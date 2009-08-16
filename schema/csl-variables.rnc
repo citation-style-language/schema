@@ -1,0 +1,133 @@
+
+## Variables
+div {
+    variables =
+        
+        ## the primary title for the cited item
+        "title"
+        | 
+          ## the secondary title for the cited item; for a book chapter, this 
+          ## would be a book title, for an article the journal title, etc.
+          "container-title"
+        | 
+          ## the tertiary title for the cited item; for example, a series title
+          "collection-title"
+        | 
+          ## collection number; for example, series number
+          "collection-number"
+        | 
+          ## title of a related original version; often useful in cases of translation
+          "original-title"
+        | 
+          ## the name of the publisher
+          "publisher"
+        | 
+          ## the location of the publisher
+          "publisher-place"
+        | 
+          ## the name of the archive
+          "archive"
+        | 
+          ## the location of the archive
+          "archive-place"
+        | 
+          ## issuing authority (for patents) or judicial authority (such as court  
+          ## for legal cases)
+          "authority"
+        | 
+          ## the location within an archival collection (for example, box and folder)
+          "archive_location"
+        | 
+          ## the name or title of a related event such as a conference or hearing
+          "event"
+        | 
+          ## the location or place for the related event
+          "event-place"
+        | 
+          ## the range of pages an item covers in a containing item
+          "page"
+        | 
+          ## the first page of an item within a containing item
+          "page-first"
+        | 
+          ## a description to locate an item within some larger container or 
+          ## collection; a volume or issue number is a kind of locator, for example.
+          "locator"
+        | 
+          ## version description
+          "version"
+        | 
+          ## volume number for the container periodical
+          "volume"
+        | 
+          ## refers to the number of items in multi-volume books and such
+          "number-of-volumes"
+        | 
+          ## refers to the number of pages in a book or other document
+          "number-of-pages"
+        | 
+          ## the issue number for the container publication
+          "issue"
+        | 
+          ##
+          "chapter-number"
+        | 
+          ## medium description (DVD, CD, etc.)
+          "medium"
+        | 
+          ## the (typically publication) status of an item; for example "forthcoming"
+          "status"
+        | 
+          ## an edition description
+          "edition"
+        | 
+          ## a section description (for newspapers, etc.)
+          "section"
+        | 
+          ##
+          "genre"
+        | 
+          ## a short inline note, often used to refer to additional details of the resource
+          "note"
+        | 
+          ## notes made by a reader about the content of the resource
+          "annote"
+        | 
+          ##
+          "abstract"
+        | 
+          ##
+          "keyword"
+        | 
+          ## a document number; useful for reports and such
+          "number"
+        | 
+          ## for related referenced resources; this is here for legal case 
+          ## histories, but may be relevant for other contexts.
+          "references"
+        | 
+          ##
+          "URL"
+        | 
+          ##
+          "DOI"
+        | 
+          ##
+          "ISBN"
+        | 
+          ##
+          "call-number"
+        | 
+          ## the number used for the in-text citation mark in numeric styles
+          "citation-number"
+        | 
+          ## the label used for the in-text citation mark in label styles
+          "citation-label"
+        | 
+          ## The number of a preceding note containing the first reference to
+          ## this item. Relevant only for note-based styles, and null for first references.
+          "first-reference-note-number"
+        | 
+          ## The year suffix for author-date styles; e.g. the 'a' in '1999a'.
+          "year-suffix"
+}

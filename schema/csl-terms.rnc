@@ -1,0 +1,101 @@
+## Terms and forms
+div {
+  cs-terms =
+    
+    ## Miscellaneous Terms
+    "accessed"
+    | "anonymous"
+    | "and"
+    | "and others"
+    | "at"
+    | "et-al"
+    | "forthcoming"
+    | "from"
+    | "in press"
+    | "ibid"
+    | "in"
+    | "no date"
+    | "references"
+    | "reference item"
+    | "retrieved"
+    | "letter"
+    | "interview"
+    | "online"
+    | "cited"
+    | "edition"
+    | "internet"
+    | "presented at"
+    | 
+      ## Roles
+      "author"
+    | "editor"
+    | "translator"
+    | "interviewer"
+    | "recipient"
+    | 
+      ## Combined roles
+      "editortranslator"
+    |
+      ## Months
+      "month-01"
+    | "month-02"
+    | "month-03"
+    | "month-04"
+    | "month-05"
+    | "month-06"
+    | "month-07"
+    | "month-08"
+    | "month-09"
+    | "month-10"
+    | "month-11"
+    | "month-12"
+    | 
+      ## Quotes
+      "open-quote"
+    | "close-quote"
+    | "open-inner-quote"
+    | "close-inner-quote"
+    |
+      ## Ordinals
+      "ordinal-01"
+    | "ordinal-02"
+    | "ordinal-03"
+    | "ordinal-04"
+    |
+      ## Long ordinals
+      "long-ordinal-01"
+    | "long-ordinal-02"
+    | "long-ordinal-03"
+    | "long-ordinal-04"
+    | "long-ordinal-05"
+    | "long-ordinal-06"
+    | "long-ordinal-07"
+    | "long-ordinal-08"
+    | "long-ordinal-09"
+    | "long-ordinal-10"
+    |
+      ## Other
+      cs-terms.locator
+    | cs-terms.extension
+    | info-fields
+  
+  ## Locators
+  cs-terms.locator =
+    "book"
+    | "chapter"
+    | "column"
+    | "figure"
+    | "folio"
+    | "issue"
+    | "line"
+    | "note"
+    | "opus"
+    | "page"
+    | "paragraph"
+    | "part"
+    | "section"
+    | "sub verbo"
+    | "volume"
+    | "verse"
+}
+
