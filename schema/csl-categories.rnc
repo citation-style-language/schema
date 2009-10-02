@@ -1,0 +1,40 @@
+namespace cs = "http://purl.org/net/xbiblio/csl"
+
+div {
+    info-format-categories = "author-date" | "numeric" | "label" | "note" | "author"
+    
+    ## Add one or more field categories. The "generic-base" category is reserved 
+    ## for the handful of truly generic styles (APA, Harvard, etc.) from which most descend.
+    info-field-categories =
+        "anthropology"
+        | "astronomy"
+        | "biology"
+        | "botany"
+        | "chemistry"
+        | "communications"
+        | "engineering"
+        | "generic-base"
+        | "geography"
+        | "geology"
+        | "history"
+        | "humanities"
+        | "law"
+        | "linguistics"
+        | "literature"
+        | "math"
+        | "medicine"
+        | "philosophy"
+        | "physics"
+        | "psychology"
+        | "sociology"
+        | "science"
+        | "political_science"
+        | "social_science"
+        | "theology"
+        | "zoology"
+        | info-categories.extension
+    
+    ## You can override in a customization schema, though please report 
+    ## obvious gaps for inclusion in the schema.
+    info-categories.extension = notAllowed
+}
