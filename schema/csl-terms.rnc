@@ -77,7 +77,7 @@ div {
       ## Other
       cs-terms.locator
     | cs-terms.extension
-    | info-fields
+    | info-field-categories
   
   ## Locators
   cs-terms.locator =

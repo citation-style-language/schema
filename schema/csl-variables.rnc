@@ -1,3 +1,23 @@
+# contributor roles
+div {
+    cs-names =
+        "author"
+        | "editor"
+        | "translator"
+        | "recipient"
+        | "interviewer"
+        | "publisher"
+        | "composer"
+        | "original-publisher"
+        | "original-author"
+        | 
+          ## to be used when citing a section of a book, for example, to distinguish the author 
+          ## proper from the author of the containing work
+          "container-author"
+        | 
+          ## use for series editor
+          "collection-editor"
+}
 
 ## Variables
 div {
