@@ -150,4 +150,7 @@ div {
         | 
           ## The year suffix for author-date styles; e.g. the 'a' in '1999a'.
           "year-suffix"
+        |
+          ## The geographic unit for which a resource (such as legislation) is relevant
+          "jurisdiction"
 }
