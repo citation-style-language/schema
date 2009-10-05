@@ -365,7 +365,7 @@ div {
 div {
     date =
         element cs:date {
-            attribute variable { cs-date-tokens },
+            attribute variable { cs-dates },
             ((
               ## Localized date formats are specified by setting `form`. The
               ## default date format can be changed for all locales by configuring
@@ -435,7 +435,7 @@ div {
         attribute name { "year" },
         attribute form { "short" | "long" }?
     
-    cs-date-tokens = "issued" | "event" | "accessed" | "container" | "original-date"
+    
 }
 [ a:documentation [ xhtml:h2 [ "Formatting Text" ] ] ]
 div {
@@ -449,7 +449,7 @@ div {
             strip-periods,
             ((
               ## adds a variable belonging to this item
-              attribute variable { variables },
+              attribute variable { cs-variables },
               attribute form { "short" | "long" }?)
              | 
                ## adds the results of a macro, as specified in the main body of the CSL
@@ -783,7 +783,7 @@ div {
 }
 [ a:documentation [ xhtml:h2 [ "Sorting" ] ] ]
 div {
-    all-variables = variables | cs-date-tokens | cs-names
+    all-variables = cs-variables | cs-dates | cs-names
     
     ## The sort element specifies the sort order for a citation or for the
     ## bibliography. If it is not added, citations are sorted according to user
