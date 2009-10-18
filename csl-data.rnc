@@ -1,0 +1,74 @@
+include "csl-types.rnc"
+include "csl-variables.rnc"
+start = element references { reference+ }
+reference = element reference { type, uri?, container-uri?, contributor*, date?, variable+ }
+
+## Types 
+div {
+  type = attribute type { cs-types }
+}
+
+## Identifiers
+div {
+  
+  ## The URI is the global identity for the refererence
+  uri-pattern = xsd:anyURI
+  uri = attribute uri { xsd:anyURI }
+  container-uri = attribute container-uri { xsd:anyURI }
+  
+  ## the local-id attribute can be used to establish ...
+  local-id = attribute local-id { xsd:ID }
+}
+
+## Contributors
+div {
+  contributor =
+    element contributor {
+      attribute type { cs-names },
+      name-attributes
+    }
+  name-attributes =
+    attribute name { text }
+    | (attribute given { text }?,
+       attribute family { text }?,
+       attribute prefix { text }?,
+       attribute suffix { text }?,
+       attribute particle { text }?)
+}
+
+## Dates
+div {
+  date =
+    element date { date-pattern }
+    | date-range
+  date-range =
+    element date-range {
+      element begin-date { date-pattern },
+      element end-date { date-pattern }
+    }
+  date-pattern =
+    attribute type { cs-dates },
+    attribute year { xsd:gYear },
+    attribute month {
+      xsd:string { pattern = "\d{2}" }
+    }?,
+    attribute day { string }?,
+    attribute season { "fall" | "winter" | "spring" | "summer" }?,
+    attribute other { text }?,
+    attribute circa { xsd:boolean }?
+}
+
+## Simple Variables
+div {
+  variable =
+    element variable {
+      attribute type { cs-variables },
+      (simple-variable-pattern | rich-variable-pattern)
+    }
+  simple-variable-pattern = text
+  rich-variable-pattern =
+    (text
+     | element b { text }
+     | element i { text }
+     | element sup { text })+
+}
