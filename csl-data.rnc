@@ -1,3 +1,12 @@
+namespace dc = "http://purl.org/dc/elements/1.1/"
+
+dc:title [ "Citation Style Language Data" ]
+dc:creator [ "Bruce D'Arcus" ]
+dc:copyright [ "Bruce D'Arcus, 2009" ]
+dc:description [
+    "A schema for the CSL data model."
+]
+
 include "csl-types.rnc"
 include "csl-variables.rnc"
 start = element references { reference+ }
@@ -11,13 +20,11 @@ div {
 ## Identifiers
 div {
   
-  ## The URI is the global identity for the refererence
-  uri-pattern = xsd:anyURI
+  ## The URI is the global identity for the refererence; used to associate a citation reference to its data
   uri = attribute uri { xsd:anyURI }
-  container-uri = attribute container-uri { xsd:anyURI }
   
-  ## the local-id attribute can be used to establish ...
-  local-id = attribute local-id { xsd:ID }
+  ## the URI for containing items (such as edited books or journals)
+  container-uri = attribute container-uri { xsd:anyURI }
 }
 
 ## Contributors
@@ -52,7 +59,9 @@ div {
     attribute month {
       xsd:string { pattern = "\d{2}" }
     }?,
-    attribute day { string }?,
+    attribute day {
+      xsd:string { pattern = "\d{2}" }
+    }?,
     attribute season { "fall" | "winter" | "spring" | "summer" }?,
     attribute other { text }?,
     attribute circa { xsd:boolean }?
