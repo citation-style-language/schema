@@ -24,6 +24,7 @@ include "csl-terms.rnc"
 include "csl-types.rnc"
 include "csl-variables.rnc"
 include "csl-categories.rnc"
+
 # Embedded Schematron rules to detect undefined macro-calls in cs:text, cs:key
 
 s:rule [
@@ -68,6 +69,13 @@ div {
             ## names (e.g. "Koning, W. de"). Default is "display-and-sort".
             attribute demote-non-dropping-particle { "never" | "sort-only" | "display-and-sort" }?,
             
+            ## Determines whether compound given names (e.g. "Jean-Luc") are
+            ## initialized with (J-L) or without a hyphen (JL). Defaults to true.
+            attribute initialize-with-hyphen { xsd:boolean }?,
+            
+            et-al-opt,
+            name-opt,
+            names-opt,
             info,
             (style-locale* & macro* & citation & bibliography?)?
         }
@@ -256,6 +264,12 @@ div {
 }
 [ a:documentation [ xhtml:h2 [ "Contributor Names" ] ] ]
 div {
+    ## Options for cs:names, available for cs:style, cs:citation and cs:bibliography.
+    names-opt =
+        ## Delimiter between names (delimiter between variables is on <names>
+        ## tag, where it should be). This is ", " in "J. Doe, S. Smith."
+        attribute names-delimiter { text }?
+    
     names-attributes =
         affixes,
         formatting,
@@ -265,6 +279,66 @@ div {
         attribute variable {
             list { cs-names+ }
         }
+    
+    ## Options for cs:name, available for cs:style, cs:citation and cs:bibliography.
+    name-opt =
+        name-attributes,
+	
+	## Indicates long (first name + last name, for Western names) or short
+	## (last name only, for Western names) form of name. Default is long
+	## form. The "count" form is used to return the count of the contributor
+	## list, and may be used in special sorting routines.
+	attribute name-form { "long" | "short" | "count" }?,
+	
+	## Delimiter between names (delimiter between variables is on <names>
+	## tag, where it should be). This is ", " in "J. Doe, S. Smith."
+	attribute name-delimiter { text }?
+    
+    name-attributes =
+        ## Controls appearance of "and"/"&". To disable, do not specify.
+        attribute and { "text" | "symbol" }?,
+        
+        ## Delimiter preceding the last name in a name list
+        attribute delimiter-precedes-last {
+        
+            ## Default behavior; delimiter is included for name lists of length
+            ## three or more:
+            ## 2 authors: "J. Doe and T. Timmons,"
+            ## 3 authors: "J. Doe, S. Smith, and T. Timmons" (note comma preceding 'and').
+            "contextual"
+            | 
+              ## Delimiter is always included
+              ## 2 author result: "J. Doe, and T. Timmons"
+              ## 3 authors: "J. Doe, S. Smith, and T. Timmons" (note comma preceding 'and').
+              "always"
+            | 
+              ## Delimiter is never included
+              ## 2 authors: "J. Doe and T. Timmons,"
+              ## 3 authors: "J. Doe, S. Smith and T. Timmons"
+              "never"
+            }?,
+        
+        ## Indicates whether given name parts ought to be given as initials
+        ## (e.g., J. K. Rowling) and the text to follow each initial.
+        attribute initialize-with { text }?,
+        
+        ## Sets the author name order to correspond to the sort order of
+        ## the bibliography; e.g. Doe, John (name-as-sort-order) vs. John Doe (w/o
+        ## attribute).
+        attribute name-as-sort-order {
+        
+            ## Applies name-as-sort-order to first author only.
+            "first"
+            | 
+              ## Applies name-as-sort-order to all authors.
+              "all"
+            }?,
+        
+        ## The delimiter for personal name parts where sort order differs from 
+        ## display order (for example, in standard Western names). This is the
+        ## ", " in "Doe, John."
+        attribute sort-separator { text }?
+    
     names =
         element cs:names {
             names-attributes,
@@ -274,66 +348,22 @@ div {
     
     ## Short version of "names" element, without children, allowed in <substitute>
     names-short = element cs:names { names-attributes }
+    
     name =
         element cs:name {
+            name-attributes,
             affixes,
             formatting,
             
             ## Indicates long (first name + last name, for Western names) or short
             ## (last name only, for Western names) form of name. Default is long
-            ## form. 
-            
-            ## The "count" form is used to return the count of the contributor 
+            ## form. The "count" form is used to return the count of the contributor
             ## list, and may be used in special sorting routines.
             attribute form { "long" | "short" | "count" }?,
-            
-            ## Controls appearance of "and"/"&". To disable, do not specify.
-            attribute and { "text" | "symbol" }?,
             
             ## Delimiter between names (delimiter between variables is on <names>
             ## tag, where it should be). This is ", " in "J. Doe, S. Smith."
             delimiter,
-            
-            ## Delimiter preceding the last name in a name list
-            attribute delimiter-precedes-last {
-                
-                ## Default behavior; delimiter is included for name lists of length
-                ## three or more:
-                ## 2 authors: "J. Doe and T. Timmons,"
-                ## 3 authors: "J. Doe, S. Smith, and T. Timmons" (note comma preceding 'and').
-                "contextual"
-                | 
-                  ## Delimiter is always included
-                  ## 2 author result: "J. Doe, and T. Timmons"
-                  ## 3 authors: "J. Doe, S. Smith, and T. Timmons" (note comma preceding 'and').
-                  "always"
-                | 
-                  ## Delimiter is never included
-                  ## 2 authors: "J. Doe and T. Timmons,"
-                  ## 3 authors: "J. Doe, S. Smith and T. Timmons"
-                  "never"
-            }?,
-            
-            ## Sets the author name order to correspond to the sort order of
-            ## the bibliography; e.g. Doe, John (name-as-sort-order) vs. John Doe (w/o
-            ## attribute).
-            attribute name-as-sort-order {
-                
-                ## Applies name-as-sort-order to first author only.
-                "first"
-                | 
-                  ## Applies name-as-sort-order to all authors.
-                  "all"
-            }?,
-            
-            ## The delimiter for personal name parts where sort order differs from 
-            ## display order (for example, in standard Western names). This is the
-            ## ", " in "Doe, John."
-            attribute sort-separator { text }?,
-            
-            ## Indicates whether given name parts ought to be given as initials
-            ## (e.g., J. K. Rowling) and the text to follow each initial.
-            attribute initialize-with { text }?,
             
             ## Allows for separate configuration of name part formatting. For example, 
             ## Jane DOE. Order of these elements is not significant.
@@ -352,7 +382,7 @@ div {
     et-al =
         element cs:et-al {
             
-            ## term to use for et al substitutiog; "et-al" is default
+            ## term to use for et al substitution; "et-al" is default
             attribute term { "et-al" | "and others" }?,
             affixes,
             formatting
@@ -563,13 +593,17 @@ div {
         disambiguate-rule-opt,
         collapse-opt,
         collapse-delimiter-opt,
-        position-opt
+        position-opt,
+        name-opt,
+        names-opt
     bibliography-options =
         et-al-opt,
         hanging-indent-opt,
         second-field-align-opt,
         subsequent-author-substitute-opt,
-        line-formatting-opt
+        line-formatting-opt,
+        name-opt,
+        names-opt
     
     ## sets the bibliographic entries to be rendered with hanging-indents
     hanging-indent-opt = attribute hanging-indent { xsd:boolean }?
