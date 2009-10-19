@@ -3,10 +3,7 @@ namespace dc = "http://purl.org/dc/elements/1.1/"
 dc:title [ "Citation Style Language Data" ]
 dc:creator [ "Bruce D'Arcus" ]
 dc:copyright [ "Bruce D'Arcus, 2009" ]
-dc:description [
-    "A schema for the CSL data model."
-]
-
+dc:description [ "A schema for the CSL data model." ]
 include "csl-types.rnc"
 include "csl-variables.rnc"
 start = element references { reference+ }
@@ -77,7 +74,21 @@ div {
   simple-variable-pattern = text
   rich-variable-pattern =
     (text
+     | element abbr { text }
      | element b { text }
+     | element cite {
+         
+         ## cited title which is a part (like an article), and so typically rendered in quotes, rather than italicized
+         attribute class { "part" },
+         text
+       }
      | element i { text }
-     | element sup { text })+
+     | element span {
+         
+         ## text whose case should not be transformed (as with proper nouns)
+         attribute class { "protect" }?,
+         text
+       }
+     | element sup { text }
+     | element sub { text })+
 }
