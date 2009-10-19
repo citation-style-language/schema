@@ -79,7 +79,7 @@ div {
      | element cite {
          
          ## cited title which is a part (like an article), and so typically rendered in quotes, rather than italicized
-         attribute class { "part" },
+         attribute class { "part" }?,
          text
        }
      | element i { text }
