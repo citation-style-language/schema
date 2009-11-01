@@ -73,7 +73,6 @@ div {
             ## initialized with (J-L) or without a hyphen (JL). Defaults to true.
             attribute initialize-with-hyphen { xsd:boolean }?,
             
-            et-al-opt,
             name-opt,
             names-opt,
             info,
@@ -317,6 +316,15 @@ div {
               ## 3 authors: "J. Doe, S. Smith and T. Timmons"
               "never"
             }?,
+        
+        ## Specifies when "et al." name list abbreviation is used
+        ##   et-al-min: the minimum number of contributors to use "et al."
+        ##   et-al-use-first: the number of contributors to print before "et al."
+        ##   et-al-subsequent-*: as above, but for subsequent citations
+        attribute et-al-min { xsd:integer }?,
+        attribute et-al-use-first { xsd:integer }?,
+        attribute et-al-subsequent-min { xsd:integer }?,
+        attribute et-al-subsequent-use-first { xsd:integer }?,
         
         ## Indicates whether given name parts ought to be given as initials
         ## (e.g., J. K. Rowling) and the text to follow each initial.
@@ -587,8 +595,6 @@ div {
 [ a:documentation [ xhtml:h2 [ "Options" ] ] ]
 div {
     citation-options =
-        et-al-opt,
-        et-al-subsequent-opt,
         disambiguate-opt,
         disambiguate-rule-opt,
         collapse-opt,
@@ -597,7 +603,6 @@ div {
         name-opt,
         names-opt
     bibliography-options =
-        et-al-opt,
         hanging-indent-opt,
         second-field-align-opt,
         subsequent-author-substitute-opt,
@@ -684,19 +689,6 @@ div {
     
     ## substitutes subsequent recurrences of an author for a given string
     subsequent-author-substitute-opt = attribute subsequent-author-substitute { text }?
-    
-    ## defines parameters relating to "et al" formatting:
-    ##     et-al-min: the minimum number of contributors to use "et al"
-    ##     et-al-use-first: the number of contributors to explicitly print under
-    ##          "et al" conditions
-    ##     et-al-subsequent-*: same as above, but for subsequent references
-    ##                         (citation only)
-    et-al-opt =
-        attribute et-al-min { xsd:integer }?,
-        attribute et-al-use-first { xsd:integer }?
-    et-al-subsequent-opt =
-        attribute et-al-subsequent-min { xsd:integer }?,
-        attribute et-al-subsequent-use-first { xsd:integer }?
     
     ## Options to set parameters relating to disambiguation.
     ## Disambiguation is an unavoidably complex process, the aim of
