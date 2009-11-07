@@ -151,15 +151,16 @@ div {
     info-summary = element cs:summary { info-text }
     info-title = element cs:title { info-text }
     
-    ## for journal dedicated styles the journal's ISSNs or ISSN-L may be included,
-    ## format should be two groups of four digits, separated by a hyphen, e.g. "1234-1234"
+    ## For journal-dedicated styles the journal's ISSNs or ISSN-L may be included.
+    ## A valid ISSN(-L) consists of: four digits, a hyphen, three digits, and a 
+    ## check digit, which can be a numeral digit or a roman X, e.g. "1234-1231".
     info-issn =
         element cs:issn {
-            xsd:string { pattern = "\d{4}\-\d{4}" }
+            xsd:string { pattern = "\d{4}\-\d{3}(\d|x|X)" }
         }
     info-issnl =
         element cs:issnl {
-            xsd:string { pattern = "\d{4}\-\d{4}" }
+            xsd:string { pattern = "\d{4}\-\d{3}(\d|x|X)" }
         }
     
     ## a required update date-time stamp; for example, 2007-10-26T21:32:52+02:00
