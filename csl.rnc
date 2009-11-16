@@ -52,7 +52,7 @@ div {
     style =
         element cs:style {
             
-            ## The version of the CSL schema
+            ## Indicates with which version of the CSL schema the style is compatible
             attribute version { "1.0" },
             
             ## Default style locale (optional)
@@ -185,33 +185,27 @@ div {
 [ a:documentation [ xhtml:h2 [ "Locales" ] ] ]
 div {
     
-    ## The structure of standalone locale files
+    ## Describes the structure of standalone locale files
     locale =
         element cs:locale {
             
             ## Specifies the locale of the locale file.
-            attribute xml:lang { xsd:language }
-            & 
-              ## Terms are localized strings used as content for the cs:text field.
-              localized-terms
-            & localized-dates+
-            & localized-options
+            attribute xml:lang { xsd:language },
+            
+            ## Indicates with which version of the CSL schema the locale file is compatible
+            attribute version { "1.0" },
+            
+            (localized-terms & localized-dates+ & localized-options)
         }
     
-    ## A language-specific wrapper.
+    ## In styles, cs:locale can be used to override localized terms, dates and options.
     style-locale =
         element cs:locale {
             
-            ## Where localization is other than that of the style, use the 
-            ## xml:lang attribute.
-            attribute xml:lang { xsd:language }
-            & 
-              ## Terms are localized strings used as content for the cs:text field. 
-              ## It is only needed where you need to add a term not supported by 
-              ## default, or override an existing one.
-              localized-terms?
-            & localized-dates*
-            & localized-options?
+            ## Specifies the locale that should be overridden.
+            attribute xml:lang { xsd:language },
+            
+            (localized-terms? & localized-dates* & localized-options?)
         }
     localized-terms = element cs:terms { (simple-term | compound-term)+ }
     term-attributes =
