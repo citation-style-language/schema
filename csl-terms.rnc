@@ -4,27 +4,28 @@ div {
     
     ## Miscellaneous Terms
     "accessed"
+    | "ad"
     | "anonymous"
     | "and"
     | "and others"
     | "at"
+    | "bc"
+    | "cited"
+    | "edition"
     | "et-al"
     | "forthcoming"
     | "from"
-    | "in press"
     | "ibid"
     | "in"
-    | "no date"
-    | "references"
-    | "reference item"
-    | "retrieved"
-    | "letter"
-    | "interview"
-    | "online"
-    | "cited"
-    | "edition"
     | "internet"
+    | "interview"
+    | "in press"
+    | "letter"
+    | "no date"
+    | "online"
     | "presented at"
+    | "reference"
+    | "retrieved"
     | 
       ## Roles
       "author"
@@ -49,6 +50,12 @@ div {
     | "month-10"
     | "month-11"
     | "month-12"
+    | 
+      ## Seasons
+      "season-01"
+    | "season-02"
+    | "season-03"
+    | "season-04"
     | 
       ## Quotes
       "open-quote"
@@ -95,7 +102,7 @@ div {
     | "part"
     | "section"
     | "sub verbo"
-    | "volume"
     | "verse"
+    | "volume"
 }
 
