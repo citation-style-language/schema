@@ -202,8 +202,11 @@ div {
     style-locale =
         element cs:locale {
             
-            ## Specifies the locale that should be overridden.
-            attribute xml:lang { xsd:language },
+            ## Specifies the locale to override. A cs:locale element without the
+            ## xml:lang attribute can also be used: it overrides the content of
+            ## all locales, but is in turn overridden by cs:locale elements with
+            ## the xml:lang attribute.
+            attribute xml:lang { xsd:language }?,
             
             (localized-terms? & localized-dates* & localized-options?)
         }
