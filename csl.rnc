@@ -443,6 +443,12 @@ div {
             formatting
         }
     
+    ## The default delimiter for date ranges is the en-dash (e.g. "May–July 2008").
+    ## If the date-range-delimiter is set for the largest date-part ("day",
+    ## "month" or "year") that differs between the two dates of the date range,
+    ## its value is used instead.
+    date-range-delimiter = attribute range-delimiter { text }?
+    
     ## Month formats:
     ##     long (default): January
     ##     short: Jan
@@ -450,8 +456,9 @@ div {
     ##     numeric-leading-zeros: 01
     month =
         attribute name { "month" },
-        (attribute form { "long" | "short" | "numeric" | "numeric-leading-zeros" }?,
-         strip-periods)
+        attribute form { "long" | "short" | "numeric" | "numeric-leading-zeros" }?,
+        date-range-delimiter,
+        strip-periods
     
     ## Day formats:
     ##     numeric (default): 5
@@ -459,15 +466,16 @@ div {
     ##     ordinal: 5th
     day =
         attribute name { "day" },
-        attribute form { "numeric" | "numeric-leading-zeros" | "ordinal" }?
+        attribute form { "numeric" | "numeric-leading-zeros" | "ordinal" }?,
+        date-range-delimiter
     
     ## Year formats:
     ##     long (default): 2005
     ##     short: 05
     year =
         attribute name { "year" },
-        attribute form { "short" | "long" }?
-    
+        attribute form { "short" | "long" }?,
+        date-range-delimiter
     
 }
 [ a:documentation [ xhtml:h2 [ "Formatting Text" ] ] ]
