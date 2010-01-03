@@ -444,10 +444,10 @@ div {
         }
     
     ## The default delimiter for date ranges is the en-dash (e.g. "May–July 2008").
-    ## If the date-range-delimiter is set for the largest date-part ("day",
-    ## "month" or "year") that differs between the two dates of the date range,
-    ## its value is used instead.
-    date-range-delimiter = attribute range-delimiter { text }?
+    ## If the date-range-delimiter attribute is set for the largest date-part 
+    ## ("day", "month" or "year") that differs between the two dates of the date
+    ## range, its value is used instead.
+    date-range-delimiter = attribute date-range-delimiter { text }?
     
     ## Month formats:
     ##     long (default): January
