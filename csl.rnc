@@ -934,6 +934,11 @@ div {
             list { all-variables+ }
         }?,
         
+        ## If any of the given date variables contain an uncertain date, this is true
+        attribute uncertain-date { 
+            list { cs-dates+ }
+        }?,
+        
         ## The boolean operators below indicate the relative position of a 
         ## reference within the document.  These should be checked in 
         ## the order shown below: "first" is true only once, on the first
