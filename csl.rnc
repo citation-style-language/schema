@@ -935,7 +935,7 @@ div {
         }?,
         
         ## If any of the given date variables contain an uncertain date, this is true
-        attribute uncertain-date { 
+        attribute is-uncertain-date { 
             list { cs-dates+ }
         }?,
         
