@@ -7,9 +7,7 @@ div {
     | "translator"
     | "recipient"
     | "interviewer"
-    | "publisher"
     | "composer"
-    | "original-publisher"
     | "original-author"
     | 
       ## to be used when citing a section of a book, for example, to distinguish the author 
@@ -50,6 +48,12 @@ div {
     | 
       ## the location of the publisher
       "publisher-place"
+    | 
+      ## the name of the original publisher
+      "original-publisher"
+    | 
+      ## the location of the original publisher
+      "original-publisher-place"
     | 
       ## the name of the archive
       "archive"
