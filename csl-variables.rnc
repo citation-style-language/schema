@@ -4,6 +4,7 @@ div {
   cs-names =
     "author"
     | "editor"
+    | "editorial-director"
     | "translator"
     | "recipient"
     | "interviewer"
