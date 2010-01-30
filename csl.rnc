@@ -98,39 +98,40 @@ div {
             & info-title
             & info-updated
         }
-    info-text =
-        attribute xml:lang { xsd:language }?,
-        text
-    info-author = element cs:author { info-Contributor-pattern }
-    info-Contributor-pattern =
+
+    info-author = element cs:author { info-contributor-pattern }
+    info-contributor = element cs:contributor { info-contributor-pattern }
+    info-contributor-pattern =
         element cs:name { text }
         & element cs:email { text }?
         & element cs:uri { xsd:anyURI }?
-    info-contributor = element cs:contributor { info-Contributor-pattern }
-    
-    ## The scheme attribute should be understood to specify the controlled 
-    ## CSL category list. The terms thus typically include further logic, 
-    ## such as the broader categories to which they belong ("humanities", 
-    ## "social sciences") as well as the class of style ("author-date", "note", etc.).
+
+    ## The category element may be used to specify the citation format of the
+    ## style (using the citation-format attribute) and the fields or disciplines
+    ## for which the style is relevant (using the field attribute).
     info-category =
         element cs:category {
             attribute citation-format { info-format-categories }
             | attribute field { info-field-categories }
         }
     
-    ## As in Atom, the cs:id element is a required URI that is globally-unique 
-    ## and persistant. Once assigned it should never change. Ideally, of course, 
-    ## the URI resolves to the correct CSL file.
+    ## As in Atom, the cs:id element is a required URI that is globally-unique
+    ## and persistant. To allow styles to be automatically updated, the URI of a
+    ## style should not change once assigned. Ideally, the URI resolves to the
+    ## correct CSL file: it should preferably point to the CSL style itself in
+    ## case of independent styles, and to the independent-parent style in case
+    ## of dependent styles.
     info-id = element cs:id { xsd:anyURI }
+    
     info-link =
         element cs:link {
             attribute href { xsd:anyURI },
             
-            ## For transformation to Atom, the rel values should be expanded to include the 
-            ## base URI <http://purl.org/net/xbiblio/csl/relations#>.
+            ## For transformation to Atom, the rel values should be expanded to
+            ## include the base URI <http://purl.org/net/xbiblio/csl/relations#>.
             attribute rel {
                 
-                ## The URI of the CSL style itself. Used for (automatic) style
+                ## The URI of the CSL style itself. Used for automatic style
                 ## updating.
                 "self"
                 | 
@@ -144,12 +145,15 @@ div {
                   ## A documentation URI for the style.
                   "documentation"
             },
-            string
+            info-text
         }
     info-published = element cs:published { xsd:dateTime }
     info-rights = element cs:rights { info-text }
     info-summary = element cs:summary { info-text }
     info-title = element cs:title { info-text }
+    info-text =
+        attribute xml:lang { xsd:language }?,
+        text
     
     ## For journal-dedicated styles the journal's ISSNs or ISSN-L may be included.
     ## A valid ISSN(-L) consists of: four digits, a hyphen, three digits, and a 
@@ -166,23 +170,7 @@ div {
     ## a required update date-time stamp; for example, 2007-10-26T21:32:52+02:00
     info-updated = element cs:updated { xsd:dateTime }
 }
-[ a:documentation [ xhtml:h2 [ "Localized Terms" ] ] ]
-div {
-    
-    ## "symbol" and reverts to "short" if no term exists
-    ## "verb-short" reverts to "verb" if no term exists
-    ## all others revert to "long" if no term exists
-    cs-term-forms = "long" | "verb" | "short" | "verb-short" | "symbol" | cs-term-forms.extension
-    
-    ## Extension structures. You may override these in a customization 
-    ## schema. If you do, please contact the xbiblio project to add 
-    ## the term or form to the formal controlled list in the schema.
-    div {
-        cs-terms.extension = notAllowed
-        cs-term-forms.extension = notAllowed
-    }
-}
-[ a:documentation [ xhtml:h2 [ "Locales" ] ] ]
+[ a:documentation [ xhtml:h2 [ "Localization" ] ] ]
 div {
     
     ## Describes the structure of standalone locale files
@@ -214,6 +202,19 @@ div {
     term-attributes =
         attribute form { cs-term-forms }?,
         attribute name { cs-terms }
+
+    ## "verb-short" reverts to "verb" if the "verb-short" form is not available
+    ## "symbol" reverts to "short" if the "symbol" form is not available
+    ## "verb" and "short" revert to "long" if the specified form is not available
+    cs-term-forms = "long" | "verb" | "short" | "verb-short" | "symbol" | cs-term-forms.extension
+    
+    ## Extension structures. You may override these in a customization 
+    ## schema. If you do, please contact the xbiblio project to add 
+    ## the term or form to the formal controlled list in the schema.
+    div {
+        cs-terms.extension = notAllowed
+        cs-term-forms.extension = notAllowed
+    }
     
     ## Simple terms are basic strings, used to represent genres, media, etc.
     simple-term = element cs:term { term-attributes, text }
@@ -258,6 +259,32 @@ div {
             ## the quotation marks, or outside (default).
             attribute punctuation-in-quote { xsd:boolean }?
         }
+}
+[ a:documentation [ xhtml:h2 [ "Macros" ] ] ]
+div {
+    
+    ## The macro element works something like in BibTeX, and provides a ready-made 
+    ## bundle of formatting templates that can be easily reused elsewhere.
+    macro =
+        element cs:macro {
+            attribute name { token },
+            cs-element+
+        }
+}
+[ a:documentation [ xhtml:h2 [ "Citation and Bibliography" ] ] ]
+div {
+    
+    ## The cs:citation handles printing of citations. A citation may consist of
+    ## one or more references to bibliographic sources. These references can either
+    ## be simple in-text keys [doe99] or numeric markers [1], or more complex short
+    ## descriptors common in author-date (Doe, 1999a) or note styles.
+    citation = element cs:citation { (citation-options & sort?), citation-layout }
+    
+    bibliography = element cs:bibliography { (bibliography-options & sort?), bibliography-layout }
+    
+    citation-layout = element cs:layout { affixes, formatting, delimiter, cs-element }
+    bibliography-layout = element cs:layout { affixes, formatting, cs-element }
+    cs-element = (names | date | label | cs-text | cs-number | choose | group)+
 }
 [ a:documentation [ xhtml:h2 [ "Contributor Names" ] ] ]
 div {
@@ -552,17 +579,6 @@ div {
         ## modifies pluralization behavior (defaults to "contextual")
         attribute plural { "always" | "never" | "contextual" }?
 }
-[ a:documentation [ xhtml:h2 [ "Macros" ] ] ]
-div {
-    
-    ## The macro element works something like in BibTeX, and provides a ready-made 
-    ## bundle of formatting templates that can be easily reused elsewhere.
-    macro =
-        element cs:macro {
-            attribute name { token },
-            cs-element+
-        }
-}
 [ a:documentation [ xhtml:h2 [ "Groups" ] ] ]
 div {
     
@@ -571,32 +587,6 @@ div {
     ## or macro call results. So if there are no such results, then any <text term="(term)"> 
     ## content will not be printed.
     group = element cs:group { affixes, formatting, delimiter, cs-element+ }
-}
-div {
-    citation-layout = element cs:layout { affixes, formatting, delimiter, cs-element }
-    bibliography-layout = element cs:layout { affixes, formatting, cs-element }
-    cs-element = (names | date | label | cs-text | cs-number | choose | group)+
-}
-[ a:documentation [ xhtml:h2 [ "Citation" ] ] ]
-div {
-    
-    ## The cs:citation handles printing of citations. A citation may consist of 
-    ## one-or-more references to bibliographic sources. These references can either 
-    ## be simple in-text keys [doe99] or numeric markers [1], or more complex short 
-    ## descriptors generated at runtime common in author-date (Doe, 1999a) or note-based
-    ## styles.  
-    ## note: one issue unique to note-based styles is that a citation reference 
-    ## effectively may become a full sentence. Implementers should consider this in 
-    ## their design and insert the final formatted citation in the correct title form.
-    ## For example, if a citation is footnoted without any additional text, the first 
-    ## character of the output should be uppercased. By contrast, if the citation is 
-    ## within a pre-existing footnote, and preceded by non-citation text, then it should 
-    ## be printed as is.
-    citation = element cs:citation { (citation-options & sort?), citation-layout }
-}
-[ a:documentation [ xhtml:h2 [ "Bibliography" ] ] ]
-div {
-    bibliography = element cs:bibliography { (bibliography-options & sort?), bibliography-layout }
 }
 [ a:documentation [ xhtml:h2 [ "Options" ] ] ]
 div {
