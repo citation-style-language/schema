@@ -10,7 +10,9 @@ namespace xhtml = "http://www.w3.org/1999/xhtml"
 dc:title [ "Citation Style Language" ]
 dc:creator [ "Bruce D'Arcus" ]
 dc:creator [ "Simon Kornblith" ]
-dc:copyright [ "Bruce D'Arcus and Simon Kornblith, 2007-2009" ]
+dc:contributor [ "Frank Bennett" ]
+dc:contributor [ "Rintze Zelle" ]
+dc:copyright [ "Bruce D'Arcus and Simon Kornblith, 2007-2010" ]
 dc:rights [ "Permission to freely use, copy and distribute." ]
 dc:description [
     "Citation Style Language (CSL) schema for describing bibliographic and citation formatting."
