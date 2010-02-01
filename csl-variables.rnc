@@ -21,7 +21,13 @@ div {
 
 ## Dates
 div {
-  cs-dates = "issued" | "event" | "accessed" | "container" | "original-date"
+  cs-dates =
+    "accessed"
+    | "container"
+    | "event"
+    | "issued"
+    | "original-date"
+    | "submitted" 
 }
 
 ## Simple Variables
