@@ -245,7 +245,9 @@ div {
             ## No affixes may be applied to cs:date in cs:locale
             formatting,
             delimiter,
-            element cs:date-part { affixes, formatting, (month | day | year) }+
+            element cs:date-part {
+                affixes, text-case, formatting, (month | day | year)
+            }+
         }
     
     ## Locale specific options.
@@ -457,11 +459,11 @@ div {
                     "year"
               }?,
               
-              ## If the form attribute is set, date-part can be used to override
-              ## layout options as defined in the locales, except for affixes and
-              ## formatting (e.g. to change the localized date to use leading-zeros,
-              ## or the short form of month). The order of date-parts has no effect
-              ## on how localized dates are presented.
+              ## For localized dates, date-part can be used to override layout
+              ## options as defined in the locales (except for affixes, which
+              ## are locale-specific), e.g. to force the use of leading-zeros,
+              ## or the short month form. The inclusion of date-parts does not 
+              ## affect which, and in what order, the date-parts are rendered.
               element cs:date-part { text-case, formatting, (month | day | year) }*)
              | (
                 ## Non-localized dates are formatted by including, in the desired
