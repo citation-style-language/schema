@@ -578,7 +578,7 @@ div {
         formatting,
         text-case,
         strip-periods,
-        attribute form { cs-term-forms },
+        attribute form { cs-term-forms }?,
         
         ## modifies pluralization behavior (defaults to "contextual")
         attribute plural { "always" | "never" | "contextual" }?
