@@ -258,7 +258,7 @@ div {
     ## bundle of formatting templates that can be easily reused elsewhere.
     macro =
         element cs:macro {
-            attribute name { token },
+            attribute name { xsd:NMTOKEN },
             cs-element+
         }
 }
@@ -515,7 +515,7 @@ div {
               attribute form { "short" | "long" }?)
              | 
                ## adds the results of a macro, as specified in the main body of the CSL
-               attribute macro { token }
+               attribute macro { xsd:NMTOKEN }
              | (
                 ## adds a localized term
                 attribute term { cs-terms },
@@ -811,7 +811,7 @@ div {
             ## > > otherwise return "Jones, Smith, Doe", a count value
             ## > > of 3 would be obtained).
             (attribute variable { all-variables }
-             | attribute macro { token }),
+             | attribute macro { xsd:NMTOKEN }),
             
             ## Default sort order is ascending
             attribute sort { "ascending" | "descending" }?,
