@@ -30,6 +30,16 @@ div {
     | "submitted" 
 }
 
+## Numbers
+div {
+  cs-numbers =
+    "edition"
+    | "issue"
+    | "number"
+    | "number-of-volumes"
+    | "volume"
+}
+
 ## Simple Variables
 div {
   cs-variables =
