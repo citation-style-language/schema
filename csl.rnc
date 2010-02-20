@@ -735,94 +735,21 @@ div {
 div {
     all-variables = cs-variables | cs-dates | cs-names
     
-    ## The sort element specifies the sort order for a citation or for the
-    ## bibliography. If it is not added, citations are sorted according to user
-    ## preferences, and bibliography is sorted according to order cited.
+    ## Specifies the sort order within citations or the bibliography. By
+    ## default, items are sorted in the order cited.
     sort = element cs:sort { key+ }
     key =
         element cs:key {
             
-            ## Sort keys may be generated either directly from a
-            ## variable, or by calling a macro.  In either case, the
-            ## value returned for sorting purposes may differ from the
-            ## "ordinary" rendered value of a variable.  Refer to the
-            ## notes below as a guide when building a sort algorithm
-            ## for a new style.
-            ## 
-            ## *The* **variable** *attribute*
-            ## 
-            ## When ordinary variables are referenced in a sort key
-            ## via the variable attribute, the string value is
-            ## returned, without formatting decorations and without
-            ## text escaping.  Names, dates and numbers are returned
-            ## in a default format, as follows:
-            ##  
-            ## > **names:** Name variables can be set directly on a
-            ## > key using the variable attribute.  In this case, the
-            ## > name-list from the variable will be returned as a
-            ## > string in the long form of names, formatted using
-            ## > name-as-sort-order.  However, we strongly discourage
-            ## > use of the variable attribute for name variables;
-            ## > it is simpler and more reliable to use a macro
-            ## > call to the same macro used to render creator names
-            ## > in the context (citation or bibliography) to which
-            ## > the sort applies.
-            ## >   
-            ## > **date:** Date variables are returned to a sort key
-            ## > formatted as YYYY-MM-DD, zero-padded, with zero values 
-            ## > for any missing elements.  In contrast to name variables,
-            ## > it is often more reliable to set sort keys for dates
-            ## > using the variable attribute, rather than calling
-            ## > a macro that returns a string that may well not be
-            ## > appropriate to sorting purposes.
-            ## >  
-            ## > **number:** The number is returned as a numeric
-            ## > integer value.  In the rare case that numbers are
-            ## > included in a sort, it is unlikely that a form
-            ## > transformation (i.e. to roman, year-suffix or ordinal)
-            ## > will be desired.  Numeric variables should ordinarily
-            ## > be referenced via the variable attribute, rather than
-            ## > via a macro.
-            ## 
-            ## *the* **macro** *attribute*
-            ##     
-            ## When a macro is called via a sort key, it returns whatever
-            ## string value the macro would ordinarily generate, but stripped
-            ## of any formatting decorations, and without text escaping.
-            ## As indicated above, using a macro to set a sort key is
-            ## most likely to be useful for names.  There are some special
-            ## considerations for name variables, which are detailed
-            ## below.
-            ## 
-            ## > **names:** Sort keys of two types may be produced
-            ## > using the names element.
-            ## 
-            ## > > Keys for sorting a list of names may be obtained
-            ## > > from any macro that generates names of form "short"
-            ## > > or "long".  The only exception to ordinary
-            ## > > rendering is that "et al." is not appended to names
-            ## > > used in sort keys.
-            ## > >
-            ## > > Keys for sorting by the number of names in a
-            ## > > names-list (i.e. the number of authors of an item)
-            ## > > may be obtained from names returned with
-            ## > > form="count" (i.e. if the form-attribute of name is
-            ## > > set to "count" for a name variable that would
-            ## > > otherwise return "Jones, Smith, Doe", a count value
-            ## > > of 3 would be obtained).
             (attribute variable { all-variables }
              | attribute macro { xsd:NMTOKEN }),
             
             ## Default sort order is ascending
             attribute sort { "ascending" | "descending" }?,
             
-            ## For all forms of the name element (long, short,
-            ## count), the number of names used in the sort can be
-            ## constrained with the names-min and names-use-first
-            ## attributes. If these attributes are set, their values
-            ## override those of the corresponding et-al-min and
-            ## et-al-use-first options, affecting all names generated
-            ## by all macros called by the key
+            ## names-min and names-use-first can be used to (further) constrain
+            ## the number of names used in a name sort, overriding the values
+            ## set on the et-al abbreviation attributes.
             (attribute names-min { xsd:integer },
              attribute names-use-first { xsd:integer })?
         }
@@ -836,25 +763,26 @@ div {
     else-if = element cs:else-if { condition, cs-element* }
     else = element cs:else { cs-element+ }
     condition =
+       
+        ## The contents of an <if disambiguate="true"> block is only rendered if
+        ## it disambiguates two otherwise identical citations. This attempt at
+        ## disambiguation will only be made when all other disambiguation
+        ## methods have failed to uniquely identify the target source.
+        attribute disambiguate { "true" }?,
         
-        ## If the item is of any of the given types, this is true
-        attribute type {
-            list { cs-types+ }
-        }?,
-        
-        ## If any of the given variables exist, this is true
-        attribute variable {
-            list { all-variables+ }
-        }?,
-        
-        ## If any of the given variables contain numeric data, this is true
+        ## Tests whether the given variables contain numeric data
         attribute is-numeric {
             list { all-variables+ }
         }?,
         
-        ## If any of the given date variables contain an uncertain date, this is true
+        ## Tests whether the given date variables contain uncertain dates
         attribute is-uncertain-date { 
             list { cs-dates+ }
+        }?,
+        
+        ## Tests whether the locator matches the given locator variables
+        attribute locator {
+            list { cs-terms.locator+ }
         }?,
         
         ## The boolean operators below indicate the relative position of a 
@@ -872,16 +800,22 @@ div {
             list { ("first" | "subsequent" | "ibid" | "ibid-with-locator" | "near-note")+ }
         }?,
         
-        ## The contents of an <if disambiguate="true"> block is only rendered if
-        ## it disambiguates two otherwise identical citations. This attempt at
-        ## disambiguation will only be made when all other disambiguation
-        ## methods have failed to uniquely identify the target source.
-        attribute disambiguate { "true" }?,
-        
-        ## A conditional on the locator for this specific entry
-        attribute locator {
-            list { cs-terms.locator+ }
+        ## Tests whether the item matches the given types
+        attribute type {
+            list { cs-types+ }
         }?,
+        
+        ## Tests whether the given variables contain non-empty values
+        attribute variable {
+            list { all-variables+ }
+        }?,
+        ## Specifies the test criterion (default is all)
+        ##     all: a condition tests "true" when it tests "true" for all of the
+        ##          given condition values
+        ##     any: a condition tests "true" when it tests "true" for any of the
+        ##          given condition values
+        ##    none: a condition tests "true" when it tests "true" for none of the
+        ##          given condition values
         attribute match { "all" | "any" | "none" }?
 }
 
