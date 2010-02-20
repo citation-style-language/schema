@@ -872,13 +872,11 @@ div {
             list { ("first" | "subsequent" | "ibid" | "ibid-with-locator" | "near-note")+ }
         }?,
         
-        ## If text inside an <if disambiguate="true"> block can be used to
-        ## differentiate two otherwise identical citations, it will be added.
-        ## If the citations remain identical after its addition, it will not
-        ## be added.  This attempt at disambiguation will be made only if
-        ## all other disambiguation methods have failed to uniquely identify
-        ## the target source.
-        attribute disambiguate { xsd:boolean }?,
+        ## The contents of an <if disambiguate="true"> block is only rendered if
+        ## it disambiguates two otherwise identical citations. This attempt at
+        ## disambiguation will only be made when all other disambiguation
+        ## methods have failed to uniquely identify the target source.
+        attribute disambiguate { "true" }?,
         
         ## A conditional on the locator for this specific entry
         attribute locator {
