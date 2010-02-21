@@ -31,6 +31,7 @@ div {
       ## Roles
       "author"
     | "editor"
+    | "editorial-director"
     | "translator"
     | "interviewer"
     | "recipient"
