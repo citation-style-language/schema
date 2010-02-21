@@ -3,20 +3,19 @@
 div {
   cs-names =
     "author"
-    | "editor"
-    | "editorial-director"
-    | "translator"
-    | "recipient"
-    | "interviewer"
-    | "composer"
-    | "original-author"
-    | 
-      ## to be used when citing a section of a book, for example, to distinguish the author 
-      ## proper from the author of the containing work
-      "container-author"
     | 
       ## use for series editor
       "collection-editor"
+    | "composer"
+    | 
+      ## use for book author when citing a book chapter
+      "container-author"
+    | "editor"
+    | "editorial-director"
+    | "interviewer"
+    | "original-author"
+    | "recipient"
+    | "translator"
 }
 
 ## Dates
@@ -44,126 +43,30 @@ div {
 div {
   cs-variables =
     
-    ## the primary title for the cited item
-    "title"
-    | 
-      ## the secondary title for the cited item; for a book chapter, this 
-      ## would be a book title, for an article the journal title, etc.
-      "container-title"
-    | 
-      ## the tertiary title for the cited item; for example, a series title
-      "collection-title"
-    | 
-      ## collection number; for example, series number
-      "collection-number"
-    | 
-      ## title of a related original version; often useful in cases of translation
-      "original-title"
-    | 
-      ## the name of the publisher
-      "publisher"
-    | 
-      ## the location of the publisher
-      "publisher-place"
-    | 
-      ## the name of the original publisher
-      "original-publisher"
-    | 
-      ## the location of the original publisher
-      "original-publisher-place"
-    | 
-      ## the name of the archive
-      "archive"
-    | 
-      ## the location of the archive
-      "archive-place"
-    | 
-      ## issuing authority (for patents) or judicial authority (such as court  
-      ## for legal cases)
-      "authority"
-    | 
-      ## the location within an archival collection (for example, box and folder)
-      "archive_location"
-    | 
-      ## the name or title of a related event such as a conference or hearing
-      "event"
-    | 
-      ## the location or place for the related event
-      "event-place"
-    | 
-      ## the range of pages an item covers in a containing item
-      "page"
-    | 
-      ## the first page of an item within a containing item
-      "page-first"
-    | 
-      ## a description to locate an item within some larger container or 
-      ## collection; a volume or issue number is a kind of locator, for example.
-      "locator"
-    | 
-      ## version description
-      "version"
-    | 
-      ## volume number for the container periodical
-      "volume"
-    | 
-      ## refers to the number of items in multi-volume books and such
-      "number-of-volumes"
-    | 
-      ## refers to the number of pages in a book or other document
-      "number-of-pages"
-    | 
-      ## the issue number for the container publication
-      "issue"
-    | 
-      ##
-      "chapter-number"
-    | 
-      ## medium description (DVD, CD, etc.)
-      "medium"
-    | 
-      ## the (typically publication) status of an item; for example "forthcoming"
-      "status"
-    | 
-      ## an edition description
-      "edition"
-    | 
-      ## a section description (for newspapers, etc.)
-      "section"
-    | 
-      ##
-      "genre"
-    | 
-      ## a short inline note, often used to refer to additional details of the resource
-      "note"
+    ##
+    "abstract"
     | 
       ## notes made by a reader about the content of the resource
       "annote"
     | 
-      ##
-      "abstract"
+      ## the name of the archive
+      "archive"
     | 
-      ##
-      "keyword"
+      ## the location within an archival collection (for example, box and folder)
+      "archive_location"
     | 
-      ## a document number; useful for reports and such
-      "number"
+      ## the place of the archive
+      "archive-place"
     | 
-      ## for related referenced resources; this is here for legal case 
-      ## histories, but may be relevant for other contexts.
-      "references"
-    | 
-      ##
-      "URL"
-    | 
-      ##
-      "DOI"
-    | 
-      ##
-      "ISBN"
+      ## issuing authority (for patents) or judicial authority (such as court
+      ## for legal cases)
+      "authority"
     | 
       ##
       "call-number"
+    | 
+      ##
+      "chapter-number"
     | 
       ## the number used for the in-text citation mark in numeric styles
       "citation-number"
@@ -171,13 +74,109 @@ div {
       ## the label used for the in-text citation mark in label styles
       "citation-label"
     | 
-      ## The number of a preceding note containing the first reference to
-      ## this item. Relevant only for note-based styles, and null for first references.
+      ## collection number; for example, series number
+      "collection-number"
+    | 
+      ## the tertiary title for the cited item; for example, a series title
+      "collection-title"
+    | 
+      ## the secondary title for the cited item (book title for book chapters,
+      ## journal title for articles, etc.).
+      "container-title"
+    | 
+      ##
+      "DOI"
+    | 
+      ## an edition description
+      "edition"
+    | 
+      ## the name or title of a related event such as a conference or hearing
+      "event"
+    | 
+      ## the location or place for the related event
+      "event-place"
+    |
+      ## The number of a preceding note containing the first reference to this
+      ## item. Relevant only for note-based styles, and null for first references.
       "first-reference-note-number"
+    | 
+      ##
+      "genre"
+    | 
+      ##
+      "ISBN"
+    | 
+      ## the issue number for the container publication
+      "issue"
+    | 
+      ## For legislation and patents; scope of geographic relevance for a document.
+      "jurisdiction"
+    | 
+      ##
+      "keyword"
+    | 
+      ## a description to locate an item within some larger container or 
+      ## collection; a volume or issue number is a kind of locator, for example.
+      "locator"
+    | 
+      ## medium description (DVD, CD, etc.)
+      "medium"
+    | 
+      ## a short inline note, often used to refer to additional details of the resource
+      "note"
+    | 
+      ## a document number; useful for reports and such
+      "number"
+    | 
+      ## refers to the number of pages in a book or other document
+      "number-of-pages"
+    | 
+      ## refers to the number of items in multi-volume books and such
+      "number-of-volumes"
+    | 
+      ## the name of the original publisher
+      "original-publisher"
+    | 
+      ## the place of the original publisher
+      "original-publisher-place"
+    | 
+      ## title of a related original version; often useful in cases of translation
+      "original-title"
+    | 
+      ## the range of pages an item covers in a containing item
+      "page"
+    | 
+      ## the first page of an item within a containing item
+      "page-first"
+    | 
+      ## the name of the publisher
+      "publisher"
+    | 
+      ## the place of the publisher
+      "publisher-place"
+    | 
+      ## for related referenced resources; used for legal case histories, but
+      ## may be relevant for other contexts.
+      "references"
+    | 
+      ## a section description (for newspapers, etc.)
+      "section"
+    | 
+      ## the (typically publication) status of an item; for example "forthcoming"
+      "status"
+    | 
+      ## the primary title for the cited item
+      "title"
+    | 
+      ##
+      "URL"
+    | 
+      ##
+      "version"
+    | 
+      ## volume number for the container periodical
+      "volume"
     | 
       ## The year suffix for author-date styles; e.g. the 'a' in '1999a'.
       "year-suffix"
-    |
-      ## For legislation and patents; scope of geographic relevance for a document.
-      "jurisdiction"
 }
