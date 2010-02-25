@@ -2,7 +2,7 @@ namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
 namespace atom = "http://www.w3.org/2005/Atom"
 namespace cs = "http://purl.org/net/xbiblio/csl"
 namespace dc = "http://purl.org/dc/elements/1.1/"
-namespace s = "http://www.ascc.net/xml/schematron"
+namespace sch = "http://www.ascc.net/xml/schematron"
 namespace xhtml = "http://www.w3.org/1999/xhtml"
 
 # CSL schema metadata
@@ -29,18 +29,25 @@ include "csl-categories.rnc"
 
 # Embedded Schematron rules to detect undefined macro-calls in cs:text, cs:key
 
-s:rule [
-    context = "//cs:text[@macro]"
-    s:assert [
-        test = "@macro = /cs:style/cs:macro/@name"
-        "This macro call has no corresponding macro."
+sch:ns [
+    uri = "http://purl.org/net/xbiblio/csl"
+    prefix = "cs"
     ]
-]
-s:rule [
-    context = "//cs:key[@macro]"
-    s:assert [
-        test = "@macro = /cs:style/cs:macro/@name"
-        "This macro call has no corresponding macro."
+sch:pattern [
+    name = "Non-existing macros"
+    sch:rule [
+        context = "//cs:text[@macro]"
+        sch:assert [
+            test = "@macro = /cs:style/cs:macro/@name"
+            "This macro call has no corresponding macro."
+        ]
+    ]
+    sch:rule [
+        context = "//cs:key[@macro]"
+        sch:assert [
+            test = "@macro = /cs:style/cs:macro/@name"
+            "This macro call has no corresponding macro."
+        ]
     ]
 ]
 
