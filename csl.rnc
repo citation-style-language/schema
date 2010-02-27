@@ -305,16 +305,16 @@ div {
     ## Options for cs:name, available for cs:style, cs:citation and cs:bibliography.
     name-opt =
         name-attributes,
-	
-	## Indicates long (first name + last name, for Western names) or short
-	## (last name only, for Western names) form of name. Default is long
-	## form. The "count" form is used to return the count of the contributor
-	## list, and may be used in special sorting routines.
-	attribute name-form { "long" | "short" | "count" }?,
-	
-	## Delimiter between names (delimiter between variables is on <names>
-	## tag, where it should be). This is ", " in "J. Doe, S. Smith."
-	attribute name-delimiter { text }?
+        
+        ## Indicates long (first name + last name, for Western names) or short
+        ## (last name only, for Western names) form of name. Default is long
+        ## form. The "count" form is used to return the count of the contributor
+        ## list, and may be used in special sorting routines.
+        attribute name-form { "long" | "short" | "count" }?,
+        
+        ## Delimiter between names (delimiter between variables is on <names>
+        ## tag, where it should be). This is ", " in "J. Doe, S. Smith."
+        attribute name-delimiter { text }?
     
     name-attributes =
         ## Controls appearance of "and"/"&". To disable, do not specify.
