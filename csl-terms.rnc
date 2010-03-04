@@ -1,4 +1,4 @@
-## Terms and forms
+## Terms
 div {
   cs-terms =
     
@@ -29,18 +29,6 @@ div {
     | "reference"
     | "retrieved"
     | 
-      ## Roles
-      "author"
-    | "container-author"
-    | "editor"
-    | "editorial-director"
-    | "translator"
-    | "interviewer"
-    | "recipient"
-    | 
-      ## Combined roles
-      "editortranslator"
-    |
       ## Months
       "month-01"
     | "month-02"
@@ -73,7 +61,7 @@ div {
     | "ordinal-03"
     | "ordinal-04"
     |
-      ## Long ordinals
+      ## Long Ordinals
       "long-ordinal-01"
     | "long-ordinal-02"
     | "long-ordinal-03"
@@ -85,10 +73,16 @@ div {
     | "long-ordinal-09"
     | "long-ordinal-10"
     |
-      ## Other
+      ## Contributor Roles
+      cs-names
+    | "editortranslator"
+    |
+      ## Categories
+      info-field-categories
+    |
+      ## Locators
       cs-terms.locator
     | cs-terms.extension
-    | info-field-categories
   
   ## Locators
   cs-terms.locator =
