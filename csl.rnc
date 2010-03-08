@@ -580,10 +580,9 @@ div {
 [ a:documentation [ xhtml:h2 [ "Groups" ] ] ]
 div {
     
-    ## Group is used to provide delimiters and a common prefix/suffix. It is syntactic 
-    ## sugar for a conditional that tests for the presence of any non-null child variable 
-    ## or macro call results. So if there are no such results, then any <text term="(term)"> 
-    ## content will not be printed.
+    ## cs:group and its child elements are suppressed if a) at least one
+    ## rendering element in cs:group calls a variable (either directly or via a
+    ## macro), and b) all variables that are called are empty.
     group = element cs:group { affixes, formatting, delimiter, cs-element+ }
 }
 [ a:documentation [ xhtml:h2 [ "Options" ] ] ]
