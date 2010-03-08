@@ -237,10 +237,10 @@ div {
             },
             
             ## No affixes may be applied to cs:date in cs:locale
-            formatting,
+            font-formatting,
             delimiter,
             element cs:date-part {
-                affixes, text-case, formatting, (month | day | year)
+                affixes, text-case, font-formatting, (month | day | year)
             }+
         }
     
@@ -280,8 +280,8 @@ div {
     
     bibliography = element cs:bibliography { (bibliography-options & sort?), bibliography-layout }
     
-    citation-layout = element cs:layout { affixes, formatting, delimiter, cs-element }
-    bibliography-layout = element cs:layout { affixes, formatting, cs-element }
+    citation-layout = element cs:layout { affixes, font-formatting, delimiter, cs-element }
+    bibliography-layout = element cs:layout { affixes, font-formatting, cs-element }
     cs-element = (names | date | label | cs-text | cs-number | choose | group)+
 }
 [ a:documentation [ xhtml:h2 [ "Contributor Names" ] ] ]
@@ -294,7 +294,8 @@ div {
     
     names-attributes =
         affixes,
-        formatting,
+        display,
+        font-formatting,
         
         ## the delimiter between name groups
         delimiter,
@@ -384,7 +385,7 @@ div {
         element cs:name {
             name-attributes,
             affixes,
-            formatting,
+            font-formatting,
             
             ## Indicates long (first name + last name, for Western names) or short
             ## (last name only, for Western names) form of name. Default is long
@@ -401,7 +402,7 @@ div {
             element cs:name-part {
                 attribute name { "family" | "given" },
                 text-case,
-                formatting
+                font-formatting
             }*
         }
     
@@ -416,7 +417,7 @@ div {
             ## term to use for et al substitution; "et-al" is default
             attribute term { "et-al" | "and others" }?,
             affixes,
-            formatting
+            font-formatting
         }
     
     ## Substitutions, if the name does not exist
@@ -458,17 +459,18 @@ div {
               ## are locale-specific), e.g. to force the use of leading-zeros,
               ## or the short month form. The inclusion of date-parts does not 
               ## affect which, and in what order, the date-parts are rendered.
-              element cs:date-part { text-case, formatting, (month | day | year) }*)
+              element cs:date-part { text-case, font-formatting, (month | day | year) }*)
              | (
                 ## Non-localized dates are formatted by including, in the desired
                 ## order, the relevant `date-part`-elements, and by applying formatting,
                 ## affixes on cs:date and cs:date-part.
                 element cs:date-part {
-                    affixes, text-case, formatting, (month | day | year)
+                    affixes, text-case, font-formatting, (month | day | year)
                 }+,
                 delimiter)),
             affixes,
-            formatting
+            display,
+            font-formatting
         }
     
     ## The default delimiter for date ranges is the en-dash (e.g. "May–July 2008").
@@ -509,32 +511,32 @@ div {
 [ a:documentation [ xhtml:h2 [ "Formatting Text" ] ] ]
 div {
     
-    ## The cs:text element is the main formatting element used to layout down content.    
+    ## The cs:text element is the main formatting element used to layout down content.
     cs-text =
         element cs:text {
             affixes,
-            formatting,
-            text-case,
+            display,
+            font-formatting,
+            quotes,
             strip-periods,
-            ((
-              ## adds a variable belonging to this item
-              attribute variable { cs-variables },
-              attribute form { "short" | "long" }?)
-             | 
-               ## adds the results of a macro, as specified in the main body of the CSL
-               attribute macro { xsd:NMTOKEN }
+            text-case,
+            (
+             ## render macro output
+             attribute macro { xsd:NMTOKEN }
              | (
-                ## adds a localized term
+                ## render localized term
                 attribute term { cs-terms },
                 attribute form { cs-term-forms }?,
                 
-                ## chooses between the single ("false", default) and multiple ("true") version of a term
+                ## term plurality: single ("false", default) or multiple ("true")
                 attribute plural { xsd:boolean }?)
-             | 
-               ## adds the text in the value field. use sparingly.
-               ## when dealing with localizable text, <text term="(term)"/> should be
-               ## used, even if this means defining a new term.
-               attribute value { text })
+             |
+               ## render verbatim text.
+               attribute value { text }
+             | (
+                ## render variable
+                attribute variable { cs-variables },
+                attribute form { "short" | "long" }?))
         }
     
     ## The number markup directive matches the first number found in a field, 
@@ -550,7 +552,8 @@ div {
     cs-number =
         element cs:number {
             affixes,
-            formatting,
+            display,
+            font-formatting,
             text-case,
             attribute variable { cs-numbers },
             attribute form { "numeric" | "ordinal" | "roman" | "long-ordinal" }?
@@ -569,7 +572,7 @@ div {
         }
     label-primitives =
         affixes,
-        formatting,
+        font-formatting,
         text-case,
         strip-periods,
         attribute form { cs-term-forms }?,
@@ -583,7 +586,14 @@ div {
     ## cs:group and its child elements are suppressed if a) at least one
     ## rendering element in cs:group calls a variable (either directly or via a
     ## macro), and b) all variables that are called are empty.
-    group = element cs:group { affixes, formatting, delimiter, cs-element+ }
+    group =
+        element cs:group {
+            affixes,
+            display,
+            font-formatting,
+            delimiter,
+            cs-element+
+        }
 }
 [ a:documentation [ xhtml:h2 [ "Options" ] ] ]
 div {
@@ -827,10 +837,53 @@ div {
 
 ## Formatting attributes.
 div {
-    delimiter = attribute delimiter { text }?
     affixes =
         attribute prefix { text }?,
         attribute suffix { text }?
+    delimiter = attribute delimiter { text }?
+
+    ## The text of each individual cite is normally formatted as a
+    ## single continuous run of text.  Portions of the cite text can be
+    ## specially positioned using the display attribute.
+    display = attribute display {
+        
+        ## Set the display value set to "block" to place the content
+        ## in a block stretching from margin to margin.
+        "block"
+        | 
+          ## Set the display value set to "left-margin" to place the
+          ## content in a block of fixed width starting at the left 
+          ## margin.  All "left-margin" blocks in a bibliography share
+          ## the same width, set according to the maximum number of
+          ## characters appearing in any one such block.
+          "left-margin"
+        | 
+          ## Set the display value to "right-inline" to place the
+          ## content in a block directly to the right of any immediately
+          ## preceding "left-margin" block, and extending to the
+          ## right margin.
+          "right-inline"
+        | 
+          ## Set the display value to "indent" to block-indent the
+          ## text to the right by a standard amount.
+          "indent"
+    }?
+    
+    ## attributes are drawn directly from CSS and FO where possible
+    font-formatting =
+        attribute font-style { "italic" | "normal" | "oblique" }?,
+        attribute font-variant { "normal" | "small-caps" }?,
+        attribute font-weight { "normal" | "bold" | "light" }?,
+        attribute text-decoration { "none" | "underline" }?,
+        attribute vertical-align { "baseline" | "sup" | "sub" }?
+    
+    ## When set to true (false is the default), quotes (defined as terms) are
+    ## placed around the rendered text. Nested quotes flipflop.
+    quotes = attribute quotes { xsd:boolean }?
+    
+    ## Removes any periods from the rendered text (defaults to false)
+    strip-periods = attribute strip-periods { xsd:boolean }?
+    
     text-case =
         attribute text-case {
             
@@ -855,47 +908,4 @@ div {
               ## display as sentence case/sentence style
               "sentence"
         }?
-    
-    ## attributes are drawn directly from CSS and FO where possible
-    formatting =
-        attribute font-style { "italic" | "normal" | "oblique" }?,
-        attribute font-variant { "normal" | "small-caps" }?,
-        attribute font-weight { "normal" | "bold" | "light" }?,
-        attribute text-decoration { "none" | "underline" }?,
-        attribute vertical-align { "baseline" | "sup" | "sub" }?,
-        
-        ## The text of each individual cite is normally formatted as a
-        ## single continuous run of text.  Portions of the cite text can be
-        ## specially positioned using the display attribute.
-        attribute display {
-            
-            ## Set the display value set to "block" to place the content
-            ## in a block stretching from margin to margin.
-            "block"
-            | 
-              ## Set the display value set to "left-margin" to place the
-              ## content in a block of fixed width starting at the left 
-              ## margin.  All "left-margin" blocks in a bibliography share
-              ## the same width, set according to the maximum number of
-              ## characters appearing in any one such block.
-              "left-margin"
-            | 
-              ## Set the display value to "right-inline" to place the
-              ## content in a block directly to the right of any immediately
-              ## preceding "left-margin" block, and extending to the
-              ## right margin.
-              "right-inline"
-            | 
-              ## Set the display value to "indent" to block-indent the
-              ## text to the right by a standard amount.
-              "indent"
-        }?,
-        
-        ## When set true, places quotes around the rendered text.  The
-        ## style of quotes used is locale dependent, and may vary if
-        ## quotes are nested within the cite.
-        attribute quotes { xsd:boolean }?
-    
-    ## Removes any periods from the rendered text (defaults to false)
-    strip-periods = attribute strip-periods { xsd:boolean }?
 }
