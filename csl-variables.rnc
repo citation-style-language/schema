@@ -23,7 +23,7 @@ div {
   cs-dates =
     "accessed"
     | "container"
-    | "event"
+    | "event-date"
     | "issued"
     | "original-date"
     | "submitted" 
