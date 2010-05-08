@@ -733,8 +733,7 @@ div {
     ## If "true", bibliographic entries are rendered with hanging-indents.
     hanging-indent-opt = attribute hanging-indent { xsd:boolean }?
     
-    ## Defines spacing between entries and between lines (measured in number
-    ## of lines). Both attributes default to 1.
+    ## entry-spacing and line-spacing default to 1.
     line-formatting-opt =
         attribute entry-spacing { xsd:integer }?,
         attribute line-spacing { xsd:integer }?
