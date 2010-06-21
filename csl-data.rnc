@@ -53,12 +53,8 @@ div {
   date-pattern =
     attribute type { cs-dates },
     attribute year { xsd:gYear },
-    attribute month {
-      xsd:string { pattern = "\d{2}" }
-    }?,
-    attribute day {
-      xsd:string { pattern = "\d{2}" }
-    }?,
+    attribute month { xsd:gMonth }?,
+    attribute day { xsd:gDay }?,
     attribute season { "fall" | "winter" | "spring" | "summer" }?,
     attribute other { text }?,
     attribute circa { xsd:boolean }?
