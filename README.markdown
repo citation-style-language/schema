@@ -1,4 +1,4 @@
-= Contents =
+# Contents
 
 This repository contains schema files to represent:
 
