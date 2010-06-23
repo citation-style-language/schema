@@ -43,21 +43,28 @@ div {
 ## Dates
 div {
   date =
-    element date { date-pattern }
-    | date-range
-  date-range =
-    element date-range {
-      element begin-date { date-pattern },
-      element end-date { date-pattern }
+    element date { 
+      attribute type { cs-dates }, 
+      attribute circa { xsd:boolean }?,
+      (date-pattern | date-range)
     }
   date-pattern =
-    attribute type { cs-dates },
-    attribute year { xsd:gYear },
-    attribute month { xsd:gMonth }?,
-    attribute day { xsd:gDay }?,
-    attribute season { "fall" | "winter" | "spring" | "summer" }?,
-    attribute other { text }?,
-    attribute circa { xsd:boolean }?
+    year-pattern,
+    ( ( month-pattern, day-pattern? ) | season-pattern )?
+  date-range =
+    element begin-date { date-pattern },
+    element end-date { date-pattern }?
+  year-pattern =
+    attribute year {
+      xsd:integer { maxInclusive="-1" }
+      | xsd:integer { minInclusive="1" }
+    }
+  month-pattern =
+    attribute month { xsd:integer { minInclusive="1" maxInclusive="12" } }
+  day-pattern =
+    attribute day { xsd:integer { minInclusive="1" maxInclusive="31" } }
+  season-pattern =
+    attribute season { text }
 }
 
 ## Simple Variables
