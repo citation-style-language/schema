@@ -32,9 +32,9 @@ div {
       name-attributes
     }
   name-attributes =
-    attribute name { text }
-    | (attribute given { text }?,
-       attribute family { text }?,
+    attribute literal { text }
+    | ((attribute given { text }?,
+       attribute family { text }?),
        attribute dropping-particle { text }?,
        attribute non-dropping-particle { text }?,
        attribute suffix { text }?)
@@ -79,6 +79,7 @@ div {
          text
        }
      | element i { text }
+     | element sc { text }
      | element span {
          
          ## text whose case should not be transformed (as with proper nouns)
