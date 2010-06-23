@@ -35,9 +35,9 @@ div {
     attribute name { text }
     | (attribute given { text }?,
        attribute family { text }?,
-       attribute prefix { text }?,
-       attribute suffix { text }?,
-       attribute particle { text }?)
+       attribute dropping-particle { text }?,
+       attribute non-dropping-particle { text }?,
+       attribute suffix { text }?)
 }
 
 ## Dates
