@@ -92,6 +92,7 @@ div {
             & info-rights?
             & info-summary?
             & info-title
+            & info-short-title
             & info-updated
         }
 
@@ -147,6 +148,9 @@ div {
     info-rights = element cs:rights { info-text }
     info-summary = element cs:summary { info-text }
     info-title = element cs:title { info-text }
+    
+    ## For abbreviated titles (e.g. "APA")
+    info-short-title = element cs:short-title { info-text }
     info-text =
         attribute xml:lang { xsd:language }?,
         text
