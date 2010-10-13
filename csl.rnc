@@ -92,7 +92,7 @@ div {
             & info-rights?
             & info-summary?
             & info-title
-            & info-short-title
+            & info-short-title?
             & info-updated
         }
 
