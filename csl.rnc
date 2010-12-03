@@ -150,7 +150,7 @@ div {
     info-title = element cs:title { info-text }
     
     ## For abbreviated titles (e.g. "APA")
-    info-short-title = element cs:short-title { info-text }
+    info-title-short = element cs:title-short { info-text }
     info-text =
         attribute xml:lang { xsd:language }?,
         text
