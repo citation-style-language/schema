@@ -325,6 +325,27 @@ div {
         ## Controls appearance of "and"/"&". To disable, do not specify.
         attribute and { "text" | "symbol" }?,
         
+        ## Delimiter between the last name rendered and the "et-al" term in case
+        ## of et-al abbreviation
+        attribute delimiter-precedes-et-al {
+        
+            ## Default behavior; a space is used for name lists truncated to a
+            ## single name. For two or more names, the name delimiter is used:
+            ## 1 name: "J. Doe et al."
+            ## 2 names: "J. Doe, S. Smith, et al."
+            "contextual"
+            | 
+            ## Name delimiter is always used
+            ## 1 name: "J. Doe, et al."
+            ## 2 names: "J. Doe, S. Smith, et al."
+            "always"
+            | 
+            ## Name delimiter is never used
+            ## 1 name: "J. Doe et al."
+            ## 2 names: "J. Doe, S. Smith et al."
+            "never"
+            }?,
+        
         ## Delimiter preceding the last name in a name list
         attribute delimiter-precedes-last {
         
