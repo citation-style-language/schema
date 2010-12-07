@@ -366,14 +366,17 @@ div {
               "never"
             }?,
         
-        ## Specifies when "et al." name list abbreviation is used
-        ##   et-al-min: the minimum number of contributors to use "et al."
-        ##   et-al-use-first: the number of contributors to print before "et al."
+        ## Specifies when and how "et al." name list abbreviation is used
+        ##   et-al-min: the minimum number of names to use "et al."
+        ##   et-al-use-first: the number of names to print before "et al."
         ##   et-al-subsequent-*: as above, but for subsequent citations
+        ##   et-al-use-last: when set to "true" ("false" is the default),
+        ##   "et al." is replaced by an ellipsis followed by the last name
         attribute et-al-min { xsd:integer }?,
         attribute et-al-use-first { xsd:integer }?,
         attribute et-al-subsequent-min { xsd:integer }?,
         attribute et-al-subsequent-use-first { xsd:integer }?,
+        attribute et-al-use-last { xsd:boolean }?,
         
         ## Indicates whether given name parts ought to be given as initials
         ## (e.g., J. K. Rowling) and the text to follow each initial.
@@ -791,7 +794,10 @@ div {
             ## the number of names used in a name sort, overriding the values
             ## set on the et-al abbreviation attributes.
             (attribute names-min { xsd:integer },
-             attribute names-use-first { xsd:integer })?
+             attribute names-use-first { xsd:integer })?,
+            
+            ## names-use-last can be used to override the value of et-at-use-last
+            attribute names-use-last { xsd:boolean })?
         }
 }
 [ a:documentation [ xhtml:h2 [ "Conditional Statements" ] ] ]
