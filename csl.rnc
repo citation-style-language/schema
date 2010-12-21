@@ -793,11 +793,11 @@ div {
             ## names-min and names-use-first can be used to (further) constrain
             ## the number of names used in a name sort, overriding the values
             ## set on the et-al abbreviation attributes.
-            (attribute names-min { xsd:integer },
-             attribute names-use-first { xsd:integer })?,
+            attribute names-min { xsd:integer }?,
+            attribute names-use-first { xsd:integer }?,
             
             ## names-use-last can be used to override the value of et-at-use-last
-            attribute names-use-last { xsd:boolean })?
+            attribute names-use-last { xsd:boolean }?
         }
 }
 [ a:documentation [ xhtml:h2 [ "Conditional Statements" ] ] ]
