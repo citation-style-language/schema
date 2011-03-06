@@ -1,0 +1,23 @@
+{
+	"description" : "A representation of a bibliographic source",
+	"type" : "object",
+	"properties" : {
+		"issued" : {
+			"format" : "date",
+			"type" : "string",
+			"description" : "primary date associated with the source"
+		},
+		"id" : {
+			"type":"string",
+			"required":true
+		},
+		"title" : { 
+			"type" : "string" 
+		},
+		"uri" : {
+			"type" : "string", 
+			"format" : "url" 
+		}
+	}
+}
+
