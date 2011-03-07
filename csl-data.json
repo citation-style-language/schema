@@ -1,23 +1,75 @@
 {
-	"description" : "A representation of a bibliographic source",
-	"type" : "object",
-	"properties" : {
-		"issued" : {
-			"format" : "date",
-			"type" : "string",
-			"description" : "primary date associated with the source"
-		},
-		"id" : {
-			"type":"string",
-			"required":true
-		},
-		"title" : { 
-			"type" : "string" 
-		},
-		"uri" : {
-			"type" : "string", 
-			"format" : "url" 
-		}
-	}
+    "description": "JSON schema (draft 3) for CSL input data",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "type": {
+                "type": "string",
+                "required": true,
+                "enum" : [
+                    "article",
+                    "article-journal",
+                    "article-magazine",
+                    "article-newspaper",
+                    "bill",
+                    "book",
+                    "broadcast",
+                    "chapter",
+                    "entry",
+                    "entry-dictionary",
+                    "entry-encyclopedia",
+                    "figure",
+                    "graphic",
+                    "interview",
+                    "legal_case",
+                    "legislation",
+                    "manuscript",
+                    "map",
+                    "motion_picture",
+                    "musical_score",
+                    "pamphlet",
+                    "paper-conference",
+                    "patent",
+                    "personal_communication",
+                    "post",
+                    "post-weblog",
+                    "report",
+                    "review",
+                    "review-book",
+                    "song",
+                    "speech",
+                    "thesis",
+                    "treaty",
+                    "webpage" 
+                ] 
+            },
+            "id": {
+                "type": "string",
+                "required": true 
+            },
+            "author": {
+                "type": "array" 
+            },
+            "issued": {
+                "type": "object" 
+            },
+            "container-title": {
+                "type": "string" 
+            },
+            "publisher": {
+                "type": "string" 
+            },
+            "publisher-place": {
+                "type": "string" 
+            },
+            "title": {
+                "type": "string" 
+            },
+            "URL": {
+                "type": "string" 
+            } 
+        },
+        "additionalProperties" : false 
+    } 
 }
-
