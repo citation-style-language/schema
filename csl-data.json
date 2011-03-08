@@ -1,5 +1,6 @@
 {
     "description": "JSON schema (draft 3) for CSL input data",
+    "id": "https://github.com/citation-style-language/schema/raw/master/csl-data.json",
     "type": "array",
     "items": {
         "type": "object",
@@ -51,10 +52,163 @@
             "author": {
                 "type": "array" 
             },
+            "collection-editor": {
+                "type": "array" 
+            },
+            "composer": {
+                "type": "array" 
+            },
+            "container-author": {
+                "type": "array" 
+            },
+            "editor": {
+                "type": "array" 
+            },
+            "editorial-director": {
+                "type": "array" 
+            },
+            "interviewer": {
+                "type": "array" 
+            },
+            "original-author": {
+                "type": "array" 
+            },
+            "recipient": {
+                "type": "array" 
+            },
+            "translator": {
+                "type": "array" 
+            },
+            "accessed": {
+                "type": "object" 
+            },
+            "container": {
+                "type": "object" 
+            },
+            "event-date": {
+                "type": "object" 
+            },
             "issued": {
                 "type": "object" 
             },
+            "original-date": {
+                "type": "object" 
+            },
+            "submitted": {
+                "type": "object" 
+            },
+            "abstract": {
+                "type": "string" 
+            },
+            "annote": {
+                "type": "string" 
+            },
+            "archive": {
+                "type": "string" 
+            },
+            "archive_location": {
+                "type": "string" 
+            },
+            "archive-place": {
+                "type": "string" 
+            },
+            "authority": {
+                "type": "string" 
+            },
+            "call-number": {
+                "type": "string" 
+            },
+            "chapter-number": {
+                "type": "string" 
+            },
+            "citation-number": {
+                "type": "string" 
+            },
+            "citation-label": {
+                "type": "string" 
+            },
+            "collection-number": {
+                "type": "string" 
+            },
+            "collection-title": {
+                "type": "string" 
+            },
             "container-title": {
+                "type": "string" 
+            },
+            "DOI": {
+                "type": "string" 
+            },
+            "edition": {
+                "type": [
+                    "string",
+                    "number" 
+                ] 
+            },
+            "event": {
+                "type": "string" 
+            },
+            "event-place": {
+                "type": "string" 
+            },
+            "first-reference-note-number": {
+                "type": "string" 
+            },
+            "genre": {
+                "type": "string" 
+            },
+            "ISBN": {
+                "type": "string" 
+            },
+            "issue": {
+                "type": [
+                    "string",
+                    "number" 
+                ] 
+            },
+            "jurisdiction": {
+                "type": "string" 
+            },
+            "keyword": {
+                "type": "string" 
+            },
+            "locator": {
+                "type": "string" 
+            },
+            "medium": {
+                "type": "string" 
+            },
+            "note": {
+                "type": "string" 
+            },
+            "number": {
+                "type": [
+                    "string",
+                    "number" 
+                ] 
+            },
+            "number-of-pages": {
+                "type": "string" 
+            },
+            "number-of-volumes": {
+                "type": [
+                    "string",
+                    "number" 
+                ] 
+            },
+            "original-publisher": {
+                "type": "string" 
+            },
+            "original-publisher-place": {
+                "type": "string" 
+            },
+            "original-title": {
+                "type": "string" 
+            },
+            "page": {
+                "type": "string" 
+            },
+            "page-first": {
                 "type": "string" 
             },
             "publisher": {
@@ -63,10 +217,31 @@
             "publisher-place": {
                 "type": "string" 
             },
+            "references": {
+                "type": "string" 
+            },
+            "section": {
+                "type": "string" 
+            },
+            "status": {
+                "type": "string" 
+            },
             "title": {
                 "type": "string" 
             },
             "URL": {
+                "type": "string" 
+            },
+            "version": {
+                "type": "string" 
+            },
+            "volume": {
+                "type": [
+                    "string",
+                    "number" 
+                ] 
+            },
+            "year-suffix": {
                 "type": "string" 
             } 
         },
