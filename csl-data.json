@@ -50,7 +50,44 @@
                 "required": true 
             },
             "author": {
-                "type": "array" 
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "family" : {
+                            "type": "string" 
+                        },
+                        "given" : {
+                            "type": "string" 
+                        },
+                        "dropping-particle" : {
+                            "type": "string" 
+                        },
+                        "non-dropping-particle" : {
+                            "type": "string" 
+                        },
+                        "suffix" : {
+                            "type": "string" 
+                        },
+                        "comma-suffix" : {
+                            "type": [
+                                "string",
+                                "number",
+                                "boolean"
+                            ] 
+                        },
+                        "static-ordering" : {
+                            "type": [
+                                "string",
+                                "number",
+                                "boolean"
+                            ] 
+                        },
+                        "literal" : {
+                            "type": "string" 
+                        } 
+                    } 
+                } 
             },
             "collection-editor": {
                 "type": "array" 
