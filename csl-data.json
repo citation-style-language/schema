@@ -52,6 +52,7 @@
             "author": {
                 "type": "array",
                 "items": {
+                    "id": "name-variable",
                     "type": "object",
                     "properties": {
                         "family" : {
@@ -73,48 +74,76 @@
                             "type": [
                                 "string",
                                 "number",
-                                "boolean"
+                                "boolean" 
                             ] 
                         },
                         "static-ordering" : {
                             "type": [
                                 "string",
                                 "number",
-                                "boolean"
+                                "boolean" 
                             ] 
                         },
                         "literal" : {
                             "type": "string" 
                         } 
-                    } 
+                    } ,
+                    "additionalProperties" : false 
                 } 
             },
             "collection-editor": {
-                "type": "array" 
+                "type": "array",
+                "items": {
+                    "$ref": "name-variable" 
+                } 
             },
             "composer": {
-                "type": "array" 
+                "type": "array",
+                "items": {
+                    "$ref": "name-variable" 
+                } 
             },
             "container-author": {
-                "type": "array" 
+                "type": "array",
+                "items": {
+                    "$ref": "name-variable" 
+                } 
             },
             "editor": {
-                "type": "array" 
+                "type": "array",
+                "items": {
+                    "$ref": "name-variable" 
+                } 
             },
             "editorial-director": {
-                "type": "array" 
+                "type": "array",
+                "items": {
+                    "$ref": "name-variable" 
+                } 
             },
             "interviewer": {
-                "type": "array" 
+                "type": "array",
+                "items": {
+                    "$ref": "name-variable" 
+                } 
             },
             "original-author": {
-                "type": "array" 
+                "type": "array",
+                "items": {
+                    "$ref": "name-variable" 
+                } 
             },
             "recipient": {
-                "type": "array" 
+                "type": "array",
+                "items": {
+                    "$ref": "name-variable" 
+                } 
             },
             "translator": {
-                "type": "array" 
+                "type": "array",
+                "items": {
+                    "$ref": "name-variable" 
+                } 
             },
             "accessed": {
                 "type": "object" 
