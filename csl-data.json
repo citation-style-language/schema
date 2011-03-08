@@ -53,42 +53,50 @@
                 "type": "array",
                 "items": {
                     "id": "name-variable",
-                    "type": "object",
-                    "properties": {
-                        "family" : {
-                            "type": "string" 
+                    "type": [
+                        {
+                            "properties": {
+                                "family" : {
+                                    "type": "string" 
+                                },
+                                "given" : {
+                                    "type": "string" 
+                                },
+                                "dropping-particle" : {
+                                    "type": "string" 
+                                },
+                                "non-dropping-particle" : {
+                                    "type": "string" 
+                                },
+                                "suffix" : {
+                                    "type": "string" 
+                                },
+                                "comma-suffix" : {
+                                    "type": [
+                                        "string",
+                                        "number",
+                                        "boolean" 
+                                    ] 
+                                },
+                                "static-ordering" : {
+                                    "type": [
+                                        "string",
+                                        "number",
+                                        "boolean" 
+                                    ] 
+                                } 
+                            },
+                            "additionalProperties" : false 
                         },
-                        "given" : {
-                            "type": "string" 
-                        },
-                        "dropping-particle" : {
-                            "type": "string" 
-                        },
-                        "non-dropping-particle" : {
-                            "type": "string" 
-                        },
-                        "suffix" : {
-                            "type": "string" 
-                        },
-                        "comma-suffix" : {
-                            "type": [
-                                "string",
-                                "number",
-                                "boolean" 
-                            ] 
-                        },
-                        "static-ordering" : {
-                            "type": [
-                                "string",
-                                "number",
-                                "boolean" 
-                            ] 
-                        },
-                        "literal" : {
-                            "type": "string" 
+                        {
+                            "properties": {
+                                "literal" : {
+                                    "type": "string" 
+                                } 
+                            },
+                            "additionalProperties" : false 
                         } 
-                    } ,
-                    "additionalProperties" : false 
+                    ] 
                 } 
             },
             "collection-editor": {
