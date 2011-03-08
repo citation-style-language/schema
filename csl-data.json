@@ -163,7 +163,49 @@
                 "type": "object" 
             },
             "issued": {
-                "type": "object" 
+                "id": "date-variable",
+                "type": [
+                    {
+                        "properties": {
+                            "date-parts": {
+                                "type": "array",
+                                "items": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": [
+                                            "string",
+                                            "number" 
+                                        ] 
+                                    },
+                                    "maxItems": 3 
+                                },
+                                "maxItems": 2 
+                            },
+                            "season": {
+                                "type": [
+                                    "string",
+                                    "number" 
+                                ] 
+                            },
+                            "circa": {
+                                "type": [
+                                    "string",
+                                    "number",
+                                    "boolean" 
+                                ] 
+                            } 
+                        },
+                        "additionalProperties" : false 
+                    },
+                    {
+                        "properties": {
+                            "literal": {
+                                "type": "string" 
+                            } 
+                        },
+                        "additionalProperties" : false 
+                    } 
+                ] 
             },
             "original-date": {
                 "type": "object" 
