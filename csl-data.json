@@ -154,15 +154,6 @@
                 } 
             },
             "accessed": {
-                "type": "object" 
-            },
-            "container": {
-                "type": "object" 
-            },
-            "event-date": {
-                "type": "object" 
-            },
-            "issued": {
                 "id": "date-variable",
                 "type": [
                     {
@@ -207,11 +198,20 @@
                     } 
                 ] 
             },
+            "container": {
+                "$ref": "date-variable" 
+            },
+            "event-date": {
+                "$ref": "date-variable" 
+            },
+            "issued": {
+                "$ref": "date-variable" 
+            },
             "original-date": {
-                "type": "object" 
+                "$ref": "date-variable" 
             },
             "submitted": {
-                "type": "object" 
+                "$ref": "date-variable" 
             },
             "abstract": {
                 "type": "string" 
