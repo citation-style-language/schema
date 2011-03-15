@@ -1,3 +1,5 @@
+#! /usr/bin/env ruby
+
 require 'rubygems'
 require 'json-schema'
 
@@ -12,4 +14,3 @@ jsfiles.each do |jsfile|
     puts $!.message
   end
 end
-
