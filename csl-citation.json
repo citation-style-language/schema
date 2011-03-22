@@ -1,0 +1,42 @@
+CSL in-line citation schema
+---------------------------
+
+This is a placeholder, the proper schema should replace this file at the same URL.
+
+It's the same structure as a citeproc "minimal citation data object" http://gsl-nagoya-u.net/http/pub/citeproc-doc.html#citation-data-object, except:
+
+* an added "itemData" element containing the full item data as returned by sys.retrieveItem() and the same as one array item of https://github.com/citation-style-language/schema/raw/master/csl-data.json
+
+* an extra "uris" array which can contain any number of unique identifiers.
+
+Example:
+
+CslCitation:
+{
+	"schema": "https://github.com/citation-style-language/schema/raw/master/csl-citation.json",
+	"citationID":"12rsus7rlj",
+	"citationItems":
+	[
+		{
+			"id":"ITEM-1",
+			"itemData":
+			{
+				"id" : "ITEM-1",
+				"issued" : { "date-parts" : [ [ "2007" ] ] },
+				"title" : "My paper"
+			},
+			"locator":"21",
+			"label":"page",
+			"uris" : 
+			[ 
+				"www.mendeley.com/uniqueDocumentIdForUserA",
+				"www.mendeley.com/uniqueDocumentIdForUserB",
+				"www.zotero.org/uniqueDocumentIdForUserC"
+			]
+		}
+	],
+	"properties":
+	{
+		"noteIndex": 1
+	}
+}
