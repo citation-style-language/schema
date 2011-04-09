@@ -1,0 +1,25 @@
+
+namespace cs = "http://purl.org/net/xbiblio/csl"
+namespace dc = "http://purl.org/dc/elements/1.1/"
+namespace sch = "http://www.ascc.net/xml/schematron"
+namespace xhtml = "http://www.w3.org/1999/xhtml"
+
+dc:title [ "CSL Test Suite Schema" ]
+dc:creator [ "Bruce D'Arcus" ]
+dc:rights [ "Permission to freely use, copy and distribute." ]
+dc:description [
+    "Describes a simple format for CSL processor tests."
+]
+
+include "csl.rnc"{
+   # here I've redefined the style pattern to allow an optional 
+   # no-namespace style link (not sure if it should be namespaced)
+   style |= element style { attribute src { xsd:anyURI } }
+   start = element test { input & style & style-locale* & description? & tag* & output }
+ }
+
+input = element input { text }
+description = element description { text }
+tag = element tag { token }
+# right now plain text, but we can (should?) define an HTML output subset?
+output = element output { text }
