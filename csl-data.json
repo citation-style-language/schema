@@ -46,8 +46,29 @@
                 ] 
             },
             "id": {
-                "type": "string",
+                "type": [
+                    "string",
+                    "number" 
+                ],
                 "required": true 
+            },
+            "position": {
+                "type": [
+                    "string",
+                    "number" 
+                ] 
+            },
+            "categories": {
+                "type": "array",
+                "items": {
+                    "type": "string" 
+                } 
+            },
+            "journalAbbreviation": {
+                "type": "string" 
+            },
+            "shortTitle": {
+                "type": "string" 
             },
             "author": {
                 "type": "array",
@@ -79,6 +100,16 @@
                                     ] 
                                 },
                                 "static-ordering" : {
+                                    "type": [
+                                        "string",
+                                        "number",
+                                        "boolean" 
+                                    ] 
+                                },
+                                "literal" : {
+                                    "type": "string" 
+                                },
+                                "parse-names" : {
                                     "type": [
                                         "string",
                                         "number",
@@ -183,6 +214,18 @@
                                     "string",
                                     "number",
                                     "boolean" 
+                                ] 
+                            },
+                            "literal": {
+                                "type": "string" 
+                            },
+                            "raw": {
+                                "type": "string" 
+                            },
+                            "day": {
+                                "type": [
+                                    "string",
+                                    "number" 
                                 ] 
                             } 
                         },
