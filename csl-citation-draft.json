@@ -29,6 +29,9 @@
                         ],
                         "required": true 
                     },
+                    "itemData": {
+                        "$ref": "csl-data.json/#/items" 
+                    },
                     "prefix": {
                         "type": "string" 
                     },
