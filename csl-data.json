@@ -52,12 +52,6 @@
                 ],
                 "required": true 
             },
-            "position": {
-                "type": [
-                    "string",
-                    "number" 
-                ] 
-            },
             "categories": {
                 "type": "array",
                 "items": {
@@ -221,13 +215,7 @@
                             },
                             "raw": {
                                 "type": "string" 
-                            },
-                            "day": {
-                                "type": [
-                                    "string",
-                                    "number" 
-                                ] 
-                            } 
+                            }
                         },
                         "additionalProperties" : false 
                     },
