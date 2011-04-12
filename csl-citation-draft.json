@@ -29,6 +29,12 @@
                         ],
                         "required": true 
                     },
+                    "prefix": {
+                        "type": "string" 
+                    },
+                    "suffix": {
+                        "type": "string" 
+                    },
                     "locator": {
                         "type": "string" 
                     },
@@ -51,6 +57,20 @@
                             "sub verbo",
                             "verse",
                             "volume" 
+                        ] 
+                    },
+                    "suppress-author": {
+                        "type": [
+                            "string",
+                            "number",
+                            "boolean" 
+                        ] 
+                    },
+                    "author-only": {
+                        "type": [
+                            "string",
+                            "number",
+                            "boolean" 
                         ] 
                     },
                     "uris": {
