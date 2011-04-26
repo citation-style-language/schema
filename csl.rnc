@@ -12,14 +12,13 @@ dc:creator [ "Bruce D'Arcus" ]
 dc:creator [ "Simon Kornblith" ]
 dc:contributor [ "Frank Bennett" ]
 dc:contributor [ "Rintze Zelle" ]
-dc:copyright [ "Bruce D'Arcus and Simon Kornblith, 2007-2010" ]
+dc:copyright [ "Bruce D'Arcus and Simon Kornblith, 2007-2011" ]
 dc:rights [ "Permission to freely use, copy and distribute." ]
 dc:description [
     "Citation Style Language (CSL) schema for describing bibliographic and citation formatting."
 ]
 
-## Root element. cs:style for CSL styles, cs:locale for locales-xx-XX.xml files
-start = style | locale
+start = independent-style | dependent-style | locale
 
 ## Subparts of the CSL schema
 include "csl-terms.rnc"
@@ -51,14 +50,9 @@ sch:pattern [
     ]
 ]
 
-## The CSL data model consists of resources and variables. Primary resources are the 
-## citation object itself, as well as related agents and events. Variables are 
-## attributes of the resource: titles, dates, volume numbers, and so forth. From the 
-## perspective of CSL, resources templates involve a list of variables. By contrast, 
-## a variable can be accessed directly.
-## In addition, CSL also contains structures for macros and parameter options.
+## Independent CSL style
 div {
-    style =
+    independent-style =
         element cs:style {
             
             ## Indicates with which version of the CSL schema the style is compatible
@@ -73,6 +67,17 @@ div {
             style-options,
             info,
             (style-locale* & macro* & citation & bibliography?)?
+        }
+}
+## Dependent CSL style
+div {
+    dependent-style =
+        element cs:style {
+            
+            ## Indicates with which version of the CSL schema the style is compatible
+            attribute version { "1.0" },
+            
+            info-dependent-style
         }
 }
 [ a:documentation [ xhtml:h2 [ "Style Metadata" ] ] ]
@@ -90,6 +95,20 @@ div {
             & info-link*
             & info-published?
             & info-rights?
+            & info-summary?
+            & info-title
+            & info-title-short?
+            & info-updated
+        }
+    
+    info-dependent-style = 
+        element cs:info {
+            info-category*
+            & info-id
+            & info-issn*
+            & info-issnl?
+            & info-link-dependent-style
+            & info-published?
             & info-summary?
             & info-title
             & info-title-short?
@@ -128,13 +147,8 @@ div {
             ## include the base URI <http://purl.org/net/xbiblio/csl/relations#>.
             attribute rel {
                 
-                ## The URI of the CSL style itself. Used for automatic style
-                ## updating.
+                ## The URI of the CSL style itself.
                 "self"
-                | 
-                  ## The CSL style URI whose configuration content should be
-                  ## used for processing. Required for dependent styles.
-                  "independent-parent"
                 | 
                   ## The CSL style URI from which the current style is derived.
                   "template"
@@ -144,6 +158,26 @@ div {
             },
             info-text
         }
+    
+    info-link-dependent-style =
+        element cs:link {
+            attribute href { xsd:anyURI },
+            
+            ## For transformation to Atom, the rel values should be expanded to
+            ## include the base URI <http://purl.org/net/xbiblio/csl/relations#>.
+            attribute rel {
+                
+                ## The URI of the CSL style itself.
+                "self"
+                | 
+                  ## The CSL style URI whose content should be used for
+                  ## processing. Required for dependent styles.
+                  "independent-parent"
+            },
+            info-text
+        }
+    
+    ## Typically, the date of initial creation or first availability
     info-published = element cs:published { xsd:dateTime }
     info-rights = element cs:rights { info-text }
     info-summary = element cs:summary { info-text }
@@ -173,7 +207,7 @@ div {
 [ a:documentation [ xhtml:h2 [ "Localization" ] ] ]
 div {
     
-    ## Describes the structure of standalone locale files
+    ## CSL locale file (locales-xx-XX.xml)
     locale =
         element cs:locale {
             
