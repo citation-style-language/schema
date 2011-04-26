@@ -107,7 +107,7 @@ div {
             & info-id
             & info-issn*
             & info-issnl?
-            & info-link-dependent-style
+            & info-link-dependent-style+
             & info-published?
             & info-summary?
             & info-title
