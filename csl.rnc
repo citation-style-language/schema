@@ -55,9 +55,6 @@ div {
     independent-style =
         element cs:style {
             
-            ## Indicates with which version of the CSL schema the style is compatible
-            attribute version { "1.0" },
-            
             ## Default style locale (optional)
             attribute default-locale { xsd:language }?,
             
@@ -65,6 +62,7 @@ div {
             attribute class { "in-text" | "note" },
             
             style-options,
+            version,
             info,
             (style-locale* & macro* & citation & bibliography?)?
         }
@@ -73,15 +71,15 @@ div {
 div {
     dependent-style =
         element cs:style {
-            
-            ## Indicates with which version of the CSL schema the style is compatible
-            attribute version { "1.0" },
-            
+            version,
             info-dependent-style
         }
 }
 [ a:documentation [ xhtml:h2 [ "Style Metadata" ] ] ]
 div {
+    
+    ## The version of the CSL schema with which the style is compatible.
+    version = attribute version { "1.0" }
     
     ## The Content model for CSL metadata is borrowed from Atom.
     info =
