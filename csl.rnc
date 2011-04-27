@@ -81,7 +81,7 @@ div {
     ## The version of the CSL schema with which the style is compatible.
     version = attribute version { "1.0" }
     
-    ## The Content model for CSL metadata is borrowed from Atom.
+    ## Metadata for independent styles (model loosely based on that of Atom).
     info =
         element cs:info {
             info-author*
@@ -99,6 +99,7 @@ div {
             & info-updated
         }
     
+    ## Metadata for dependent styles (model loosely based on that of Atom).
     info-dependent-style = 
         element cs:info {
             info-category*
