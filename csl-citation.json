@@ -20,9 +20,7 @@ The implementation of this can vary depending on the Word processor used. Curren
 * OpenOffice: In-line citations are of type com.sun.star.text.ReferenceMark, bibliographies are of type com.sun.star.text.TextSection
            or temporarily represented as a bookmark if exporting to Word
 
-For more detail you are welcome to download Mendeley from www.mendeley.com and browse the VBA source code in the following files:
-<INSTALL LOCATION>\Mendeley Desktop\wordPlugin\Mendeley-*.dot 
-<INSTALL_LOCATION>\Mendeley Destkop\openOfficePlugin\Mendeley-*oxt
+If you are trying to implement this and want help ensuring compatibility or have suggestions for changes, please get in touch with me at steve.ridout@mendeley.com, or better yet on the xbiblio mailing list: https://lists.sourceforge.net/lists/listinfo/xbiblio-devel
 
 * Example in-line citation field code contents from Mendeley (with newlines for readability):
 
@@ -66,5 +64,3 @@ For more detail you are welcome to download Mendeley from www.mendeley.com and b
 (The "Mendeley Bibliography" bit is optional)
 
 "Mendeley Bibliography CSL_BIBLIOGRAPHY"
-
-If you are trying to implement this and want help ensuring compatibility or have suggestions for changes, please get in touch with me at steve.ridout@mendeley.com, or on the xbiblio mailing list: https://lists.sourceforge.net/lists/listinfo/xbiblio-devel
