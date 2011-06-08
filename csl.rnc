@@ -203,7 +203,13 @@ div {
     
     ## Typically, the date of initial creation or first availability
     info-published = element cs:published { xsd:dateTime }
-    info-rights = element cs:rights { info-text }
+    
+    info-rights =
+        element cs:rights {
+            attribute license { xsd:anyURI }?,
+            info-text
+        }
+    
     info-summary = element cs:summary { info-text }
     info-title = element cs:title { info-text }
     
