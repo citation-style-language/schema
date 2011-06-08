@@ -207,8 +207,8 @@ div {
             xsd:string { pattern = "\d{4}\-\d{3}(\d|x|X)" }
         }
     
-    ## a required update date-time stamp; for example, 2007-10-26T21:32:52+02:00
-    info-updated = element cs:updated { xsd:dateTime }
+    ## Date and time of last style update, e.g. 2007-10-26T21:32:52+02:00
+    info-updated = element cs:updated { xsd:dateTime? }
 }
 [ a:documentation [ xhtml:h2 [ "Localization" ] ] ]
 div {
