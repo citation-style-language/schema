@@ -147,6 +147,22 @@ div {
     ## of dependent styles.
     info-id = element cs:id { xsd:anyURI }
     
+    ## The journal's ISSNs, eISSN or ISSN-L for journal-specific styles.
+    ## A ISSN must consist of four digits, a hyphen, three digits, and a 
+    ## check digit (a numeral digit or roman X), e.g. "1234-1231".
+    info-issn =
+        element cs:issn {
+            xsd:string { pattern = "\d{4}\-\d{3}(\d|x|X)" }
+        }
+    info-eissn =
+    element cs:eissn {
+            xsd:string { pattern = "\d{4}\-\d{3}(\d|x|X)" }
+        }
+    info-issnl =
+        element cs:issnl {
+            xsd:string { pattern = "\d{4}\-\d{3}(\d|x|X)" }
+        }
+    
     info-link =
         element cs:link {
             attribute href { xsd:anyURI },
@@ -193,28 +209,13 @@ div {
     
     ## For abbreviated titles (e.g. "APA")
     info-title-short = element cs:title-short { info-text }
-    info-text =
-        attribute xml:lang { xsd:language }?,
-        text
-    
-    ## The journal's ISSNs, eISSN or ISSN-L for journal-specific styles.
-    ## A ISSN must consist of four digits, a hyphen, three digits, and a 
-    ## check digit (a numeral digit or roman X), e.g. "1234-1231".
-    info-issn =
-        element cs:issn {
-            xsd:string { pattern = "\d{4}\-\d{3}(\d|x|X)" }
-        }
-    info-eissn =
-    element cs:eissn {
-            xsd:string { pattern = "\d{4}\-\d{3}(\d|x|X)" }
-        }
-    info-issnl =
-        element cs:issnl {
-            xsd:string { pattern = "\d{4}\-\d{3}(\d|x|X)" }
-        }
     
     ## Date and time of last style update, e.g. 2007-10-26T21:32:52+02:00
     info-updated = element cs:updated { xsd:dateTime? }
+    
+    info-text =
+        attribute xml:lang { xsd:language }?,
+        text
 }
 [ a:documentation [ xhtml:h2 [ "Localization" ] ] ]
 div {
