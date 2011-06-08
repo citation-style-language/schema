@@ -470,6 +470,7 @@ div {
             element cs:name-part {
                 attribute name { "family" | "given" },
                 text-case,
+                affixes,
                 font-formatting
             }*
         }
