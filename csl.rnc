@@ -101,7 +101,7 @@ div {
             & info-summary?
             & info-title
             & info-title-short?
-            & info-updated
+            & info-updated?
         }
     
     ## Metadata for dependent styles (model loosely based on that of Atom).
@@ -120,7 +120,7 @@ div {
             & info-summary?
             & info-title
             & info-title-short?
-            & info-updated
+            & info-updated?
         }
 
     info-author = element cs:author { info-contributor-pattern }
@@ -455,7 +455,7 @@ div {
     names =
         element cs:names {
             names-attributes,
-            ((name, et-al?) & name-label*),
+            ((name?, et-al?) & name-label*),
             substitute?
         }
     
