@@ -197,6 +197,9 @@ div {
                   ## The CSL style URI whose content should be used for
                   ## processing. Required for dependent styles.
                   "independent-parent"
+                | 
+                  ## A documentation URI for the style.
+                  "documentation"
             },
             info-text
         }
