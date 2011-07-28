@@ -326,7 +326,7 @@ div {
     macro =
         element cs:macro {
             attribute name { xsd:NMTOKEN },
-            cs-element+
+            cs-element
         }
 }
 [ a:documentation [ xhtml:h2 [ "Citation and Bibliography" ] ] ]
