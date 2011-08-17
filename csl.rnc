@@ -524,7 +524,7 @@ div {
                   | 
                     ## Use the localized numeric form of the date (e.g. "12-15-2005" for en-US)
                     "numeric"
-              }?,
+              },
               
               ## The date-parts attribute may be set to show fewer date elements.
               attribute date-parts {
