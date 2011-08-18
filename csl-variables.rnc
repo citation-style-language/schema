@@ -28,9 +28,12 @@ div {
 ## number variables
 div {
   cs-numbers =
-    "edition"
+    "chapter-number"
+    | "collection-number"
+    | "edition"
     | "issue"
     | "number"
+    | "number-of-pages"
     | "number-of-volumes"
     | "volume"
 }
@@ -45,10 +48,8 @@ div {
     | "archive-place"
     | "authority"
     | "call-number"
-    | "chapter-number"
     | "citation-label"
     | "citation-number"
-    | "collection-number"
     | "collection-title"
     | "container-title"
     | "DOI"
@@ -62,7 +63,6 @@ div {
     | "locator"
     | "medium"
     | "note"
-    | "number-of-pages"
     | "original-publisher"
     | "original-publisher-place"
     | "original-title"
