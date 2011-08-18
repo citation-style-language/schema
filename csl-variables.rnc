@@ -52,21 +52,17 @@ div {
     | "collection-title"
     | "container-title"
     | "DOI"
-    | "edition"
     | "event"
     | "event-place"
     | "first-reference-note-number"
     | "genre"
     | "ISBN"
-    | "issue"
     | "jurisdiction"
     | "keyword"
     | "locator"
     | "medium"
     | "note"
-    | "number"
     | "number-of-pages"
-    | "number-of-volumes"
     | "original-publisher"
     | "original-publisher-place"
     | "original-title"
@@ -81,6 +77,8 @@ div {
     | "title-short"
     | "URL"
     | "version"
-    | "volume"
     | "year-suffix"
+    |
+      ## number variables
+      cs-numbers
 }
