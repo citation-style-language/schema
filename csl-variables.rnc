@@ -78,6 +78,7 @@ div {
     | "section"
     | "status"
     | "title"
+    | "title-short"
     | "URL"
     | "version"
     | "volume"
