@@ -653,7 +653,7 @@ div {
     label =
         element cs:label {
             label-primitives,
-            attribute variable { "page" | "locator" }
+            attribute variable { "cs-numbers" | "locator" | "page" }
         }
     label-primitives =
         affixes,
