@@ -969,6 +969,7 @@ div {
     quotes = attribute quotes { xsd:boolean }?
     
     ## Removes any periods from the rendered text (defaults to false)
+    [ a:defaultValue = "false" ]
     strip-periods = attribute strip-periods { xsd:boolean }?
     
     text-case =
