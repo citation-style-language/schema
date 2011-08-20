@@ -492,7 +492,10 @@ div {
         }
     
     ## Similar to label as below, but inherits variable from <names> tag
-    name-label = element cs:label { label-primitives }
+    name-label = element cs:label {
+                     attribute form { cs-term-forms }?,
+                     label-primitives
+                 }
     
     ## Configures formatting of the et al substitution. Only necessary to deviate from 
     ## default rendering (for example, to italicize the string).
@@ -653,14 +656,14 @@ div {
     label =
         element cs:label {
             label-primitives,
-            attribute variable { "cs-numbers" | "locator" | "page" }
+            attribute variable { "cs-numbers" | "locator" | "page" },
+            attribute form { "long" | "short" | "symbol" }?
         }
     label-primitives =
         affixes,
         font-formatting,
         text-case,
         strip-periods,
-        attribute form { cs-term-forms }?,
         
         ## modifies pluralization behavior (defaults to "contextual")
         attribute plural { "always" | "never" | "contextual" }?
