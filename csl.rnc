@@ -256,8 +256,14 @@ div {
         }
     localized-terms = element cs:terms { (simple-term | compound-term)+ }
     term-attributes =
-        attribute form { cs-term-forms }?,
-        attribute name { cs-terms }
+        (( attribute form { cs-term-forms }?,
+           attribute name { cs-terms } )
+           | (attribute form { "long" }?,
+           attribute name { cs-terms.gender-variants },
+           attribute gender-form { "masculine" | "feminine" })
+           | (attribute form { "long" }?,
+           attribute name { cs-terms.gender-assignable },
+           attribute gender { "masculine" | "feminine" }))
 
     ## "verb-short" reverts to "verb" if the "verb-short" form is not available
     ## "symbol" reverts to "short" if the "symbol" form is not available
