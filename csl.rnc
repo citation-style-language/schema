@@ -829,8 +829,8 @@ div {
     
     ## entry-spacing and line-spacing default to 1.
     line-formatting-opt =
-        attribute entry-spacing { xsd:integer }?,
-        attribute line-spacing { xsd:integer }?
+        attribute entry-spacing { xsd:nonNegativeInteger }?,
+        attribute line-spacing { xsd:integer { minExclusive = "0" } }?
     
     ## Aligns any subsequent lines of a bibliography entry with the beginning
     ## of the second field. If set to "margin", the first field is put in the
