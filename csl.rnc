@@ -871,8 +871,8 @@ div {
     
     ## The choose elements provides a simple conditional structure.
     choose = element cs:choose { if, else-if*, else? }
-    if = element cs:if { condition, cs-element* }
-    else-if = element cs:else-if { condition, cs-element* }
+    if = element cs:if { condition+, cs-element* }
+    else-if = element cs:else-if { condition+, cs-element* }
     else = element cs:else { cs-element+ }
     condition =
        
