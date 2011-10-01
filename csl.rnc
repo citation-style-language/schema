@@ -85,7 +85,7 @@ div {
     ## The version of the CSL schema with which the style is compatible.
     version = attribute version { "1.0" }
     
-    ## Metadata for independent styles (model loosely based on that of Atom).
+    ## Metadata for independent styles.
     info =
         element cs:info {
             info-author*
@@ -101,10 +101,10 @@ div {
             & info-summary?
             & info-title
             & info-title-short?
-            & info-updated?
+            & info-updated
         }
     
-    ## Metadata for dependent styles (model loosely based on that of Atom).
+    ## Metadata for dependent styles.
     info-dependent-style = 
         element cs:info {
             info-author*
@@ -120,7 +120,7 @@ div {
             & info-summary?
             & info-title
             & info-title-short?
-            & info-updated?
+            & info-updated
         }
 
     info-author = element cs:author { info-contributor-pattern }
@@ -219,8 +219,8 @@ div {
     ## For abbreviated titles (e.g. "APA")
     info-title-short = element cs:title-short { info-text }
     
-    ## Date and time of last style update, e.g. 2007-10-26T21:32:52+02:00
-    info-updated = element cs:updated { xsd:dateTime? }
+    ## Date and time of last style update (e.g. "2007-10-26T21:32:52+02:00")
+    info-updated = element cs:updated { xsd:dateTime }
     
     info-text =
         attribute xml:lang { xsd:language }?,
