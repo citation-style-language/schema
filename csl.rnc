@@ -891,64 +891,65 @@ div {
     
     ## The choose elements provides a simple conditional structure.
     choose = element cs:choose { if, else-if*, else? }
-    if = element cs:if { condition+, cs-element* }
-    else-if = element cs:else-if { condition+, cs-element* }
+    if = element cs:if { condition+, match, cs-element* }
+    else-if = element cs:else-if { condition+, match, cs-element* }
     else = element cs:else { cs-element+ }
     condition =
-       
+        
         ## The contents of an <if disambiguate="true"> block is only rendered if
         ## it disambiguates two otherwise identical citations. This attempt at
         ## disambiguation will only be made when all other disambiguation
         ## methods have failed to uniquely identify the target source.
-        attribute disambiguate { "true" }?,
-        
-        ## Tests whether the given variables contain numeric data
-        attribute is-numeric {
-            list { all-variables+ }
-        }?,
-        
-        ## Tests whether the given date variables contain uncertain dates
-        attribute is-uncertain-date { 
-            list { cs-dates+ }
-        }?,
-        
-        ## Tests whether the locator matches the given locator variables
-        attribute locator {
-            list { cs-terms.locator+ }
-        }?,
-        
-        ## The boolean operators below indicate the relative position of a 
-        ## reference within the document.  These should be checked in 
-        ## the order shown below: "first" is true only once, on the first
-        ## use of the reference; when "ibid-with-locator" is true, "ibid"
-        ## and "subsequent are also true; and when "ibid" is true, "subsequent"
-        ## is also true.  The "near-note" operator is true if and only if the
-        ## reference has been used within five footnotes (or endnotes, as the 
-        ## case may be), counting backward from the current note.  This threshold
-        ## may be adjusted using the "near-note-distance" option.  The value of 
-        ## "near-note" is *always* false for references that are not in a 
-        ## footnote/endnote.
-        attribute position {
-            list { ("first" | "subsequent" | "ibid" | "ibid-with-locator" | "near-note")+ }
-        }?,
-        
-        ## Tests whether the item matches the given types
-        attribute type {
-            list { cs-types+ }
-        }?,
-        
-        ## Tests whether the given variables contain non-empty values
-        attribute variable {
-            list { all-variables+ }
-        }?,
-        ## Specifies the test criterion (default is all)
-        ##     all: a condition tests "true" when it tests "true" for all of the
-        ##          given condition values
-        ##     any: a condition tests "true" when it tests "true" for any of the
-        ##          given condition values
-        ##    none: a condition tests "true" when it tests "true" for none of the
-        ##          given condition values
-        attribute match { "all" | "any" | "none" }?
+        attribute disambiguate { "true" }
+        |
+          ## Tests whether the given variables contain numeric data
+          attribute is-numeric {
+              list { all-variables+ }
+          }
+        |
+          ## Tests whether the given date variables contain uncertain dates
+          attribute is-uncertain-date { 
+              list { cs-dates+ }
+          }
+        |
+          ## Tests whether the locator matches the given locator variables
+          attribute locator {
+              list { cs-terms.locator+ }
+          }
+        |
+          ## The boolean operators below indicate the relative position of a 
+          ## reference within the document.  These should be checked in 
+          ## the order shown below: "first" is true only once, on the first
+          ## use of the reference; when "ibid-with-locator" is true, "ibid"
+          ## and "subsequent are also true; and when "ibid" is true, "subsequent"
+          ## is also true.  The "near-note" operator is true if and only if the
+          ## reference has been used within five footnotes (or endnotes, as the 
+          ## case may be), counting backward from the current note.  This threshold
+          ## may be adjusted using the "near-note-distance" option.  The value of 
+          ## "near-note" is *always* false for references that are not in a 
+          ## footnote/endnote.
+          attribute position {
+              list { ("first" | "subsequent" | "ibid" | "ibid-with-locator" | "near-note")+ }
+          }
+        |
+          ## Tests whether the item matches the given types
+          attribute type {
+              list { cs-types+ }
+          }
+        |
+          ## Tests whether the given variables contain non-empty values
+          attribute variable {
+              list { all-variables+ }
+          }
+    
+    ## Specifies the test criterion (default is all)
+    ##     all: a condition tests "true" when it tests "true" for all of the
+    ##          given condition values
+    ##     any: a condition tests "true" when it tests "true" for any of the
+    ##          given condition values
+    ##    none: a condition tests "true" when it tests "true" for none of the
+    ##          given condition values
+    match = attribute match { "all" | "any" | "none" }?
 }
 
 ## Formatting attributes.
