@@ -837,8 +837,28 @@ div {
     ## margin and all subsequent lines of text are aligned with the margin.
     second-field-align-opt = attribute second-field-align { "flush" | "margin" }?
     
-    ## Substitutes subsequent recurrences of an author for a given string.
-    subsequent-author-substitute-opt = attribute subsequent-author-substitute { text }?
+    subsequent-author-substitute-opt =
+        
+        ## Substitutes names that repeat in subsequent bibliographic entries by
+        ## the given string.
+        attribute subsequent-author-substitute { text }?,
+        
+        attribute subsequent-author-substitute-rule {
+            
+            ## Requires a match of all rendered names in the name variable, and
+            ## substitutes once for all names (default).
+            "complete-all"
+            | 
+              ## Requires a match of all rendered names in the name variable,
+              ## and substitutes for each name.
+              "complete-each"
+            | 
+              ## Substitutes for each name, until the first mismatch.
+              "partial-each"
+            | 
+              ## Substitutes the first name if it matches.
+              "partial-first"
+        }?
 }
 [ a:documentation [ xhtml:h2 [ "Sorting" ] ] ]
 div {
@@ -977,9 +997,10 @@ div {
     ## placed around the rendered text. Nested quotes flipflop.
     quotes = attribute quotes { xsd:boolean }?
     
-    ## Removes any periods from the rendered text (defaults to false)
-    [ a:defaultValue = "false" ]
-    strip-periods = attribute strip-periods { xsd:boolean }?
+    ## Removes any periods from the rendered text
+    strip-periods =
+        [ a:defaultValue = "false" ]
+        attribute strip-periods { xsd:boolean }?
     
     text-case =
         attribute text-case {
