@@ -52,6 +52,7 @@ div {
     | "citation-number"
     | "collection-title"
     | "container-title"
+    | "container-title-short"
     | "DOI"
     | "event"
     | "event-place"
