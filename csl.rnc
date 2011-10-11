@@ -782,6 +782,7 @@ div {
         ## author published in the same year included in one bibliography.
         attribute disambiguate-add-year-suffix { xsd:boolean }?,
         
+        [ a:defaultValue = "by-cite" ]
         attribute givenname-disambiguation-rule {
             
             ## A given name is first formatted as specified by the attributes to
@@ -819,21 +820,28 @@ div {
               ## Apply the transformation described under the "all-names"
               ## rule above, but limit the transformation to the current
               ## source.  The appearance of the name in other references
-              ## will not be affected. Default.
+              ## will not be affected.
               "by-cite"
         }?
     
     ## The number of notes (footnotes or endnotes) within which a
     ## preceding reference to the same source must occur in order for
-    ## position="near-note" to be true.  Defaults to 5.
-    note-distance-opt = attribute near-note-distance { xsd:integer }?
+    ## position="near-note" to be true.
+    note-distance-opt =
+        [ a:defaultValue = "5" ]
+        attribute near-note-distance { xsd:integer }?
     
     ## If "true", bibliographic entries are rendered with hanging-indents.
-    hanging-indent-opt = attribute hanging-indent { xsd:boolean }?
+    hanging-indent-opt =
+        [ a:defaultValue = "false" ]
+        attribute hanging-indent { xsd:boolean }?
     
-    ## entry-spacing and line-spacing default to 1.
+    ## Spacing between bibliographic lines and entries.
     line-formatting-opt =
+        [ a:defaultValue = "1" ]
         attribute entry-spacing { xsd:nonNegativeInteger }?,
+        
+        [ a:defaultValue = "1" ]
         attribute line-spacing { xsd:integer { minExclusive = "0" } }?
     
     ## Aligns any subsequent lines of a bibliography entry with the beginning
@@ -847,10 +855,11 @@ div {
         ## the given string.
         attribute subsequent-author-substitute { text }?,
         
+        [ a:defaultValue = "complete-all" ]
         attribute subsequent-author-substitute-rule {
             
             ## Requires a match of all rendered names in the name variable, and
-            ## substitutes once for all names (default).
+            ## substitutes once for all names.
             "complete-all"
             | 
               ## Requires a match of all rendered names in the name variable,
@@ -877,7 +886,8 @@ div {
             (attribute variable { all-variables }
              | attribute macro { xsd:NMTOKEN }),
             
-            ## Default sort order is ascending
+            ## Sort order
+            [ a:defaultValue = "ascending" ]
             attribute sort { "ascending" | "descending" }?,
             
             ## names-min and names-use-first can be used to (further) constrain
@@ -946,14 +956,16 @@ div {
               list { all-variables+ }
           }
     
-    ## Specifies the test criterion (default is all)
+    ## Specifies the test criterion
     ##     all: a condition tests "true" when it tests "true" for all of the
     ##          given condition values
     ##     any: a condition tests "true" when it tests "true" for any of the
     ##          given condition values
     ##    none: a condition tests "true" when it tests "true" for none of the
     ##          given condition values
-    match = attribute match { "all" | "any" | "none" }?
+    match =
+        [ a:defaultValue = "all" ]
+        attribute match { "all" | "any" | "none" }?
 }
 
 ## Formatting attributes.
@@ -990,17 +1002,28 @@ div {
           "indent"
     }?
     
-    ## attributes are drawn directly from CSS and FO where possible
+    ## The following attributes are based on those found in CSS and XSL-FO
     font-formatting =
+        [ a:defaultValue = "normal" ]
         attribute font-style { "italic" | "normal" | "oblique" }?,
+        
+        [ a:defaultValue = "normal" ]
         attribute font-variant { "normal" | "small-caps" }?,
+        
+        [ a:defaultValue = "normal" ]
         attribute font-weight { "normal" | "bold" | "light" }?,
+        
+        [ a:defaultValue = "none" ]
         attribute text-decoration { "none" | "underline" }?,
+        
+        [ a:defaultValue = "baseline" ]
         attribute vertical-align { "baseline" | "sup" | "sub" }?
     
-    ## When set to true (false is the default), quotes (defined as terms) are
-    ## placed around the rendered text. Nested quotes flipflop.
-    quotes = attribute quotes { xsd:boolean }?
+    ## When set to "true", quotes (defined as terms) are placed around the
+    ## rendered text. Nested quotes flipflop.
+    quotes =
+        [ a:defaultValue = "false" ]
+        attribute quotes { xsd:boolean }?
     
     ## Removes any periods from the rendered text
     strip-periods =
