@@ -779,12 +779,11 @@ div {
         
         attribute givenname-disambiguation-rule {
             
-            ## The default given name disambiguation rule.  A given
-            ## name is first formatted as specified by the attributes
-            ## to name (form, initialize-with).  If the resulting name
-            ## does not uniquely identify the full name of the
-            ## individual, it is progressively transformed in the following
-            ## progression, until disambiguation succeeds:
+            ## A given name is first formatted as specified by the attributes to
+            ## name (form, initialize-with). If the resulting name does not
+            ## uniquely identify the full name of the individual, it is
+            ## progressively transformed in the following progression, until
+            ## disambiguation succeeds:
             ## 
             ## 1. "short" becomes "long" + "initialize-with" if the latter is defined
             ## 2. "long" + "initialize-with" becomes "long" if the former is defined
@@ -815,7 +814,7 @@ div {
               ## Apply the transformation described under the "all-names"
               ## rule above, but limit the transformation to the current
               ## source.  The appearance of the name in other references
-              ## will not be affected.
+              ## will not be affected. Default.
               "by-cite"
         }?
     
