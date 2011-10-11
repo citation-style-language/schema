@@ -440,6 +440,11 @@ div {
         attribute et-al-subsequent-use-first { xsd:integer }?,
         attribute et-al-use-last { xsd:boolean }?,
         
+        ## If set to "false", names are not initialized and initialize-with only
+        ## affects initials already present in the input data.
+        [ a:defaultValue = "true" ]
+        attribute initialize { xsd:boolean }?,
+        
         ## Indicates whether given name parts ought to be given as initials
         ## (e.g., J. K. Rowling) and the text to follow each initial.
         attribute initialize-with { text }?,
