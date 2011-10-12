@@ -26,7 +26,7 @@ include "csl-types.rnc"
 include "csl-variables.rnc"
 include "csl-categories.rnc"
 
-# Embedded Schematron rules to detect undefined macro-calls in cs:text, cs:key
+# Embedded Schematron rules to detect calls in cs:text & cs:key to nonexistent macros 
 
 sch:ns [
     uri = "http://purl.org/net/xbiblio/csl"
@@ -55,10 +55,10 @@ div {
     independent-style =
         element cs:style {
             
-            ## Default style locale (optional)
+            ## Set a default style locale (optional)
             attribute default-locale { xsd:language }?,
             
-            ## Style type (in-text citations or note-based)
+            ## Select the style type (in-text citations or notes)
             attribute class { "in-text" | "note" },
             
             style-options,
@@ -72,7 +72,7 @@ div {
     dependent-style =
         element cs:style {
             
-            ## Should be stripped from dependent styles for CSL 1.1
+            ## Obsolete. Should be disallowed for dependent styles with CSL 1.1.
             attribute class { "in-text" | "note" }?,
             
             version,
@@ -82,7 +82,8 @@ div {
 [ a:documentation [ xhtml:h2 [ "Style Metadata" ] ] ]
 div {
     
-    ## The version of the CSL schema with which the style is compatible.
+    ## The CSL version of the style. Must be "1.0" for CSL 1.0-compatible styles.
+    [ a:defaultValue = "1.0" ]
     version = attribute version { "1.0" }
     
     ## Metadata for independent styles.
@@ -236,7 +237,9 @@ div {
             ## Specifies the locale of the locale file.
             attribute xml:lang { xsd:language },
             
-            ## Indicates with which version of the CSL schema the locale file is compatible
+            ## The CSL version of the locale file. Must be "1.0" for CSL
+            ## 1.0-compatible locale files.
+            [ a:defaultValue = "1.0" ]
             attribute version { "1.0" },
             
             (localized-terms & localized-dates+ & localized-options)
@@ -256,7 +259,9 @@ div {
         }
     localized-terms = element cs:terms { (simple-term | compound-term)+ }
     term-attributes =
-        (( attribute form { cs-term-forms }?,
+        (( 
+           [ a:defaultValue = "long" ]
+           attribute form { cs-term-forms }?,
            attribute name { cs-terms } )
            | (attribute form { "long" }?,
            attribute name { cs-terms.gender-variants },
@@ -321,6 +326,7 @@ div {
             
             ## Determines whether punctuation (commas and periods) goes within 
             ## the quotation marks, or outside (default).
+            [ a:defaultValue = "false" ]
             attribute punctuation-in-quote { xsd:boolean }?
         }
 }
@@ -354,8 +360,8 @@ div {
 div {
     ## Options for cs:names, available for cs:style, cs:citation and cs:bibliography.
     names-opt =
-        ## Delimiter between names (delimiter between variables is on <names>
-        ## tag, where it should be). This is ", " in "J. Doe, S. Smith."
+        ## Delimiter between names of different name variables rendered by the
+        ## same cs:names element
         attribute names-delimiter { text }?
     
     names-attributes =
@@ -363,7 +369,8 @@ div {
         display,
         font-formatting,
         
-        ## the delimiter between name groups
+        ## Delimiter between names of different name variables rendered by the
+        ## same cs:names element
         delimiter,
         attribute variable {
             list { cs-names+ }
@@ -374,13 +381,13 @@ div {
         name-attributes,
         
         ## Indicates long (first name + last name, for Western names) or short
-        ## (last name only, for Western names) form of name. Default is long
-        ## form. The "count" form is used to return the count of the contributor
-        ## list, and may be used in special sorting routines.
+        ## (last name only, for Western names) form of name. The "count" form is
+        ## used to return the count of the contributor list, and may be used in
+        ## special sorting routines.
+        [ a:defaultValue = "long" ]
         attribute name-form { "long" | "short" | "count" }?,
         
-        ## Delimiter between names (delimiter between variables is on <names>
-        ## tag, where it should be). This is ", " in "J. Doe, S. Smith."
+        ## Delimiter between names in a name variable (e.g. ", " in "Doe, Smith")
         attribute name-delimiter { text }?
     
     name-attributes =
@@ -389,10 +396,11 @@ div {
         
         ## Delimiter between the last name rendered and the "et-al" term in case
         ## of et-al abbreviation
+        [ a:defaultValue = "contextual" ]
         attribute delimiter-precedes-et-al {
         
-            ## Default behavior; a space is used for name lists truncated to a
-            ## single name. For two or more names, the name delimiter is used:
+            ## A space is used for name lists truncated to a single name. For
+            ## two or more names, the name delimiter is used:
             ## 1 name: "J. Doe et al."
             ## 2 names: "J. Doe, S. Smith, et al."
             "contextual"
@@ -409,10 +417,10 @@ div {
             }?,
         
         ## Delimiter preceding the last name in a name list
+        [ a:defaultValue = "contextual" ]
         attribute delimiter-precedes-last {
         
-            ## Default behavior; delimiter is included for name lists of length
-            ## three or more:
+            ## Delimiter is included for name lists of length three or more:
             ## 2 authors: "J. Doe and T. Timmons,"
             ## 3 authors: "J. Doe, S. Smith, and T. Timmons" (note comma preceding 'and').
             "contextual"
@@ -438,6 +446,7 @@ div {
         attribute et-al-use-first { xsd:integer }?,
         attribute et-al-subsequent-min { xsd:integer }?,
         attribute et-al-subsequent-use-first { xsd:integer }?,
+        [ a:defaultValue = "false" ]
         attribute et-al-use-last { xsd:boolean }?,
         
         ## If set to "false", names are not initialized and initialize-with only
@@ -482,14 +491,16 @@ div {
             affixes,
             font-formatting,
             
-            ## Indicates long (first name + last name, for Western names) or short
-            ## (last name only, for Western names) form of name. Default is long
-            ## form. The "count" form is used to return the count of the contributor
-            ## list, and may be used in special sorting routines.
+            ## Indicates long (first name + last name, for Western names) or
+            ## short (last name only, for Western names) form of name. The
+            ## "count" form is used to return the count of the contributor list,
+            ## and may be used in special sorting routines.
+            [ a:defaultValue = "long" ]
             attribute form { "long" | "short" | "count" }?,
             
-            ## Delimiter between names (delimiter between variables is on <names>
-            ## tag, where it should be). This is ", " in "J. Doe, S. Smith."
+            ## Delimiter between names in a name variable (e.g. ", " in "Doe,
+            ## Smith")
+            [ a:defaultValue = ", " ]
             delimiter,
             
             ## Allows for separate configuration of name part formatting. For example, 
@@ -502,8 +513,9 @@ div {
             }*
         }
     
-    ## Similar to label as below, but inherits variable from <names> tag
+    ## Similar to label as below, but inherits variable from <names/> tag
     name-label = element cs:label {
+    	             [ a:defaultValue = "long" ]
                      attribute form { cs-term-forms }?,
                      label-primitives
                  }
@@ -513,7 +525,8 @@ div {
     et-al =
         element cs:et-al {
             
-            ## term to use for et al substitution; "et-al" is default
+            ## term to use for et al substitution
+            [ a:defaultValue = "et-al" ]
             attribute term { "et-al" | "and others" }?,
             affixes,
             font-formatting
@@ -541,9 +554,10 @@ div {
               },
               
               ## The date-parts attribute may be set to show fewer date elements.
+              [ a:defaultValue = "year-month-day" ]
               attribute date-parts {
                   
-                  ## Year, month and day (default)
+                  ## Year, month and day
                   "year-month-day"
                   | 
                     ## Year and month
@@ -576,33 +590,37 @@ div {
     ## If the range-delimiter attribute is set for the largest date-part ("day",
     ## "month" or "year") that differs between the two dates of the date range,
     ## its value is used instead.
+    [ a:defaultValue = "–" ]
     range-delimiter = attribute range-delimiter { text }?
     
     ## Month formats:
-    ##     long (default): January
+    ##     long: January
     ##     short: Jan
     ##     numeric: 1
     ##     numeric-leading-zeros: 01
     month =
         attribute name { "month" },
+        [ a:defaultValue = "long" ]
         attribute form { "long" | "short" | "numeric" | "numeric-leading-zeros" }?,
         range-delimiter,
         strip-periods
     
     ## Day formats:
-    ##     numeric (default): 5
+    ##     numeric: 5
     ##     numeric-leading-zeros: 05
     ##     ordinal: 5th
     day =
         attribute name { "day" },
+        [ a:defaultValue = "numeric" ]
         attribute form { "numeric" | "numeric-leading-zeros" | "ordinal" }?,
         range-delimiter
     
     ## Year formats:
-    ##     long (default): 2005
+    ##     long: 2005
     ##     short: 05
     year =
         attribute name { "year" },
+        [ a:defaultValue = "long" ]
         attribute form { "short" | "long" }?,
         range-delimiter
     
@@ -625,9 +643,11 @@ div {
              | (
                 ## render localized term
                 attribute term { cs-terms },
+                [ a:defaultValue = "long" ]
                 attribute form { cs-term-forms }?,
                 
-                ## term plurality: single ("false", default) or multiple ("true")
+                ## term plurality: single ("false") or multiple ("true")
+                [ a:defaultValue = "false" ]
                 attribute plural { xsd:boolean }?)
              |
                ## render verbatim text.
@@ -635,6 +655,7 @@ div {
              | (
                 ## render variable
                 attribute variable { cs-variables },
+                [ a:defaultValue = "long" ]
                 attribute form { "short" | "long" }?))
         }
     
@@ -655,6 +676,7 @@ div {
             font-formatting,
             text-case,
             attribute variable { cs-numbers },
+            [ a:defaultValue = "numeric" ]
             attribute form { "numeric" | "ordinal" | "roman" | "long-ordinal" }?
         }
 }
@@ -668,6 +690,7 @@ div {
         element cs:label {
             label-primitives,
             attribute variable { cs-numbers | "locator" | "page" },
+            [ a:defaultValue = "long" ]
             attribute form { "long" | "short" | "symbol" }?
         }
     label-primitives =
@@ -676,7 +699,8 @@ div {
         text-case,
         strip-periods,
         
-        ## modifies pluralization behavior (defaults to "contextual")
+        ## modifies pluralization behavior
+        [ a:defaultValue = "contextual" ]
         attribute plural { "always" | "never" | "contextual" }?
 }
 [ a:documentation [ xhtml:h2 [ "Groups" ] ] ]
@@ -717,12 +741,14 @@ div {
         names-opt
     
     ## Determines whether the non-dropping particle is demoted in inverted
-    ## names (e.g. "Koning, W. de"). Defaults to "display-and-sort".
+    ## names (e.g. "Koning, W. de").
+    [ a:defaultValue = "display-and-sort" ]
     demote-non-dropping-particle-opt =
         attribute demote-non-dropping-particle { "never" | "sort-only" | "display-and-sort" }?
     
     ## Determines whether compound given names (e.g. "Jean-Luc") are
-    ## initialized with (J-L) or without a hyphen (JL). Defaults to true.
+    ## initialized with (J-L) or without a hyphen (JL).
+    [ a:defaultValue = "true" ]
     initialize-with-hyphen-opt =
         attribute initialize-with-hyphen { xsd:boolean }?
     
@@ -763,23 +789,26 @@ div {
     
     disambiguate-opt =
         
-        ## When set true, add further names to uniquely identify the target
+        ## When set to "true", adds further names to uniquely identify the target
         ## source, overriding the constraint imposed by
-        ## et-al-subsequent-use-first. The exact rendering of any names added is
+        ## "et-al-subsequent-use-first". The exact rendering of any names added is
         ## determined by applying, in order: the form ("long" or "short"); the
-        ## initialize-with attribute, if present; and a given name
-        ## disambiguation rule, if disambiguate-add-givenname is set true.
+        ## "initialize-with" attribute, if present; and a given name
+        ## disambiguation rule, if "disambiguate-add-givenname" is set to "true".
+        [ a:defaultValue = "false" ]
         attribute disambiguate-add-names { xsd:boolean }?,
         
-        ## When set true, transform names as required by by the rule specified
+        ## When set to "true", transforms names as required by by the rule specified
         ## by givenname-disambiguation-rule, or use the "all-names" rule by
         ## default. Note that, all of the given name disambiguation rules except
         ## for the "by-cite" rule, a name transformation will affect the way the
         ## name is rendered in multiple references.
+        [ a:defaultValue = "false" ]
         attribute disambiguate-add-givenname { xsd:boolean }?,
         
-        ## Adds a year-suffix (e.g., 2007a) when there are two works by the same
+        ## When set to "true", adds a year-suffix (e.g., 2007a) when there are two works by the same
         ## author published in the same year included in one bibliography.
+        [ a:defaultValue = "false" ]
         attribute disambiguate-add-year-suffix { xsd:boolean }?,
         
         [ a:defaultValue = "by-cite" ]
@@ -831,7 +860,7 @@ div {
         [ a:defaultValue = "5" ]
         attribute near-note-distance { xsd:integer }?
     
-    ## If "true", bibliographic entries are rendered with hanging-indents.
+    ## When set to "true", bibliographic entries are rendered with hanging-indents.
     hanging-indent-opt =
         [ a:defaultValue = "false" ]
         attribute hanging-indent { xsd:boolean }?
@@ -910,10 +939,11 @@ div {
     else = element cs:else { cs-element+ }
     condition =
         
-        ## The contents of an <if disambiguate="true"> block is only rendered if
+        ## The contents of an <if disambiguate="true"/> block is only rendered if
         ## it disambiguates two otherwise identical citations. This attempt at
         ## disambiguation will only be made when all other disambiguation
         ## methods have failed to uniquely identify the target source.
+        [ a:defaultValue = "true" ]
         attribute disambiguate { "true" }
         |
           ## Tests whether the given variables contain numeric data
@@ -971,38 +1001,34 @@ div {
 ## Formatting attributes.
 div {
     affixes =
+        [ a:defaultValue = "" ]
         attribute prefix { text }?,
+        [ a:defaultValue = "" ]
         attribute suffix { text }?
     delimiter = attribute delimiter { text }?
 
-    ## The text of each individual cite is normally formatted as a
-    ## single continuous run of text.  Portions of the cite text can be
-    ## specially positioned using the display attribute.
-    display = attribute display {
+    display =
+        ## By default, bibliographic entries consist of continuous runs of text.
+        ## With the "display" attribute, portions of each entry can be
+        ## individually positioned.
+        attribute display {
         
-        ## Set the display value set to "block" to place the content
-        ## in a block stretching from margin to margin.
+        ## Places the content in a block stretching from margin to margin.
         "block"
         | 
-          ## Set the display value set to "left-margin" to place the
-          ## content in a block of fixed width starting at the left 
-          ## margin.  All "left-margin" blocks in a bibliography share
-          ## the same width, set according to the maximum number of
-          ## characters appearing in any one such block.
+          ## Places the content in a block starting at the left margin.
           "left-margin"
         | 
-          ## Set the display value to "right-inline" to place the
-          ## content in a block directly to the right of any immediately
-          ## preceding "left-margin" block, and extending to the
-          ## right margin.
+          ## Places the content in a block to the right of a preceding
+          ## "left-margin" block.
           "right-inline"
         | 
-          ## Set the display value to "indent" to block-indent the
-          ## text to the right by a standard amount.
+          ## Places the content in a block indented to the right by a standard
+          ## amount.
           "indent"
     }?
     
-    ## The following attributes are based on those found in CSS and XSL-FO
+    ## The font-formatting attributes are based on those of CSS and XSL-FO
     font-formatting =
         [ a:defaultValue = "normal" ]
         attribute font-style { "italic" | "normal" | "oblique" }?,
@@ -1019,39 +1045,37 @@ div {
         [ a:defaultValue = "baseline" ]
         attribute vertical-align { "baseline" | "sup" | "sub" }?
     
-    ## When set to "true", quotes (defined as terms) are placed around the
-    ## rendered text. Nested quotes flipflop.
     quotes =
+        ## When set to "true", quotes are placed around the rendered text.
         [ a:defaultValue = "false" ]
         attribute quotes { xsd:boolean }?
     
-    ## Removes any periods from the rendered text
     strip-periods =
+        ## When set to "true", periods are removed from the rendered text.
         [ a:defaultValue = "false" ]
         attribute strip-periods { xsd:boolean }?
     
     text-case =
         attribute text-case {
             
-            ## display all text as lowercase
+            ## Renders text in lowercase.
             "lowercase"
             | 
-              ## display all text as uppercase
+              ## Renders text in uppercase.
               "uppercase"
             | 
-              ## capitalize first character; other characters
-              ## displayed as is
+              ## Capitalizes the first character (other characters remain in
+              ## their original case).
               "capitalize-first"
             | 
-              ## capitalize first character of every word;
-              ## other characters displayed lowercase
+              ## Capitalizes the first character of every word (other characters
+              ## remain in their original case).
               "capitalize-all"
             | 
-              ## display as title case (the Chicago Manual
-              ## of Style calls this "headline style")
+              ## Renders text in title case.
               "title"
             | 
-              ## display as sentence case/sentence style
+              ## Renders text in sentence case.
               "sentence"
         }?
 }
