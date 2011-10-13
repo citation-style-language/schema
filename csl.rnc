@@ -26,7 +26,8 @@ include "csl-types.rnc"
 include "csl-variables.rnc"
 include "csl-categories.rnc"
 
-# Embedded Schematron rules to detect calls in cs:text & cs:key to nonexistent macros 
+# Embedded Schematron rules to detect calls in cs:text & cs:key to nonexistent
+# macros
 
 sch:ns [
     uri = "http://purl.org/net/xbiblio/csl"
@@ -55,10 +56,10 @@ div {
     independent-style =
         element cs:style {
             
-            ## Set a default style locale (optional)
+            ## Set a default style locale.
             attribute default-locale { xsd:language }?,
             
-            ## Select the style type (in-text citations or notes)
+            ## Select whether citations appear in-text or as notes.
             attribute class { "in-text" | "note" },
             
             style-options,
@@ -72,7 +73,7 @@ div {
     dependent-style =
         element cs:style {
             
-            ## Obsolete. Should be disallowed for dependent styles with CSL 1.1.
+            ## Obsolete for dependent styles. Will be disallowed with CSL 1.1.
             attribute class { "in-text" | "note" }?,
             
             version,
@@ -82,9 +83,11 @@ div {
 [ a:documentation [ xhtml:h2 [ "Style Metadata" ] ] ]
 div {
     
-    ## The CSL version of the style. Must be "1.0" for CSL 1.0-compatible styles.
-    [ a:defaultValue = "1.0" ]
-    version = attribute version { "1.0" }
+    version =
+        ## Set the CSL version of the style ("1.0" for CSL 1.0-compatible
+        ## styles).
+        [ a:defaultValue = "1.0" ]
+        attribute version { "1.0" }
     
     ## Metadata for independent styles.
     info =
@@ -131,35 +134,34 @@ div {
         & element cs:email { text }?
         & element cs:uri { xsd:anyURI }?
 
-    ## The category element may be used to specify the citation format of the
-    ## style (using the citation-format attribute) and the fields or disciplines
-    ## for which the style is relevant (using the field attribute).
     info-category =
+        ## Specify the citation format of the style (using the "citation-format"
+        ## attribute) or the fields and disciplines for which the style is
+        ## relevant (using the "field" attribute).
         element cs:category {
             attribute citation-format { info-format-categories }
             | attribute field { info-field-categories }
         }
     
-    ## As in Atom, the cs:id element is a required URI that is globally-unique
-    ## and persistant. To allow styles to be automatically updated, the URI of a
-    ## style should not change once assigned. Ideally, the URI resolves to the
-    ## correct CSL file: it should preferably point to the CSL style itself in
-    ## case of independent styles, and to the independent-parent style in case
-    ## of dependent styles.
-    info-id = element cs:id { xsd:anyURI }
+    info-id =
+        ## Specify the URI to establish the identity of the style. The URI
+        ## should be stable, unique and dereferenceable URI.
+        element cs:id { xsd:anyURI }
     
-    ## The journal's ISSNs, eISSN or ISSN-L for journal-specific styles.
-    ## A ISSN must consist of four digits, a hyphen, three digits, and a 
-    ## check digit (a numeral digit or roman X), e.g. "1234-1231".
     info-issn =
+        ## Specify the journal's ISSN(s) for journal-specific styles. An ISSN
+        ## must consist of four digits, a hyphen, three digits, and a check
+        ## digit (a numeral digit or roman X), e.g. "1234-1231".
         element cs:issn {
             xsd:string { pattern = "\d{4}\-\d{3}(\d|x|X)" }
         }
     info-eissn =
-    element cs:eissn {
+        ## Specify the journal's eISSN for journal-specific styles.
+        element cs:eissn {
             xsd:string { pattern = "\d{4}\-\d{3}(\d|x|X)" }
         }
     info-issnl =
+        ## Specify the journal's ISSN-L for journal-specific styles.
         element cs:issnl {
             xsd:string { pattern = "\d{4}\-\d{3}(\d|x|X)" }
         }
@@ -168,17 +170,16 @@ div {
         element cs:link {
             attribute href { xsd:anyURI },
             
-            ## For transformation to Atom, the rel values should be expanded to
-            ## include the base URI <http://purl.org/net/xbiblio/csl/relations#>.
+            ## Specify how the URL relates to the style.
             attribute rel {
                 
                 ## The URI of the CSL style itself.
                 "self"
                 | 
-                  ## The CSL style URI from which the current style is derived.
+                  ## URI of the style from which the current style is derived.
                   "template"
                 | 
-                  ## A documentation URI for the style.
+                  ## URI of style documentation.
                   "documentation"
             },
             info-text
@@ -188,25 +189,25 @@ div {
         element cs:link {
             attribute href { xsd:anyURI },
             
-            ## For transformation to Atom, the rel values should be expanded to
-            ## include the base URI <http://purl.org/net/xbiblio/csl/relations#>.
+            ## Specify how the URL relates to the style.
             attribute rel {
                 
                 ## The URI of the CSL style itself.
                 "self"
                 | 
-                  ## The CSL style URI whose content should be used for
+                  ## URI of the CSL style whose content should be used for
                   ## processing. Required for dependent styles.
                   "independent-parent"
                 | 
-                  ## A documentation URI for the style.
+                  ## URI of style documentation.
                   "documentation"
             },
             info-text
         }
     
-    ## Typically, the date of initial creation or first availability
-    info-published = element cs:published { xsd:dateTime }
+    info-published =
+        ## Specify when the style was initially created or made available.
+        element cs:published { xsd:dateTime }
     
     info-rights =
         element cs:rights {
@@ -217,11 +218,16 @@ div {
     info-summary = element cs:summary { info-text }
     info-title = element cs:title { info-text }
     
-    ## For abbreviated titles (e.g. "APA")
-    info-title-short = element cs:title-short { info-text }
     
-    ## Date and time of last style update (e.g. "2007-10-26T21:32:52+02:00")
-    info-updated = element cs:updated { xsd:dateTime }
+    info-title-short =
+        ## Specify an abbreviated style title (e.g. "APA")
+        element cs:title-short { info-text }
+    
+    
+    info-updated =
+        ## Specify when the style was last updated (e.g.
+        ## "2007-10-26T21:32:52+02:00")
+        element cs:updated { xsd:dateTime }
     
     info-text =
         attribute xml:lang { xsd:language }?,
@@ -234,25 +240,23 @@ div {
     locale =
         element cs:locale {
             
-            ## Specifies the locale of the locale file.
+            ## Specify the locale of the locale file.
             attribute xml:lang { xsd:language },
             
-            ## The CSL version of the locale file. Must be "1.0" for CSL
-            ## 1.0-compatible locale files.
+            ## Set the CSL version of the locale file ("1.0" for CSL
+            ## 1.0-compatible locale files).
             [ a:defaultValue = "1.0" ]
             attribute version { "1.0" },
             
             (localized-terms & localized-dates+ & localized-options)
         }
     
-    ## In styles, cs:locale can be used to override localized terms, dates and options.
     style-locale =
+        ## Use to (re)define localized terms, dates and options.
         element cs:locale {
             
-            ## Specifies the locale to override. A cs:locale element without the
-            ## xml:lang attribute can also be used: it overrides the content of
-            ## all locales, but is in turn overridden by cs:locale elements with
-            ## the xml:lang attribute.
+            ## Specify the affected locale(s). If "xml:lang" is not set, the
+            ## "cs:locale" element affects all locales.
             attribute xml:lang { xsd:language }?,
             
             (localized-terms? & localized-dates* & localized-options?)
@@ -275,9 +279,9 @@ div {
     ## "verb" and "short" revert to "long" if the specified form is not available
     cs-term-forms = "long" | "verb" | "short" | "verb-short" | "symbol" | cs-term-forms.extension
     
-    ## Extension structures. You may override these in a customization 
-    ## schema. If you do, please contact the xbiblio project to add 
-    ## the term or form to the formal controlled list in the schema.
+    ## Extension structures. You may override these in a customization schema.
+    ## If you do, please contact the CSL project team to add the term or form to
+    ## the official schema.
     div {
         cs-terms.extension = notAllowed
         cs-term-forms.extension = notAllowed
@@ -297,13 +301,13 @@ div {
     localized-dates =
         element cs:date {
             
-            ## Declares the type of date being defined.
+            ## Select the type of date being defined.
             attribute form {
                 
-                ## Text form of the date (e.g. "December 15, 2005" for en-US).
+                ## Text form of the date (e.g. "December 15, 2005" for "en-US").
                 "text"
                 | 
-                  ## Numeric form of the date (e.g. "12-15-2005" for en-US)
+                  ## Numeric form of the date (e.g. "12-15-2005" for "en-US").
                   "numeric"
             },
             
@@ -324,8 +328,8 @@ div {
         ## cs:citation-options and cs:bibliography-options can be added.
         element cs:style-options {
             
-            ## Determines whether punctuation (commas and periods) goes within 
-            ## the quotation marks, or outside (default).
+            ## Specify whether punctuation (a period or comma) is placed within
+            ## or outside (default) the closing quotation mark.
             [ a:defaultValue = "false" ]
             attribute punctuation-in-quote { xsd:boolean }?
         }
@@ -333,9 +337,8 @@ div {
 [ a:documentation [ xhtml:h2 [ "Macros" ] ] ]
 div {
     
-    ## The macro element works something like in BibTeX, and provides a ready-made 
-    ## bundle of formatting templates that can be easily reused elsewhere.
     macro =
+        ## Use to create collections of (reusable) formatting instructions.
         element cs:macro {
             attribute name { xsd:NMTOKEN },
             cs-element
@@ -436,37 +439,42 @@ div {
               "never"
             }?,
         
-        ## Specifies when and how "et al." name list abbreviation is used
-        ##   et-al-min: the minimum number of names to use "et al."
-        ##   et-al-use-first: the number of names to print before "et al."
-        ##   et-al-subsequent-*: as above, but for subsequent citations
-        ##   et-al-use-last: when set to "true" ("false" is the default),
-        ##   "et al." is replaced by an ellipsis followed by the last name
+        ## The minimum number of names needed in a name variable to activate
+        ## et-al abbreviation
         attribute et-al-min { xsd:integer }?,
+        
+        ## The number of names to render when et-al abbreviation is activated
         attribute et-al-use-first { xsd:integer }?,
+        
+        ## As "et-al-min", but only affecting subsequent citations to an item
         attribute et-al-subsequent-min { xsd:integer }?,
+        
+        ## As "et-al-use-first", but only affecting subsequent citations to an
+        ## item
         attribute et-al-subsequent-use-first { xsd:integer }?,
+        
+        ## When set to "true", the "et-al" (or "and others") term is replaced by
+        ## an ellipsis followed by the last name of the name variable
         [ a:defaultValue = "false" ]
         attribute et-al-use-last { xsd:boolean }?,
         
-        ## If set to "false", names are not initialized and initialize-with only
-        ## affects initials already present in the input data.
+        ## If set to "false", names are not initialized and "initialize-with"
+        ## only affects initials already present in the input data.
         [ a:defaultValue = "true" ]
         attribute initialize { xsd:boolean }?,
         
-        ## Indicates whether given name parts ought to be given as initials
-        ## (e.g., J. K. Rowling) and the text to follow each initial.
+        ## Activate initializing of given names. The attribute value is appended
+        ## to each initial (e.g. with ". ", "Orson Welles" becomes "O. Welles").
         attribute initialize-with { text }?,
         
-        ## Sets the author name order to correspond to the sort order of
-        ## the bibliography; e.g. Doe, John (name-as-sort-order) vs. John Doe (w/o
-        ## attribute).
+        ## Specify whether (and which) names should be rendered in their sort
+        ## order (e.g. "Doe, John" instead of "John Doe".
         attribute name-as-sort-order {
         
-            ## Applies name-as-sort-order to first author only.
+            ## Render the first name of each name variable in sort order.
             "first"
             | 
-              ## Applies name-as-sort-order to all authors.
+              ## Render all names in sort order.
               "all"
             }?,
         
@@ -482,7 +490,7 @@ div {
             substitute?
         }
     
-    ## Short version of "names" element, without children, allowed in <substitute>
+    ## Short version of "names" element, without children, allowed in <substitute/>
     names-short = element cs:names { names-attributes }
     
     name =
