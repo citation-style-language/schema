@@ -499,20 +499,19 @@ div {
             affixes,
             font-formatting,
             
-            ## Indicates long (first name + last name, for Western names) or
-            ## short (last name only, for Western names) form of name. The
-            ## "count" form is used to return the count of the contributor list,
-            ## and may be used in special sorting routines.
+            ## Select the "long" (first name + last name, for Western names),
+            ## "short" (last name only, for Western names), or "count" name form
+            ## (returning the number of names in the name variable, which can be
+            ## useful for some sorting algorithms).
             [ a:defaultValue = "long" ]
             attribute form { "long" | "short" | "count" }?,
             
-            ## Delimiter between names in a name variable (e.g. ", " in "Doe,
-            ## Smith")
+            ## Set the delimiter for names in a name variable (e.g. ", " in
+            ## "Doe, Smith")
             [ a:defaultValue = ", " ]
             delimiter,
             
-            ## Allows for separate configuration of name part formatting. For example, 
-            ## Jane DOE. Order of these elements is not significant.
+            ## Use to format individual name parts (e.g., "Jane DOE").
             element cs:name-part {
                 attribute name { "family" | "given" },
                 text-case,
@@ -521,27 +520,28 @@ div {
             }*
         }
     
-    ## Similar to label as below, but inherits variable from <names/> tag
+    ## Inherits variable from the parent cs:names element.
     name-label = element cs:label {
     	             [ a:defaultValue = "long" ]
                      attribute form { cs-term-forms }?,
                      label-primitives
                  }
     
-    ## Configures formatting of the et al substitution. Only necessary to deviate from 
-    ## default rendering (for example, to italicize the string).
     et-al =
+        ## Specify the term used for et-al abbreviation and its formatting. 
         element cs:et-al {
             
-            ## term to use for et al substitution
+            ## Select the term to use for et-al abbreviation.
             [ a:defaultValue = "et-al" ]
             attribute term { "et-al" | "and others" }?,
             affixes,
             font-formatting
         }
     
-    ## Substitutions, if the name does not exist
-    substitute = element cs:substitute { (names-short | cs-element)+ }
+    substitute =
+        ## Specify substitution options when the name variables selected on the
+        ## parent cs:names element are empty.
+        element cs:substitute { (names-short | cs-element)+ }
 }
 [ a:documentation [ xhtml:h2 [ "Dates" ] ] ]
 div {
@@ -549,9 +549,7 @@ div {
         element cs:date {
             attribute variable { cs-dates },
             ((
-              ## Localized date formats are specified by setting `form`. The
-              ## default date format can be changed for all locales by configuring
-              ## the date-parts attribute and date-part elements.
+              ## Use to select a localized date format.
               attribute form {
                   
                   ## Use the localized text form of the date (e.g. "December 15, 2005" for en-US).
@@ -561,7 +559,7 @@ div {
                     "numeric"
               },
               
-              ## The date-parts attribute may be set to show fewer date elements.
+              ## Limit the date parts rendered.
               [ a:defaultValue = "year-month-day" ]
               attribute date-parts {
                   
@@ -575,16 +573,15 @@ div {
                     "year"
               }?,
               
-              ## For localized dates, date-part can be used to override layout
-              ## options as defined in the locales (except for affixes, which
-              ## are locale-specific), e.g. to force the use of leading-zeros,
-              ## or the short month form. The inclusion of date-parts does not 
-              ## affect which, and in what order, the date-parts are rendered.
+              ## Specify overriding formatting for localized dates (affixes
+              ## cannot be overridden, as these are considered locale-specific).
+              ## Example uses are forcing the use of leading-zeros, or of the
+              ## "short" month form. Has no effect on which, and in what order,
+              ## date parts are rendered.
               element cs:date-part { text-case, font-formatting, (month | day | year) }*)
              | (
-                ## Non-localized dates are formatted by including, in the desired
-                ## order, the relevant `date-part`-elements, and by applying formatting,
-                ## affixes on cs:date and cs:date-part.
+                ## Specify, in the desired order, the date parts that should be
+                ## rendered and their formatting.
                 element cs:date-part {
                     affixes, text-case, font-formatting, (month | day | year)
                 }+,
@@ -594,50 +591,42 @@ div {
             font-formatting
         }
     
-    ## The default delimiter for date ranges is the en-dash.
-    ## If the range-delimiter attribute is set for the largest date-part ("day",
-    ## "month" or "year") that differs between the two dates of the date range,
-    ## its value is used instead.
-    [ a:defaultValue = "–" ]
-    range-delimiter = attribute range-delimiter { text }?
+    range-delimiter =
+        ## Specify a delimiter for date ranges (by default the en-dash). A custom
+        ## delimiter is retrieved from the largest date part ("day", "month" or
+        ## "year") that differs between the two dates.
+        [ a:defaultValue = "–" ]
+        attribute range-delimiter { text }?
     
-    ## Month formats:
-    ##     long: January
-    ##     short: Jan
-    ##     numeric: 1
-    ##     numeric-leading-zeros: 01
     month =
         attribute name { "month" },
+        ## Months forms: "long" (e.g. "January"), "short" ("Jan."), "numeric"
+        ## ("1"), and "numeric-leading-zeros" ("01").
         [ a:defaultValue = "long" ]
         attribute form { "long" | "short" | "numeric" | "numeric-leading-zeros" }?,
         range-delimiter,
         strip-periods
     
-    ## Day formats:
-    ##     numeric: 5
-    ##     numeric-leading-zeros: 05
-    ##     ordinal: 5th
     day =
         attribute name { "day" },
+        ## Day forms: "numeric" ("5"), "numeric-leading-zeros" ("05"), "ordinal"
+        ## ("5th").
         [ a:defaultValue = "numeric" ]
         attribute form { "numeric" | "numeric-leading-zeros" | "ordinal" }?,
         range-delimiter
     
-    ## Year formats:
-    ##     long: 2005
-    ##     short: 05
     year =
         attribute name { "year" },
+        ## Year forms: "long" ("2005"), "short" ("05").
         [ a:defaultValue = "long" ]
         attribute form { "short" | "long" }?,
         range-delimiter
-    
 }
 [ a:documentation [ xhtml:h2 [ "Formatting Text" ] ] ]
 div {
     
-    ## The cs:text element is the main formatting element used to layout down content.
     cs-text =
+        ## Use to call macros, render variables, terms, or verbatim text.
         element cs:text {
             affixes,
             display,
@@ -646,55 +635,49 @@ div {
             strip-periods,
             text-case,
             (
-             ## render macro output
+             ## Select a macro.
              attribute macro { xsd:NMTOKEN }
              | (
-                ## render localized term
+                ## Select a term.
                 attribute term { cs-terms },
                 [ a:defaultValue = "long" ]
                 attribute form { cs-term-forms }?,
                 
-                ## term plurality: single ("false") or multiple ("true")
+                ## Specify term plurality: singular ("false") or plural ("true").
                 [ a:defaultValue = "false" ]
                 attribute plural { xsd:boolean }?)
              |
-               ## render verbatim text.
+               ## Specify verbatim text.
                attribute value { text }
              | (
-                ## render variable
+                ## Select a variable.
                 attribute variable { cs-variables },
                 [ a:defaultValue = "long" ]
                 attribute form { "short" | "long" }?))
         }
     
-    ## The number markup directive matches the first number found in a field, 
-    ## and returns only that component. If no number is detected, the result 
-    ## is empty. A non-empty number may be subject to further formatting consisting 
-    ## of a form attribute whose value may be numeric, ordinal or roman to format 
-    ## it as a simple number (the default), an ordinal number (1st, 2nd, 3rd etc), 
-    ## a long-ordinal (first, second, third, etc), or roman (i, ii, iii, iv etc). 
-    ## The text-case can also apply to capitalize the roman numbers for instance. 
-    ## The other normal formatting rules apply too (font-style, ...). When used 
-    ## in a conditional, number tests if there is a number present, allowing conditional 
-    ## formatting.
     cs-number =
+        ## Use to render a number variable.
         element cs:number {
             affixes,
             display,
             font-formatting,
             text-case,
             attribute variable { cs-numbers },
+            ## Number forms: "numeric" ("4"), "ordinal" ("4th"), "long-ordinal"
+            ## ("fourth"), "roman" ("iv").
             [ a:defaultValue = "numeric" ]
-            attribute form { "numeric" | "ordinal" | "roman" | "long-ordinal" }?
+            attribute form { "numeric" | "ordinal" | "long-ordinal" | "roman" }?
         }
 }
 [ a:documentation [ xhtml:h2 [ "Label Text" ] ] ]
 div {
     
-    ## The label element is used to print text terms that depend on document content
-    ## for pluralization. For labeling pages, this is preferable, as pages may be
-    ## either singular or plural (p. or pp.)
+
     label =
+        ## Use to render a term whose pluralization depends on the content of a
+        ## variable. E.g. if "page" variable holds a page range, the plural label
+        ## "pp." is selected instead of the singular "p.".
         element cs:label {
             label-primitives,
             attribute variable { cs-numbers | "locator" | "page" },
@@ -707,7 +690,7 @@ div {
         text-case,
         strip-periods,
         
-        ## modifies pluralization behavior
+        ## Specify when the plural version of a term is selected.
         [ a:defaultValue = "contextual" ]
         attribute plural { "always" | "never" | "contextual" }?
 }
