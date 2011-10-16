@@ -82,7 +82,6 @@ div {
 }
 [ a:documentation [ xhtml:h2 [ "Style Metadata" ] ] ]
 div {
-    
     version =
         ## Set the CSL version of the style ("1.0" for CSL 1.0-compatible
         ## styles).
@@ -155,11 +154,13 @@ div {
         element cs:issn {
             xsd:string { pattern = "\d{4}\-\d{3}(\d|x|X)" }
         }
+    
     info-eissn =
         ## Specify the journal's eISSN for journal-specific styles.
         element cs:eissn {
             xsd:string { pattern = "\d{4}\-\d{3}(\d|x|X)" }
         }
+    
     info-issnl =
         ## Specify the journal's ISSN-L for journal-specific styles.
         element cs:issnl {
@@ -218,14 +219,12 @@ div {
     info-summary = element cs:summary { info-text }
     info-title = element cs:title { info-text }
     
-    
     info-title-short =
-        ## Specify an abbreviated style title (e.g. "APA")
+        ## Specify an abbreviated style title (e.g., "APA")
         element cs:title-short { info-text }
     
-    
     info-updated =
-        ## Specify when the style was last updated (e.g.
+        ## Specify when the style was last updated (e.g.,
         ## "2007-10-26T21:32:52+02:00")
         element cs:updated { xsd:dateTime }
     
@@ -261,6 +260,7 @@ div {
             
             (localized-terms? & localized-dates* & localized-options?)
         }
+    
     localized-terms = element cs:terms { (simple-term | compound-term)+ }
     term-attributes =
         (( 
@@ -293,39 +293,41 @@ div {
     ## Compound terms are those whose output can be either singular or plural. 
     ## Typically used for things like page number or editor labels.
     compound-term = element cs:term { term-attributes, single-term, multiple-term }
-    multiple-term = element cs:multiple { text }
-    single-term = element cs:single { text }
     
-    ## Instances of cs:date for which the form attribute is set are localized
-    ## by default. Localized date formats can be overridden.
+    multiple-term =
+        ## Plural version of the term.
+        element cs:multiple { text }
+        
+    single-term =
+        ## Singular version of the term.
+        element cs:single { text }
+    
     localized-dates =
         element cs:date {
             
-            ## Select the type of date being defined.
+            ## Select the localized date format ("text" or "numeric") that will
+            ## be defined.
             attribute form {
                 
-                ## Text form of the date (e.g. "December 15, 2005" for "en-US").
+                ## Text date form (e.g., "December 15, 2005" for "en-US").
                 "text"
                 | 
-                  ## Numeric form of the date (e.g. "12-15-2005" for "en-US").
+                  ## Numeric date form (e.g., "12-15-2005" for "en-US").
                   "numeric"
             },
             
-            ## No affixes may be applied to cs:date in cs:locale
             font-formatting,
             delimiter,
             element cs:date-part {
                 affixes, text-case, font-formatting, (month | day | year)
             }+
         }
-    
-    ## Locale specific options.
-    localized-options =
         
-        ## Localized global options are specified as attributes in the
-        ## cs:style-options element. If future versions of CSL include localized
-        ## options that are citation or bibliography specific, the elements
-        ## cs:citation-options and cs:bibliography-options can be added.
+    ## Localized global options are specified as attributes in the
+    ## cs:style-options element. If future versions of CSL include localized
+    ## options that are citation or bibliography specific, the elements
+    ## cs:citation-options and cs:bibliography-options can be added.
+    localized-options =
         element cs:style-options {
             
             ## Specify whether punctuation (a period or comma) is placed within
@@ -336,7 +338,6 @@ div {
 }
 [ a:documentation [ xhtml:h2 [ "Macros" ] ] ]
 div {
-    
     macro =
         ## Use to create collections of (reusable) formatting instructions.
         element cs:macro {
@@ -346,14 +347,13 @@ div {
 }
 [ a:documentation [ xhtml:h2 [ "Citation and Bibliography" ] ] ]
 div {
+    citation =
+        ## Use to describe the formatting of citations.
+        element cs:citation { (citation-options & sort?), citation-layout }
     
-    ## The cs:citation handles printing of citations. A citation may consist of
-    ## one or more references to bibliographic sources. These references can either
-    ## be simple in-text keys [doe99] or numeric markers [1], or more complex short
-    ## descriptors common in author-date (Doe, 1999a) or note styles.
-    citation = element cs:citation { (citation-options & sort?), citation-layout }
-    
-    bibliography = element cs:bibliography { (bibliography-options & sort?), bibliography-layout }
+    bibliography =
+        ## Use to describe the formatting of the bibliography.
+        element cs:bibliography { (bibliography-options & sort?), bibliography-layout }
     
     citation-layout = element cs:layout { affixes, font-formatting, delimiter, cs-element }
     bibliography-layout = element cs:layout { affixes, font-formatting, cs-element }
@@ -361,10 +361,10 @@ div {
 }
 [ a:documentation [ xhtml:h2 [ "Contributor Names" ] ] ]
 div {
-    ## Options for cs:names, available for cs:style, cs:citation and cs:bibliography.
+    
+    ## Options affecting cs:names, for cs:style, cs:citation and cs:bibliography.
     names-opt =
-        ## Delimiter between names of different name variables rendered by the
-        ## same cs:names element
+        ## Inheritable name option, companion for "delimiter" on cs:names.
         attribute names-delimiter { text }?
     
     names-attributes =
@@ -372,89 +372,89 @@ div {
         display,
         font-formatting,
         
-        ## Delimiter between names of different name variables rendered by the
-        ## same cs:names element
+        ## Specify the delimiter for name lists of name variables rendered by
+        ## the same cs:names element.
         delimiter,
+        
         attribute variable {
             list { cs-names+ }
         }
     
-    ## Options for cs:name, available for cs:style, cs:citation and cs:bibliography.
+    ## Options affecting cs:name, for cs:style, cs:citation and cs:bibliography.
     name-opt =
         name-attributes,
         
-        ## Indicates long (first name + last name, for Western names) or short
-        ## (last name only, for Western names) form of name. The "count" form is
-        ## used to return the count of the contributor list, and may be used in
-        ## special sorting routines.
+        ## Inheritable name option, companion for "form" on cs:name.
         [ a:defaultValue = "long" ]
         attribute name-form { "long" | "short" | "count" }?,
         
-        ## Delimiter between names in a name variable (e.g. ", " in "Doe, Smith")
+        ## Inheritable name option, companion for "delimiter" on cs:name.
         attribute name-delimiter { text }?
     
     name-attributes =
-        ## Controls appearance of "and"/"&". To disable, do not specify.
-        attribute and { "text" | "symbol" }?,
         
-        ## Delimiter between the last name rendered and the "et-al" term in case
-        ## of et-al abbreviation
+        ## Use to separate the second-to-last and last name of a name list by
+        ## the "and" term or ampersand.
+        attribute and {
+            
+            ## Use the "and" term (e.g., "Doe, Johnson and Smith").
+            "text"
+            |
+              ## Use the "ampersand" (e.g., "Doe, Johnson & Smith").
+              "symbol"
+        }?,
+        
+        ## Specify when the name delimiter is used between a truncated name list
+        ## and the "et-al" (or "and others") term in case of et-al abbreviation
+        ## (e.g., "Smith, Doe et al." or "Smith, Doe, et al.").
         [ a:defaultValue = "contextual" ]
         attribute delimiter-precedes-et-al {
         
-            ## A space is used for name lists truncated to a single name. For
-            ## two or more names, the name delimiter is used:
-            ## 1 name: "J. Doe et al."
-            ## 2 names: "J. Doe, S. Smith, et al."
+            ## The name delimiter is only used when the truncated name list
+            ## consists of two or more names.
             "contextual"
             | 
-            ## Name delimiter is always used
-            ## 1 name: "J. Doe, et al."
-            ## 2 names: "J. Doe, S. Smith, et al."
-            "always"
+              ## The name delimiter is always used.
+              "always"
             | 
-            ## Name delimiter is never used
-            ## 1 name: "J. Doe et al."
-            ## 2 names: "J. Doe, S. Smith et al."
-            "never"
-            }?,
+              ## The name delimiter is never used.
+              "never"
+        }?,
         
-        ## Delimiter preceding the last name in a name list
+        ## Specify when the name delimiter is used between the second-to-last
+        ## and last name of a non-truncated name list. Only has an effect when
+        ## the "and" term or ampersand is used (e.g., "Doe and Smith" or "Doe,
+        ## and Smith").
         [ a:defaultValue = "contextual" ]
         attribute delimiter-precedes-last {
         
-            ## Delimiter is included for name lists of length three or more:
-            ## 2 authors: "J. Doe and T. Timmons,"
-            ## 3 authors: "J. Doe, S. Smith, and T. Timmons" (note comma preceding 'and').
+            ## The name delimiter is only used when the name list consists of
+            ## three or more names.
             "contextual"
             | 
-              ## Delimiter is always included
-              ## 2 author result: "J. Doe, and T. Timmons"
-              ## 3 authors: "J. Doe, S. Smith, and T. Timmons" (note comma preceding 'and').
+              ## The name delimiter is always used.
               "always"
             | 
-              ## Delimiter is never included
-              ## 2 authors: "J. Doe and T. Timmons,"
-              ## 3 authors: "J. Doe, S. Smith and T. Timmons"
+              ## The name delimiter is never used.
               "never"
-            }?,
+        }?,
         
-        ## The minimum number of names needed in a name variable to activate
-        ## et-al abbreviation
+        ## Set the minimum number of names needed in a name variable to activate
+        ## et-al abbreviation.
         attribute et-al-min { xsd:integer }?,
         
-        ## The number of names to render when et-al abbreviation is activated
+        ## Set the number of names to render when et-al abbreviation is active.
         attribute et-al-use-first { xsd:integer }?,
         
-        ## As "et-al-min", but only affecting subsequent citations to an item
+        ## As "et-al-min", but only affecting subsequent citations to an item.
         attribute et-al-subsequent-min { xsd:integer }?,
         
         ## As "et-al-use-first", but only affecting subsequent citations to an
-        ## item
+        ## item.
         attribute et-al-subsequent-use-first { xsd:integer }?,
         
-        ## When set to "true", the "et-al" (or "and others") term is replaced by
-        ## an ellipsis followed by the last name of the name variable
+        ## If set to "true", the "et-al" (or "and others") term is replaced by
+        ## an ellipsis followed by the last name of the name variable.
         [ a:defaultValue = "false" ]
         attribute et-al-use-last { xsd:boolean }?,
         
@@ -464,11 +464,11 @@ div {
         attribute initialize { xsd:boolean }?,
         
         ## Activate initializing of given names. The attribute value is appended
-        ## to each initial (e.g. with ". ", "Orson Welles" becomes "O. Welles").
+        ## to each initial (e.g., with ". ", "Orson Welles" becomes "O. Welles").
         attribute initialize-with { text }?,
         
         ## Specify whether (and which) names should be rendered in their sort
-        ## order (e.g. "Doe, John" instead of "John Doe".
+        ## order (e.g., "Doe, John" instead of "John Doe").
         attribute name-as-sort-order {
         
             ## Render the first name of each name variable in sort order.
@@ -478,9 +478,9 @@ div {
               "all"
             }?,
         
-        ## The delimiter for personal name parts where sort order differs from 
-        ## display order (for example, in standard Western names). This is the
-        ## ", " in "Doe, John."
+        ## Sets the delimiter for name-parts that have switched positions as a
+        ## result of "name-as-sort-order" (e.g., ", " in "Doe, John").
+        [ a:defaultValue = ", " ]
         attribute sort-separator { text }?
     
     names =
@@ -506,7 +506,7 @@ div {
             [ a:defaultValue = "long" ]
             attribute form { "long" | "short" | "count" }?,
             
-            ## Set the delimiter for names in a name variable (e.g. ", " in
+            ## Set the delimiter for names in a name variable (e.g., ", " in
             ## "Doe, Smith")
             [ a:defaultValue = ", " ]
             delimiter,
@@ -522,7 +522,7 @@ div {
     
     ## Inherits variable from the parent cs:names element.
     name-label = element cs:label {
-    	             [ a:defaultValue = "long" ]
+                     [ a:defaultValue = "long" ]
                      attribute form { cs-term-forms }?,
                      label-primitives
                  }
@@ -534,6 +534,7 @@ div {
             ## Select the term to use for et-al abbreviation.
             [ a:defaultValue = "et-al" ]
             attribute term { "et-al" | "and others" }?,
+            
             affixes,
             font-formatting
         }
@@ -552,10 +553,12 @@ div {
               ## Use to select a localized date format.
               attribute form {
                   
-                  ## Use the localized text form of the date (e.g. "December 15, 2005" for en-US).
+                  ## Use the localized text form of the date (e.g., "December
+                  ## 15, 2005" for en-US).
                   "text"
                   | 
-                    ## Use the localized numeric form of the date (e.g. "12-15-2005" for en-US)
+                    ## Use the localized numeric form of the date (e.g.,
+                    ## "12-15-2005" for en-US)
                     "numeric"
               },
               
@@ -600,26 +603,32 @@ div {
     
     month =
         attribute name { "month" },
-        ## Months forms: "long" (e.g. "January"), "short" ("Jan."), "numeric"
+        
+        ## Months forms: "long" (e.g., "January"), "short" ("Jan."), "numeric"
         ## ("1"), and "numeric-leading-zeros" ("01").
         [ a:defaultValue = "long" ]
         attribute form { "long" | "short" | "numeric" | "numeric-leading-zeros" }?,
+        
         range-delimiter,
         strip-periods
     
     day =
         attribute name { "day" },
+        
         ## Day forms: "numeric" ("5"), "numeric-leading-zeros" ("05"), "ordinal"
         ## ("5th").
         [ a:defaultValue = "numeric" ]
         attribute form { "numeric" | "numeric-leading-zeros" | "ordinal" }?,
+        
         range-delimiter
     
     year =
         attribute name { "year" },
+        
         ## Year forms: "long" ("2005"), "short" ("05").
         [ a:defaultValue = "long" ]
         attribute form { "short" | "long" }?,
+        
         range-delimiter
 }
 [ a:documentation [ xhtml:h2 [ "Formatting Text" ] ] ]
@@ -664,6 +673,7 @@ div {
             font-formatting,
             text-case,
             attribute variable { cs-numbers },
+            
             ## Number forms: "numeric" ("4"), "ordinal" ("4th"), "long-ordinal"
             ## ("fourth"), "roman" ("iv").
             [ a:defaultValue = "numeric" ]
@@ -676,7 +686,7 @@ div {
 
     label =
         ## Use to render a term whose pluralization depends on the content of a
-        ## variable. E.g. if "page" variable holds a range, the plural label
+        ## variable. E.g., if "page" variable holds a range, the plural label
         ## "pp." is selected instead of the singular "p.".
         element cs:label {
             label-primitives,
@@ -735,12 +745,12 @@ div {
     
     demote-non-dropping-particle-opt =
         ## Specify whether the non-dropping particle is demoted in inverted
-        ## names (e.g. "Koning, W. de").
+        ## names (e.g., "Koning, W. de").
         [ a:defaultValue = "display-and-sort" ]
         attribute demote-non-dropping-particle { "never" | "sort-only" | "display-and-sort" }?
     
     initialize-with-hyphen-opt =
-        ## Specify whether compound given names (e.g. "Jean-Luc") are
+        ## Specify whether compound given names (e.g., "Jean-Luc") are
         ## initialized with ("J-L") or without a hyphen ("JL").
         [ a:defaultValue = "true" ]
         attribute initialize-with-hyphen { xsd:boolean }?
@@ -868,7 +878,7 @@ div {
         ## Use to align any subsequent lines of bibliographic entries with the
         ## beginning of the second field.
         attribute second-field-align {
-        	## Align the first field with the margin.
+                ## Align the first field with the margin.
                 "flush"
                 |
                   ## Put the first field in the margin and align all subsequent
