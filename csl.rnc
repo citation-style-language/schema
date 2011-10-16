@@ -864,10 +864,17 @@ div {
         [ a:defaultValue = "1" ]
         attribute line-spacing { xsd:integer { minExclusive = "0" } }?
     
-    ## Aligns any subsequent lines of a bibliography entry with the beginning
-    ## of the second field. If set to "margin", the first field is put in the
-    ## margin and all subsequent lines of text are aligned with the margin.
-    second-field-align-opt = attribute second-field-align { "flush" | "margin" }?
+    second-field-align-opt =
+        ## Use to align any subsequent lines of bibliographic entries with the
+        ## beginning of the second field.
+        attribute second-field-align {
+        	## Align the first field with the margin.
+                "flush"
+                |
+                  ## Put the first field in the margin and align all subsequent
+                  ## lines of text with the margin.
+                  "margin"
+        }?
     
     subsequent-author-substitute-opt =
         
@@ -897,26 +904,32 @@ div {
 div {
     all-variables = cs-variables | cs-dates | cs-names
     
-    ## Specifies the sort order within citations or the bibliography. By
-    ## default, items are sorted in the order cited.
-    sort = element cs:sort { key+ }
+    sort =
+        ## Specify how cites and bibliographic entries should be sorted. By
+        ## default, items appear in the order in which they were cited.
+        element cs:sort { key+ }
+    
     key =
         element cs:key {
             
             (attribute variable { all-variables }
              | attribute macro { xsd:NMTOKEN }),
             
-            ## Sort order
+            ## Select between an ascending and descending sort.
             [ a:defaultValue = "ascending" ]
             attribute sort { "ascending" | "descending" }?,
-            
-            ## names-min and names-use-first can be used to (further) constrain
-            ## the number of names used in a name sort, overriding the values
-            ## set on the et-al abbreviation attributes.
+                    
+            ## The minimum number of names needed in a name variable to activate
+            ## name list truncation. Overrides the values set on any
+            ## "et-al-(subsequent-)min" attributes.
             attribute names-min { xsd:integer }?,
+            
+            ## The number of names to render when name list truncation is
+            ## activated. Overrides the values set on the
+            ## "et-al-(subsequent-)use-first" attributes.
             attribute names-use-first { xsd:integer }?,
             
-            ## names-use-last can be used to override the value of et-at-use-last
+            ## Use to override the value of the "et-at-use-last" attribute.
             attribute names-use-last { xsd:boolean }?
         }
 }
