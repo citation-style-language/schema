@@ -731,6 +731,7 @@ div {
         name-opt,
         names-opt
     citation-options =
+        cite-group-delimiter-opt,
         collapse-opt,
         disambiguate-opt,
         note-distance-opt,
@@ -760,8 +761,13 @@ div {
         ## Reformat page ranges in the "page" variable.
         attribute page-range-format { "expanded" | "minimal" | "chicago" }?
     
+    cite-group-delimiter-opt =
+        ## Activate cite grouping and specify the delimiter for cites within a
+        ## cite group. Defaults to the cite delimiter.
+        attribute cite-group-delimiter { text }?
+        
     collapse-opt =
-        ## Specify the method of citation collapsing.
+        ## Activate cite grouping and specify the method of citation collapsing.
         attribute collapse {
         
             ## Collapse ranges of numeric cites, e.g. from "[1,2,3]" to "[1-3]".
