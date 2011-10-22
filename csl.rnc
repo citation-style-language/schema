@@ -763,7 +763,8 @@ div {
     
     cite-group-delimiter-opt =
         ## Activate cite grouping and specify the delimiter for cites within a
-        ## cite group. Defaults to the cite delimiter.
+        ## cite group.
+        [ a:defaultValue = ", " ]
         attribute cite-group-delimiter { text }?
         
     collapse-opt =
