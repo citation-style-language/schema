@@ -72,12 +72,9 @@ div {
 div {
     dependent-style =
         element cs:style {
-        
-            ## Obsolete for dependent styles. Will be disallowed with CSL 1.1.
-            attribute class { "in-text" | "note" }?,
-            
             version,
-            info-dependent-style
+            info-dependent-style,
+            legacy-attributes-dependent-style
         }
 }
 [ a:documentation [ xhtml:h2 [ "Style Metadata" ] ] ]
@@ -182,6 +179,10 @@ div {
                 | 
                   ## URI of style documentation.
                   "documentation"
+                | 
+                  ## Obsolete for independent styles. Will be disallowed with
+                  ## CSL 1.1.
+                  "independent-parent"
             },
             info-text
         }
@@ -202,6 +203,10 @@ div {
                 | 
                   ## URI of style documentation.
                   "documentation"
+                | 
+                  ## Obsolete for dependent styles. Will be disallowed with CSL
+                  ## 1.1.
+                  "template"
             },
             info-text
         }
@@ -231,6 +236,12 @@ div {
     info-text =
         attribute xml:lang { xsd:language }?,
         text
+
+    ## Obsolete for dependent styles. Will be disallowed with CSL 1.1.
+    legacy-attributes-dependent-style =
+        attribute class { "in-text" | "note" }?,
+        attribute default-locale { xsd:language }?,
+        style-options
 }
 [ a:documentation [ xhtml:h2 [ "Localization" ] ] ]
 div {
