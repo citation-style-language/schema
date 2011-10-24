@@ -1,0 +1,13 @@
+namespace cs = "http://purl.org/net/xbiblio/csl"
+namespace dc = "http://purl.org/dc/elements/1.1/"
+
+dc:title [ "Citation Style Language Schema - Relaxed" ]
+dc:creator [ "Bruce D'Arcus" ]
+dc:rights [ "Permission to freely use, copy and distribute." ]
+dc:description [
+    "Relaxes the need for a cs:updated value in the official CSL schema."
+]
+
+include "csl.rnc"{
+   info-updated = element cs:updated { xsd:dateTime? }
+}
