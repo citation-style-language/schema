@@ -59,6 +59,7 @@ div {
     | "first-reference-note-number"
     | "genre"
     | "ISBN"
+    | "ISSN"
     | "jurisdiction"
     | "keyword"
     | "locator"
