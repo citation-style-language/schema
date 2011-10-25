@@ -70,6 +70,8 @@ div {
     | "original-title"
     | "page"
     | "page-first"
+    | "PMID"
+    | "PMCID"
     | "publisher"
     | "publisher-place"
     | "references"
