@@ -53,6 +53,7 @@ div {
     | "collection-title"
     | "container-title"
     | "container-title-short"
+    | "dimensions"
     | "DOI"
     | "event"
     | "event-place"
