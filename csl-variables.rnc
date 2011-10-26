@@ -8,6 +8,7 @@ div {
     | "container-author"
     | "editor"
     | "editorial-director"
+    | "illustrator"
     | "interviewer"
     | "original-author"
     | "recipient"
