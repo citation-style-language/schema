@@ -611,7 +611,7 @@ div {
         ## Specify a delimiter for date ranges (by default the en-dash). A custom
         ## delimiter is retrieved from the largest date part ("day", "month" or
         ## "year") that differs between the two dates.
-        [ a:defaultValue = "–" ]
+        [ a:defaultValue = "â€“" ]
         attribute range-delimiter { text }?
     
     day =
