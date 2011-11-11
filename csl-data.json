@@ -58,6 +58,9 @@
                     "type": "string" 
                 } 
             },
+            "language": {
+                "type": "string" 
+            },
             "journalAbbreviation": {
                 "type": "string" 
             },
