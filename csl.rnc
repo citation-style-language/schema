@@ -975,7 +975,7 @@ div {
         |
           ## Tests whether the locator matches the given locator types.
           attribute locator {
-              list { cs-terms.locator+ }
+              list { (cs-terms.locator | "sub-verbo")+ }
           }
         |
           ## Tests whether the cite position matches the given positions.
