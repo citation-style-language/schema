@@ -77,7 +77,7 @@ div {
             legacy-attributes-dependent-style
         }
 }
-[ a:documentation [ xhtml:h2 [ "Style Metadata" ] ] ]
+[ a:documentation [ xhtml:h2 [ "Style and Locale Metadata" ] ] ]
 div {
     version =
         ## Set the CSL version of the style ("1.0" for CSL 1.0-compatible
@@ -123,8 +123,17 @@ div {
             & info-updated
         }
     
+    ## Metadata for locale files.
+    info-locale = 
+        element cs:info {
+            info-translator*
+            & info-rights?
+            & info-updated?
+        }
+    
     info-author = element cs:author { info-contributor-pattern }
     info-contributor = element cs:contributor { info-contributor-pattern }
+    info-translator = element cs:translator { info-contributor-pattern }
     info-contributor-pattern =
         element cs:name { text }
         & element cs:email { text }?
@@ -258,6 +267,7 @@ div {
             [ a:defaultValue = "1.0" ]
             attribute version { "1.0" },
             
+            info-locale?,
             (localized-terms & localized-dates+ & localized-options)
         }
     
