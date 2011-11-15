@@ -341,6 +341,7 @@ div {
             
             font-formatting,
             delimiter,
+            text-case,
             element cs:date-part {
                 affixes, text-case, font-formatting, (month | day | year)
             }+
@@ -614,7 +615,8 @@ div {
                 delimiter)),
             affixes,
             display,
-            font-formatting
+            font-formatting,
+            text-case
         }
     
     range-delimiter =
