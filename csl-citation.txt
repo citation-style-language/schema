@@ -6,8 +6,8 @@ objects in documents. The JSON schema references "csl-data.json", which
 describes the CSL citation data object format for CSL processors (documented at
 http://gsl-nagoya-u.net/http/pub/citeproc-doc.html#citation-data-object).
 
-Support for the CSL Embedded Citation Object format is available in the current
-Mendeley Desktop 1.0-dev2 development preview release.
+Support for the CSL Embedded Citation Object format is available in
+Mendeley Desktop 1.0 and later.
 
 The CSL citation data object consists of:
 
@@ -30,16 +30,16 @@ The CSL citation data object consists of:
     http://citationstyles.org/downloads/specification.html#locators)
   * a "suppress-author" element of type "string", "boolean" or "number"
   * a "author-only" element of type "string", "boolean" or "number"
-* a "mendeley" element of type "object" containing:
-  * a "previouslyFormattedCitation" element of type "string", set to the
-    rendered output of the cite of the previous rendering round (this can be
-    used to determine if the user manually altered the output)
-	* a "manualFormatting" element of type "string", set to the user-customized
-	  output of the cite (this output will be used in favor of the generated
-	  output)
 * a "properties" element of type "object" containing:
   * a "noteIndex" element of type "number", set to the index of the footnote or
     endnote
+* (Mendeley-specific) a "mendeley" element of type "object" containing:
+  * a "previouslyFormattedCitation" element of type "string", set to the
+    rendered output of the cite of the previous rendering round (this can be
+    used to determine if the user manually altered the output)
+  * a "manualFormatting" element of type "string", set to the user-customized
+    output of the cite (this output will be used in favor of the generated
+    output)
 	
 The method to embed metadata for citations and bibliographies typically varies
 between word processors. Currently Mendeley uses:
@@ -53,12 +53,12 @@ between word processors. Currently Mendeley uses:
   exporting to Word
 
 If you are trying to implement this and want help ensuring compatibility or have
-suggestions for changes, please get in touch with me at
-steve.ridout@mendeley.com, or better yet on the xbiblio mailing list:
+suggestions for changes, please use the xbiblio mailing list:
 https://lists.sourceforge.net/lists/listinfo/xbiblio-devel
 
 An example of an embedded citation object from Mendeley (the "Mendeley
-Citation{970e7ce0-8a21-482e-b7d6-e77794a2d37d}" bit is optional, any text before
+Citation{970e7ce0-8a21-482e-b7d6-e77794a2d37d}" part is not required and used
+only for backwards compatibility with older versions of Mendeley, any text before
 "CSL_CITATION" can be ignored, and newlines have been added for readability):
 
 ---
@@ -99,7 +99,7 @@ ADDIN Mendeley Citation{970e7ce0-8a21-482e-b7d6-e77794a2d37d} CSL_CITATION
 ---
 
 An example of a bibliography field code contents from Mendeley (the "Mendeley
-Bibliography" bit is optional):
+Bibliography" part is not required and only used by Mendeley for backwards compatibility)
 
 ---
 ADDIN Mendeley Bibliography CSL_BIBLIOGRAPHY
