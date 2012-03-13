@@ -34,11 +34,12 @@ div {
     | "season-03"
     | "season-04"
     | 
-      ## Quotes
+      ## Punctuation
       "open-quote"
     | "close-quote"
     | "open-inner-quote"
     | "close-inner-quote"
+    | "page-range-delimiter"
     |
       ## Terms to which a gender may be assigned
       cs-terms.gender-assignable
