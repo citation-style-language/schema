@@ -782,7 +782,7 @@ div {
     
     page-range-format-opt =
         ## Reformat page ranges in the "page" variable.
-        attribute page-range-format { "expanded" | "minimal" | "chicago" }?
+        attribute page-range-format { "chicago" | "expanded" | "minimal" | "minimal-two" }?
     
     cite-group-delimiter-opt =
         ## Activate cite grouping and specify the delimiter for cites within a
