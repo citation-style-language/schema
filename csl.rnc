@@ -12,7 +12,7 @@ dc:creator [ "Bruce D'Arcus" ]
 dc:creator [ "Simon Kornblith" ]
 dc:contributor [ "Frank Bennett" ]
 dc:contributor [ "Rintze Zelle" ]
-dc:copyright [ "Bruce D'Arcus and Simon Kornblith, 2007-2011" ]
+dc:copyright [ "Bruce D'Arcus and Simon Kornblith, 2007-2012" ]
 dc:rights [ "Permission to freely use, copy and distribute." ]
 dc:description [
     "Citation Style Language (CSL) schema for describing bibliographic and citation formatting."
@@ -55,14 +55,12 @@ sch:pattern [
 div {
     independent-style =
         element cs:style {
-        
-            ## Set a default style locale.
-            attribute default-locale { xsd:language }?,
             
             ## Select whether citations appear in-text or as notes.
             attribute class { "in-text" | "note" },
             
             style-options,
+            default-locale,
             version,
             info,
             (style-locale* & macro* & citation & bibliography?)?
@@ -72,6 +70,7 @@ div {
 div {
     dependent-style =
         element cs:style {
+            default-locale,
             version,
             info-dependent-style,
             legacy-attributes-dependent-style
@@ -79,6 +78,11 @@ div {
 }
 [ a:documentation [ xhtml:h2 [ "Style and Locale Metadata" ] ] ]
 div {
+    
+    default-locale =
+        ## Set a default style locale.
+        attribute default-locale { xsd:language }?
+    
     version =
         ## Set the CSL version of the style ("1.0" for CSL 1.0-compatible
         ## styles).
@@ -249,7 +253,6 @@ div {
     ## Obsolete for dependent styles. Will be disallowed with CSL 1.1.
     legacy-attributes-dependent-style =
         attribute class { "in-text" | "note" }?,
-        attribute default-locale { xsd:language }?,
         style-options
 }
 [ a:documentation [ xhtml:h2 [ "Localization" ] ] ]
