@@ -28,6 +28,7 @@ div {
     | "presented at"
     | "reference"
     | "retrieved"
+    | "scale"
     | 
       ## Seasons
       "season-01"
