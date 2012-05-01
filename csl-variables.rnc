@@ -12,6 +12,7 @@ div {
     | "interviewer"
     | "original-author"
     | "recipient"
+    | "reviewed-author"
     | "translator"
 }
 
@@ -77,6 +78,7 @@ div {
     | "publisher"
     | "publisher-place"
     | "references"
+    | "reviewed-title"
     | "scale"
     | "section"
     | "source"
