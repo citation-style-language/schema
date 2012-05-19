@@ -1,39 +1,36 @@
-namespace cs = "http://purl.org/net/xbiblio/csl"
 
+## Categories for style metadata
 div {
-    info-format-categories = "author-date" | "numeric" | "label" | "note" | "author"
-    
-    ## "generic-base" is reserved for truly generic styles (APA, Harvard, etc.).
-    info-field-categories =
-        "anthropology"
-        | "astronomy"
-        | "biology"
-        | "botany"
-        | "chemistry"
-        | "communications"
-        | "engineering"
-        | "generic-base"
-        | "geography"
-        | "geology"
-        | "history"
-        | "humanities"
-        | "law"
-        | "linguistics"
-        | "literature"
-        | "math"
-        | "medicine"
-        | "philosophy"
-        | "physics"
-        | "political_science"
-        | "psychology"
-        | "science"
-        | "social_science"
-        | "sociology"
-        | "theology"
-        | "zoology"
-        | info-categories.extension
-    
-    ## Categories can be redefined in a customization schema, though please
-    ## report obvious gaps for inclusion in the schema.
-    info-categories.extension = notAllowed
+  category.citation-format =
+    "author" | "author-date" | "label" | "note" | "numeric"
+  
+  ## Use "generic-base" for styles that are non-discipline specific, such as
+  ## APA, Harvard, etc.
+  category.field =
+    "anthropology"
+    | "astronomy"
+    | "biology"
+    | "botany"
+    | "chemistry"
+    | "communications"
+    | "engineering"
+    | "generic-base"
+    | "geography"
+    | "geology"
+    | "history"
+    | "humanities"
+    | "law"
+    | "linguistics"
+    | "literature"
+    | "math"
+    | "medicine"
+    | "philosophy"
+    | "physics"
+    | "political_science"
+    | "psychology"
+    | "science"
+    | "social_science"
+    | "sociology"
+    | "theology"
+    | "zoology"
 }

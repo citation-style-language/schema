@@ -1,6 +1,7 @@
-## CSL Types
+
+## Item types
 div {
-  cs-types =
+  item-types =
     "article"
     | "article-journal"
     | "article-magazine"
@@ -36,4 +37,3 @@ div {
     | "treaty"
     | "webpage"
 }
-

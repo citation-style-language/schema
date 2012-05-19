@@ -1,7 +1,28 @@
 
-## name variables
+## Variables
 div {
-  cs-names =
+  
+  ## All variables
+  variables =
+    variables.dates
+    | variables.names
+    | variables.numbers
+    | variables.strings
+  
+  ## Standard variables
+  variables.standard = variables.numbers | variables.strings
+  
+  ## Date variables
+  variables.dates =
+    "accessed"
+    | "container"
+    | "event-date"
+    | "issued"
+    | "original-date"
+    | "submitted"
+  
+  ## Name variables
+  variables.names =
     "author"
     | "collection-editor"
     | "composer"
@@ -14,22 +35,9 @@ div {
     | "recipient"
     | "reviewed-author"
     | "translator"
-}
-
-## date variables
-div {
-  cs-dates =
-    "accessed"
-    | "container"
-    | "event-date"
-    | "issued"
-    | "original-date"
-    | "submitted" 
-}
-
-## number variables
-div {
-  cs-numbers =
+  
+  ## Number variables
+  variables.numbers =
     "chapter-number"
     | "collection-number"
     | "edition"
@@ -38,11 +46,9 @@ div {
     | "number-of-pages"
     | "number-of-volumes"
     | "volume"
-}
-
-## standard variables
-div {
-  cs-variables =
+  
+  ## String variables
+  variables.strings =
     "abstract"
     | "annote"
     | "archive"
@@ -88,7 +94,4 @@ div {
     | "URL"
     | "version"
     | "year-suffix"
-    |
-      ## number variables
-      cs-numbers
 }

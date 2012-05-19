@@ -1,9 +1,18 @@
+
 ## Terms
 div {
-  cs-terms =
-    
-    ## Miscellaneous Terms
-    "accessed"
+  terms =
+    category.field
+    | terms.gender-assignable
+    | terms.gender-variants
+    | terms.locator
+    | 
+      ## Contributor roles
+      variables.names
+    | "editortranslator"
+    | 
+      ## Miscellaneous terms
+      "accessed"
     | "ad"
     | "and"
     | "and others"
@@ -30,39 +39,22 @@ div {
     | "retrieved"
     | "scale"
     | 
-      ## Seasons
-      "season-01"
-    | "season-02"
-    | "season-03"
-    | "season-04"
-    | 
       ## Punctuation
       "open-quote"
     | "close-quote"
     | "open-inner-quote"
     | "close-inner-quote"
     | "page-range-delimiter"
-    |
-      ## Terms to which a gender may be assigned
-      cs-terms.gender-assignable
-    |
-      ## Terms for which gender variants may be specified
-      cs-terms.gender-variants
-    |
-      ## Locators
-      cs-terms.locator
-    |
-      ## Contributor Roles
-      cs-names
-    | "editortranslator"
-    |
-      ## Categories
-      info-field-categories
-    | cs-terms.extension
-
-  ## Terms to which a gender may be assigned
-  cs-terms.gender-assignable =
+    | 
+      ## Seasons
+      "season-01"
+    | "season-02"
+    | "season-03"
+    | "season-04"
   
+  ## Terms to which a gender may be assigned
+  terms.gender-assignable =
+    
     ## Months
     "month-01"
     | "month-02"
@@ -76,23 +68,19 @@ div {
     | "month-10"
     | "month-11"
     | "month-12"
-    |
-      ## Non-locator terms accompanying number variables
-      cs-terms.non-locator-number-variables
-    |
-      ## Locator terms with matching number variables
-      cs-terms.locator-number-variables
-
+    | terms.non-locator-number-variables
+    | terms.locator-number-variables
+  
   ## Terms for which gender variants may be specified
-  cs-terms.gender-variants =
+  terms.gender-variants =
     
     ## Ordinals
     "ordinal-01"
     | "ordinal-02"
     | "ordinal-03"
     | "ordinal-04"
-    |
-      ## Long Ordinals
+    | 
+      ## Long ordinals
       "long-ordinal-01"
     | "long-ordinal-02"
     | "long-ordinal-03"
@@ -103,9 +91,9 @@ div {
     | "long-ordinal-08"
     | "long-ordinal-09"
     | "long-ordinal-10"
-
+  
   ## Locators
-  cs-terms.locator =
+  terms.locator =
     "book"
     | "chapter"
     | "column"
@@ -120,17 +108,13 @@ div {
     | "section"
     | "sub verbo"
     | "verse"
-    |
-      ## Locator terms with matching number variables
-      cs-terms.locator-number-variables
-
+    | terms.locator-number-variables
+  
   ## Locator terms with matching number variables
-  cs-terms.locator-number-variables =
-    "issue"
-    | "volume"
+  terms.locator-number-variables = "issue" | "volume"
   
   ## Non-locator terms accompanying number variables
-  cs-terms.non-locator-number-variables =
+  terms.non-locator-number-variables =
     "chapter-number"
     | "collection-number"
     | "edition"
@@ -138,4 +122,3 @@ div {
     | "number-of-pages"
     | "number-of-volumes"
 }
-
