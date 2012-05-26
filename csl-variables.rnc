@@ -27,6 +27,7 @@ div {
     | "collection-editor"
     | "composer"
     | "container-author"
+    | "director"
     | "editor"
     | "editorial-director"
     | "illustrator"
