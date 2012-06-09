@@ -10,6 +10,7 @@ div {
     | "book"
     | "broadcast"
     | "chapter"
+    | "dataset"
     | "entry"
     | "entry-dictionary"
     | "entry-encyclopedia"
