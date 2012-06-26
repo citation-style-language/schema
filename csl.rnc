@@ -1029,7 +1029,7 @@ div {
     | 
       ## Tests whether the locator matches the given locator types.
       attribute locator {
-        list { (terms.locator | "sub-verbo")+ }
+        list { (terms.locator.testable | "sub-verbo")+ }
       }
     | 
       ## Tests whether the cite position matches the given positions.
