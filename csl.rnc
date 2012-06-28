@@ -475,6 +475,10 @@ div {
       | 
         ## The name delimiter is never used.
         "never"
+      | 
+        ## The name delimiter is only used if the preceding name is inverted as
+        ## a result of the "name-as-sort-order" attribute.
+        "after-inverted-name"
     }?,
     
     ## Specify when the name delimiter is used between the second-to-last
@@ -493,6 +497,10 @@ div {
       | 
         ## The name delimiter is never used.
         "never"
+      | 
+        ## The name delimiter is only used if the preceding name is inverted as
+        ## a result of the "name-as-sort-order" attribute.
+        "after-inverted-name"
     }?,
     
     ## Set the minimum number of names needed in a name variable to activate
