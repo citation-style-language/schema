@@ -38,6 +38,7 @@ div {
     | "reference"
     | "retrieved"
     | "scale"
+    | "version"
     | 
       ## Punctuation
       "open-quote"
