@@ -345,7 +345,11 @@ div {
   term.attributes =
     (attribute name { terms },
      [ a:defaultValue = "long" ] attribute form { term.form }?)
-    | (attribute name { terms.gender-variants },
+    | (attribute name { terms.ordinals },
+       attribute form { "long" }?,
+       attribute gender-form { "masculine" | "feminine" }?,
+       attribute match { "1-digit" | "2-digits" | "whole-number" }?)
+    | (attribute name { terms.long-ordinals },
        attribute form { "long" }?,
        attribute gender-form { "masculine" | "feminine" })
     | (attribute name { terms.gender-assignable },

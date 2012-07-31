@@ -74,15 +74,18 @@ div {
   
   ## Terms for which gender variants may be specified
   terms.gender-variants =
+    terms.ordinals
+    | terms.long-ordinals
+  
+  terms.ordinals =
     
     ## Ordinals
-    "ordinal-01"
-    | "ordinal-02"
-    | "ordinal-03"
-    | "ordinal-04"
-    | 
-      ## Long ordinals
-      "long-ordinal-01"
+    xsd:string { pattern = "ordinal(-\d{2})?" }
+  
+  terms.long-ordinals =
+    
+    ## Long ordinals
+    "long-ordinal-01"
     | "long-ordinal-02"
     | "long-ordinal-03"
     | "long-ordinal-04"
