@@ -348,7 +348,7 @@ div {
     | (attribute name { terms.ordinals },
        attribute form { "long" }?,
        attribute gender-form { "masculine" | "feminine" }?,
-       attribute match { "1-digit" | "2-digits" | "whole-number" }?)
+       attribute match { "last-digit" | "last-two-digits" | "whole-number" }?)
     | (attribute name { terms.long-ordinals },
        attribute form { "long" }?,
        attribute gender-form { "masculine" | "feminine" })
