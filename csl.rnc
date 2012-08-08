@@ -300,6 +300,10 @@ div {
   locale.style-options =
     element cs:style-options {
       
+      ## Limit the "ordinal" form to the first day of the month.
+      [ a:defaultValue = "false" ]
+      attribute limit-day-ordinals-to-day-1 { xsd:boolean }?,
+      
       ## Specify whether punctuation (a period or comma) is placed within
       ## or outside (default) the closing quotation mark.
       [ a:defaultValue = "false" ]
