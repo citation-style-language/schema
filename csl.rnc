@@ -420,7 +420,7 @@ div {
   rendering-element.names =
     element cs:names {
       names.attributes,
-      ((names.name?, names.et-al?) & names.label*),
+      ((names.name?, names.et-al?) & names.label?),
       names.substitute?
     }
   
