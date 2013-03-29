@@ -1,0 +1,55 @@
+namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
+namespace cs = "http://purl.org/net/xbiblio/csl"
+namespace dc = "http://purl.org/dc/elements/1.1/"
+
+dc:title [ "Extension schema for the Citation Style Language styles repository" ]
+dc:creator [ "Rintze Zelle" ]
+dc:rights [
+  "Copyright 2013 Rintze Zelle. Permission to freely use, copy and distribute."
+]
+dc:description [
+  "Enforces stricter requirements for the styles in the official CSL styles repository."
+]
+
+include "csl.rnc" {
+
+  ## Remove legacy attributes from cs:style of dependents
+  dependent-style.style =
+    element cs:style {
+      style.default-locale,
+      version,
+      dependent-style.style.info
+    }
+
+  ## Only allow cs:issn once
+  ## Metadata for independent styles.
+  independent-style.style.info =
+    element cs:info {
+      info.author*
+      & info.category*
+      & info.contributor*
+      & info.id
+      & info.issn?
+      & info.eissn?
+      & info.issnl?
+      & independent-style.info.link*
+      & info.published?
+      & info.rights?
+      & info.summary?
+      & info.title
+      & info.title-short?
+      & info.updated
+    }
+
+  ## Remove legacy attributes from cs:et-al
+  names.et-al =
+    
+    ## Specify the term used for et-al abbreviation and its formatting. 
+    element cs:et-al {
+      
+      ## Select the term to use for et-al abbreviation.
+      [ a:defaultValue = "et-al" ]
+      attribute term { "et-al" | "and others" }?,
+      font-formatting
+    }
+}
