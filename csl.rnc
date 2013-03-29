@@ -65,7 +65,7 @@ div {
       (style.locale*
        & style.macro*
        & style.citation
-       & style.bibliography?)?
+       & style.bibliography?)
     }
   
   dependent-style.style =
