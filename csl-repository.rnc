@@ -3,9 +3,9 @@ namespace cs = "http://purl.org/net/xbiblio/csl"
 namespace dc = "http://purl.org/dc/elements/1.1/"
 
 dc:title [ "Extension schema for the Citation Style Language styles repository" ]
-dc:creator [ "Rintze Zelle" ]
+dc:creator [ "Rintze M. Zelle" ]
 dc:rights [
-  "Copyright 2013 Rintze Zelle. Permission to freely use, copy and distribute."
+  "Copyright 2013 Rintze M. Zelle. Permission to freely use, copy and distribute."
 ]
 dc:description [
   "Enforces stricter requirements for the styles in the official CSL styles repository."
@@ -22,6 +22,8 @@ include "csl.rnc" {
     }
 
   ## Only allow cs:issn once
+  ## Require at least one cs:link element
+  ## Require a cs:rights element
   ## Metadata for independent styles.
   independent-style.style.info =
     element cs:info {
@@ -32,13 +34,44 @@ include "csl.rnc" {
       & info.issn?
       & info.eissn?
       & info.issnl?
-      & independent-style.info.link*
+      & independent-style.info.link+
       & info.published?
-      & info.rights?
+      & info.rights
       & info.summary?
       & info.title
       & info.title-short?
       & info.updated
+    }
+    
+  ## Only allow cs:issn once
+  ## Require at least one cs:link element
+  ## Require a cs:rights element
+  ## Metadata for dependent styles.
+  dependent-style.style.info =
+    element cs:info {
+      info.author*
+      & info.category*
+      & info.contributor*
+      & info.id
+      & info.issn?
+      & info.eissn?
+      & info.issnl?
+      & dependent-style.info.link+
+      & info.published?
+      & info.rights
+      & info.summary?
+      & info.title
+      & info.title-short?
+      & info.updated
+    }
+
+  ## Require "license" attribute; require specific value for "license" attribute and
+  ## text content for cs:rights
+  info.rights =
+    element cs:rights {
+      attribute license { "http://creativecommons.org/licenses/by-sa/3.0/" },
+      attribute xml:lang { xsd:language }?,
+      "This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License"
     }
 
   ## Remove legacy attributes from cs:et-al
