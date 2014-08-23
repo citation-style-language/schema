@@ -1,16 +1,17 @@
-This is the official repository
-for the schema for the Citation Style Language (CSL) and the citeproc-json format.
+This is the official repository for schemas describing the Citation Style
+Language (CSL). Current schemas include:
 
-For more information, or for questions, see
+* CSL schema - describes CSL style and locale XML files
+* CSL-JSON schema - describes a commonly used JSON data model for storing
+CSL processor input (such as bibliographic metadata)  
 
-* CitationStyles.org.
-* The xbiblio-devel mailing list:
-  https://lists.sourceforge.net/lists/listinfo/xbiblio-devel
+For more information about CSL, visit
+[CitationStyles.org](http://citationstyles.org/).
 
+# CSL Schema
 
-# CSL schema
-
-The CSL XML schema consists of the files:
+The CSL schema is written in the compact syntax of [RELAX
+NG](http://relaxng.org/), and currently consists of the following files:
 
 * csl.rnc
 * csl-categories.rnc
@@ -18,31 +19,47 @@ The CSL XML schema consists of the files:
 * csl-types.rnc
 * csl-variables.rnc
 
-CSL styles and locale files can be validated against csl.rnc, which incorporates
-the contents of the other four files.
+CSL style and locale files should be validated against "csl.rnc", which
+incorporates the content of the other files.
 
-# citeproc-json schema
+The CSL schema contains several [Schematron](http://www.schematron.com/)
+rules to make sure all macros called in a CSL style are actually defined.
+Since the popular [Jing](https://code.google.com/p/jing-trang/) XML
+validator currently ignores embedded Schematron rules, we also provide the
+"csl.sch" Schematron schema, which contains the Schematron rules extracted
+from the CSL schema. Jing users can use "csl.sch" to perform a secondary
+validation of CSL styles.
 
-This repository also contains the files csl-data.json and
-csl-citation.json, which uses the [json-schema](http://json-schema.org/) language to
-describe the metadata model used by citation processors for their
-input data and for embedded citation data in word processor documents,
-respectively.
+# CSL-JSON Schema
 
-***At this point these JSON schemas are not yet normative.***
+The CSL-JSON schema is written in [JSON Schema](http://json-schema.org/),
+and currently consists of the following files:
 
+* csl-data.json
+* csl-citation.json
 
-The JSON schema "csl-citation.json" describes a format for embedding citation
-objects in documents. The JSON schema references "csl-data.json", which
-describes the CSL citation data object format for CSL processors.
+To render citations and bibliographies, CSL processors not only require CSL
+style and locale files, but also bibliographic metadata. The citeproc-js CSL
+processor
+[introduced](http://gsl-nagoya-u.net/http/pub/citeproc-doc.html#data-input)
+a JSON format to store such metadata, and this format has since been adopted
+by various other software products. The format, also known as
+"citeproc-JSON", has been codified in the CSL-JSON Schema.
 
-Some human-readable documentation to accompany these can be found at:
+***At this point the CSL-JSON schema is not yet fully normative, and care
+must be taken to ensure compatibility with other tools built around
+CSL-JSON.***
 
-* The section
-  [Citation data object](http://gsl-nagoya-u.net/http/pub/citeproc-doc.html#citation-data-object) in
-  the [citeproc-js Integrators Manual](http://gsl-nagoya-u.net/http/pub/citeproc-doc.html)
-* [Appendix IV - Variables](http://citationstyles.org/downloads/specification.html#appendix-iv-variables) of the
-  [CSL specification](http://citationstyles.org/downloads/specification.html)
+Whereas "csl-data.json" describes how the metadata of bibliographic items
+can be stored, "csl-citation.json" incorporates "csl-data.json" and adds an
+additional layer of information to also describe the context in which
+bibliographic items are cited. This includes information such as the order
+in which items are cited, which items are cited together in a single
+citation, etc.
+
+## Mendeley CSL-JSON
+
+Mendeley provided the following documentation on their use of CSL-JSON:
 
 Support for the CSL Embedded Citation Object format is available in
 Mendeley Desktop 1.0 and later.
@@ -94,37 +111,37 @@ An example of an embedded citation object from Mendeley:
 
 ```
 {
-  "schema": "https://github.com/citation-style-language/schema/raw/master/csl-citation.json",
-  "citationID":"12rsus7rlj",
-  "citationItems":
-  [
-    {
-      "id":"ITEM-1",
-      "itemData":
-      {
-        "id" : "ITEM-1",
-        "issued" : { "date-parts" : [ [ "2007" ] ] },
-        "title" : "My paper",
-        "type" : "journal-article"
-      },
-      "locator":"21",
-      "label":"page",
-      "uris" :
-      [
-        "http://www.mendeley.com/documents/?uuid=970e7ce0-8a21-482e-b7d6-e77794a2d37d",
-        "http://www.zotero.org/uniqueDocumentId"
-      ]
+    "schema": "https://github.com/citation-style-language/schema/raw/master/csl-citation.json",
+    "citationID": "12rsus7rlj",
+    "citationItems": [
+        {
+            "id": "ITEM-1",
+            "itemData": {
+                "id": "ITEM-1",
+                "issued": {
+                    "date-parts": [
+                        [
+                            "2007"
+                        ]
+                    ]
+                },
+                "title": "My paper",
+                "type": "journal-article"
+            },
+            "locator": "21",
+            "label": "page",
+            "uris": [
+                "http://www.mendeley.com/documents/?uuid=970e7ce0-8a21-482e-b7d6-e77794a2d37d",
+                "http://www.zotero.org/uniqueDocumentId"
+            ]
+        }
+    ],
+    "mendeley": {
+        "previouslyFormattedCitation": "(2007)",
+        "manualFormatting": "2007b"
+    },
+    "properties": {
+        "noteIndex": 1
     }
-  ],
-  "mendeley":
-  {
-    "previouslyFormattedCitation" : "(2007)",
-    "manualFormatting" : "2007b"
-  }
-  "properties":
-  {
-    "noteIndex": 1
-  }
 }
 ```
-
