@@ -257,6 +257,9 @@
             "event-date": {
                 "$ref": "date-variable" 
             },
+            "epub-date": {
+                "$ref": "date-variable" 
+            },
             "issued": {
                 "$ref": "date-variable" 
             },

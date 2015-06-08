@@ -17,6 +17,7 @@ div {
     "accessed"
     | "container"
     | "event-date"
+    | "epub-date"
     | "issued"
     | "original-date"
     | "submitted"
