@@ -115,6 +115,7 @@ div {
     | "paragraph"
     | "part"
     | "section"
+    | "table"
     | "sub verbo"
     | "verse"
     |
