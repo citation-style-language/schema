@@ -13,8 +13,9 @@ dc:creator [ "Simon Kornblith" ]
 bibo:editor [ "Frank Bennett" ]
 bibo:editor [ "Rintze Zelle" ]
 dc:rights [
-  "Copyright 2007-2012 by Frank Bennett, Bruce D'Arcus, Simon Kornblith, and Rintze Zelle. Permission to freely use, copy and distribute."
+  "Copyright 2007-2017 Frank Bennett, Bruce D'Arcus, Simon Kornblith, and Rintze Zelle"
 ]
+dc:license [ "MIT license" ]
 dc:description [
   "RELAX NG compact schema for the Citation Style Language (CSL)."
 ]
