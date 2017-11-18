@@ -45,6 +45,8 @@ div {
     | "open-inner-quote"
     | "close-inner-quote"
     | "page-range-delimiter"
+    | "comma"
+    | "semicolon"
     | 
       ## Seasons
       "season-01"
