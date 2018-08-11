@@ -1,5 +1,6 @@
 {
-    "description": "JSON schema (draft 3) for CSL citation objects",
+    "description": "JSON schema for CSL citation objects",
+    "$schema" : "http://json-schema.org/draft-03/schema#",
     "id": "https://github.com/citation-style-language/schema/raw/master/csl-citation.json",
     "type": "object",
     "properties": {
