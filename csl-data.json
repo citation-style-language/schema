@@ -216,8 +216,10 @@
                                             "number" 
                                         ] 
                                     },
+                                    "minItems": 1,
                                     "maxItems": 3 
                                 },
+                                "minItems": 1,
                                 "maxItems": 2 
                             },
                             "season": {
