@@ -4,7 +4,7 @@ namespace dc = "http://purl.org/dc/elements/1.1/"
 
 dc:title [ "Extension schema for the Citation Style Language styles repository" ]
 dc:creator [ "Rintze M. Zelle" ]
-dc:rights [ "Copyright 2013-2017 Rintze Zelle" ]
+dc:rights [ "Copyright 2013-2018 Citation Style Language and contributors" ]
 dc:license [ "MIT license" ]
 dc:description [
   "Enforces stricter requirements for the styles in the official CSL styles repository."

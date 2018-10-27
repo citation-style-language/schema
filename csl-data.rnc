@@ -2,7 +2,7 @@ namespace dc = "http://purl.org/dc/elements/1.1/"
 
 dc:title [ "Citation Style Language Data" ]
 dc:creator [ "Bruce D'Arcus" ]
-dc:rights [ "Copyright 2009-2017 Bruce D'Arcus" ]
+dc:rights [ "Copyright 2009-2018 Citation Style Language and contributors" ]
 dc:license [ "MIT license" ]
 dc:description [ "A schema for the CSL data model." ]
 include "csl-types.rnc"
