@@ -104,9 +104,6 @@
                                         "boolean" 
                                     ] 
                                 },
-                                "literal" : {
-                                    "type": "string" 
-                                },
                                 "parse-names" : {
                                     "type": [
                                         "string",
@@ -116,7 +113,15 @@
                                 } 
                             },
                             "additionalProperties" : false 
-                        }
+                        },
+                        {
+                            "properties": {
+                                "literal" : {
+                                    "type": "string" 
+                                } 
+                            },
+                            "additionalProperties" : false 
+                        } 
                     ] 
                 } 
             },
@@ -223,10 +228,20 @@
                                     "number",
                                     "boolean" 
                                 ] 
-                            },
+                            }
+                        },
+                        "additionalProperties" : false 
+                    },
+                    {
+                        "properties": {
                             "literal": {
                                 "type": "string" 
-                            },
+                            } 
+                        },
+                        "additionalProperties" : false 
+                    },
+                    {
+                        "properties": {
                             "raw": {
                                 "type": "string" 
                             }
