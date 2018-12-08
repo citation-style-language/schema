@@ -117,15 +117,7 @@
                                 } 
                             },
                             "additionalProperties" : false 
-                        },
-                        {
-                            "properties": {
-                                "literal" : {
-                                    "type": "string" 
-                                } 
-                            },
-                            "additionalProperties" : false 
-                        } 
+                        }
                     ] 
                 } 
             },
@@ -241,15 +233,7 @@
                             }
                         },
                         "additionalProperties" : false 
-                    },
-                    {
-                        "properties": {
-                            "literal": {
-                                "type": "string" 
-                            } 
-                        },
-                        "additionalProperties" : false 
-                    } 
+                    }
                 ] 
             },
             "container": {
