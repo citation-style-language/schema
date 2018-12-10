@@ -1,447 +1,440 @@
 {
+    "$id": "https://raw.githubusercontent.com/citation-style-language/schema/master/csl-data.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "description": "JSON schema for CSL input data",
-    "$schema" : "http://json-schema.org/draft-03/schema#",
-    "id": "https://github.com/citation-style-language/schema/raw/master/csl-data.json",
-    "type": "array",
-    "items": {
-        "type": "object",
-        "properties": {
-            "type": {
-                "type": "string",
-                "required": true,
-                "enum" : [
-                    "article",
-                    "article-journal",
-                    "article-magazine",
-                    "article-newspaper",
-                    "bill",
-                    "book",
-                    "broadcast",
-                    "chapter",
-                    "dataset",
-                    "entry",
-                    "entry-dictionary",
-                    "entry-encyclopedia",
-                    "figure",
-                    "graphic",
-                    "interview",
-                    "legal_case",
-                    "legislation",
-                    "manuscript",
-                    "map",
-                    "motion_picture",
-                    "musical_score",
-                    "pamphlet",
-                    "paper-conference",
-                    "patent",
-                    "personal_communication",
-                    "post",
-                    "post-weblog",
-                    "report",
-                    "review",
-                    "review-book",
-                    "song",
-                    "speech",
-                    "thesis",
-                    "treaty",
-                    "webpage" 
-                ] 
-            },
-            "id": {
-                "type": [
-                    "string",
-                    "number" 
-                ],
-                "required": true 
-            },
-            "categories": {
-                "type": "array",
-                "items": {
-                    "type": "string" 
-                } 
-            },
-            "language": {
-                "type": "string" 
-            },
-            "journalAbbreviation": {
-                "type": "string" 
-            },
-            "shortTitle": {
-                "type": "string" 
-            },
-            "author": {
-                "type": "array",
-                "items": {
-                    "id": "name-variable",
-                    "type": [
+    "definitions": {
+        "dateDefinition": {
+            "type": "object",
+            "allOf": [
+                {
+                    "oneOf": [
                         {
                             "properties": {
-                                "family" : {
-                                    "type": "string" 
-                                },
-                                "given" : {
-                                    "type": "string" 
-                                },
-                                "dropping-particle" : {
-                                    "type": "string" 
-                                },
-                                "non-dropping-particle" : {
-                                    "type": "string" 
-                                },
-                                "suffix" : {
-                                    "type": "string" 
-                                },
-                                "comma-suffix" : {
-                                    "type": [
-                                        "string",
-                                        "number",
-                                        "boolean" 
-                                    ] 
-                                },
-                                "static-ordering" : {
-                                    "type": [
-                                        "string",
-                                        "number",
-                                        "boolean" 
-                                    ] 
-                                },
-                                "literal" : {
-                                    "type": "string" 
-                                },
-                                "parse-names" : {
-                                    "type": [
-                                        "string",
-                                        "number",
-                                        "boolean" 
-                                    ] 
-                                } 
+                                "date-parts": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "number"
+                                        },
+                                        "maxItems": 3,
+                                        "minItems": 1
+                                    },
+                                    "maxItems": 2,
+                                    "minItems": 1
+                                }
                             },
-                            "additionalProperties" : false 
+                            "required": ["date-parts"]
                         },
                         {
                             "properties": {
-                                "literal" : {
-                                    "type": "string" 
-                                } 
+                                "raw": {
+                                    "type": "string"
+                                }
                             },
-                            "additionalProperties" : false 
-                        } 
-                    ] 
-                } 
-            },
-            "collection-editor": {
-                "type": "array",
-                "items": {
-                    "$ref": "name-variable" 
-                } 
-            },
-            "composer": {
-                "type": "array",
-                "items": {
-                    "$ref": "name-variable" 
-                } 
-            },
-            "container-author": {
-                "type": "array",
-                "items": {
-                    "$ref": "name-variable" 
-                } 
-            },
-            "director": {
-                "type": "array",
-                "items": {
-                    "$ref": "name-variable" 
-                } 
-            },
-            "editor": {
-                "type": "array",
-                "items": {
-                    "$ref": "name-variable" 
-                } 
-            },
-            "editorial-director": {
-                "type": "array",
-                "items": {
-                    "$ref": "name-variable" 
-                } 
-            },
-            "interviewer": {
-                "type": "array",
-                "items": {
-                    "$ref": "name-variable" 
-                } 
-            },
-            "illustrator": {
-                "type": "array",
-                "items": {
-                    "$ref": "name-variable" 
-                } 
-            },
-            "original-author": {
-                "type": "array",
-                "items": {
-                    "$ref": "name-variable" 
-                } 
-            },
-            "recipient": {
-                "type": "array",
-                "items": {
-                    "$ref": "name-variable" 
-                } 
-            },
-            "reviewed-author": {
-                "type": "array",
-                "items": {
-                    "$ref": "name-variable" 
-                } 
-            },
-            "translator": {
-                "type": "array",
-                "items": {
-                    "$ref": "name-variable" 
-                } 
-            },
-            "accessed": {
-                "id": "date-variable",
-                "type": [
+                            "required": ["raw"]
+                        }
+                    ]
+                },
+                {
+                    "properties": {
+                        "circa": {
+                            "type": [
+                                "string",
+                                "number",
+                                "boolean"
+                            ]
+                        },
+                        "season": {
+                            "type": [
+                                "number"
+                            ],
+                            "minimum": 1,
+                            "maximum": 4
+                        }
+                    }
+                }
+            ]
+        },
+        "nameDefinition": {
+            "type": "array",
+            "items": {
+                "anyOf": [
                     {
+                        "type": "object",
                         "properties": {
-                            "date-parts": {
-                                "type": "array",
-                                "items": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": [
-                                            "string",
-                                            "number" 
-                                        ] 
-                                    },
-                                    "maxItems": 3 
-                                },
-                                "maxItems": 2 
+                            "literal": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "literal"
+                        ]
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "family": {
+                                "type": "string"
                             },
-                            "season": {
-                                "type": [
-                                    "string",
-                                    "number" 
-                                ] 
+                            "given": {
+                                "type": "string"
                             },
-                            "circa": {
+                            "dropping-particle": {
+                                "type": "string"
+                            },
+                            "non-dropping-particle": {
+                                "type": "string"
+                            },
+                            "suffix": {
+                                "type": "string"
+                            },
+                            "comma-suffix": {
                                 "type": [
                                     "string",
                                     "number",
-                                    "boolean" 
-                                ] 
+                                    "boolean"
+                                ]
                             },
-                            "literal": {
-                                "type": "string" 
+                            "static-ordering": {
+                                "type": [
+                                    "string",
+                                    "number",
+                                    "boolean"
+                                ]
                             },
-                            "raw": {
-                                "type": "string" 
+                            "parse-names": {
+                                "type": [
+                                    "string",
+                                    "number",
+                                    "boolean"
+                                ]
                             }
                         },
-                        "additionalProperties" : false 
-                    },
-                    {
-                        "properties": {
-                            "literal": {
-                                "type": "string" 
-                            } 
-                        },
-                        "additionalProperties" : false 
-                    } 
-                ] 
-            },
-            "container": {
-                "$ref": "date-variable" 
-            },
-            "event-date": {
-                "$ref": "date-variable" 
-            },
-            "issued": {
-                "$ref": "date-variable" 
-            },
-            "original-date": {
-                "$ref": "date-variable" 
-            },
-            "submitted": {
-                "$ref": "date-variable" 
-            },
-            "abstract": {
-                "type": "string" 
-            },
-            "annote": {
-                "type": "string" 
-            },
-            "archive": {
-                "type": "string" 
-            },
-            "archive_location": {
-                "type": "string" 
-            },
-            "archive-place": {
-                "type": "string" 
-            },
-            "authority": {
-                "type": "string" 
-            },
-            "call-number": {
-                "type": "string" 
-            },
-            "chapter-number": {
-                "type": "string" 
-            },
-            "citation-number": {
-                "type": "string" 
-            },
-            "citation-label": {
-                "type": "string" 
-            },
-            "collection-number": {
-                "type": "string" 
-            },
-            "collection-title": {
-                "type": "string" 
-            },
-            "container-title": {
-                "type": "string" 
-            },
-            "container-title-short": {
-                "type": "string" 
-            },
-            "dimensions": {
-                "type": "string" 
-            },
-            "DOI": {
-                "type": "string" 
-            },
-            "edition": {
-                "type": [
-                    "string",
-                    "number" 
-                ] 
-            },
-            "event": {
-                "type": "string" 
-            },
-            "event-place": {
-                "type": "string" 
-            },
-            "first-reference-note-number": {
-                "type": "string" 
-            },
-            "genre": {
-                "type": "string" 
-            },
-            "ISBN": {
-                "type": "string" 
-            },
-            "ISSN": {
-                "type": "string" 
-            },
-            "issue": {
-                "type": [
-                    "string",
-                    "number" 
-                ] 
-            },
-            "jurisdiction": {
-                "type": "string" 
-            },
-            "keyword": {
-                "type": "string" 
-            },
-            "locator": {
-                "type": "string" 
-            },
-            "medium": {
-                "type": "string" 
-            },
-            "note": {
-                "type": "string" 
-            },
-            "number": {
-                "type": [
-                    "string",
-                    "number" 
-                ] 
-            },
-            "number-of-pages": {
-                "type": "string" 
-            },
-            "number-of-volumes": {
-                "type": [
-                    "string",
-                    "number" 
-                ] 
-            },
-            "original-publisher": {
-                "type": "string" 
-            },
-            "original-publisher-place": {
-                "type": "string" 
-            },
-            "original-title": {
-                "type": "string" 
-            },
-            "page": {
-                "type": "string" 
-            },
-            "page-first": {
-                "type": "string" 
-            },
-            "PMCID": {
-                "type": "string" 
-            },
-            "PMID": {
-                "type": "string" 
-            },
-            "publisher": {
-                "type": "string" 
-            },
-            "publisher-place": {
-                "type": "string" 
-            },
-            "references": {
-                "type": "string" 
-            },
-            "reviewed-title": {
-                "type": "string" 
-            },
-            "scale": {
-                "type": "string" 
-            },
-            "section": {
-                "type": "string" 
-            },
-            "source": {
-                "type": "string" 
-            },
-            "status": {
-                "type": "string" 
-            },
-            "title": {
-                "type": "string" 
-            },
-            "title-short": {
-                "type": "string" 
-            },
-            "URL": {
-                "type": "string" 
-            },
-            "version": {
-                "type": "string" 
-            },
-            "volume": {
-                "type": [
-                    "string",
-                    "number" 
-                ] 
-            },
-            "year-suffix": {
-                "type": "string" 
-            } 
+                        "required": [
+                            "family"
+                        ]
+                    }
+                ]
+            }
         },
-        "additionalProperties" : false 
-    } 
+        "numberDefinition": {
+            "oneOf": [
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "string",
+                    "pattern": "^[0-9]+$"
+                }
+            ]
+        },
+        "requiredFields": {
+            "properties": {
+                "id": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "article",
+                        "article-journal",
+                        "article-magazine",
+                        "article-newspaper",
+                        "bill",
+                        "book",
+                        "broadcast",
+                        "chapter",
+                        "dataset",
+                        "entry",
+                        "entry-dictionary",
+                        "entry-encyclopedia",
+                        "figure",
+                        "graphic",
+                        "interview",
+                        "legal_case",
+                        "legislation",
+                        "manuscript",
+                        "map",
+                        "motion_picture",
+                        "musical_score",
+                        "pamphlet",
+                        "paper-conference",
+                        "patent",
+                        "personal_communication",
+                        "post",
+                        "post-weblog",
+                        "report",
+                        "review",
+                        "review-book",
+                        "song",
+                        "speech",
+                        "thesis",
+                        "treaty",
+                        "webpage"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ]
+        },
+        "dateFields": {
+            "properties": {
+                "accessed": {
+                    "$ref": "#/definitions/dateDefinition"
+                },
+                "container": {
+                    "$ref": "#/definitions/dateDefinition"
+                },
+                "event-date": {
+                    "$ref": "#/definitions/dateDefinition"
+                },
+                "issued": {
+                    "$ref": "#/definitions/dateDefinition"
+                },
+                "original-date": {
+                    "$ref": "#/definitions/dateDefinition"
+                },
+                "submitted": {
+                    "$ref": "#/definitions/dateDefinition"
+                }
+            }
+        },
+        "nameFields": {
+            "properties": {
+                "author": {
+                    "$ref": "#/definitions/nameDefinition"
+                },
+                "collection-editor": {
+                    "$ref": "#/definitions/nameDefinition"
+                },
+                "composer": {
+                    "$ref": "#/definitions/nameDefinition"
+                },
+                "container-author": {
+                    "$ref": "#/definitions/nameDefinition"
+                },
+                "director": {
+                    "$ref": "#/definitions/nameDefinition"
+                },
+                "editor": {
+                    "$ref": "#/definitions/nameDefinition"
+                },
+                "editorial-director": {
+                    "$ref": "#/definitions/nameDefinition"
+                },
+                "illustrator": {
+                    "$ref": "#/definitions/nameDefinition"
+                },
+                "interviewer": {
+                    "$ref": "#/definitions/nameDefinition"
+                },
+                "original-author": {
+                    "$ref": "#/definitions/nameDefinition"
+                },
+                "recipient": {
+                    "$ref": "#/definitions/nameDefinition"
+                },
+                "reviewed-author": {
+                    "$ref": "#/definitions/nameDefinition"
+                },
+                "translator": {
+                    "$ref": "#/definitions/nameDefinition"
+                }
+            }
+        },
+        "numberFields": {
+            "properties": {
+                "chapter-number": {
+                    "$ref": "#/definitions/numberDefinition"
+                },
+                "collection-number": {
+                    "$ref": "#/definitions/numberDefinition"
+                },
+                "edition": {
+                    "$ref": "#/definitions/numberDefinition"
+                },
+                "issue": {
+                    "$ref": "#/definitions/numberDefinition"
+                },
+                "number": {
+                    "$ref": "#/definitions/numberDefinition"
+                },
+                "number-of-pages": {
+                    "$ref": "#/definitions/numberDefinition"
+                },
+                "number-of-volumes": {
+                    "$ref": "#/definitions/numberDefinition"
+                },
+                "volume": {
+                    "$ref": "#/definitions/numberDefinition"
+                }
+            }
+        },
+        "stringFields": {
+            "properties": {
+                "abstract": {
+                    "type": "string"
+                },
+                "annote": {
+                    "type": "string"
+                },
+                "archive": {
+                    "type": "string"
+                },
+                "archive_location": {
+                    "type": "string"
+                },
+                "archive-place": {
+                    "type": "string"
+                },
+                "authority": {
+                    "type": "string"
+                },
+                "call-number": {
+                    "type": "string"
+                },
+                "citation-label": {
+                    "type": "string"
+                },
+                "citation-number": {
+                    "type": "string"
+                },
+                "collection-title": {
+                    "type": "string"
+                },
+                "container-title": {
+                    "type": "string"
+                },
+                "container-title-short": {
+                    "type": "string"
+                },
+                "dimensions": {
+                    "type": "string"
+                },
+                "DOI": {
+                    "type": "string"
+                },
+                "event": {
+                    "type": "string"
+                },
+                "event-place": {
+                    "type": "string"
+                },
+                "first-reference-note-number": {
+                    "type": "string"
+                },
+                "genre": {
+                    "type": "string"
+                },
+                "ISBN": {
+                    "type": "string"
+                },
+                "ISSN": {
+                    "type": "string"
+                },
+                "jurisdiction": {
+                    "type": "string"
+                },
+                "keyword": {
+                    "type": "string"
+                },
+                "locator": {
+                    "type": "string"
+                },
+                "medium": {
+                    "type": "string"
+                },
+                "note": {
+                    "type": "string"
+                },
+                "original-publisher": {
+                    "type": "string"
+                },
+                "original-publisher-place": {
+                    "type": "string"
+                },
+                "original-title": {
+                    "type": "string"
+                },
+                "page": {
+                    "type": "string"
+                },
+                "page-first": {
+                    "type": "string"
+                },
+                "PMID": {
+                    "type": "string"
+                },
+                "PMCID": {
+                    "type": "string"
+                },
+                "publisher": {
+                    "type": "string"
+                },
+                "publisher-place": {
+                    "type": "string"
+                },
+                "references": {
+                    "type": "string"
+                },
+                "reviewed-title": {
+                    "type": "string"
+                },
+                "scale": {
+                    "type": "string"
+                },
+                "section": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "title-short": {
+                    "type": "string"
+                },
+                "URL": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                },
+                "year-suffix": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "type": "array",
+    "items": {
+        "type": "object",
+        "allOf": [
+            {
+                "$ref": "#/definitions/requiredFields"
+            },
+            {
+                "$ref": "#/definitions/dateFields"
+            },
+            {
+                "$ref": "#/definitions/nameFields"
+            },
+            {
+                "$ref": "#/definitions/numberFields"
+            },
+            {
+                "$ref": "#/definitions/stringFields"
+            }
+        ]
+    }
 }

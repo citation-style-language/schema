@@ -1,101 +1,103 @@
 {
+    "$id": "https://raw.githubusercontent.com/citation-style-language/schema/master/csl-citation.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "description": "JSON schema for CSL citation objects",
-    "$schema" : "http://json-schema.org/draft-03/schema#",
-    "id": "https://github.com/citation-style-language/schema/raw/master/csl-citation.json",
+    "definitions": {
+        "citationItemDefinition": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "itemData": {
+                    "$ref": "csl-data.json"
+                },
+                "prefix": {
+                    "type": "string"
+                },
+                "suffix": {
+                    "type": "string"
+                },
+                "locator": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string",
+                    "enum": [
+                        "book",
+                        "chapter",
+                        "column",
+                        "figure",
+                        "folio",
+                        "issue",
+                        "line",
+                        "note",
+                        "opus",
+                        "page",
+                        "paragraph",
+                        "part",
+                        "section",
+                        "sub verbo",
+                        "verse",
+                        "volume"
+                    ]
+                },
+                "suppress-author": {
+                    "type": [
+                        "string",
+                        "number",
+                        "boolean"
+                    ]
+                },
+                "author-only": {
+                    "type": [
+                        "string",
+                        "number",
+                        "boolean"
+                    ]
+                },
+                "uris": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uri"
+                    }
+                }
+            },
+            "additionalProperties": false
+        }
+    },
     "type": "object",
     "properties": {
         "schema": {
             "type": "string",
-            "required": true,
-            "enum" : [
-                "https://github.com/citation-style-language/schema/raw/master/csl-citation.json" 
-            ] 
+            "format": "uri"
         },
         "citationID": {
             "type": [
                 "string",
-                "number" 
-            ],
-            "required": true 
+                "number"
+            ]
         },
         "citationItems": {
             "type": "array",
             "items": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": [
-                            "string",
-                            "number" 
-                        ],
-                        "required": true 
-                    },
-                    "itemData": {
-                        "$ref": "csl-data.json/#/items" 
-                    },
-                    "prefix": {
-                        "type": "string" 
-                    },
-                    "suffix": {
-                        "type": "string" 
-                    },
-                    "locator": {
-                        "type": "string" 
-                    },
-                    "label": {
-                        "type": "string",
-                        "enum": [
-                            "book",
-                            "chapter",
-                            "column",
-                            "figure",
-                            "folio",
-                            "issue",
-                            "line",
-                            "note",
-                            "opus",
-                            "page",
-                            "paragraph",
-                            "part",
-                            "section",
-                            "sub verbo",
-                            "verse",
-                            "volume" 
-                        ] 
-                    },
-                    "suppress-author": {
-                        "type": [
-                            "string",
-                            "number",
-                            "boolean" 
-                        ] 
-                    },
-                    "author-only": {
-                        "type": [
-                            "string",
-                            "number",
-                            "boolean" 
-                        ] 
-                    },
-                    "uris": {
-                        "type": "array",
-                        "items": {
-                            "type": "string" 
-                        } 
-                    } 
-                },
-                "additionalProperties" : false 
-            } 
+                "$ref": "#/definitions/citationItemDefinition"
+            }
         },
         "properties": {
             "type": "object",
             "properties": {
                 "noteIndex": {
-                    "type": "number" 
-                } 
+                    "type": "number"
+                }
             },
-            "additionalProperties" : false 
-        } 
+            "additionalProperties": false
+        }
     },
-    "additionalProperties" : false 
+    "required": ["schema", "citationID", "citationItems"],
+    "additionalProperties": false
 }
