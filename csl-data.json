@@ -346,10 +346,16 @@
                 "ISSN": {
                     "type": "string"
                 },
+                "journalAbbreviation": {
+                    "type": "string"
+                },
                 "jurisdiction": {
                     "type": "string"
                 },
                 "keyword": {
+                    "type": "string"
+                },
+                "language": {
                     "type": "string"
                 },
                 "locator": {
@@ -398,6 +404,9 @@
                     "type": "string"
                 },
                 "section": {
+                    "type": "string"
+                },
+                "shortTitle": {
                     "type": "string"
                 },
                 "source": {
