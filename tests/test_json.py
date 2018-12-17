@@ -1,7 +1,6 @@
 import json
 import pathlib
 
-import jsonref
 import jsonschema
 
 import pytest
@@ -33,15 +32,14 @@ def json_schema(request):
     """
     path = root.joinpath(request.param)
     text = path.read_text()
-    # Dereference schemas as workaround for https://github.com/Julian/jsonschema/issues/447
-    schema = jsonref.loads(text, jsonschema=True)
+    schema = json.loads(text)
     return schema
 
 
 @pytest.fixture
 def csl_data_validator():
     text = root.joinpath('csl-data.json').read_text()
-    schema = jsonref.loads(text, jsonschema=True)
+    schema = json.loads(text)
     Validator = jsonschema.validators.validator_for(schema)
     return Validator(schema)
 
