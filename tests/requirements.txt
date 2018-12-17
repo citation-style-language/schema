@@ -1,2 +1,2 @@
-jsonref
-jsonschema
+jsonschema>=3.0.0a3
+pytest
