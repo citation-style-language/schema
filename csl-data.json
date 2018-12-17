@@ -33,6 +33,14 @@
                                 }
                             },
                             "required": ["raw"]
+                        },
+                        {
+                            "properties": {
+                                "literal": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": ["literal"]
                         }
                     ]
                 },
