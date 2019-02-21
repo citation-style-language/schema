@@ -1,6 +1,6 @@
 {
     "description": "JSON schema for CSL input data",
-    "$schema" : "http://json-schema.org/draft-03/schema#",
+    "$schema" : "http://json-schema.org/draft-04/schema#",
     "id": "https://github.com/citation-style-language/schema/raw/master/csl-data.json",
     "type": "array",
     "items": {
@@ -8,7 +8,6 @@
         "properties": {
             "type": {
                 "type": "string",
-                "required": true,
                 "enum" : [
                     "article",
                     "article-journal",
@@ -51,8 +50,7 @@
                 "type": [
                     "string",
                     "number" 
-                ],
-                "required": true 
+                ] 
             },
             "categories": {
                 "type": "array",
@@ -73,7 +71,7 @@
                 "type": "array",
                 "items": {
                     "id": "name-variable",
-                    "type": [
+                    "anyOf": [
                         {
                             "properties": {
                                 "family" : {
@@ -195,7 +193,7 @@
             },
             "accessed": {
                 "id": "date-variable",
-                "type": [
+                "anyOf": [
                     {
                         "properties": {
                             "date-parts": {
@@ -426,6 +424,7 @@
                 "type": "string" 
             } 
         },
+        "required": ["type", "id"],
         "additionalProperties" : false 
     } 
 }
