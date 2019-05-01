@@ -67,6 +67,9 @@
                     }
                 }
             },
+            "required": [
+                "id"
+            ],
             "additionalProperties": false
         }
     },

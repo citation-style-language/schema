@@ -15,13 +15,14 @@
                                     "items": {
                                         "type": "array",
                                         "items": {
-                                            "type": "number"
+                                            "type": [
+                                                "string",
+                                                "number"
+                                            ]
                                         },
-                                        "maxItems": 3,
-                                        "minItems": 1
+                                        "maxItems": 3
                                     },
-                                    "maxItems": 2,
-                                    "minItems": 1
+                                    "maxItems": 2
                                 }
                             },
                             "required": ["date-parts"]
@@ -55,10 +56,9 @@
                         },
                         "season": {
                             "type": [
+                                "string",
                                 "number"
-                            ],
-                            "minimum": 1,
-                            "maximum": 4
+                            ]
                         }
                     }
                 }
@@ -103,25 +103,8 @@
                                     "number",
                                     "boolean"
                                 ]
-                            },
-                            "static-ordering": {
-                                "type": [
-                                    "string",
-                                    "number",
-                                    "boolean"
-                                ]
-                            },
-                            "parse-names": {
-                                "type": [
-                                    "string",
-                                    "number",
-                                    "boolean"
-                                ]
                             }
-                        },
-                        "required": [
-                            "family"
-                        ]
+                        }
                     }
                 ]
             }
