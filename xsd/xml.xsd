@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.w3.org/XML/1998/namespace" xmlns:cs="http://purl.org/net/xbiblio/csl">
+  <xs:import namespace="http://purl.org/net/xbiblio/csl" schemaLocation="csl.xsd"/>
+  <xs:attributeGroup name="lang">
+    <xs:attribute name="lang" use="required" form="qualified" type="xs:language">
+      <xs:annotation>
+        <xs:documentation>Specify the locale of the locale file.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="lang1">
+    <xs:attribute name="lang" use="required" form="qualified" type="xs:language"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="lang2">
+    <xs:attribute name="lang" use="required" form="qualified" type="xs:language">
+      <xs:annotation>
+        <xs:documentation>Specify the affected locale(s). If "xml:lang" is not set, the
+"cs:locale" element affects all locales.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+</xs:schema>

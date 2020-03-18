@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://purl.org/net/xbiblio/csl" xmlns:cs="http://purl.org/net/xbiblio/csl">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+  <xs:simpleType name="variables">
+    <xs:annotation>
+      <xs:documentation>All variables</xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes="cs:variables.dates cs:variables.names cs:variables.numbers cs:variables.strings"/>
+  </xs:simpleType>
+  <xs:simpleType name="variables.standard">
+    <xs:annotation>
+      <xs:documentation>Standard variables</xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes="cs:variables.numbers cs:variables.strings"/>
+  </xs:simpleType>
+  <xs:simpleType name="variables.dates">
+    <xs:annotation>
+      <xs:documentation>Date variables</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="accessed"/>
+      <xs:enumeration value="container"/>
+      <xs:enumeration value="event-date"/>
+      <xs:enumeration value="issued"/>
+      <xs:enumeration value="original-date"/>
+      <xs:enumeration value="submitted"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="variables.names">
+    <xs:annotation>
+      <xs:documentation>Name variables</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="author"/>
+      <xs:enumeration value="collection-editor"/>
+      <xs:enumeration value="composer"/>
+      <xs:enumeration value="container-author"/>
+      <xs:enumeration value="director"/>
+      <xs:enumeration value="editor"/>
+      <xs:enumeration value="editorial-director"/>
+      <xs:enumeration value="illustrator"/>
+      <xs:enumeration value="interviewer"/>
+      <xs:enumeration value="original-author"/>
+      <xs:enumeration value="recipient"/>
+      <xs:enumeration value="reviewed-author"/>
+      <xs:enumeration value="translator"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="variables.numbers">
+    <xs:annotation>
+      <xs:documentation>Number variables</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="chapter-number"/>
+      <xs:enumeration value="collection-number"/>
+      <xs:enumeration value="edition"/>
+      <xs:enumeration value="issue"/>
+      <xs:enumeration value="number"/>
+      <xs:enumeration value="number-of-pages"/>
+      <xs:enumeration value="number-of-volumes"/>
+      <xs:enumeration value="volume"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="variables.strings">
+    <xs:annotation>
+      <xs:documentation>String variables</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="abstract"/>
+      <xs:enumeration value="annote"/>
+      <xs:enumeration value="archive"/>
+      <xs:enumeration value="archive_location"/>
+      <xs:enumeration value="archive-place"/>
+      <xs:enumeration value="authority"/>
+      <xs:enumeration value="call-number"/>
+      <xs:enumeration value="citation-label"/>
+      <xs:enumeration value="citation-number"/>
+      <xs:enumeration value="collection-title"/>
+      <xs:enumeration value="container-title"/>
+      <xs:enumeration value="container-title-short"/>
+      <xs:enumeration value="dimensions"/>
+      <xs:enumeration value="DOI"/>
+      <xs:enumeration value="event"/>
+      <xs:enumeration value="event-place"/>
+      <xs:enumeration value="first-reference-note-number"/>
+      <xs:enumeration value="genre"/>
+      <xs:enumeration value="ISBN"/>
+      <xs:enumeration value="ISSN"/>
+      <xs:enumeration value="jurisdiction"/>
+      <xs:enumeration value="keyword"/>
+      <xs:enumeration value="locator"/>
+      <xs:enumeration value="medium"/>
+      <xs:enumeration value="note"/>
+      <xs:enumeration value="original-publisher"/>
+      <xs:enumeration value="original-publisher-place"/>
+      <xs:enumeration value="original-title"/>
+      <xs:enumeration value="page"/>
+      <xs:enumeration value="page-first"/>
+      <xs:enumeration value="PMID"/>
+      <xs:enumeration value="PMCID"/>
+      <xs:enumeration value="publisher"/>
+      <xs:enumeration value="publisher-place"/>
+      <xs:enumeration value="references"/>
+      <xs:enumeration value="reviewed-title"/>
+      <xs:enumeration value="scale"/>
+      <xs:enumeration value="section"/>
+      <xs:enumeration value="source"/>
+      <xs:enumeration value="status"/>
+      <xs:enumeration value="title"/>
+      <xs:enumeration value="title-short"/>
+      <xs:enumeration value="URL"/>
+      <xs:enumeration value="version"/>
+      <xs:enumeration value="year-suffix"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

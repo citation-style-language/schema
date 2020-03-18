@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://purl.org/net/xbiblio/csl" xmlns:cs="http://purl.org/net/xbiblio/csl">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+  <xs:simpleType name="item-types">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="article"/>
+      <xs:enumeration value="article-journal"/>
+      <xs:enumeration value="article-magazine"/>
+      <xs:enumeration value="article-newspaper"/>
+      <xs:enumeration value="bill"/>
+      <xs:enumeration value="book"/>
+      <xs:enumeration value="broadcast"/>
+      <xs:enumeration value="chapter"/>
+      <xs:enumeration value="dataset"/>
+      <xs:enumeration value="entry"/>
+      <xs:enumeration value="entry-dictionary"/>
+      <xs:enumeration value="entry-encyclopedia"/>
+      <xs:enumeration value="figure"/>
+      <xs:enumeration value="graphic"/>
+      <xs:enumeration value="interview"/>
+      <xs:enumeration value="legal_case"/>
+      <xs:enumeration value="legislation"/>
+      <xs:enumeration value="manuscript"/>
+      <xs:enumeration value="map"/>
+      <xs:enumeration value="motion_picture"/>
+      <xs:enumeration value="musical_score"/>
+      <xs:enumeration value="pamphlet"/>
+      <xs:enumeration value="paper-conference"/>
+      <xs:enumeration value="patent"/>
+      <xs:enumeration value="personal_communication"/>
+      <xs:enumeration value="post"/>
+      <xs:enumeration value="post-weblog"/>
+      <xs:enumeration value="report"/>
+      <xs:enumeration value="review"/>
+      <xs:enumeration value="review-book"/>
+      <xs:enumeration value="song"/>
+      <xs:enumeration value="speech"/>
+      <xs:enumeration value="thesis"/>
+      <xs:enumeration value="treaty"/>
+      <xs:enumeration value="webpage"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

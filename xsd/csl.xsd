@@ -1,0 +1,1962 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://purl.org/net/xbiblio/csl" xmlns:cs="http://purl.org/net/xbiblio/csl">
+  <xs:include schemaLocation="csl-terms.xsd"/>
+  <xs:include schemaLocation="csl-types.xsd"/>
+  <xs:include schemaLocation="csl-variables.xsd"/>
+  <xs:include schemaLocation="csl-categories.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+  <!-- CSL schema metadata -->
+  <!-- Embedded Schematron rules to detect calls to nonexistent macros -->
+  <xs:group name="independent-style.style">
+    <xs:sequence>
+      <xs:element name="style">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:group ref="cs:independent-style.style.info"/>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+              <xs:group ref="cs:style.locale"/>
+              <xs:element ref="cs:macro"/>
+              <xs:element ref="cs:citation"/>
+              <xs:element ref="cs:bibliography"/>
+            </xs:choice>
+          </xs:sequence>
+          <xs:attribute name="class" use="required">
+            <xs:annotation>
+              <xs:documentation>Select whether citations appear in-text or as notes.</xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+              <xs:restriction base="xs:token">
+                <xs:enumeration value="in-text"/>
+                <xs:enumeration value="note"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attributeGroup ref="cs:style.default-locale"/>
+          <xs:attributeGroup ref="cs:style.options"/>
+          <xs:attributeGroup ref="cs:version"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="dependent-style.style">
+    <xs:sequence>
+      <xs:element name="style">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="cs:dependent-style.style.info">
+              <xs:attributeGroup ref="cs:style.default-locale"/>
+              <xs:attributeGroup ref="cs:version"/>
+              <xs:attributeGroup ref="cs:dependent-style.style.legacy-attributes"/>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="locale-file.locale">
+    <xs:sequence>
+      <xs:element name="locale">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:group minOccurs="0" ref="cs:locale-file.locale.info"/>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+              <xs:element ref="cs:style-options"/>
+              <xs:group ref="cs:locale.date"/>
+              <xs:element ref="cs:terms"/>
+            </xs:choice>
+          </xs:sequence>
+          <xs:attributeGroup ref="xml:lang"/>
+          <xs:attributeGroup ref="cs:version"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:attributeGroup name="style.default-locale">
+    <xs:attribute name="default-locale" type="xs:language">
+      <xs:annotation>
+        <xs:documentation>Set a default style locale.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="version">
+    <xs:attribute name="version" use="required">
+      <xs:annotation>
+        <xs:documentation>Indicate CSL version compatibility ("1.0" for CSL 1.0).</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="1.0"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="dependent-style.style.legacy-attributes">
+    <xs:annotation>
+      <xs:documentation>Obsolete for dependent styles. Will be disallowed with CSL 1.1.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="class">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="in-text"/>
+          <xs:enumeration value="note"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attributeGroup ref="cs:style.options"/>
+  </xs:attributeGroup>
+  <xs:group name="independent-style.style.info">
+    <xs:annotation>
+      <xs:documentation>Metadata for independent styles.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="info">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element ref="cs:author"/>
+            <xs:element ref="cs:category"/>
+            <xs:element ref="cs:contributor"/>
+            <xs:element ref="cs:id"/>
+            <xs:element ref="cs:issn"/>
+            <xs:element ref="cs:eissn"/>
+            <xs:element ref="cs:issnl"/>
+            <xs:group ref="cs:independent-style.info.link"/>
+            <xs:element ref="cs:published"/>
+            <xs:element ref="cs:rights"/>
+            <xs:element ref="cs:summary"/>
+            <xs:element ref="cs:title"/>
+            <xs:element ref="cs:title-short"/>
+            <xs:element ref="cs:updated"/>
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:complexType name="dependent-style.style.info">
+    <xs:annotation>
+      <xs:documentation>Metadata for dependent styles.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="info">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element ref="cs:author"/>
+            <xs:element ref="cs:category"/>
+            <xs:element ref="cs:contributor"/>
+            <xs:element ref="cs:id"/>
+            <xs:element ref="cs:issn"/>
+            <xs:element ref="cs:eissn"/>
+            <xs:element ref="cs:issnl"/>
+            <xs:group ref="cs:dependent-style.info.link"/>
+            <xs:element ref="cs:published"/>
+            <xs:element ref="cs:rights"/>
+            <xs:element ref="cs:summary"/>
+            <xs:element ref="cs:title"/>
+            <xs:element ref="cs:title-short"/>
+            <xs:element ref="cs:updated"/>
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:group name="locale-file.locale.info">
+    <xs:annotation>
+      <xs:documentation>Metadata for locale files.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="info">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element ref="cs:translator"/>
+            <xs:element ref="cs:rights"/>
+            <xs:element ref="cs:updated"/>
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:element name="author" type="cs:personal-details"/>
+  <xs:element name="contributor" type="cs:personal-details"/>
+  <xs:element name="translator" type="cs:personal-details"/>
+  <xs:complexType name="personal-details">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="name" type="xs:string"/>
+      <xs:element ref="cs:email"/>
+      <xs:element ref="cs:uri"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:element name="email" type="xs:string"/>
+  <xs:element name="uri" type="xs:anyURI"/>
+  <xs:element name="category">
+    <xs:annotation>
+      <xs:documentation>Specify the citation format of the style (using the "citation-format"
+attribute) or the fields and disciplines for which the style is
+relevant (using the "field" attribute).</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="citation-format" type="cs:category.citation-format"/>
+      <xs:attribute name="field" type="cs:category.field"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="id" type="xs:anyURI">
+    <xs:annotation>
+      <xs:documentation>Specify the URI to establish the identity of the style. The URI
+should be stable, unique and dereferenceable URI.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="issn" type="cs:issn">
+    <xs:annotation>
+      <xs:documentation>Specify the journal's ISSN(s) for journal-specific styles. An ISSN
+must consist of four digits, a hyphen, three digits, and a check
+digit (a numeral digit or roman X), e.g. "1234-1231".</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="eissn" type="cs:issn">
+    <xs:annotation>
+      <xs:documentation>Specify the journal's eISSN for journal-specific styles.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="issnl" type="cs:issn">
+    <xs:annotation>
+      <xs:documentation>Specify the journal's ISSN-L for journal-specific styles.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:simpleType name="issn">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d{4}\-\d{3}(\d|x|X)"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:group name="independent-style.info.link">
+    <xs:sequence>
+      <xs:element name="link">
+        <xs:complexType mixed="true">
+          <xs:attribute name="href" use="required" type="xs:anyURI"/>
+          <xs:attribute name="rel" use="required">
+            <xs:annotation>
+              <xs:documentation>Specify how the URL relates to the style.</xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+              <xs:restriction base="xs:token">
+                <xs:enumeration value="self">
+                  <xs:annotation>
+                    <xs:documentation>The URI of the CSL style itself.</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
+                <xs:enumeration value="template">
+                  <xs:annotation>
+                    <xs:documentation>URI of the style from which the current style is derived.</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
+                <xs:enumeration value="documentation">
+                  <xs:annotation>
+                    <xs:documentation>URI of style documentation.</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
+                <xs:enumeration value="independent-parent">
+                  <xs:annotation>
+                    <xs:documentation>Obsolete for independent styles. Will be disallowed with
+CSL 1.1.</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attributeGroup ref="cs:info-text"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="dependent-style.info.link">
+    <xs:sequence>
+      <xs:element name="link">
+        <xs:complexType mixed="true">
+          <xs:attribute name="href" use="required" type="xs:anyURI"/>
+          <xs:attribute name="rel" use="required">
+            <xs:annotation>
+              <xs:documentation>Specify how the URL relates to the style.</xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+              <xs:restriction base="xs:token">
+                <xs:enumeration value="self">
+                  <xs:annotation>
+                    <xs:documentation>The URI of the CSL style itself.</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
+                <xs:enumeration value="independent-parent">
+                  <xs:annotation>
+                    <xs:documentation>URI of the CSL style whose content should be used for
+processing. Required for dependent styles.</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
+                <xs:enumeration value="documentation">
+                  <xs:annotation>
+                    <xs:documentation>URI of style documentation.</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
+                <xs:enumeration value="template">
+                  <xs:annotation>
+                    <xs:documentation>Obsolete for dependent styles. Will be disallowed with CSL
+1.1.</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attributeGroup ref="cs:info-text"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:element name="published" type="xs:dateTime">
+    <xs:annotation>
+      <xs:documentation>Specify when the style was initially created or made available.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="rights">
+    <xs:complexType mixed="true">
+      <xs:attribute name="license" type="xs:anyURI"/>
+      <xs:attributeGroup ref="cs:info-text"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="summary">
+    <xs:complexType mixed="true">
+      <xs:attributeGroup ref="cs:info-text"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="title">
+    <xs:complexType mixed="true">
+      <xs:attributeGroup ref="cs:info-text"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="title-short">
+    <xs:annotation>
+      <xs:documentation>Specify an abbreviated style title (e.g., "APA")</xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:attributeGroup ref="cs:info-text"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="updated" type="xs:dateTime">
+    <xs:annotation>
+      <xs:documentation>Specify when the style was last updated (e.g.,
+"2007-10-26T21:32:52+02:00")</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:attributeGroup name="info-text">
+    <xs:attributeGroup ref="xml:lang1"/>
+  </xs:attributeGroup>
+  <xs:group name="style.locale">
+    <xs:sequence>
+      <xs:element name="locale">
+        <xs:annotation>
+          <xs:documentation>Use to (re)define localized terms, dates and options.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element ref="cs:style-options"/>
+            <xs:group ref="cs:locale.date"/>
+            <xs:element ref="cs:terms"/>
+          </xs:choice>
+          <xs:attributeGroup ref="xml:lang2"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:element name="style-options">
+    <xs:complexType>
+      <xs:attribute name="limit-day-ordinals-to-day-1" default="false" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Limit the "ordinal" form to the first day of the month.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="punctuation-in-quote" default="false" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Specify whether punctuation (a period or comma) is placed within
+or outside (default) the closing quotation mark.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:group name="locale.date">
+    <xs:sequence>
+      <xs:element name="date">
+        <xs:complexType>
+          <xs:group maxOccurs="unbounded" ref="cs:locale.date.date-part"/>
+          <xs:attributeGroup ref="cs:date.form"/>
+          <xs:attributeGroup ref="cs:delimiter"/>
+          <xs:attributeGroup ref="cs:font-formatting"/>
+          <xs:attributeGroup ref="cs:text-case"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:attributeGroup name="date.form">
+    <xs:attribute name="form" use="required">
+      <xs:annotation>
+        <xs:documentation>Select the localized date format ("text" or "numeric").</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="text">
+            <xs:annotation>
+              <xs:documentation>Text date form (e.g., "December 15, 2005").</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="numeric">
+            <xs:annotation>
+              <xs:documentation>Numeric date form (e.g., "2005-12-15").</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:group name="locale.date.date-part">
+    <xs:sequence>
+      <xs:element name="date-part">
+        <xs:complexType>
+          <xs:attributeGroup ref="cs:affixes"/>
+          <xs:attributeGroup ref="cs:font-formatting"/>
+          <xs:attributeGroup ref="cs:text-case"/>
+          <xs:attribute name="form">
+            <xs:simpleType>
+              <xs:restriction base="xs:token">
+                <xs:enumeration value="numeric"/>
+                <xs:enumeration value="numeric-leading-zeros"/>
+                <xs:enumeration value="ordinal"/>
+                <xs:enumeration value="long"/>
+                <xs:enumeration value="short"/>
+                <xs:enumeration value="numeric"/>
+                <xs:enumeration value="numeric-leading-zeros"/>
+                <xs:enumeration value="short"/>
+                <xs:enumeration value="long"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="name" use="required">
+            <xs:simpleType>
+              <xs:restriction base="xs:token">
+                <xs:enumeration value="day"/>
+                <xs:enumeration value="month"/>
+                <xs:enumeration value="year"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attributeGroup ref="cs:range-delimiter"/>
+          <xs:attributeGroup ref="cs:strip-periods"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:element name="terms">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="cs:term"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="term">
+    <xs:complexType mixed="true">
+      <xs:sequence minOccurs="0">
+        <xs:element ref="cs:single"/>
+        <xs:element ref="cs:multiple"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="cs:term.attributes"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="term.attributes">
+    <xs:attribute name="form">
+      <xs:simpleType>
+        <xs:union memberTypes="cs:term.form">
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="long"/>
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="long"/>
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="long"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="name" use="required">
+      <xs:simpleType>
+        <xs:union memberTypes="cs:terms cs:terms.ordinals cs:terms.long-ordinals cs:terms.gender-assignable"/>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="gender-form">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="masculine"/>
+          <xs:enumeration value="feminine"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="match">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="last-digit"/>
+          <xs:enumeration value="last-two-digits"/>
+          <xs:enumeration value="whole-number"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="gender">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="masculine"/>
+          <xs:enumeration value="feminine"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:simpleType name="term.form">
+    <xs:annotation>
+      <xs:documentation>"verb-short" reverts to "verb" if the "verb-short" form is not available.
+"symbol" reverts to "short" if the "symbol" form is not available.
+"verb" and "short" revert to "long" if the specified form is not available.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="long"/>
+      <xs:enumeration value="verb"/>
+      <xs:enumeration value="short"/>
+      <xs:enumeration value="verb-short"/>
+      <xs:enumeration value="symbol"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="single" type="xs:string">
+    <xs:annotation>
+      <xs:documentation>Singular version of the term.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="multiple" type="xs:string">
+    <xs:annotation>
+      <xs:documentation>Plural version of the term.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="macro">
+    <xs:annotation>
+      <xs:documentation>Use to create collections of (reusable) formatting instructions.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:group maxOccurs="unbounded" ref="cs:rendering-element"/>
+      <xs:attribute name="name" use="required" type="xs:NMTOKEN"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:group name="rendering-element">
+    <xs:choice>
+      <xs:group ref="cs:rendering-element.names"/>
+      <xs:group ref="cs:rendering-element.date"/>
+      <xs:group ref="cs:rendering-element.label"/>
+      <xs:element ref="cs:text"/>
+      <xs:element ref="cs:number"/>
+      <xs:element ref="cs:choose"/>
+      <xs:element ref="cs:group"/>
+    </xs:choice>
+  </xs:group>
+  <xs:element name="citation">
+    <xs:annotation>
+      <xs:documentation>Use to describe the formatting of citations.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="cs:sort"/>
+        <xs:group ref="cs:citation.layout"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="cs:citation.options"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="bibliography">
+    <xs:annotation>
+      <xs:documentation>Use to describe the formatting of the bibliography.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="cs:sort"/>
+        <xs:group ref="cs:bibliography.layout"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="cs:bibliography.options"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:group name="citation.layout">
+    <xs:sequence>
+      <xs:element name="layout">
+        <xs:complexType>
+          <xs:group maxOccurs="unbounded" ref="cs:rendering-element"/>
+          <xs:attributeGroup ref="cs:affixes"/>
+          <xs:attributeGroup ref="cs:delimiter"/>
+          <xs:attributeGroup ref="cs:font-formatting"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="bibliography.layout">
+    <xs:sequence>
+      <xs:element name="layout">
+        <xs:complexType>
+          <xs:group maxOccurs="unbounded" ref="cs:rendering-element"/>
+          <xs:attributeGroup ref="cs:affixes"/>
+          <xs:attributeGroup ref="cs:font-formatting"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="rendering-element.names">
+    <xs:sequence>
+      <xs:element name="names">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+              <xs:choice>
+                <xs:group ref="cs:names.name"/>
+                <xs:element ref="cs:et-al"/>
+              </xs:choice>
+              <xs:group ref="cs:names.label"/>
+            </xs:choice>
+            <xs:element minOccurs="0" ref="cs:substitute"/>
+          </xs:sequence>
+          <xs:attributeGroup ref="cs:names.attributes"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:attributeGroup name="names.attributes">
+    <xs:attribute name="variable" use="required">
+      <xs:simpleType>
+        <xs:restriction>
+          <xs:simpleType>
+            <xs:list itemType="cs:variables.names"/>
+          </xs:simpleType>
+          <xs:minLength value="1"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attributeGroup ref="cs:affixes"/>
+    <xs:attributeGroup ref="cs:delimiter"/>
+    <xs:attributeGroup ref="cs:display"/>
+    <xs:attributeGroup ref="cs:font-formatting"/>
+  </xs:attributeGroup>
+  <xs:group name="names.name">
+    <xs:sequence>
+      <xs:element name="name">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="cs:name-part"/>
+          </xs:sequence>
+          <xs:attributeGroup ref="cs:name.attributes"/>
+          <xs:attribute name="form" default="long">
+            <xs:annotation>
+              <xs:documentation>Select the "long" (first name + last name, for Western names),
+"short" (last name only, for Western names), or "count" name form
+(returning the number of names in the name variable, which can be
+useful for some sorting algorithms).</xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+              <xs:restriction base="xs:token">
+                <xs:enumeration value="long"/>
+                <xs:enumeration value="short"/>
+                <xs:enumeration value="count"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attributeGroup ref="cs:affixes"/>
+          <xs:attributeGroup ref="cs:delimiter"/>
+          <xs:attributeGroup ref="cs:font-formatting"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:attributeGroup name="name.attributes">
+    <xs:attribute name="and">
+      <xs:annotation>
+        <xs:documentation>Use to separate the second-to-last and last name of a name list by
+the "and" term or ampersand.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="text">
+            <xs:annotation>
+              <xs:documentation>Use the "and" term (e.g., "Doe, Johnson and Smith").</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="symbol">
+            <xs:annotation>
+              <xs:documentation>Use the "ampersand" (e.g., "Doe, Johnson &amp; Smith").</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="delimiter-precedes-et-al" default="contextual">
+      <xs:annotation>
+        <xs:documentation>Specify when the name delimiter is used between a truncated name list
+and the "et-al" (or "and others") term in case of et-al abbreviation
+(e.g., "Smith, Doe et al." or "Smith, Doe, et al.").</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="contextual">
+            <xs:annotation>
+              <xs:documentation>The name delimiter is only used when the truncated name list
+consists of two or more names.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="always">
+            <xs:annotation>
+              <xs:documentation>The name delimiter is always used.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="never">
+            <xs:annotation>
+              <xs:documentation>The name delimiter is never used.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="after-inverted-name">
+            <xs:annotation>
+              <xs:documentation>The name delimiter is only used if the preceding name is inverted as
+a result of the "name-as-sort-order" attribute.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="delimiter-precedes-last" default="contextual">
+      <xs:annotation>
+        <xs:documentation>Specify when the name delimiter is used between the second-to-last
+and last name of a non-truncated name list. Only has an effect when
+the "and" term or ampersand is used (e.g., "Doe and Smith" or "Doe,
+and Smith").</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="contextual">
+            <xs:annotation>
+              <xs:documentation>The name delimiter is only used when the name list consists of
+three or more names.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="always">
+            <xs:annotation>
+              <xs:documentation>The name delimiter is always used.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="never">
+            <xs:annotation>
+              <xs:documentation>The name delimiter is never used.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="after-inverted-name">
+            <xs:annotation>
+              <xs:documentation>The name delimiter is only used if the preceding name is inverted as
+a result of the "name-as-sort-order" attribute.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="et-al-min" type="xs:integer">
+      <xs:annotation>
+        <xs:documentation>Set the minimum number of names needed in a name variable to activate
+et-al abbreviation.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="et-al-use-first" type="xs:integer">
+      <xs:annotation>
+        <xs:documentation>Set the number of names to render when et-al abbreviation is active.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="et-al-subsequent-min" type="xs:integer">
+      <xs:annotation>
+        <xs:documentation>As "et-al-min", but only affecting subsequent citations to an item.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="et-al-subsequent-use-first" type="xs:integer">
+      <xs:annotation>
+        <xs:documentation>As "et-al-use-first", but only affecting subsequent citations to an
+item.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="et-al-use-last" default="false" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>If set to "true", the "et-al" (or "and others") term is replaced by
+an ellipsis followed by the last name of the name variable.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="initialize" default="true" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>If set to "false", names are not initialized and "initialize-with"
+only affects initials already present in the input data.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="initialize-with">
+      <xs:annotation>
+        <xs:documentation>Activate initializing of given names. The attribute value is appended
+to each initial (e.g., with ". ", "Orson Welles" becomes "O. Welles").</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="name-as-sort-order">
+      <xs:annotation>
+        <xs:documentation>Specify whether (and which) names should be rendered in their sort
+order (e.g., "Doe, John" instead of "John Doe").</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="first">
+            <xs:annotation>
+              <xs:documentation>Render the first name of each name variable in sort order.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="all">
+            <xs:annotation>
+              <xs:documentation>Render all names in sort order.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="sort-separator" default=", ">
+      <xs:annotation>
+        <xs:documentation>Sets the delimiter for name-parts that have switched positions as a
+result of "name-as-sort-order" (e.g., ", " in "Doe, John").</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:element name="name-part">
+    <xs:annotation>
+      <xs:documentation>Use to format individual name parts (e.g., "Jane DOE").</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="name" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="family"/>
+            <xs:enumeration value="given"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attributeGroup ref="cs:affixes"/>
+      <xs:attributeGroup ref="cs:font-formatting"/>
+      <xs:attributeGroup ref="cs:text-case"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="et-al">
+    <xs:annotation>
+      <xs:documentation>Specify the term used for et-al abbreviation and its formatting. </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="term" default="et-al">
+        <xs:annotation>
+          <xs:documentation>Select the term to use for et-al abbreviation.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="et-al"/>
+            <xs:enumeration value="and others"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attributeGroup ref="cs:font-formatting"/>
+      <xs:attributeGroup ref="cs:names.et-al.legacy-attributes"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="names.et-al.legacy-attributes">
+    <xs:annotation>
+      <xs:documentation>Ignored in CSL 1.0.1. Will be disallowed with CSL 1.1.</xs:documentation>
+    </xs:annotation>
+    <xs:attributeGroup ref="cs:affixes"/>
+  </xs:attributeGroup>
+  <xs:group name="names.label">
+    <xs:annotation>
+      <xs:documentation>Inherits variable from the parent cs:names element.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="label">
+        <xs:complexType>
+          <xs:attribute name="form" default="long" type="cs:term.form"/>
+          <xs:attributeGroup ref="cs:label.attributes-shared"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:element name="substitute">
+    <xs:annotation>
+      <xs:documentation>Specify substitution options when the name variables selected on the
+parent cs:names element are empty.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:group ref="cs:substitute.names"/>
+        <xs:group ref="cs:rendering-element"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:group name="substitute.names">
+    <xs:annotation>
+      <xs:documentation>Short version of cs:names, without children, allowed in cs:substitute.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="names">
+        <xs:complexType>
+          <xs:attributeGroup ref="cs:names.attributes"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="rendering-element.date">
+    <xs:sequence>
+      <xs:element name="date">
+        <xs:complexType>
+          <xs:choice>
+            <xs:group minOccurs="0" maxOccurs="unbounded" ref="cs:rendering-element.date.date-part.localized"/>
+            <xs:group maxOccurs="unbounded" ref="cs:rendering-element.date.date-part.non-localized"/>
+          </xs:choice>
+          <xs:attribute name="variable" use="required" type="cs:variables.dates"/>
+          <xs:attribute name="date-parts" default="year-month-day">
+            <xs:annotation>
+              <xs:documentation>Limit the date parts rendered.</xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+              <xs:restriction base="xs:token">
+                <xs:enumeration value="year-month-day">
+                  <xs:annotation>
+                    <xs:documentation>Year, month and day</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
+                <xs:enumeration value="year-month">
+                  <xs:annotation>
+                    <xs:documentation>Year and month</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
+                <xs:enumeration value="year">
+                  <xs:annotation>
+                    <xs:documentation>Year only</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="form">
+            <xs:annotation>
+              <xs:documentation>Select the localized date format ("text" or "numeric").</xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+              <xs:restriction base="xs:token">
+                <xs:enumeration value="text">
+                  <xs:annotation>
+                    <xs:documentation>Text date form (e.g., "December 15, 2005").</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
+                <xs:enumeration value="numeric">
+                  <xs:annotation>
+                    <xs:documentation>Numeric date form (e.g., "2005-12-15").</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attributeGroup ref="cs:delimiter"/>
+          <xs:attributeGroup ref="cs:affixes"/>
+          <xs:attributeGroup ref="cs:display"/>
+          <xs:attributeGroup ref="cs:font-formatting"/>
+          <xs:attributeGroup ref="cs:text-case"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="rendering-element.date.date-part.localized">
+    <xs:sequence>
+      <xs:element name="date-part">
+        <xs:annotation>
+          <xs:documentation>Specify overriding formatting for localized dates (affixes
+cannot be overridden, as these are considered locale-specific).
+Example uses are forcing the use of leading-zeros, or of the
+"short" month form. Has no effect on which, and in what order,
+date parts are rendered.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:attributeGroup ref="cs:font-formatting"/>
+          <xs:attributeGroup ref="cs:text-case"/>
+          <xs:attribute name="form">
+            <xs:simpleType>
+              <xs:restriction base="xs:token">
+                <xs:enumeration value="numeric"/>
+                <xs:enumeration value="numeric-leading-zeros"/>
+                <xs:enumeration value="ordinal"/>
+                <xs:enumeration value="long"/>
+                <xs:enumeration value="short"/>
+                <xs:enumeration value="numeric"/>
+                <xs:enumeration value="numeric-leading-zeros"/>
+                <xs:enumeration value="short"/>
+                <xs:enumeration value="long"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="name" use="required">
+            <xs:simpleType>
+              <xs:restriction base="xs:token">
+                <xs:enumeration value="day"/>
+                <xs:enumeration value="month"/>
+                <xs:enumeration value="year"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attributeGroup ref="cs:range-delimiter"/>
+          <xs:attributeGroup ref="cs:strip-periods"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="rendering-element.date.date-part.non-localized">
+    <xs:sequence>
+      <xs:element name="date-part">
+        <xs:annotation>
+          <xs:documentation>Specify, in the desired order, the date parts that should be
+rendered and their formatting.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:attributeGroup ref="cs:affixes"/>
+          <xs:attributeGroup ref="cs:font-formatting"/>
+          <xs:attributeGroup ref="cs:text-case"/>
+          <xs:attribute name="form">
+            <xs:simpleType>
+              <xs:restriction base="xs:token">
+                <xs:enumeration value="numeric"/>
+                <xs:enumeration value="numeric-leading-zeros"/>
+                <xs:enumeration value="ordinal"/>
+                <xs:enumeration value="long"/>
+                <xs:enumeration value="short"/>
+                <xs:enumeration value="numeric"/>
+                <xs:enumeration value="numeric-leading-zeros"/>
+                <xs:enumeration value="short"/>
+                <xs:enumeration value="long"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="name" use="required">
+            <xs:simpleType>
+              <xs:restriction base="xs:token">
+                <xs:enumeration value="day"/>
+                <xs:enumeration value="month"/>
+                <xs:enumeration value="year"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attributeGroup ref="cs:range-delimiter"/>
+          <xs:attributeGroup ref="cs:strip-periods"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:attributeGroup name="day">
+    <xs:attribute name="name" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="day"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="form" default="numeric">
+      <xs:annotation>
+        <xs:documentation>Day forms: "numeric" ("5"), "numeric-leading-zeros" ("05"), "ordinal"
+("5th").</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="numeric"/>
+          <xs:enumeration value="numeric-leading-zeros"/>
+          <xs:enumeration value="ordinal"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attributeGroup ref="cs:range-delimiter"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="month">
+    <xs:attribute name="name" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="month"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="form" default="long">
+      <xs:annotation>
+        <xs:documentation>Months forms: "long" (e.g., "January"), "short" ("Jan."), "numeric"
+("1"), and "numeric-leading-zeros" ("01").</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="long"/>
+          <xs:enumeration value="short"/>
+          <xs:enumeration value="numeric"/>
+          <xs:enumeration value="numeric-leading-zeros"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attributeGroup ref="cs:range-delimiter"/>
+    <xs:attributeGroup ref="cs:strip-periods"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="year">
+    <xs:attribute name="name" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="year"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="form" default="long">
+      <xs:annotation>
+        <xs:documentation>Year forms: "long" ("2005"), "short" ("05").</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="short"/>
+          <xs:enumeration value="long"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attributeGroup ref="cs:range-delimiter"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="range-delimiter">
+    <xs:attribute name="range-delimiter" default="–">
+      <xs:annotation>
+        <xs:documentation>Specify a delimiter for date ranges (by default the en-dash). A custom
+delimiter is retrieved from the largest date part ("day", "month" or
+"year") that differs between the two dates.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:element name="text">
+    <xs:annotation>
+      <xs:documentation>Use to call macros, render variables, terms, or verbatim text.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attributeGroup ref="cs:text.attributes"/>
+      <xs:attributeGroup ref="cs:affixes"/>
+      <xs:attributeGroup ref="cs:display"/>
+      <xs:attributeGroup ref="cs:font-formatting"/>
+      <xs:attributeGroup ref="cs:quotes"/>
+      <xs:attributeGroup ref="cs:strip-periods"/>
+      <xs:attributeGroup ref="cs:text-case"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="text.attributes">
+    <xs:attribute name="form">
+      <xs:simpleType>
+        <xs:union memberTypes="cs:term.form">
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="short"/>
+              <xs:enumeration value="long"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="macro" type="xs:NMTOKEN">
+      <xs:annotation>
+        <xs:documentation>Select a macro.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="term" type="cs:terms">
+      <xs:annotation>
+        <xs:documentation>Select a term.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="plural" default="false" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>Specify term plurality: singular ("false") or plural ("true").</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="value">
+      <xs:annotation>
+        <xs:documentation>Specify verbatim text.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="variable" type="cs:variables.standard">
+      <xs:annotation>
+        <xs:documentation>Select a variable.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:element name="number">
+    <xs:annotation>
+      <xs:documentation>Use to render a number variable.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attributeGroup ref="cs:number.attributes"/>
+      <xs:attributeGroup ref="cs:affixes"/>
+      <xs:attributeGroup ref="cs:display"/>
+      <xs:attributeGroup ref="cs:font-formatting"/>
+      <xs:attributeGroup ref="cs:text-case"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="number.attributes">
+    <xs:attribute name="variable" use="required" type="cs:variables.numbers"/>
+    <xs:attribute name="form" default="numeric">
+      <xs:annotation>
+        <xs:documentation>Number forms: "numeric" ("4"), "ordinal" ("4th"), "long-ordinal"
+("fourth"), "roman" ("iv").</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="numeric"/>
+          <xs:enumeration value="ordinal"/>
+          <xs:enumeration value="long-ordinal"/>
+          <xs:enumeration value="roman"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:group name="rendering-element.label">
+    <xs:sequence>
+      <xs:element name="label">
+        <xs:annotation>
+          <xs:documentation>Use to render a term whose pluralization depends on the content of a
+variable. E.g., if "page" variable holds a range, the plural label
+"pp." is selected instead of the singular "p.".</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:attributeGroup ref="cs:label.attributes"/>
+          <xs:attributeGroup ref="cs:label.attributes-shared"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:attributeGroup name="label.attributes">
+    <xs:attribute name="variable" use="required">
+      <xs:simpleType>
+        <xs:union memberTypes="cs:variables.numbers">
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="locator"/>
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="page"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="form" default="long">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="long"/>
+          <xs:enumeration value="short"/>
+          <xs:enumeration value="symbol"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="label.attributes-shared">
+    <xs:attribute name="plural" default="contextual">
+      <xs:annotation>
+        <xs:documentation>Specify when the plural version of a term is selected.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="always"/>
+          <xs:enumeration value="never"/>
+          <xs:enumeration value="contextual"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attributeGroup ref="cs:affixes"/>
+    <xs:attributeGroup ref="cs:font-formatting"/>
+    <xs:attributeGroup ref="cs:strip-periods"/>
+    <xs:attributeGroup ref="cs:text-case"/>
+  </xs:attributeGroup>
+  <xs:element name="group">
+    <xs:annotation>
+      <xs:documentation>Use to group rendering elements. Groups are useful for setting a
+delimiter for the group children, for organizing the layout of
+bibliographic entries (using the "display" attribute), and for
+suppressing the rendering of terms and verbatim text when variables
+are empty.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:group maxOccurs="unbounded" ref="cs:rendering-element"/>
+      <xs:attributeGroup ref="cs:affixes"/>
+      <xs:attributeGroup ref="cs:delimiter"/>
+      <xs:attributeGroup ref="cs:display"/>
+      <xs:attributeGroup ref="cs:font-formatting"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="style.options">
+    <xs:attributeGroup ref="cs:style.demote-non-dropping-particle"/>
+    <xs:attributeGroup ref="cs:style.initialize-with-hyphen"/>
+    <xs:attributeGroup ref="cs:style.page-range-format"/>
+    <xs:attributeGroup ref="cs:names-inheritable-options"/>
+    <xs:attributeGroup ref="cs:name-inheritable-options"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="citation.options">
+    <xs:attributeGroup ref="cs:citation.cite-group-delimiter"/>
+    <xs:attributeGroup ref="cs:citation.collapse-options"/>
+    <xs:attributeGroup ref="cs:citation.disambiguate-options"/>
+    <xs:attributeGroup ref="cs:citation.near-note-distance"/>
+    <xs:attributeGroup ref="cs:names-inheritable-options"/>
+    <xs:attributeGroup ref="cs:name-inheritable-options"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="bibliography.options">
+    <xs:attributeGroup ref="cs:bibliography.hanging-indent"/>
+    <xs:attributeGroup ref="cs:bibliography.line-formatting-options"/>
+    <xs:attributeGroup ref="cs:bibliography.second-field-align"/>
+    <xs:attributeGroup ref="cs:bibliography.subsequent-author-substitute-options"/>
+    <xs:attributeGroup ref="cs:names-inheritable-options"/>
+    <xs:attributeGroup ref="cs:name-inheritable-options"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="style.demote-non-dropping-particle">
+    <xs:attribute name="demote-non-dropping-particle" default="display-and-sort">
+      <xs:annotation>
+        <xs:documentation>Specify whether the non-dropping particle is demoted in inverted
+names (e.g., "Koning, W. de").</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="never"/>
+          <xs:enumeration value="sort-only"/>
+          <xs:enumeration value="display-and-sort"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="style.initialize-with-hyphen">
+    <xs:attribute name="initialize-with-hyphen" default="true" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>Specify whether compound given names (e.g., "Jean-Luc") are
+initialized with ("J-L") or without a hyphen ("JL").</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="style.page-range-format">
+    <xs:attribute name="page-range-format">
+      <xs:annotation>
+        <xs:documentation>Reformat page ranges in the "page" variable.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="chicago"/>
+          <xs:enumeration value="expanded"/>
+          <xs:enumeration value="minimal"/>
+          <xs:enumeration value="minimal-two"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="citation.cite-group-delimiter">
+    <xs:attribute name="cite-group-delimiter" default=", ">
+      <xs:annotation>
+        <xs:documentation>Activate cite grouping and specify the delimiter for cites within a
+cite group.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="citation.collapse-options">
+    <xs:attribute name="collapse">
+      <xs:annotation>
+        <xs:documentation>Activate cite grouping and specify the method of citation collapsing.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="citation-number">
+            <xs:annotation>
+              <xs:documentation>Collapse ranges of numeric cites, e.g. from "[1,2,3]" to "[1-3]".</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="year">
+            <xs:annotation>
+              <xs:documentation>Collapse cites by suppressing repeated names, e.g. from "(Doe
+2000, Doe 2001)" to "(Doe 2000, 2001)".</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="year-suffix">
+            <xs:annotation>
+              <xs:documentation>Collapse cites as with "year", but also suppresses repeated
+years, e.g. from "(Doe 2000a, Doe 2000b)" to "(Doe 2000a, b)".</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="year-suffix-ranged">
+            <xs:annotation>
+              <xs:documentation>Collapses cites as with "year-suffix", but also collapses
+ranges of year-suffixes, e.g. from "(Doe 2000a, Doe 2000b,
+Doe 2000c)" to "(Doe 2000a-c)".</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="year-suffix-delimiter">
+      <xs:annotation>
+        <xs:documentation>Specify the delimiter between year-suffixes. Defaults to the cite
+delimiter.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="after-collapse-delimiter">
+      <xs:annotation>
+        <xs:documentation>Specify the delimiter following a group of collapsed cites. Defaults
+to the cite delimiter.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="citation.disambiguate-options">
+    <xs:attribute name="disambiguate-add-names" default="false" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>Set to "true" to activate disambiguation by showing names that were
+originally hidden as a result of et-al abbreviation.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="disambiguate-add-givenname" default="false" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>Set to "true" to activate disambiguation by expanding names, showing
+initials or full given names.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="disambiguate-add-year-suffix" default="false" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>Set to "true" to activate disambiguation by adding year-suffixes
+(e.g., "(Doe 2007a, Doe 2007b)") for items from the same author(s)
+and year.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="givenname-disambiguation-rule" default="by-cite">
+      <xs:annotation>
+        <xs:documentation>Specify how name are expanded for disambiguation.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="all-names">
+            <xs:annotation>
+              <xs:documentation>Each ambiguous names is progressively transformed until
+disambiguated (when disambiguation is not possible, the name
+remains in its original form).</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="all-names-with-initials">
+            <xs:annotation>
+              <xs:documentation>As "all-names", but name expansion is limited to showing
+initials.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="primary-name">
+            <xs:annotation>
+              <xs:documentation>As "all-names", but disambiguation is limited to the first name
+of each cite.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="primary-name-with-initials">
+            <xs:annotation>
+              <xs:documentation>As "all-names-with-initials", but disambiguation is limited to
+the first name of each cite.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="by-cite">
+            <xs:annotation>
+              <xs:documentation>As "all-names", but only ambiguous names in ambiguous cites are
+expanded.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="citation.near-note-distance">
+    <xs:attribute name="near-note-distance" default="5" type="xs:integer">
+      <xs:annotation>
+        <xs:documentation>Set the number of preceding notes (footnotes or endnotes) within
+which the current item needs to have been previously cited in order
+for the "near-note" position to be "true".</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="bibliography.hanging-indent">
+    <xs:attribute name="hanging-indent" default="false" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>Set to "true" to render bibliographic entries with hanging indents.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="bibliography.line-formatting-options">
+    <xs:attribute name="entry-spacing" default="1" type="xs:nonNegativeInteger">
+      <xs:annotation>
+        <xs:documentation>Set the spacing between bibliographic entries.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="line-spacing" default="1">
+      <xs:annotation>
+        <xs:documentation>Set the spacing between bibliographic lines.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:integer">
+          <xs:minExclusive value="0"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="bibliography.second-field-align">
+    <xs:attribute name="second-field-align">
+      <xs:annotation>
+        <xs:documentation>Use to align any subsequent lines of bibliographic entries with the
+beginning of the second field.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="flush">
+            <xs:annotation>
+              <xs:documentation>Align the first field with the margin.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="margin">
+            <xs:annotation>
+              <xs:documentation>Put the first field in the margin and align all subsequent
+lines of text with the margin.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="bibliography.subsequent-author-substitute-options">
+    <xs:attribute name="subsequent-author-substitute">
+      <xs:annotation>
+        <xs:documentation>Substitute names that repeat in subsequent bibliographic entries by
+the attribute value.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="subsequent-author-substitute-rule" default="complete-all">
+      <xs:annotation>
+        <xs:documentation>Specify the method of substitution of names repeated in subsequent
+bibliographic entries.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="complete-all">
+            <xs:annotation>
+              <xs:documentation>Requires a match of all rendered names in the name variable, and
+substitutes once for all names.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="complete-each">
+            <xs:annotation>
+              <xs:documentation>Requires a match of all rendered names in the name variable,
+and substitutes for each name.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="partial-each">
+            <xs:annotation>
+              <xs:documentation>Substitutes for each name, until the first mismatch.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="partial-first">
+            <xs:annotation>
+              <xs:documentation>Substitutes the first name if it matches.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="names-inheritable-options">
+    <xs:annotation>
+      <xs:documentation>Options affecting cs:names, for cs:style, cs:citation and cs:bibliography.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="names-delimiter">
+      <xs:annotation>
+        <xs:documentation>Inheritable name option, companion for "delimiter" on cs:names.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="name-inheritable-options">
+    <xs:annotation>
+      <xs:documentation>Options affecting cs:name, for cs:style, cs:citation and cs:bibliography.</xs:documentation>
+    </xs:annotation>
+    <xs:attributeGroup ref="cs:name.attributes"/>
+    <xs:attribute name="name-delimiter">
+      <xs:annotation>
+        <xs:documentation>Inheritable name option, companion for "delimiter" on cs:name.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="name-form" default="long">
+      <xs:annotation>
+        <xs:documentation>Inheritable name option, companion for "form" on cs:name.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="long"/>
+          <xs:enumeration value="short"/>
+          <xs:enumeration value="count"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:element name="sort">
+    <xs:annotation>
+      <xs:documentation>Specify how cites and bibliographic entries should be sorted. By
+default, items appear in the order in which they were cited.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="cs:key"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="key">
+    <xs:complexType>
+      <xs:attribute name="variable" type="cs:variables"/>
+      <xs:attribute name="macro" type="xs:NMTOKEN"/>
+      <xs:attribute name="names-min" type="xs:integer">
+        <xs:annotation>
+          <xs:documentation>The minimum number of names needed in a name variable to activate
+name list truncation. Overrides the values set on any
+"et-al-(subsequent-)min" attributes.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="names-use-first" type="xs:integer">
+        <xs:annotation>
+          <xs:documentation>The number of names to render when name list truncation is
+activated. Overrides the values set on the
+"et-al-(subsequent-)use-first" attributes.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="names-use-last" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Use to override the value of the "et-at-use-last" attribute.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="sort" default="ascending">
+        <xs:annotation>
+          <xs:documentation>Select between an ascending and descending sort.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="ascending"/>
+            <xs:enumeration value="descending"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="choose">
+    <xs:annotation>
+      <xs:documentation>Use to conditionally render rendering elements.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="cs:if"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="cs:else-if"/>
+        <xs:element minOccurs="0" ref="cs:else"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="if">
+    <xs:complexType>
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="cs:rendering-element"/>
+      <xs:attributeGroup ref="cs:condition"/>
+      <xs:attributeGroup ref="cs:match"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="else-if">
+    <xs:complexType>
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="cs:rendering-element"/>
+      <xs:attributeGroup ref="cs:condition"/>
+      <xs:attributeGroup ref="cs:match"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="else">
+    <xs:complexType>
+      <xs:group maxOccurs="unbounded" ref="cs:rendering-element"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="condition">
+    <xs:attribute name="disambiguate">
+      <xs:annotation>
+        <xs:documentation>If used, the element content is only rendered if it disambiguates two
+otherwise identical citations. This attempt at disambiguation is only
+made after all other disambiguation methods have failed.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="true"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="is-numeric">
+      <xs:annotation>
+        <xs:documentation>Tests whether the given variables contain numeric text.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction>
+          <xs:simpleType>
+            <xs:list itemType="cs:variables"/>
+          </xs:simpleType>
+          <xs:minLength value="1"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="is-uncertain-date">
+      <xs:annotation>
+        <xs:documentation>Tests whether the given date variables contain approximate dates.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction>
+          <xs:simpleType>
+            <xs:list itemType="cs:variables.dates"/>
+          </xs:simpleType>
+          <xs:minLength value="1"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="locator">
+      <xs:annotation>
+        <xs:documentation>Tests whether the locator matches the given locator types.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction>
+          <xs:simpleType>
+            <xs:list>
+              <xs:simpleType>
+                <xs:union memberTypes="cs:terms.locator.testable">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="sub-verbo"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:union>
+              </xs:simpleType>
+            </xs:list>
+          </xs:simpleType>
+          <xs:minLength value="1"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="position">
+      <xs:annotation>
+        <xs:documentation>Tests whether the cite position matches the given positions.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction>
+          <xs:simpleType>
+            <xs:list>
+              <xs:simpleType>
+                <xs:restriction base="xs:token">
+                  <xs:enumeration value="first"/>
+                  <xs:enumeration value="subsequent"/>
+                  <xs:enumeration value="ibid"/>
+                  <xs:enumeration value="ibid-with-locator"/>
+                  <xs:enumeration value="near-note"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:list>
+          </xs:simpleType>
+          <xs:minLength value="1"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="type">
+      <xs:annotation>
+        <xs:documentation>Tests whether the item matches the given types.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction>
+          <xs:simpleType>
+            <xs:list itemType="cs:item-types"/>
+          </xs:simpleType>
+          <xs:minLength value="1"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="variable">
+      <xs:annotation>
+        <xs:documentation>Tests whether the default ("long") forms of the given variables
+contain non-empty values.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction>
+          <xs:simpleType>
+            <xs:list itemType="cs:variables"/>
+          </xs:simpleType>
+          <xs:minLength value="1"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="match">
+    <xs:attribute name="match" default="all">
+      <xs:annotation>
+        <xs:documentation>Set the testing logic.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="all">
+            <xs:annotation>
+              <xs:documentation>Element only tests "true" when all conditions test "true" for all
+given test values.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="any">
+            <xs:annotation>
+              <xs:documentation>Element tests "true" when any condition tests "true" for any given
+test value.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="none">
+            <xs:annotation>
+              <xs:documentation>Element only tests "true" when none of the conditions test "true"
+for any given test value.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="affixes">
+    <xs:attribute name="prefix" default=""/>
+    <xs:attribute name="suffix" default=""/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="delimiter">
+    <xs:attribute name="delimiter"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="display">
+    <xs:attribute name="display">
+      <xs:annotation>
+        <xs:documentation>By default, bibliographic entries consist of continuous runs of text.
+With the "display" attribute, portions of each entry can be
+individually positioned.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="block">
+            <xs:annotation>
+              <xs:documentation>Places the content in a block stretching from margin to margin.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="left-margin">
+            <xs:annotation>
+              <xs:documentation>Places the content in a block starting at the left margin.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="right-inline">
+            <xs:annotation>
+              <xs:documentation>Places the content in a block to the right of a preceding
+"left-margin" block.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="indent">
+            <xs:annotation>
+              <xs:documentation>Places the content in a block indented to the right by a standard
+amount.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="font-formatting">
+    <xs:annotation>
+      <xs:documentation>The font-formatting attributes are based on those of CSS and XSL-FO.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="font-style" default="normal">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="italic"/>
+          <xs:enumeration value="normal"/>
+          <xs:enumeration value="oblique"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="font-variant" default="normal">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="normal"/>
+          <xs:enumeration value="small-caps"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="font-weight" default="normal">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="normal"/>
+          <xs:enumeration value="bold"/>
+          <xs:enumeration value="light"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="text-decoration" default="none">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="none"/>
+          <xs:enumeration value="underline"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="vertical-align" default="baseline">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="baseline"/>
+          <xs:enumeration value="sup"/>
+          <xs:enumeration value="sub"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="quotes">
+    <xs:attribute name="quotes" default="false" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>When set to "true", quotes are placed around the rendered text.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="strip-periods">
+    <xs:attribute name="strip-periods" default="false" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>When set to "true", periods are removed from the rendered text.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="text-case">
+    <xs:attribute name="text-case">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="lowercase">
+            <xs:annotation>
+              <xs:documentation>Renders text in lowercase.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="uppercase">
+            <xs:annotation>
+              <xs:documentation>Renders text in uppercase.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="capitalize-first">
+            <xs:annotation>
+              <xs:documentation>Capitalizes the first character (other characters remain in
+their original case).</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="capitalize-all">
+            <xs:annotation>
+              <xs:documentation>Capitalizes the first character of every word (other characters
+remain in their original case).</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="title">
+            <xs:annotation>
+              <xs:documentation>Renders text in title case.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="sentence">
+            <xs:annotation>
+              <xs:documentation>Renders text in sentence case.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+</xs:schema>

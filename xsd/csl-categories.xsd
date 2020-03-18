@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://purl.org/net/xbiblio/csl" xmlns:cs="http://purl.org/net/xbiblio/csl">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+  <xs:simpleType name="category.citation-format">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="author"/>
+      <xs:enumeration value="author-date"/>
+      <xs:enumeration value="label"/>
+      <xs:enumeration value="note"/>
+      <xs:enumeration value="numeric"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="category.field">
+    <xs:annotation>
+      <xs:documentation>Use "generic-base" for styles that are non-discipline specific, such as
+APA, Harvard, etc.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="anthropology"/>
+      <xs:enumeration value="astronomy"/>
+      <xs:enumeration value="biology"/>
+      <xs:enumeration value="botany"/>
+      <xs:enumeration value="chemistry"/>
+      <xs:enumeration value="communications"/>
+      <xs:enumeration value="engineering"/>
+      <xs:enumeration value="generic-base"/>
+      <xs:enumeration value="geography"/>
+      <xs:enumeration value="geology"/>
+      <xs:enumeration value="history"/>
+      <xs:enumeration value="humanities"/>
+      <xs:enumeration value="law"/>
+      <xs:enumeration value="linguistics"/>
+      <xs:enumeration value="literature"/>
+      <xs:enumeration value="math"/>
+      <xs:enumeration value="medicine"/>
+      <xs:enumeration value="philosophy"/>
+      <xs:enumeration value="physics"/>
+      <xs:enumeration value="political_science"/>
+      <xs:enumeration value="psychology"/>
+      <xs:enumeration value="science"/>
+      <xs:enumeration value="social_science"/>
+      <xs:enumeration value="sociology"/>
+      <xs:enumeration value="theology"/>
+      <xs:enumeration value="zoology"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
