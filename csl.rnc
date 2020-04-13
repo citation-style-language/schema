@@ -66,6 +66,7 @@ div {
       (style.locale*
        & style.macro*
        & style.citation
+       & style.intext?
        & style.bibliography?)
     }
   
@@ -400,7 +401,15 @@ div {
     
     ## Use to describe the formatting of citations.
     element cs:citation { citation.options, sort?, citation.layout }
-  
+
+  style.intext =
+
+    ## Defines the author-only rendering for assembly of a textual citation
+    ## (like "Doe (2018)"), where the output expectations for in-text authors
+    ## are different than the default citation rendering; for example, in APA,
+    ## or numeric styles.
+    element cs:intext { citation.options, sort?, citation.layout }
+
   style.bibliography =
     
     ## Use to describe the formatting of the bibliography.
@@ -409,6 +418,8 @@ div {
     }
   
   citation.layout =
+
+    ## Use to describe formatting of individual references within a citation list.
     element cs:layout {
       affixes, delimiter, font-formatting, rendering-element+
     }
