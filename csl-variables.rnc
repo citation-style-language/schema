@@ -81,6 +81,8 @@ div {
     | "original-title"
     | "page"
     | "page-first"
+    | "part-number"
+    | "part-title"
     | "PMID"
     | "PMCID"
     | "publisher"
