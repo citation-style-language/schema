@@ -32,6 +32,7 @@ div {
     | "report"
     | "review"
     | "review-book"
+    | "software"
     | "song"
     | "speech"
     | "thesis"
