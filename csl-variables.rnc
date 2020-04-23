@@ -72,6 +72,7 @@ div {
     | "ISSN"
     | "jurisdiction"
     | "keyword"
+    | "license"
     | "location"
     | "locator"
     | "medium"
