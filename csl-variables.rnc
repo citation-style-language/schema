@@ -72,6 +72,7 @@ div {
     | "ISSN"
     | "jurisdiction"
     | "keyword"
+    | "language"
     | "locator"
     | "medium"
     | "note"
