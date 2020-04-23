@@ -96,5 +96,6 @@ div {
     | "title-short"
     | "URL"
     | "version"
+    | "volume-title"
     | "year-suffix"
 }
