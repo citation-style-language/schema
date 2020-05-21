@@ -1,0 +1,16 @@
+name: Python Test Suite
+on:
+- push
+- pull_request
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+    - name: Install dependencies
+      run: pip install --requirement=tests/requirements.txt
+    - name: Run Tests
+      run: pytest --verbose tests
