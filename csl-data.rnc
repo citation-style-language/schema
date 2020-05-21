@@ -2,7 +2,8 @@ namespace dc = "http://purl.org/dc/elements/1.1/"
 
 dc:title [ "Citation Style Language Data" ]
 dc:creator [ "Bruce D'Arcus" ]
-dc:copyright [ "Bruce D'Arcus, 2009" ]
+dc:rights [ "Copyright 2009-2018 Citation Style Language and contributors" ]
+dc:license [ "MIT license" ]
 dc:description [ "A schema for the CSL data model." ]
 include "csl-types.rnc"
 include "csl-variables.rnc"
@@ -11,7 +12,7 @@ reference = element reference { type, id, uri?, container-uri?, (contributor* & 
 
 ## Types 
 div {
-  type = attribute type { cs-types }
+  type = attribute type { item-types }
 }
 
 ## Identifiers
@@ -31,7 +32,7 @@ div {
 div {
    contributor =
       element contributor {
-         attribute type { cs-names },
+         attribute type { variables.names },
          name-elements
       }
    name-elements =
@@ -47,7 +48,7 @@ div {
 div {
    date =
       element date { 
-         attribute type { cs-dates }, 
+         attribute type { variables.dates }, 
          attribute circa { xsd:boolean }?,
          (date-pattern | date-range)
       }
@@ -76,7 +77,7 @@ div {
 div {
    variable =
       element variable {
-         attribute type { cs-variables },
+         attribute type { variables.standard },
          (simple-variable-pattern | rich-variable-pattern)
       }
    simple-variable-pattern = text
