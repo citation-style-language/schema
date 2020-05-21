@@ -13,4 +13,4 @@ jobs:
     - name: Install dependencies
       run: pip install --requirement=tests/requirements.txt
     - name: Run Tests
-      run: pytest --verbose tests
+      run: pytest --verbose --color=yes tests
