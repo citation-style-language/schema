@@ -91,3 +91,18 @@ def test_data_schema_with_extra_property_fails(csl_data_validator):
     }]
     with pytest.raises(jsonschema.exceptions.ValidationError):
         csl_data_validator.validate(csl)
+
+def test_data_schema_with_empty_date_parts(csl_data_validator):
+    """
+    empty arrays in date-parts can cause downstream citeproc failures
+    https://github.com/citation-style-language/schema/pull/158
+    """
+    csl = [{
+        'id': 'example-id',
+        'type': 'report',
+        'issued': {
+            "date-parts": []
+        },
+    }]
+    with pytest.raises(jsonschema.exceptions.ValidationError):
+        csl_data_validator.validate(csl)
