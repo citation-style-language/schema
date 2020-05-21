@@ -1,12 +1,11 @@
 {
     "description": "JSON schema for CSL citation objects",
-    "$schema" : "http://json-schema.org/draft-03/schema#",
-    "id": "https://github.com/citation-style-language/schema/raw/master/csl-citation.json",
+    "$schema" : "http://json-schema.org/draft-07/schema#",
+    "$id": "https://github.com/citation-style-language/schema/raw/master/csl-citation.json",
     "type": "object",
     "properties": {
         "schema": {
             "type": "string",
-            "required": true,
             "enum" : [
                 "https://github.com/citation-style-language/schema/raw/master/csl-citation.json" 
             ] 
@@ -15,8 +14,7 @@
             "type": [
                 "string",
                 "number" 
-            ],
-            "required": true 
+            ]
         },
         "citationItems": {
             "type": "array",
@@ -27,8 +25,7 @@
                         "type": [
                             "string",
                             "number" 
-                        ],
-                        "required": true 
+                        ]
                     },
                     "itemData": {
                         "$ref": "csl-data.json/#/items" 
@@ -84,6 +81,7 @@
                         } 
                     } 
                 },
+                "required": ["id"],
                 "additionalProperties" : false 
             } 
         },
@@ -97,5 +95,6 @@
             "additionalProperties" : false 
         } 
     },
+    "required": ["schema", "citationID"],
     "additionalProperties" : false 
 }
