@@ -1,5 +1,11 @@
 # Schemas describing the Citation Style Language
 
+<!--
+When editing this file, use line breaks to separate sentences or phrases, rather than wrapping the text at a fixed character count.
+This helps git produce clean diffs and keeps reflowing to minimum.
+More info at https://rhodesmill.org/brandon/2012/one-sentence-per-line/
+-->
+
 This is the official repository for schemas describing the Citation Style Language (CSL).
 Current schemas include:
 
