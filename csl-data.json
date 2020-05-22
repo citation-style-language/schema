@@ -70,53 +70,7 @@
             "author": {
                 "type": "array",
                 "items": {
-                    "id": "name-variable",
-                    "anyOf": [
-                        {
-                            "properties": {
-                                "family": {
-                                    "type": "string"
-                                },
-                                "given": {
-                                    "type": "string"
-                                },
-                                "dropping-particle": {
-                                    "type": "string"
-                                },
-                                "non-dropping-particle": {
-                                    "type": "string"
-                                },
-                                "suffix": {
-                                    "type": "string"
-                                },
-                                "comma-suffix": {
-                                    "type": [
-                                        "string",
-                                        "number",
-                                        "boolean"
-                                    ]
-                                },
-                                "static-ordering": {
-                                    "type": [
-                                        "string",
-                                        "number",
-                                        "boolean"
-                                    ]
-                                },
-                                "literal": {
-                                    "type": "string"
-                                },
-                                "parse-names": {
-                                    "type": [
-                                        "string",
-                                        "number",
-                                        "boolean"
-                                    ]
-                                }
-                            },
-                            "additionalProperties": false
-                        }
-                    ]
+                    "$ref": "#/definitions/name-variable"
                 }
             },
             "collection-editor": {
@@ -391,6 +345,54 @@
         "additionalProperties": false
     },
     "definitions": {
+        "name-variable": {
+            "anyOf": [
+                {
+                    "properties": {
+                        "family": {
+                            "type": "string"
+                        },
+                        "given": {
+                            "type": "string"
+                        },
+                        "dropping-particle": {
+                            "type": "string"
+                        },
+                        "non-dropping-particle": {
+                            "type": "string"
+                        },
+                        "suffix": {
+                            "type": "string"
+                        },
+                        "comma-suffix": {
+                            "type": [
+                                "string",
+                                "number",
+                                "boolean"
+                            ]
+                        },
+                        "static-ordering": {
+                            "type": [
+                                "string",
+                                "number",
+                                "boolean"
+                            ]
+                        },
+                        "literal": {
+                            "type": "string"
+                        },
+                        "parse-names": {
+                            "type": [
+                                "string",
+                                "number",
+                                "boolean"
+                            ]
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            ]
+        },
         "date-variable": {
             "anyOf": [
                 {
