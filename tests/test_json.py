@@ -83,6 +83,18 @@ def test_basic_data_schema_validates(csl_data_validator):
     csl_data_validator.validate(csl)
 
 
+def test_basic_data_schema_with_author_validates(csl_data_validator):
+    csl = [{
+        'id': 'example-id',
+        'type': 'report',
+        "author": [
+            {"given": "Jane", "family": "Roe"},
+            {"literal": "John Doe"}
+        ],
+    }]
+    csl_data_validator.validate(csl)
+
+
 def test_data_schema_with_extra_property_fails(csl_data_validator):
     csl = [{
         'id': 'example-id',
