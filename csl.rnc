@@ -2,7 +2,7 @@ namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
 namespace bibo = "http://purl.org/ontology/bibo/"
 namespace cs = "http://purl.org/net/xbiblio/csl"
 namespace dc = "http://purl.org/dc/elements/1.1/"
-namespace sch = "http://www.ascc.net/xml/schematron"
+namespace sch = "http://purl.oclc.org/dsdl/schematron"
 namespace xhtml = "http://www.w3.org/1999/xhtml"
 
 # CSL schema metadata
@@ -23,7 +23,6 @@ dc:description [
 
 sch:ns [ uri = "http://purl.org/net/xbiblio/csl" prefix = "cs" ]
 sch:pattern [
-  name = "Non-existing macros"
   sch:rule [
     context = "//cs:text[@macro]"
     sch:assert [
@@ -36,6 +35,13 @@ sch:pattern [
     sch:assert [
       test = "@macro = /cs:style/cs:macro/@name"
       "This macro call has no corresponding macro."
+    ]
+  ]
+  sch:rule [
+    context = "/cs:style/cs:macro"
+    sch:assert [
+      test = "count(/cs:style/cs:macro/@name[. = current()/@name]) = 1"
+      "This macro does not have a unique name."
     ]
   ]
 ]
