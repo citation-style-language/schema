@@ -3,7 +3,8 @@ on:
 - push
 - pull_request
 jobs:
-  test:
+  csl-json:
+    name: CSL JSON Tests
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repository
@@ -14,3 +15,15 @@ jobs:
       run: pip install --requirement=tests/requirements.txt
     - name: Run Tests
       run: pytest --verbose --color=yes tests
+  csl-xml:
+    name: CSL XML Tests
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    - name: Set up JDK
+      uses: actions/setup-java@v1
+    - name: Install dependencies
+      run: apt-get install --yes trang
+    - name: Run Tests
+      run: java -jar trang.jar csl.rnc csl.rng
