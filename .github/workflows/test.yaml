@@ -26,6 +26,6 @@ jobs:
       with:
         java-version: '11'
     - name: Install dependencies
-      run: apt-get install --yes trang
+      run: sudo apt-get install --yes trang
     - name: Run Tests
       run: java -jar trang.jar csl.rnc csl.rng
