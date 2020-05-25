@@ -28,4 +28,4 @@ jobs:
     - name: Install dependencies
       run: sudo apt-get install --yes trang
     - name: Run Tests
-      run: java -jar trang.jar csl.rnc csl.rng
+      run: trang csl.rnc csl.rng
