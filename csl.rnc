@@ -72,6 +72,7 @@ div {
       (style.locale*
        & style.macro*
        & style.citation
+       & style.intext?
        & style.bibliography?)
     }
 
@@ -79,8 +80,7 @@ div {
     element cs:style {
       style.default-locale,
       version,
-      dependent-style.style.info,
-      dependent-style.style.legacy-attributes
+      dependent-style.style.info
     }
 
   locale-file.locale =
@@ -99,14 +99,9 @@ div {
     attribute default-locale { xsd:language }?
 
   version =
-
-    ## Indicate CSL version compatibility ("1.0" for CSL 1.0).
-    [ a:defaultValue = "1.0" ] attribute version { "1.0" }
-
-  ## Obsolete for dependent styles. Will be disallowed with CSL 1.1.
-  dependent-style.style.legacy-attributes =
-    attribute class { "in-text" | "note" }?,
-    style.options
+    
+    ## Indicate CSL version compatibility.
+    [ a:defaultValue = "1.1" ] attribute version { "1.1" }
 }
 [
   a:documentation [
@@ -407,6 +402,14 @@ div {
     ## Use to describe the formatting of citations.
     element cs:citation { citation.options, sort?, citation.layout }
 
+  style.intext =
+
+    ## Defines the author-only rendering for assembly of a textual citations
+    ## (for example, "Doe [3]" or "Doe (2018)"), where the output expectations
+    ## for in-text authors are different than the default citation rendering;
+    ## for example, in APA, or numeric styles.
+    element cs:intext { citation.options, sort?, citation.layout }
+  
   style.bibliography =
 
     ## Use to describe the formatting of the bibliography.
