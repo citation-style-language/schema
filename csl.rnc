@@ -101,8 +101,8 @@ div {
   
   version =
     
-    ## Indicate CSL version compatibility ("1.0" for CSL 1.0).
-    [ a:defaultValue = "1.0" ] attribute version { "1.0" }
+    ## Indicate CSL version compatibility.
+    [ a:defaultValue = "1.1" ] attribute version { "1.1" }
   
   ## Obsolete for dependent styles. Will be disallowed with CSL 1.1.
   dependent-style.style.legacy-attributes =
