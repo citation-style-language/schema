@@ -21,10 +21,6 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
-    - name: Set up JDK
-      uses: actions/setup-java@v1
-      with:
-        java-version: '11'
     - name: Install dependencies
       run: sudo apt-get install --yes trang
     - name: Run Tests
