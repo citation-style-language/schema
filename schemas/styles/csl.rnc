@@ -43,6 +43,7 @@ div {
       (style.locale*
        & style.macro*
        & style.citation
+       & style.intext?
        & style.bibliography?)
     }
   dependent-style.style =
@@ -352,6 +353,15 @@ div {
     
     ## Use to describe the formatting of citations.
     element cs:citation { citation.options, sort?, citation.layout }
+
+  style.intext =
+
+    ## Defines the author-only rendering for assembly of a textual citations
+    ## (for example, "Doe [3]" or "Doe (2018)"), where the output expectations
+    ## for in-text authors are different than the default citation rendering;
+    ## for example, in APA, or numeric styles.
+    element cs:intext { citation.options, sort?, citation.layout }
+  
   style.bibliography =
     
     ## Use to describe the formatting of the bibliography.
