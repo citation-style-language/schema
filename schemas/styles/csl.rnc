@@ -50,8 +50,8 @@ div {
 
   dependent-style.style =
     element cs:style {
-      style.default-locale, 
-      version, 
+      style.default-locale,
+      version,
       dependent-style.style.info
     }
 
