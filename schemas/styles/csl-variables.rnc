@@ -13,6 +13,7 @@ div {
   ## Date variables
   variables.dates =
     "accessed"
+    | "available-date"
     | "container"
     | "event-date"
     | "issued"
@@ -22,15 +23,22 @@ div {
   ## Name variables
   variables.names =
     "author"
+    | "chair"
     | "collection-editor"
+    | "compiler"
     | "composer"
     | "container-author"
+    | "contributor"
     | "director"
     | "editor"
     | "editorial-director"
+    | "executive-producer"
     | "illustrator"
     | "interviewer"
+    | "organizer"
     | "original-author"
+    | "producer"
+    | "performer"
     | "recipient"
     | "reviewed-author"
     | "translator"
@@ -49,6 +57,8 @@ div {
     | "number-of-volumes"
     | "page"
     | "page-first"
+    | "part"
+    | "supplement"
     | "volume"
   
   ## String variables
@@ -56,6 +66,7 @@ div {
     "abstract"
     | "annote"
     | "archive"
+    | "archive_collection"
     | "archive_location"
     | "archive-place"
     | "authority"
@@ -65,6 +76,7 @@ div {
     | "container-title"
     | "container-title-short"
     | "dimensions"
+    | "division"
     | "DOI"
     | "event"
     | "event-place"
@@ -80,6 +92,7 @@ div {
     | "original-publisher"
     | "original-publisher-place"
     | "original-title"
+    | "part-title"
     | "PMID"
     | "PMCID"
     | "publisher"
