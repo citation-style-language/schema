@@ -80,8 +80,7 @@ div {
     element cs:style {
       style.default-locale,
       version,
-      dependent-style.style.info,
-      dependent-style.style.legacy-attributes
+      dependent-style.style.info
     }
   
   locale-file.locale =
@@ -103,11 +102,6 @@ div {
     
     ## Indicate CSL version compatibility.
     [ a:defaultValue = "1.1" ] attribute version { "1.1" }
-  
-  ## Obsolete for dependent styles. Will be disallowed with CSL 1.1.
-  dependent-style.style.legacy-attributes =
-    attribute class { "in-text" | "note" }?,
-    style.options
 }
 [
   a:documentation [
