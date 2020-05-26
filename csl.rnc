@@ -465,17 +465,17 @@ div {
   name.attributes =
 
     ## Use to separate the second-to-last and last name of a name list by
-    ## the "and" term or ampersand.
+    ## the "and" term.
     attribute and {
 
-      ## Use the "and" term (e.g., "Doe, Johnson and Smith").
-      "text"
+      ## Use the "and" term "long" form (e.g., "Doe, Johnson and Smith").
+      "long"
       |
-        ## Use the "ampersand" by default, or whatever is defined in the term (e.g., "Doe, Johnson & Smith").
+        ## Use the "and" term "symbol" form (e.g., "Doe, Johnson & Smith").
         "symbol"
       |
-        ## Use a "short" form as defined in the term. Not common in English, but is seen in other languages.
-        ## In German, for example: (Doe u. Smith, 2019), where "u." is short for "und."
+        ## Use the "and" term "short" form. Not common in English, but is seen in other languages.
+        ## In German, for example: "Doe, Johnson u. Smith, where "u." is short for "und."
         "short"
     }?,
 
