@@ -39,8 +39,10 @@
                     "report",
                     "review",
                     "review-book",
+                    "software",
                     "song",
                     "speech",
+                    "standard",
                     "thesis",
                     "treaty",
                     "webpage"
@@ -247,6 +249,12 @@
             "keyword": {
                 "type": "string"
             },
+            "language": {
+                "type": "string"
+            },
+            "license": {
+                "type": "string"
+            },
             "locator": {
                 "type": "string"
             },
@@ -333,6 +341,9 @@
                     "string",
                     "number"
                 ]
+            },
+            "volume-title": {
+                "type": "string"
             },
             "year-suffix": {
                 "type": "string"
