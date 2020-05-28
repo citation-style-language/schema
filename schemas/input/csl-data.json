@@ -239,16 +239,25 @@
                 "type": "string"
             },
             "chapter-number": {
-                "type": "string"
+                "type": [
+                    "string",
+                    "number"
+                ]
             },
             "citation-number": {
-                "type": "string"
+                "type": [
+                    "string",
+                    "number"
+                ]
             },
             "citation-label": {
                 "type": "string"
             },
             "collection-number": {
-                "type": "string"
+                "type": [
+                    "string",
+                    "number"
+                ]
             },
             "collection-title": {
                 "type": "string"
@@ -278,7 +287,10 @@
                 "type": "string"
             },
             "first-reference-note-number": {
-                "type": "string"
+                "type": [
+                    "string",
+                    "number"
+                ]
             },
             "genre": {
                 "type": "string"
@@ -302,7 +314,10 @@
                 "type": "string"
             },
             "locator": {
-                "type": "string"
+                "type": [
+                    "string",
+                    "number"
+                ]
             },
             "medium": {
                 "type": "string"
@@ -317,7 +332,10 @@
                 ]
             },
             "number-of-pages": {
-                "type": "string"
+                "type": [
+                    "string",
+                    "number"
+                ]
             },
             "number-of-volumes": {
                 "type": [
@@ -335,10 +353,22 @@
                 "type": "string"
             },
             "page": {
-                "type": "string"
+                "type": [
+                    "string",
+                    "number"
+                ]
             },
             "page-first": {
-                "type": "string"
+                "type": [
+                    "string",
+                    "number"
+                ]
+            },
+            "part": {
+                "type": [
+                    "string",
+                    "number"
+                ]
             },
             "PMCID": {
                 "type": "string"
@@ -369,6 +399,12 @@
             },
             "status": {
                 "type": "string"
+            },
+            "supplement": {
+                "type": [
+                    "string",
+                    "number"
+                ]
             },
             "title": {
                 "type": "string"
