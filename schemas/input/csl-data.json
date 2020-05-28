@@ -82,7 +82,19 @@
                     "$ref": "#/definitions/name-variable"
                 }
             },
+            "chair": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/name-variable"
+                }
+            },
             "collection-editor": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/name-variable"
+                }
+            },
+            "compiler": {
                 "type": "array",
                 "items": {
                     "$ref": "#/definitions/name-variable"
@@ -95,6 +107,12 @@
                 }
             },
             "container-author": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/name-variable"
+                }
+            },
+            "contributor": {
                 "type": "array",
                 "items": {
                     "$ref": "#/definitions/name-variable"
@@ -118,6 +136,12 @@
                     "$ref": "#/definitions/name-variable"
                 }
             },
+            "executive-producer": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/name-variable"
+                }
+            },
             "interviewer": {
                 "type": "array",
                 "items": {
@@ -130,7 +154,25 @@
                     "$ref": "#/definitions/name-variable"
                 }
             },
+            "organizer": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/name-variable"
+                }
+            },
             "original-author": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/name-variable"
+                }
+            },
+            "producer": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/name-variable"
+                }
+            },
+            "performer": {
                 "type": "array",
                 "items": {
                     "$ref": "#/definitions/name-variable"
