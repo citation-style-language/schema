@@ -217,6 +217,9 @@
             "archive": {
                 "type": "string"
             },
+            "archive_collection": {
+                "type": "string"
+            },
             "archive_location": {
                 "type": "string"
             },
@@ -260,6 +263,9 @@
                 "type": "string"
             },
             "dimensions": {
+                "type": "string"
+            },
+            "division": {
                 "type": "string"
             },
             "DOI": {
@@ -341,6 +347,9 @@
                 "type": "string"
             },
             "original-title": {
+                "type": "string"
+            },
+            "part-title": {
                 "type": "string"
             },
             "page": {
