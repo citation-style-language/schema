@@ -96,7 +96,7 @@ div {
     | "original-title"
     | "part-title"
     | "PMCID"
-      "PMID"
+    | "PMID"
     | "publisher"
     | "publisher-place"
     | "references"
