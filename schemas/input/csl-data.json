@@ -157,6 +157,9 @@
             "accessed": {
                 "$ref": "#/definitions/date-variable"
             },
+            "available-date": {
+                "$ref": "#/definitions/date-variable"
+            },
             "container": {
                 "$ref": "#/definitions/date-variable"
             },
