@@ -385,6 +385,12 @@
             "PMID": {
                 "type": "string"
             },
+            "printing": {
+                "type": [
+                    "string",
+                    "number"
+                ]
+            },
             "publisher": {
                 "type": "string"
             },

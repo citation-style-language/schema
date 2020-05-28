@@ -58,6 +58,7 @@ div {
     | "page"
     | "page-first"
     | "part"
+    | "printing"
     | "supplement"
     | "volume"
   
