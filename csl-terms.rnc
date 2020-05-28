@@ -32,8 +32,8 @@ div {
     | "interview"
     | "letter"
     | "no date"
-    | "no name"
-    | "no place"
+    | "no-name"
+    | "no-place"
     | "online"
     | "presented at"
     | "reference"
@@ -111,9 +111,14 @@ div {
   ## Locator terms that can be tested with the "locator" conditional
   ## ("sub verbo" can be tested with "sub-verbo")
   terms.locator.testable =
-    "book"
+    "appendix"
+    | "article"
+    | "book"
+    | "canon"
     | "chapter"
     | "column"
+    | "elocation"
+    | "equation"
     | "figure"
     | "folio"
     | "line"
@@ -122,10 +127,15 @@ div {
     | "page"
     | "paragraph"
     | "part"
+    | "rule"
     | "section"
+    | "supplement"
+    | "table"
+    | "timestamp"
+    | "title"
     | "verse"
     | terms.locator-number-variables
-  
+
   ## Locator terms with matching number variables
   terms.locator-number-variables = "issue" | "volume"
   
