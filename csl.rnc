@@ -731,7 +731,7 @@ div {
   title.attributes =
 
     ## Specify if titles are split into "title-main" and "title-sub"
-    [ a:defaultValue = "false" ]
+    [ a:defaultValue = "never" ]
     attribute split {
       
       ## Don't split titles
@@ -748,7 +748,7 @@ div {
     }?,
     
     ## Specify if delimiters are normalized
-    [ a:defaultValue = "false" ]
+    [ a:defaultValue = "never" ]
     attribute normalize-delimiters { 
       
       ## Don't normalize delimiters
@@ -769,20 +769,19 @@ div {
     
     ## Specify the delimiter between multiple subtitles.
     ## The same as "delimiter" if not specified.
-    attribute sub-delimiter { text }?,
+    attribute sub-delimiter { text }?
 
   title.main = element cs:main { title.formatting }
-
+  
   title.sub = element cs:sub { title.formatting }
 
-  title.formatting = {
-      affixes,
-      display,
-      font-formatting,
-      quotes,
-      strip-periods,
-      text-case
-  }
+  title.formatting = 
+    affixes,
+    display,
+    font-formatting,
+    quotes,
+    strip-periods,
+    text-case
 }
 [ a:documentation [ xhtml:h2 [ "cs:number Rendering Element" ] ] ]
 div {
@@ -1051,11 +1050,11 @@ div {
     attribute title-sub-delimiter { text }?,
 
     ## Inheritable title option, companion for "split" on cs:title.
-    [ a:defaultValue = "false" ]
+    [ a:defaultValue = "never" ]
     attribute title-split { "never" | "simple" | "full" | "chicago" }?,
 
     ## Inheritable title option, companion for "normalize-delimiters" on cs:title.
-    [ a:defaultValue = "false" ]
+    [ a:defaultValue = "never" ]
     attribute normalize-title-delimiters { "never" | "simple" | "full" | "chicago" }?
   
   ## Options affecting cs:names, for cs:style, cs:citation and cs:bibliography.
