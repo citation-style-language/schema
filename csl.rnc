@@ -721,6 +721,7 @@ div {
 [ a:documentation [ xhtml:h2 [ "cs:title Rendering Element" ] ] ]
 div {
   ## Use to render titles if "title-main" and "title-sub" need different formatting
+  ## or to omit either "title-main" or "title-sub"
   rendering-element.title =
     element cs:title {
       title.attributes,

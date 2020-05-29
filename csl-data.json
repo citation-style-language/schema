@@ -402,6 +402,30 @@
                 }
             ]
         },
+        "title-variable": {
+            "anyOf": [
+                {
+                    "properties": {
+                        "main": {
+                            "type": "string"
+                        },
+                        "sub": {
+                            "type": "array",
+                            "items": {
+                                "type": [
+                                    "string", 
+                                    "number"
+                                ]
+                            }
+                        },
+                        "literal": {
+                            "type": "string"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            ]
+        },
         "date-variable": {
             "anyOf": [
                 {
