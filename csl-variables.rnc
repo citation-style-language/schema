@@ -7,6 +7,7 @@ div {
     variables.dates
     | variables.names
     | variables.numbers
+    | variables.titles
     | variables.strings
   
   ## Standard variables
@@ -53,6 +54,30 @@ div {
     | "page-first"
     | "volume"
   
+  ## Title variables
+  variables.titles =
+    "collection-title"
+    | "collection-title-main"
+    | "collection-title-sub"
+    | "container-title"
+    | "container-title-main"
+    | "container-title-sub"
+    | "container-title-short"
+    | "original-title"
+    | "original-title-main"
+    | "original-title-sub"
+    | "reviewed-title"
+    | "reviewed-title-main"
+    | "reviewed-title-sub"
+    | "volume-title"
+    | "volume-title-main"
+    | "volume-title-sub"
+    | "title"
+    | "title-main"
+    | "title-sub"
+    | "title-short"
+
+  
   ## String variables
   variables.strings =
     "abstract"
@@ -63,13 +88,6 @@ div {
     | "authority"
     | "call-number"
     | "citation-label"
-    | "collection-title"
-    | "collection-title-main"
-    | "collection-title-sub"
-    | "container-title"
-    | "container-title-main"
-    | "container-title-sub"
-    | "container-title-short"
     | "dimensions"
     | "DOI"
     | "event"
@@ -85,29 +103,16 @@ div {
     | "note"
     | "original-publisher"
     | "original-publisher-place"
-    | "original-title"
-    | "original-title-main"
-    | "original-title-sub"
     | "PMID"
     | "PMCID"
     | "publisher"
     | "publisher-place"
     | "references"
-    | "reviewed-title"
-    | "reviewed-title-main"
-    | "reviewed-title-sub"
     | "scale"
     | "section"
     | "source"
     | "status"
-    | "title"
-    | "title-main"
-    | "title-sub"
-    | "title-short"
     | "URL"
     | "version"
-    | "volume-title"
-    | "volume-title-main"
-    | "volume-title-sub"
     | "year-suffix"
 }
