@@ -32,6 +32,8 @@ div {
     | "interview"
     | "letter"
     | "no date"
+    | "no-name"
+    | "no-place"
     | "online"
     | "presented at"
     | "reference"
