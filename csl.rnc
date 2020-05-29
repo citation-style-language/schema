@@ -851,6 +851,7 @@ div {
     style.demote-non-dropping-particle,
     style.initialize-with-hyphen,
     style.page-range-format,
+    title-inheritable-options,
     names-inheritable-options,
     name-inheritable-options
   
@@ -859,6 +860,7 @@ div {
     citation.collapse-options,
     citation.disambiguate-options,
     citation.near-note-distance,
+    title-inheritable-options,
     names-inheritable-options,
     name-inheritable-options
   
@@ -867,6 +869,7 @@ div {
     bibliography.line-formatting-options,
     bibliography.second-field-align,
     bibliography.subsequent-author-substitute-options,
+    title-inheritable-options,
     names-inheritable-options,
     name-inheritable-options
   
@@ -1038,6 +1041,22 @@ div {
         ## Substitutes the first name if it matches.
         "partial-first"
     }?
+  
+  ## Options affecting titles rendered with cs:text and cs:title, for cs:style, cs:citation and cs:bibliography
+  title-inheritable-options =
+    ## Inheritable title option, companion for "delimiter" on cs:title.
+    attribute title-delimiter { text }?,
+
+    ## Inheritable title option, companion for "sub-delimiter" on cs:title.
+    attribute title-sub-delimiter { text }?,
+
+    ## Inheritable title option, companion for "split" on cs:title.
+    [ a:defaultValue = "false" ]
+    attribute title-split { "never" | "simple" | "full" | "chicago" }?,
+
+    ## Inheritable title option, companion for "normalize-delimiters" on cs:title.
+    [ a:defaultValue = "false" ]
+    attribute normalize-title-delimiters { "never" | "simple" | "full" | "chicago" }?
   
   ## Options affecting cs:names, for cs:style, cs:citation and cs:bibliography.
   names-inheritable-options =
