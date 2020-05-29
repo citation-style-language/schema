@@ -1167,6 +1167,10 @@ div {
         ## their original case).
         "capitalize-first"
       | 
+        ## Capitalizes the first character and the first character of a subtitle
+        ## (other characters remain in their original case).
+        "capitalize-subtitle"
+      | 
         ## Capitalizes the first character of every word (other characters
         ## remain in their original case).
         "capitalize-all"
