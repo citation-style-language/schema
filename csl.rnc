@@ -396,6 +396,7 @@ div {
     | rendering-element.date
     | rendering-element.label
     | rendering-element.text
+    | rendering-element.title
     | rendering-element.number
     | rendering-element.choose
     | rendering-element.group
@@ -716,6 +717,72 @@ div {
        ## Select a variable.
        attribute variable { variables.standard },
        [ a:defaultValue = "long" ] attribute form { "short" | "long" }?)
+}
+[ a:documentation [ xhtml:h2 [ "cs:title Rendering Element" ] ] ]
+div {
+  ## Use to render titles if "title-main" and "title-sub" need different formatting
+  rendering-element.title =
+    element cs:title {
+      title.attributes,
+      title.formatting,
+      (title.main?, title.sub?)
+    }
+
+  title.attributes =
+
+    ## Specify if titles are split into "title-main" and "title-sub"
+    [ a:defaultValue = "false" ]
+    attribute split {
+      
+      ## Don't split titles
+      "never" 
+      | 
+      ## Matches "."", ":", "::", "!", "?" 
+      "simple" 
+      | 
+      ## Matches the values for "simple" plus "—" and ";"
+      "full" 
+      | 
+      ## Matches the values for "simple" plus ";" and ";," or ",:"
+      "chicago" 
+    }?,
+    
+    ## Specify if delimiters are normalized
+    [ a:defaultValue = "false" ]
+    attribute normalize-delimiters { 
+      
+      ## Don't normalize delimiters
+      "never" 
+      | 
+      ## Normalize "."", ":", "::", "!", "?" 
+      "simple" 
+      | 
+      ## Normalize the values for "simple" plus "—" and ";"
+      "full" 
+      | 
+      ## Normalize the values for "simple" plus ";" and ";," or ",:"
+      "chicago" 
+    }?,
+
+    ## Specify the delimiter between title elements.
+    delimiter,
+    
+    ## Specify the delimiter between multiple subtitles.
+    ## The same as "delimiter" if not specified.
+    attribute sub-delimiter { text }?,
+
+  title.main = element cs:main { title.formatting }
+
+  title.sub = element cs:sub { title.formatting }
+
+  title.formatting = {
+      affixes,
+      display,
+      font-formatting,
+      quotes,
+      strip-periods,
+      text-case
+  }
 }
 [ a:documentation [ xhtml:h2 [ "cs:number Rendering Element" ] ] ]
 div {
