@@ -19,32 +19,6 @@ dc:license [ "MIT license" ]
 dc:description [
   "RELAX NG compact schema for the Citation Style Language (CSL)."
 ]
-# Embedded Schematron rules to detect calls to nonexistent macros
-
-sch:ns [ uri = "http://purl.org/net/xbiblio/csl" prefix = "cs" ]
-sch:pattern [
-  sch:rule [
-    context = "//cs:text[@macro]"
-    sch:assert [
-      test = "@macro = /cs:style/cs:macro/@name"
-      "This macro call has no corresponding macro."
-    ]
-  ]
-  sch:rule [
-    context = "//cs:key[@macro]"
-    sch:assert [
-      test = "@macro = /cs:style/cs:macro/@name"
-      "This macro call has no corresponding macro."
-    ]
-  ]
-  sch:rule [
-    context = "/cs:style/cs:macro"
-    sch:assert [
-      test = "count(/cs:style/cs:macro/@name[. = current()/@name]) = 1"
-      "This macro does not have a unique name."
-    ]
-  ]
-]
 
 ## Subparts of the CSL schema
 include "csl-terms.rnc"
