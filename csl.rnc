@@ -13,7 +13,7 @@ dc:creator [ "Simon Kornblith" ]
 bibo:editor [ "Frank Bennett" ]
 bibo:editor [ "Rintze Zelle" ]
 dc:rights [
-  "Copyright 2007-2018 Citation Style Language and contributors"
+  "Copyright 2007-2020 Citation Style Language and contributors"
 ]
 dc:license [ "MIT license" ]
 dc:description [
