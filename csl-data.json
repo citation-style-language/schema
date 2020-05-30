@@ -172,6 +172,42 @@
             "submitted": {
                 "$ref": "#/definitions/date-variable"
             },
+            "collection-title": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/title-variable"
+                }
+            },
+            "container-title": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/title-variable"
+                }
+            },
+            "original-title": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/title-variable"
+                }
+            },
+            "reviewed-title": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/title-variable"
+                }
+            },
+            "volume-title": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/title-variable"
+                }
+            },
+            "title": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/title-variable"
+                }
+            },
             "abstract": {
                 "type": "string"
             },
@@ -203,12 +239,6 @@
                 "type": "string"
             },
             "collection-number": {
-                "type": "string"
-            },
-            "collection-title": {
-                "type": "string"
-            },
-            "container-title": {
                 "type": "string"
             },
             "container-title-short": {
@@ -286,9 +316,6 @@
             "original-publisher-place": {
                 "type": "string"
             },
-            "original-title": {
-                "type": "string"
-            },
             "page": {
                 "type": "string"
             },
@@ -310,9 +337,6 @@
             "references": {
                 "type": "string"
             },
-            "reviewed-title": {
-                "type": "string"
-            },
             "scale": {
                 "type": "string"
             },
@@ -323,9 +347,6 @@
                 "type": "string"
             },
             "status": {
-                "type": "string"
-            },
-            "title": {
                 "type": "string"
             },
             "title-short": {
@@ -412,10 +433,7 @@
                         "sub": {
                             "type": "array",
                             "items": {
-                                "type": [
-                                    "string", 
-                                    "number"
-                                ]
+                                "type": "string"
                             }
                         },
                         "literal": {
