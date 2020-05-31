@@ -10,7 +10,7 @@ The following section defines pytest fixtures, which can be used as arguments
 to tests, causing those tests to be run for all fixture values.
 """
 
-root = pathlib.Path(__file__).parent.parent
+root = pathlib.Path(__file__).parent.parent.parent.parent
 json_paths = list(root.glob('**/*.json'))
 
 
