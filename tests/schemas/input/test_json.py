@@ -23,8 +23,8 @@ def json_path(request):
 
 
 @pytest.fixture(params=[
-    'csl-citation.json',
-    'csl-data.json',
+    'schemas/input/csl-citation.json',
+    'schemas/input/csl-data.json',
 ])
 def json_schema(request):
     """
