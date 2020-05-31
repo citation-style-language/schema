@@ -436,6 +436,12 @@
                                 "type": "string"
                             }
                         },
+                        "addon": {
+                            "type": "string"
+                        },
+                        "short": {
+                            "type": "string"
+                        },
                         "literal": {
                             "type": "string"
                         }
