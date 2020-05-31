@@ -38,7 +38,7 @@ def json_schema(request):
 
 @pytest.fixture
 def csl_data_validator():
-    text = root.joinpath('csl-data.json').read_text()
+    text = root.joinpath('schemas/input/csl-data.json').read_text()
     schema = json.loads(text)
     Validator = jsonschema.validators.validator_for(schema)
     return Validator(schema)
