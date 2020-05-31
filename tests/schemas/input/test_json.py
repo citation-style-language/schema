@@ -11,7 +11,7 @@ to tests, causing those tests to be run for all fixture values.
 """
 
 root = pathlib.Path(__file__).parent.parent
-json_paths = list(root.glob('schemas/input/*.json'))
+json_paths = list(root.glob('**/*.json'))
 
 
 @pytest.fixture(params=json_paths, ids=[x.name for x in json_paths])
