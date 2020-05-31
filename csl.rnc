@@ -744,7 +744,7 @@ div {
       ## Matches the values for "simple" plus "—" and ";"
       "full" 
       | 
-      ## Matches the values for "simple" plus ";" and ";," or ",:"
+      ## Matches the values for "simple" plus ";"" and "[;,] or[,:]"
       "chicago" 
     }?,
     
@@ -761,7 +761,7 @@ div {
       ## Normalize the values for "simple" plus "—" and ";"
       "full" 
       | 
-      ## Normalize the values for "simple" plus ";" and ";," or ",:"
+      ## Normalize the values for "simple" plus ";"" and "[;,] or[,:]"
       "chicago" 
     }?,
 
