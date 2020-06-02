@@ -744,7 +744,8 @@ div {
       ## Matches the values for "simple" plus "—" and ";"
       "full" 
       | 
-      ## Matches the values for "simple" plus ";"" and "[;,] or[,:]"
+      ## Matches the values for "simple" plus ";"" 
+      ## and "[;,] or[,:]" (see CMoS 14.91), e.g.  "Moby-Dick; or, The Whale"
       "chicago" 
     }?,
     
@@ -760,9 +761,6 @@ div {
       | 
       ## Normalize the values for "simple" plus "—" and ";"
       "full" 
-      | 
-      ## Normalize the values for "simple" plus ";"" and "[;,] or[,:]"
-      "chicago" 
     }?,
 
     ## Specify the delimiter between title elements.
@@ -1056,7 +1054,7 @@ div {
 
     ## Inheritable title option, companion for "normalize-delimiters" on cs:title.
     [ a:defaultValue = "never" ]
-    attribute normalize-title-delimiters { "never" | "simple" | "full" | "chicago" }?
+    attribute normalize-title-delimiters { "never" | "simple" | "full" }?
   
   ## Options affecting cs:names, for cs:style, cs:citation and cs:bibliography.
   names-inheritable-options =
