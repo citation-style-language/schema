@@ -10,8 +10,8 @@ The following section defines pytest fixtures, which can be used as arguments
 to tests, causing those tests to be run for all fixture values.
 """
 
-root = pathlib.Path(__file__).parent.parent
-json_paths = list(root.glob('*.json'))
+root = pathlib.Path(__file__).parent.parent.parent.parent
+json_paths = list(root.glob('**/*.json'))
 
 
 @pytest.fixture(params=json_paths, ids=[x.name for x in json_paths])
@@ -23,8 +23,8 @@ def json_path(request):
 
 
 @pytest.fixture(params=[
-    'csl-citation.json',
-    'csl-data.json',
+    'schemas/input/csl-citation.json',
+    'schemas/input/csl-data.json',
 ])
 def json_schema(request):
     """
@@ -38,7 +38,7 @@ def json_schema(request):
 
 @pytest.fixture
 def csl_data_validator():
-    text = root.joinpath('csl-data.json').read_text()
+    text = root.joinpath('schemas/input/csl-data.json').read_text()
     schema = json.loads(text)
     Validator = jsonschema.validators.validator_for(schema)
     return Validator(schema)
