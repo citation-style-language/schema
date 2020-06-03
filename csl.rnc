@@ -732,12 +732,9 @@ div {
   title.attributes =
 
     ## Specify if titles are split into "title-main" and "title-sub"
-    [ a:defaultValue = "never" ]
+    [ a:defaultValue = "simple" ]
     attribute split {
       
-      ## Don't split titles
-      "never" 
-      | 
       ## Matches "."", ":", "::", "!", "?" 
       "simple" 
       | 
@@ -750,12 +747,9 @@ div {
     }?,
     
     ## Specify if delimiters are normalized
-    [ a:defaultValue = "never" ]
+    [ a:defaultValue = "simple" ]
     attribute normalize-delimiters { 
       
-      ## Don't normalize delimiters
-      "never" 
-      | 
       ## Normalize "."", ":", "::", "!", "?" 
       "simple" 
       | 
@@ -1049,12 +1043,12 @@ div {
     attribute title-sub-delimiter { text }?,
 
     ## Inheritable title option, companion for "split" on cs:title.
-    [ a:defaultValue = "never" ]
-    attribute title-split { "never" | "simple" | "full" | "chicago" }?,
+    [ a:defaultValue = "simple" ]
+    attribute title-split { "simple" | "full" | "chicago" }?,
 
     ## Inheritable title option, companion for "normalize-delimiters" on cs:title.
-    [ a:defaultValue = "never" ]
-    attribute normalize-title-delimiters { "never" | "simple" | "full" }?
+    [ a:defaultValue = "simple" ]
+    attribute normalize-title-delimiters { "simple" | "full" }?
   
   ## Options affecting cs:names, for cs:style, cs:citation and cs:bibliography.
   names-inheritable-options =
