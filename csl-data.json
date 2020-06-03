@@ -241,7 +241,19 @@
             "collection-number": {
                 "type": "string"
             },
+            "collection-title-main": {
+                "type": "string"
+            },
+            "collection-title-sub": {
+                "type": "string"
+            },
+            "container-title-main": {
+                "type": "string"
+            },
             "container-title-short": {
+                "type": "string"
+            },
+            "container-title-sub": {
                 "type": "string"
             },
             "dimensions": {
@@ -316,6 +328,12 @@
             "original-publisher-place": {
                 "type": "string"
             },
+            "original-title-main": {
+                "type": "string"
+            },
+            "original-title-sub": {
+                "type": "string"
+            },
             "page": {
                 "type": "string"
             },
@@ -337,6 +355,12 @@
             "references": {
                 "type": "string"
             },
+            "reviewed-title-main": {
+                "type": "string"
+            },
+            "reviewed-title-sub": {
+                "type": "string"
+            },
             "scale": {
                 "type": "string"
             },
@@ -349,7 +373,13 @@
             "status": {
                 "type": "string"
             },
+            "title-main": {
+                "type": "string"
+            },
             "title-short": {
+                "type": "string"
+            },
+            "title-sub": {
                 "type": "string"
             },
             "URL": {
@@ -363,6 +393,12 @@
                     "string",
                     "number"
                 ]
+            },
+            "volume-title-main": {
+                "type": "string"
+            },
+            "volume-title-sub": {
+                "type": "string"
             },
             "year-suffix": {
                 "type": "string"
