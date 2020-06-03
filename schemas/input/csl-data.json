@@ -1,7 +1,7 @@
 {
     "description": "JSON schema for CSL input data",
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://github.com/citation-style-language/schema/raw/master/csl-data.json",
+    "$id": "https://resource.citationstyles.org/schema/latest/input/json/csl-data.json",
     "type": "array",
     "items": {
         "type": "object",

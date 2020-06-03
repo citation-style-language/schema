@@ -1,13 +1,13 @@
 {
     "description": "JSON schema for CSL citation objects",
     "$schema" : "http://json-schema.org/draft-07/schema#",
-    "$id": "https://github.com/citation-style-language/schema/raw/master/csl-citation.json",
+    "$id": "https://resource.citationstyles.org/schema/latest/input/json/csl-citation.json",
     "type": "object",
     "properties": {
         "schema": {
             "type": "string",
             "enum" : [
-                "https://github.com/citation-style-language/schema/raw/master/csl-citation.json" 
+                "https://resource.citationstyles.org/schema/latest/input/json/csl-citation.json" 
             ] 
         },
         "citationID": {
