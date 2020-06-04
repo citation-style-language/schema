@@ -8,10 +8,10 @@ At this point, changes to CSL RelaxNG schema consist of the following:
   <dt>Changes to csl-terms.rnc, csl-types.rnc, or csl-variables.rnc.</dt>
   <dd>Adding new variables, itemtypes, locators, or terms; these can usually be added to minor x.x.x version changes.</dd>
   <dt>Changes to csl.rnc.</dt>
-  <dd>These are typically structural changes that may have an impact on compatability, and are typically reserved for major x.x version changes.</dd>
+  <dd>These are often more significant and may have an impact on compatability, and so are typically reserved for major x.x version changes.</dd>
 </dl>
 
-Regardless of the change, however, the current status of CSL requires us to be fairly conservative about change. So for either issue reports, please use the correct template, and include all specified information. It's important for us to be able to quickly understand what you asking for, how broad the need is, and what implementations options there are.
+Regardless of the change, however, the current status of CSL requires us to be fairly conservative. For issue reports, please use the correct template, and include all specified information. It's important for us to be able to quickly understand what you asking for, how broad the need is, and what implementations options there are.
 
 ## Pull Requests
 
