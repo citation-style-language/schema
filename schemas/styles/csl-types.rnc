@@ -1,3 +1,5 @@
+namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
+
 
 ## Item types
 div {
@@ -10,12 +12,16 @@ div {
     | "book"
     | "broadcast"
     | "chapter"
+    | "classic"
+    | "collection"
     | "dataset"
+    | "document"
     | "entry"
     | "entry-dictionary"
     | "entry-encyclopedia"
     | "figure"
     | "graphic"
+    | "hearing"
     | "interview"
     | "legal_case"
     | "legislation"
@@ -26,9 +32,12 @@ div {
     | "pamphlet"
     | "paper-conference"
     | "patent"
+    | "performance"
+    | "periodical"
     | "personal_communication"
     | "post"
     | "post-weblog"
+    | "regulation"
     | "report"
     | "review"
     | "review-book"

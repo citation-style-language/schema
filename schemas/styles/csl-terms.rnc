@@ -1,3 +1,5 @@
+namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
+
 
 ## Terms
 div {
@@ -32,6 +34,8 @@ div {
     | "interview"
     | "letter"
     | "no date"
+    | "no-name"
+    | "no-place"
     | "online"
     | "presented at"
     | "reference"
@@ -51,7 +55,7 @@ div {
     | "season-02"
     | "season-03"
     | "season-04"
-    |
+    | 
       ## (legacy; remove in CSL 1.1)
       category.field
   
@@ -75,15 +79,11 @@ div {
     | terms.locator-number-variables
   
   ## Terms for which gender variants may be specified
-  terms.gender-variants =
-    terms.ordinals
-    | terms.long-ordinals
-  
+  terms.gender-variants = terms.ordinals | terms.long-ordinals
   terms.ordinals =
     
     ## Ordinals
     xsd:string { pattern = "ordinal(-\d{2})?" }
-  
   terms.long-ordinals =
     
     ## Long ordinals
@@ -105,13 +105,18 @@ div {
       ## "sub verbo" is recognized as "sub" & "verbo" in attribute lists; term
       ## should be renamed to "sub-verbo"
       "sub verbo"
-    
+  
   ## Locator terms that can be tested with the "locator" conditional
   ## ("sub verbo" can be tested with "sub-verbo")
   terms.locator.testable =
-    "book"
+    "appendix"
+    | "article"
+    | "book"
+    | "canon"
     | "chapter"
     | "column"
+    | "elocation"
+    | "equation"
     | "figure"
     | "folio"
     | "line"
@@ -120,7 +125,12 @@ div {
     | "page"
     | "paragraph"
     | "part"
+    | "rule"
     | "section"
+    | "supplement"
+    | "table"
+    | "timestamp"
+    | "title"
     | "verse"
     | terms.locator-number-variables
   

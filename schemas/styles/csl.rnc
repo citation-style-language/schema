@@ -19,48 +19,20 @@ dc:license [ "MIT license" ]
 dc:description [
   "RELAX NG compact schema for the Citation Style Language (CSL)."
 ]
-# Embedded Schematron rules to detect calls to nonexistent macros
-
-sch:ns [ uri = "http://purl.org/net/xbiblio/csl" prefix = "cs" ]
-sch:pattern [
-  sch:rule [
-    context = "//cs:text[@macro]"
-    sch:assert [
-      test = "@macro = /cs:style/cs:macro/@name"
-      "This macro call has no corresponding macro."
-    ]
-  ]
-  sch:rule [
-    context = "//cs:key[@macro]"
-    sch:assert [
-      test = "@macro = /cs:style/cs:macro/@name"
-      "This macro call has no corresponding macro."
-    ]
-  ]
-  sch:rule [
-    context = "/cs:style/cs:macro"
-    sch:assert [
-      test = "count(/cs:style/cs:macro/@name[. = current()/@name]) = 1"
-      "This macro does not have a unique name."
-    ]
-  ]
-]
 
 ## Subparts of the CSL schema
 include "csl-terms.rnc"
 include "csl-types.rnc"
 include "csl-variables.rnc"
 include "csl-categories.rnc"
-[
-  a:documentation [
-    xhtml:h2 [ "cs:style and cs:locale - Root Elements" ]
-  ]
-]
+# ==============================================================================
+
+## cs:style and cs:locale - Root Elements
 div {
   start =
     independent-style.style | dependent-style.style | locale-file.locale
 
-  independent-style.style =
+    independent-style.style =
     element cs:style {
 
       ## Select whether citations appear in-text or as notes.
@@ -75,39 +47,20 @@ div {
        & style.intext?
        & style.bibliography?)
     }
-
   dependent-style.style =
     element cs:style {
       style.default-locale,
       version,
       dependent-style.style.info
     }
-
-  locale-file.locale =
-    element cs:locale {
-
-      ## Specify the locale of the locale file.
-      attribute xml:lang { xsd:language },
-      version,
-      locale-file.locale.info?,
-      (locale.style-options & locale.date+ & locale.terms)
-    }
-
-  style.default-locale =
-
-    ## Set a default style locale.
-    attribute default-locale { xsd:language }?
-
   version =
-    
+
     ## Indicate CSL version compatibility.
     [ a:defaultValue = "1.1" ] attribute version { "1.1" }
 }
-[
-  a:documentation [
-    xhtml:h2 [ "cs:info - Style and Locale File Metadata" ]
-  ]
-]
+# ==============================================================================
+
+## cs:info - Style and Locale File Metadata
 div {
 
   ## Metadata for independent styles.
@@ -158,11 +111,13 @@ div {
 
   info.translator = element cs:translator { personal-details }
 
+  info.author = element cs:author { personal-details }
+  info.contributor = element cs:contributor { personal-details }
+  info.translator = element cs:translator { personal-details }
   personal-details =
     element cs:name { text }
     & element cs:email { text }?
     & element cs:uri { xsd:anyURI }?
-
   info.category =
 
     ## Specify the citation format of the style (using the "citation-format"
@@ -172,25 +127,21 @@ div {
       attribute citation-format { category.citation-format }
       | attribute field { category.field }
     }
-
   info.id =
 
     ## Specify the URI to establish the identity of the style. The URI
     ## should be stable, unique and dereferenceable URI.
     element cs:id { xsd:anyURI }
-
   info.issn =
 
     ## Specify the journal's ISSN(s) for journal-specific styles. An ISSN
     ## must consist of four digits, a hyphen, three digits, and a check
     ## digit (a numeral digit or roman X), e.g. "1234-1231".
     element cs:issn { issn }
-
   info.eissn =
 
     ## Specify the journal's eISSN for journal-specific styles.
     element cs:eissn { issn }
-
   info.issnl =
 
     ## Specify the journal's ISSN-L for journal-specific styles.
@@ -220,7 +171,6 @@ div {
       },
       info-text
     }
-
   dependent-style.info.link =
     element cs:link {
       attribute href { xsd:anyURI },
@@ -244,38 +194,33 @@ div {
       },
       info-text
     }
-
   info.published =
 
     ## Specify when the style was initially created or made available.
     element cs:published { xsd:dateTime }
-
   info.rights =
     element cs:rights {
       attribute license { xsd:anyURI }?,
       info-text
     }
-
   info.summary = element cs:summary { info-text }
-
   info.title = element cs:title { info-text }
-
   info.title-short =
 
     ## Specify an abbreviated style title (e.g., "APA")
     element cs:title-short { info-text }
-
   info.updated =
 
     ## Specify when the style was last updated (e.g.,
     ## "2007-10-26T21:32:52+02:00")
     element cs:updated { xsd:dateTime }
-
   info-text =
     attribute xml:lang { xsd:language }?,
     text
 }
-[ a:documentation [ xhtml:h2 [ "cs:locale in Independent Styles" ] ] ]
+# ==============================================================================
+
+## cs:locale in Independent Styles
 div {
   style.locale =
 
@@ -288,11 +233,9 @@ div {
       (locale.style-options? & locale.date* & locale.terms?)
     }
 }
-[
-  a:documentation [
-    xhtml:h2 [ "cs:locale Contents - Localization Data" ]
-  ]
-]
+# ==============================================================================
+
+## cs:locale Contents - Localization Data
 div {
 
   ## Localized global options are specified as attributes in the
@@ -311,7 +254,19 @@ div {
       [ a:defaultValue = "false" ]
       attribute punctuation-in-quote { xsd:boolean }?
     }
+  locale-file.locale =
+    element cs:locale {
 
+      ## Specify the locale of the locale file.
+      attribute xml:lang { xsd:language },
+      version,
+      locale-file.locale.info?,
+      (locale.style-options & locale.date+ & locale.terms)
+    }
+  style.default-locale =
+
+    ## Set a default style locale.
+    attribute default-locale { xsd:language }?
   locale.date =
     element cs:date {
       date.form,
@@ -320,7 +275,6 @@ div {
       text-case,
       locale.date.date-part+
     }
-
   date.form =
 
     ## Select the localized date format ("text" or "numeric").
@@ -332,12 +286,10 @@ div {
         ## Numeric date form (e.g., "2005-12-15").
         "numeric"
     }
-
   locale.date.date-part =
     element cs:date-part {
       affixes, font-formatting, text-case, (day | month | year)
     }
-
   locale.terms = element cs:terms { terms.term+ }
 
   ## The "cs:term" element can either hold a basic string, or "cs:single" and
@@ -347,14 +299,15 @@ div {
       term.attributes,
       (text | (term.single, term.multiple))
     }
-
   term.attributes =
     (attribute name { terms },
      [ a:defaultValue = "long" ] attribute form { term.form }?)
     | (attribute name { terms.ordinals },
        attribute form { "long" }?,
        attribute gender-form { "masculine" | "feminine" }?,
-       attribute match { "last-digit" | "last-two-digits" | "whole-number" }?)
+       attribute match {
+         "last-digit" | "last-two-digits" | "whole-number"
+       }?)
     | (attribute name { terms.long-ordinals },
        attribute form { "long" }?,
        attribute gender-form { "masculine" | "feminine" })
@@ -370,13 +323,14 @@ div {
 
     ## Singular version of the term.
     element cs:single { text }
-
   term.multiple =
 
     ## Plural version of the term.
     element cs:multiple { text }
 }
-[ a:documentation [ xhtml:h2 [ "cs:macro" ] ] ]
+# ==============================================================================
+
+## cs:macro
 div {
   style.macro =
 
@@ -385,7 +339,6 @@ div {
       attribute name { xsd:NMTOKEN },
       rendering-element+
     }
-
   rendering-element =
     rendering-element.names
     | rendering-element.date
@@ -395,7 +348,9 @@ div {
     | rendering-element.choose
     | rendering-element.group
 }
-[ a:documentation [ xhtml:h2 [ "cs:citation and cs:bibliography" ] ] ]
+# ==============================================================================
+
+## cs:citation and cs:bibliography
 div {
   style.citation =
 
@@ -409,23 +364,23 @@ div {
     ## for in-text authors are different than the default citation rendering;
     ## for example, in APA, or numeric styles.
     element cs:intext { citation.options, sort?, citation.layout }
-  
+
   style.bibliography =
 
     ## Use to describe the formatting of the bibliography.
     element cs:bibliography {
       bibliography.options, sort?, bibliography.layout
     }
-
   citation.layout =
     element cs:layout {
       affixes, delimiter, font-formatting, rendering-element+
     }
-
   bibliography.layout =
     element cs:layout { affixes, font-formatting, rendering-element+ }
 }
-[ a:documentation [ xhtml:h2 [ "cs:names Rendering Element" ] ] ]
+# ==============================================================================
+
+## cs:names Rendering Element
 div {
   rendering-element.names =
     element cs:names {
@@ -433,7 +388,6 @@ div {
       ((names.name?, names.et-al?) & names.label?),
       names.substitute?
     }
-
   names.attributes =
     attribute variable {
       list { variables.names+ }
@@ -445,7 +399,6 @@ div {
     delimiter,
     display,
     font-formatting
-
   names.name =
     element cs:name {
       name.attributes,
@@ -464,7 +417,6 @@ div {
       font-formatting,
       name.name-part*
     }
-
   name.attributes =
 
     ## Use to separate the second-to-last and last name of a name list by
@@ -566,7 +518,6 @@ div {
     ## Sets the delimiter for name-parts that have switched positions as a
     ## result of "name-as-sort-order" (e.g., ", " in "Doe, John").
     [ a:defaultValue = ", " ] attribute sort-separator { text }?
-
   name.name-part =
 
     ## Use to format individual name parts (e.g., "Jane DOE").
@@ -576,7 +527,6 @@ div {
       font-formatting,
       text-case
     }
-
   names.et-al =
 
     ## Specify the term used for et-al abbreviation and its formatting.
@@ -598,7 +548,6 @@ div {
       [ a:defaultValue = "long" ] attribute form { term.form }?,
       label.attributes-shared
     }
-
   names.substitute =
 
     ## Specify substitution options when the name variables selected on the
@@ -608,7 +557,9 @@ div {
   ## Short version of cs:names, without children, allowed in cs:substitute.
   substitute.names = element cs:names { names.attributes }
 }
-[ a:documentation [ xhtml:h2 [ "cs:date Rendering Element" ] ] ]
+# ==============================================================================
+
+## cs:date Rendering Element
 div {
   rendering-element.date =
     element cs:date {
@@ -635,7 +586,6 @@ div {
       font-formatting,
       text-case
     }
-
   rendering-element.date.date-part.localized =
 
     ## Specify overriding formatting for localized dates (affixes
@@ -646,7 +596,6 @@ div {
     element cs:date-part {
       font-formatting, text-case, (day | month | year)
     }
-
   rendering-element.date.date-part.non-localized =
 
     ## Specify, in the desired order, the date parts that should be
@@ -654,7 +603,6 @@ div {
     element cs:date-part {
       affixes, font-formatting, text-case, (day | month | year)
     }
-
   day =
     attribute name { "day" },
 
@@ -663,7 +611,6 @@ div {
     [ a:defaultValue = "numeric" ]
     attribute form { "numeric" | "numeric-leading-zeros" | "ordinal" }?,
     range-delimiter
-
   month =
     attribute name { "month" },
 
@@ -675,14 +622,12 @@ div {
     }?,
     range-delimiter,
     strip-periods
-
   year =
     attribute name { "year" },
 
     ## Year forms: "long" ("2005"), "short" ("05").
     [ a:defaultValue = "long" ] attribute form { "short" | "long" }?,
     range-delimiter
-
   range-delimiter =
 
     ## Specify a delimiter for date ranges (by default the en-dash). A custom
@@ -690,7 +635,9 @@ div {
     ## "year") that differs between the two dates.
     [ a:defaultValue = "–" ] attribute range-delimiter { text }?
 }
-[ a:documentation [ xhtml:h2 [ "cs:text Rendering Element" ] ] ]
+# ==============================================================================
+
+## cs:text Rendering Element
 div {
   rendering-element.text =
 
@@ -704,7 +651,6 @@ div {
       strip-periods,
       text-case
     }
-
   text.attributes =
 
     ## Select a macro.
@@ -724,7 +670,9 @@ div {
        attribute variable { variables.standard },
        [ a:defaultValue = "long" ] attribute form { "short" | "long" }?)
 }
-[ a:documentation [ xhtml:h2 [ "cs:number Rendering Element" ] ] ]
+# ==============================================================================
+
+## cs:number Rendering Element
 div {
   rendering-element.number =
 
@@ -732,7 +680,6 @@ div {
     element cs:number {
       number.attributes, affixes, display, font-formatting, text-case
     }
-
   number.attributes =
     attribute variable { variables.numbers },
 
@@ -741,7 +688,9 @@ div {
     [ a:defaultValue = "numeric" ]
     attribute form { "numeric" | "ordinal" | "long-ordinal" | "roman" }?
 }
-[ a:documentation [ xhtml:h2 [ "cs:label Rendering Element" ] ] ]
+# ==============================================================================
+
+## cs:label Rendering Element
 div {
   rendering-element.label =
 
@@ -749,12 +698,10 @@ div {
     ## variable. E.g., if "page" variable holds a range, the plural label
     ## "pp." is selected instead of the singular "p.".
     element cs:label { label.attributes, label.attributes-shared }
-
   label.attributes =
     attribute variable { variables.numbers | "locator" | "page" },
     [ a:defaultValue = "long" ]
     attribute form { "long" | "short" | "symbol" }?
-
   label.attributes-shared =
 
     ## Specify when the plural version of a term is selected.
@@ -765,7 +712,9 @@ div {
     strip-periods,
     text-case
 }
-[ a:documentation [ xhtml:h2 [ "cs:group Rendering Element" ] ] ]
+# ==============================================================================
+
+## cs:group Rendering Element
 div {
   rendering-element.group =
 
@@ -782,10 +731,11 @@ div {
       font-formatting,
       rendering-element+
     }
-
   group.attributes = notAllowed?
 }
-[ a:documentation [ xhtml:h2 [ "Options" ] ] ]
+# ==============================================================================
+
+## Style Options
 div {
   style.options =
     style.demote-non-dropping-particle,
@@ -793,7 +743,6 @@ div {
     style.page-range-format,
     names-inheritable-options,
     name-inheritable-options
-
   citation.options =
     citation.cite-group-delimiter,
     citation.collapse-options,
@@ -801,7 +750,6 @@ div {
     citation.near-note-distance,
     names-inheritable-options,
     name-inheritable-options
-
   bibliography.options =
     bibliography.hanging-indent,
     bibliography.line-formatting-options,
@@ -809,7 +757,6 @@ div {
     bibliography.subsequent-author-substitute-options,
     names-inheritable-options,
     name-inheritable-options
-
   style.demote-non-dropping-particle =
 
     ## Specify whether the non-dropping particle is demoted in inverted
@@ -818,27 +765,23 @@ div {
     attribute demote-non-dropping-particle {
       "never" | "sort-only" | "display-and-sort"
     }?
-
   style.initialize-with-hyphen =
 
     ## Specify whether compound given names (e.g., "Jean-Luc") are
     ## initialized with ("J-L") or without a hyphen ("JL").
     [ a:defaultValue = "true" ]
     attribute initialize-with-hyphen { xsd:boolean }?
-
   style.page-range-format =
 
     ## Reformat page ranges in the "page" variable.
     attribute page-range-format {
       "chicago" | "expanded" | "minimal" | "minimal-two"
     }?
-
   citation.cite-group-delimiter =
 
     ## Activate cite grouping and specify the delimiter for cites within a
     ## cite group.
     [ a:defaultValue = ", " ] attribute cite-group-delimiter { text }?
-
   citation.collapse-options =
 
     ## Activate cite grouping and specify the method of citation collapsing.
@@ -868,7 +811,6 @@ div {
     ## Specify the delimiter following a group of collapsed cites. Defaults
     ## to the cite delimiter.
     attribute after-collapse-delimiter { text }?
-
   citation.disambiguate-options =
 
     ## Set to "true" to activate disambiguation by showing names that were
@@ -912,7 +854,6 @@ div {
         ## expanded.
         "by-cite"
     }?
-
   citation.near-note-distance =
 
     ## Set the number of preceding notes (footnotes or endnotes) within
@@ -920,13 +861,11 @@ div {
     ## for the "near-note" position to be "true".
     [ a:defaultValue = "5" ]
     attribute near-note-distance { xsd:integer }?
-
   bibliography.hanging-indent =
 
     ## Set to "true" to render bibliographic entries with hanging indents.
     [ a:defaultValue = "false" ]
     attribute hanging-indent { xsd:boolean }?
-
   bibliography.line-formatting-options =
 
     ## Set the spacing between bibliographic entries.
@@ -938,7 +877,6 @@ div {
     attribute line-spacing {
       xsd:integer { minExclusive = "0" }
     }?
-
   bibliography.second-field-align =
 
     ## Use to align any subsequent lines of bibliographic entries with the
@@ -952,7 +890,6 @@ div {
         ## lines of text with the margin.
         "margin"
     }?
-
   bibliography.subsequent-author-substitute-options =
 
     ## Substitute names that repeat in subsequent bibliographic entries by
@@ -996,14 +933,15 @@ div {
     [ a:defaultValue = "long" ]
     attribute name-form { "long" | "short" | "count" }?
 }
-[ a:documentation [ xhtml:h2 [ "cs:sort - Sorting" ] ] ]
+# ==============================================================================
+
+## cs:sort - Sorting
 div {
   sort =
 
     ## Specify how cites and bibliographic entries should be sorted. By
     ## default, items appear in the order in which they were cited.
     element cs:sort { sort.key+ }
-
   sort.key =
     element cs:key {
       (attribute variable { variables }
@@ -1027,22 +965,18 @@ div {
       attribute sort { "ascending" | "descending" }?
     }
 }
-[
-  a:documentation [ xhtml:h2 [ "cs:choose - Conditional Statements" ] ]
-]
+# ==============================================================================
+
+## cs:choose - Conditional Statements"
 div {
   rendering-element.choose =
 
     ## Use to conditionally render rendering elements.
     element cs:choose { choose.if, choose.else-if*, choose.else? }
-
   choose.if = element cs:if { condition+, match, rendering-element* }
-
   choose.else-if =
     element cs:else-if { condition+, match, rendering-element* }
-
   choose.else = element cs:else { rendering-element+ }
-
   condition =
 
     ## If used, the element content is only rendered if it disambiguates two
@@ -1086,7 +1020,6 @@ div {
       attribute variable {
         list { variables+ }
       }
-
   match =
 
     ## Set the testing logic.
@@ -1106,15 +1039,14 @@ div {
         "none"
     }?
 }
+# ==============================================================================
 
 ## Formatting attributes.
 div {
   affixes =
     [ a:defaultValue = "" ] attribute prefix { text }?,
     [ a:defaultValue = "" ] attribute suffix { text }?
-
   delimiter = attribute delimiter { text }?
-
   display =
 
     ## By default, bibliographic entries consist of continuous runs of text.
@@ -1149,18 +1081,15 @@ div {
     attribute text-decoration { "none" | "underline" }?,
     [ a:defaultValue = "baseline" ]
     attribute vertical-align { "baseline" | "sup" | "sub" }?
-
   quotes =
 
     ## When set to "true", quotes are placed around the rendered text.
     [ a:defaultValue = "false" ] attribute quotes { xsd:boolean }?
-
   strip-periods =
 
     ## When set to "true", periods are removed from the rendered text.
     [ a:defaultValue = "false" ]
     attribute strip-periods { xsd:boolean }?
-
   text-case =
     attribute text-case {
 
