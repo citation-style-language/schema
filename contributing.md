@@ -17,6 +17,7 @@ Regardless of the change, however, the current status of CSL requires us to be f
 
 We encourage pull requests. Please follow the following guidelines:
 
+- for linting and formatting the schema files, please use trang for the rnc (see the [trang script](tools/rnc-validate-format.sh)), and use [prettier](https://prettier.io) for the json
 - in general, please follow [these recommendations](https://www.freecodecamp.org/news/writing-good-commit-messages-a-practical-guide/) on writing good commit messages
 - reference existing issues, or create and reference new ones, that clearly lay out the issue your PR is addressing
 - if you are merely adding a string to `csl-terms.rnc`, `csl-types.rnc`, or `csl-variables`:
