@@ -738,6 +738,9 @@ div {
       ## Matches "."", ":", "::", "!", "?" 
       "simple" 
       | 
+      ## Matches the values for "simple" plus ";"
+      "extended" 
+      | 
       ## Matches the values for "simple" plus "—" and ";"
       "full" 
       | 
@@ -752,6 +755,9 @@ div {
       
       ## Normalize "."", ":", "::", "!", "?" 
       "simple" 
+      | 
+      ## Normalize the values for "simple" plus ";"
+      "extended" 
       | 
       ## Normalize the values for "simple" plus "—" and ";"
       "full" 
@@ -1044,11 +1050,11 @@ div {
 
     ## Inheritable title option, companion for "split" on cs:title.
     [ a:defaultValue = "simple" ]
-    attribute title-split { "simple" | "full" | "chicago" }?,
+    attribute title-split { "simple" | "extended" | "full" | "chicago" }?,
 
     ## Inheritable title option, companion for "normalize-delimiters" on cs:title.
     [ a:defaultValue = "simple" ]
-    attribute normalize-title-delimiters { "simple" | "full" }?
+    attribute normalize-title-delimiters { "simple" | "extended" | "full" }?
   
   ## Options affecting cs:names, for cs:style, cs:citation and cs:bibliography.
   names-inheritable-options =
