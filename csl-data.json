@@ -172,42 +172,6 @@
             "submitted": {
                 "$ref": "#/definitions/date-variable"
             },
-            "collection-title": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/definitions/title-variable"
-                }
-            },
-            "container-title": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/definitions/title-variable"
-                }
-            },
-            "original-title": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/definitions/title-variable"
-                }
-            },
-            "reviewed-title": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/definitions/title-variable"
-                }
-            },
-            "volume-title": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/definitions/title-variable"
-                }
-            },
-            "title": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/definitions/title-variable"
-                }
-            },
             "abstract": {
                 "type": "string"
             },
@@ -241,10 +205,16 @@
             "collection-number": {
                 "type": "string"
             },
+            "collection-title": {
+                "type": "string"
+            },
             "collection-title-main": {
                 "type": "string"
             },
             "collection-title-sub": {
+                "type": "string"
+            },
+            "container-title": {
                 "type": "string"
             },
             "container-title-main": {
@@ -328,6 +298,9 @@
             "original-publisher-place": {
                 "type": "string"
             },
+            "original-title": {
+                "type": "string"
+            },
             "original-title-main": {
                 "type": "string"
             },
@@ -355,6 +328,9 @@
             "references": {
                 "type": "string"
             },
+            "reviewed-title": {
+                "type": "string"
+            },
             "reviewed-title-main": {
                 "type": "string"
             },
@@ -371,6 +347,9 @@
                 "type": "string"
             },
             "status": {
+                "type": "string"
+            },
+            "title": {
                 "type": "string"
             },
             "title-main": {
@@ -393,6 +372,9 @@
                     "string",
                     "number"
                 ]
+            },
+            "volume-title": {
+                "type": "string"
             },
             "volume-title-main": {
                 "type": "string"
@@ -453,33 +435,6 @@
                                 "number",
                                 "boolean"
                             ]
-                        }
-                    },
-                    "additionalProperties": false
-                }
-            ]
-        },
-        "title-variable": {
-            "anyOf": [
-                {
-                    "properties": {
-                        "main": {
-                            "type": "string"
-                        },
-                        "sub": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "addon": {
-                            "type": "string"
-                        },
-                        "short": {
-                            "type": "string"
-                        },
-                        "literal": {
-                            "type": "string"
                         }
                     },
                     "additionalProperties": false
