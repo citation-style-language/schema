@@ -155,10 +155,6 @@ div {
         | 
           ## URI of style documentation.
           "documentation"
-        | 
-          ## Obsolete for independent styles. Will be disallowed with
-          ## CSL 1.1.
-          "independent-parent"
       },
       info-text
     }
@@ -178,10 +174,6 @@ div {
         | 
           ## URI of style documentation.
           "documentation"
-        | 
-          ## Obsolete for dependent styles. Will be disallowed with CSL
-          ## 1.1.
-          "template"
       },
       info-text
     }
