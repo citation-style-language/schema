@@ -2,7 +2,7 @@
 
 ## Schema Changes
 
-At this point, changes to CSL RelaxNG schema consist of the following:
+At this point, changes to the CSL RelaxNG schema consist of the following:
 
 <dl>
   <dt>Changes to csl-terms.rnc, csl-types.rnc, or csl-variables.rnc.</dt>
@@ -11,7 +11,7 @@ At this point, changes to CSL RelaxNG schema consist of the following:
   <dd>These are often more significant and may have an impact on compatability, and so are typically reserved for major x.x version changes.</dd>
 </dl>
 
-Regardless of the change, however, the current status of CSL requires us to be fairly conservative. For issue reports, please use the correct template, and include all specified information. It's important for us to be able to quickly understand what you asking for, how broad the need is, and what implementations options there are.
+Regardless of the change, however, the current status of CSL requires us to be fairly conservative. For issue reports, please use the correct template, and include all specified information. It's important for us to be able to quickly understand what you are requesting, how broad the need is, and what implementation options there are.
 
 ## Pull Requests
 
