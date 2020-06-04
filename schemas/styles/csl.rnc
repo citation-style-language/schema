@@ -535,12 +535,8 @@ div {
       ## Select the term to use for et-al abbreviation.
       [ a:defaultValue = "et-al" ]
       attribute term { "et-al" | "and others" }?,
-      font-formatting,
-      names.et-al.legacy-attributes
+      font-formatting
     }
-
-  ## Ignored in CSL 1.0.1. Will be disallowed with CSL 1.1.
-  names.et-al.legacy-attributes = affixes
 
   ## Inherits variable from the parent cs:names element.
   names.label =
