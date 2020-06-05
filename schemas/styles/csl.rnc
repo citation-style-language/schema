@@ -519,7 +519,7 @@ div {
       attribute term { "et-al" | "and others" }?,
       font-formatting
     }
-
+  
   ## Inherits variable from the parent cs:names element.
   names.label =
     element cs:label {
@@ -652,67 +652,57 @@ div {
 
 ## cs:title Rendering Element
 div {
+  
   ## Use to render titles if "title-main" and "title-sub" need different formatting
   ## or to omit either "title-main" or "title-sub"
   rendering-element.title =
     element cs:title {
-      title.attributes,
-      title.formatting,
-      (title.main?, title.sub?)
+      title.attributes, title.formatting, (title.main?, title.sub?)
     }
-
   title.attributes =
-
+    
     ## Specify if titles are split into "title-main" and "title-sub"
     [ a:defaultValue = "simple" ]
     attribute split {
       
       ## Matches "."", ":", "::", "!", "?" 
-      "simple" 
+      "simple"
       | 
-      ## Matches the values for "simple" plus ";"
-      "extended" 
+        ## Matches the values for "simple" plus ";"
+        "extended"
       | 
-      ## Matches the values for "simple" plus "—" and ";"
-      "full" 
+        ## Matches the values for "simple" plus "—" and ";"
+        "full"
       | 
-      ## Matches the values for "simple" plus ";"" 
-      ## and "[;,] or[,:]" (see CMoS 14.91), e.g.  "Moby-Dick; or, The Whale"
-      "chicago" 
+        ## Matches the values for "simple" plus ";"" 
+        ## and "[;,] or[,:]" (see CMoS 14.91), e.g.  "Moby-Dick; or, The Whale"
+        "chicago"
     }?,
     
     ## Specify if delimiters are normalized
     [ a:defaultValue = "simple" ]
-    attribute normalize-delimiters { 
+    attribute normalize-delimiters {
       
       ## Normalize "."", ":", "::", "!", "?" 
-      "simple" 
+      "simple"
       | 
-      ## Normalize the values for "simple" plus ";"
-      "extended" 
+        ## Normalize the values for "simple" plus ";"
+        "extended"
       | 
-      ## Normalize the values for "simple" plus "—" and ";"
-      "full" 
+        ## Normalize the values for "simple" plus "—" and ";"
+        "full"
     }?,
-
+    
     ## Specify the delimiter between title elements.
     delimiter,
     
     ## Specify the delimiter between multiple subtitles.
     ## The same as "delimiter" if not specified.
     attribute sub-delimiter { text }?
-
   title.main = element cs:main { title.formatting }
-  
   title.sub = element cs:sub { title.formatting }
-
-  title.formatting = 
-    affixes,
-    display,
-    font-formatting,
-    quotes,
-    strip-periods,
-    text-case
+  title.formatting =
+    affixes, display, font-formatting, quotes, strip-periods, text-case
 }
 # ==============================================================================
 
@@ -965,19 +955,24 @@ div {
   
   ## Options affecting titles rendered with cs:text and cs:title, for cs:style, cs:citation and cs:bibliography
   title-inheritable-options =
+    
     ## Inheritable title option, companion for "delimiter" on cs:title.
     attribute title-delimiter { text }?,
-
+    
     ## Inheritable title option, companion for "sub-delimiter" on cs:title.
     attribute title-sub-delimiter { text }?,
-
+    
     ## Inheritable title option, companion for "split" on cs:title.
     [ a:defaultValue = "simple" ]
-    attribute title-split { "simple" | "extended" | "full" | "chicago" }?,
-
+    attribute title-split {
+      "simple" | "extended" | "full" | "chicago"
+    }?,
+    
     ## Inheritable title option, companion for "normalize-delimiters" on cs:title.
     [ a:defaultValue = "simple" ]
-    attribute normalize-title-delimiters { "simple" | "extended" | "full" }?
+    attribute normalize-title-delimiters {
+      "simple" | "extended" | "full"
+    }?
   
   ## Options affecting cs:names, for cs:style, cs:citation and cs:bibliography.
   names-inheritable-options =
