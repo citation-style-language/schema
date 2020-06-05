@@ -12,7 +12,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
     - name: Install dependencies
-      run: pip install --requirement=tests/requirements.txt
+      run: pip install --requirement=tests/schemas/input/requirements.txt
     - name: Run Tests
       run: pytest --verbose --color=yes tests
   csl-xml:
@@ -24,4 +24,5 @@ jobs:
     - name: Install dependencies
       run: sudo apt-get install --yes trang
     - name: Run Tests
-      run: trang csl.rnc csl.rng
+      run: trang schemas/styles/csl.rnc csl.rng
+
