@@ -28,7 +28,7 @@
                         ]
                     },
                     "itemData": {
-                        "$ref": "csl-data.json/#/items" 
+                        "$ref": "csl-data.json#/items" 
                     },
                     "prefix": {
                         "type": "string" 
