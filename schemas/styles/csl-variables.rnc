@@ -1,13 +1,11 @@
+namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
+
 
 ## Variables
 div {
   
   ## All variables
-  variables =
-    variables.dates
-    | variables.names
-    | variables.numbers
-    | variables.strings
+  variables = variables.dates | variables.names | variables.standard
   
   ## Standard variables
   variables.standard = variables.numbers | variables.strings

@@ -20,11 +20,11 @@ For more information about CSL, visit <https://citationstyles.org>.
 The CSL schema is written in the compact syntax of [RELAX NG](http://relaxng.org/), 
 and currently consists of the following files:
 
-* [`csl.rnc`](csl.rnc)
-* [`csl-categories.rnc`](csl-categories.rnc)
-* [`csl-terms.rnc`](csl-terms.rnc)
-* [`csl-types.rnc`](csl-types.rnc)
-* [`csl-variables.rnc`](csl-variables.rnc)
+* [`csl.rnc`](schemas/styles/csl.rnc)
+* [`csl-categories.rnc`](schemas/styles/csl-categories.rnc)
+* [`csl-terms.rnc`](schemas/styles/csl-terms.rnc)
+* [`csl-types.rnc`](schemas/styles/csl-types.rnc)
+* [`csl-variables.rnc`](schemas/styles/csl-variables.rnc)
 
 CSL style and locale files should be validated against `csl.rnc`,
 which incorporates the content of the other files.
@@ -39,8 +39,8 @@ Jing users can use `csl.sch` to perform a secondary validation of CSL styles.
 The CSL-JSON schema is written in [JSON Schema](http://json-schema.org/), 
 and currently consists of the following files:
 
-* [`csl-data.json`](csl-data.json)
-* [`csl-citation.json`](csl-citation.json)
+* [`csl-data.json`](schemas/input/csl-data.json)
+* [`csl-citation.json`](schemas/input/csl-citation.json)
 
 To render citations and bibliographies, CSL processors not only require CSL style and locale files, but also bibliographic metadata.
 The citeproc-js CSL processor [introduced](http://gsl-nagoya-u.net/http/pub/citeproc-doc.html#data-input) a JSON format to store such metadata, 
@@ -100,7 +100,7 @@ An example of an embedded citation object from Mendeley:
 
 ```json
 {
-    "schema": "https://github.com/citation-style-language/schema/raw/master/csl-citation.json",
+    "schema": "https://resource.citationstyles.org/schema/latest/input/json/csl-citation.json",
     "citationID": "12rsus7rlj",
     "citationItems": [
         {
