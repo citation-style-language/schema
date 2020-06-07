@@ -163,13 +163,13 @@
           "$ref": "#/definitions/name-variable"
         }
       },
-      "producer": {
+      "performer": {
         "type": "array",
         "items": {
           "$ref": "#/definitions/name-variable"
         }
       },
-      "performer": {
+      "producer": {
         "type": "array",
         "items": {
           "$ref": "#/definitions/name-variable"
@@ -325,9 +325,6 @@
       "original-title": {
         "type": "string"
       },
-      "part-title": {
-        "type": "string"
-      },
       "page": {
         "type": ["string", "number"]
       },
@@ -336,6 +333,9 @@
       },
       "part": {
         "type": ["string", "number"]
+      },
+      "part-title": {
+        "type": "string"
       },
       "PMCID": {
         "type": "string"
