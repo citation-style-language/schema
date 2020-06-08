@@ -2,14 +2,14 @@
 
 ## Schema Changes
 
-### RelaxNG Style Language
+### RELAX NG Style Language
 
-At this point, changes to the CSL RelaxNG schema consist of the following:
+At this point, changes to the CSL RELAX NG schema consist of the following:
 
 <dl>
-  <dt>Changes to csl-terms.rnc, csl-types.rnc, or csl-variables.rnc.</dt>
-  <dd>Adding new variables, itemtypes, locators, or terms; these can usually be added to minor x.x.x version changes.</dd>
-  <dt>Changes to csl.rnc.</dt>
+  <dt>Changes to csl-terms.rnc, csl-types.rnc, or csl-variables.rnc</dt>
+  <dd>Adding new variables, item types, locators, or terms; these can usually be added to minor x.x.x version changes.</dd>
+  <dt>Changes to csl.rnc</dt>
   <dd>These are often more significant and may have an impact on compatability, and so are typically reserved for major x.x version changes.</dd>
 </dl>
 
