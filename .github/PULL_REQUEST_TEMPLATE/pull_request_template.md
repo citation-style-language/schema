@@ -18,7 +18,7 @@ Please delete options that are not relevant.
 
 # Checklist:
 
-- [ ] My code follows the style guidelines of this project, including running the specified linters/pretty-printers on the schema files
+- [ ] If I modified any of the schema files, I have run the relevant linters/pretty-printer, per [CONTRIBUTING](https://github.com/citation-style-language/schema/blob/master/CONTRIBUTING.md)
 - [ ] I have performed a self-review of my own code
-- [ ] I have commented my code, particularly in hard-to-understand areas
+- [ ] I have commented my code where relevant
 - [ ] I have included suggested corresponding changes to the documentation (if relevant)
