@@ -2,6 +2,8 @@
 
 ## Schema Changes
 
+### RelaxNG Style Language
+
 At this point, changes to the CSL RelaxNG schema consist of the following:
 
 <dl>
@@ -12,6 +14,10 @@ At this point, changes to the CSL RelaxNG schema consist of the following:
 </dl>
 
 Regardless of the change, however, the current status of CSL requires us to be fairly conservative. For issue reports, please the template instructions, and include all specified information. It's important for us to be able to quickly understand what you are requesting, how broad the need is, and what implementation options there are.
+
+### JSON Data Schemas
+
+The data schemas are intended to mirror the rnc files, and so follow similar conventions. Ideally when we add variables, we add to both at the same time.
 
 ## Pull Requests
 
