@@ -17,6 +17,7 @@ Regardless of the change, however, the current status of CSL requires us to be f
 
 We encourage pull requests. Please follow the following guidelines:
 
+- make sure your PRs and reasonably focused, and link where possible to existing issues
 - for linting and formatting the schema files, please use [trang](https://github.com/relaxng/jing-trang) for the rnc (see the [trang script](https://github.com/citation-style-language/schema/blob/master/tools/rnc-validate-format.sh)), and use [prettier](https://prettier.io) for the json
 - in general, please follow [these recommendations](https://www.freecodecamp.org/news/writing-good-commit-messages-a-practical-guide/) on writing good commit messages
 - follow  the instructions on the template
