@@ -18,7 +18,6 @@ Please delete options that are not relevant.
 
 # Checklist:
 
-- [ ] If I modified any of the schema files, I have run the relevant linters/pretty-printer, per [CONTRIBUTING](https://github.com/citation-style-language/schema/blob/master/CONTRIBUTING.md)
+- [ ] If I modified any of the schema files, I have run trang and/or prettier on the files, per [CONTRIBUTING](https://github.com/citation-style-language/schema/blob/master/CONTRIBUTING.md)
 - [ ] I have performed a self-review of my own code
-- [ ] I have commented my code where relevant
 - [ ] I have included suggested corresponding changes to the documentation (if relevant)
