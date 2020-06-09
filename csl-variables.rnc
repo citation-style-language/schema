@@ -1,3 +1,5 @@
+namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
+
 
 ## Variables
 div {
@@ -71,8 +73,13 @@ div {
     | "event"
     | "event-place"
     | "genre"
+    | "ISAN"
     | "ISBN"
+    | "ISCI"
+    | "ISMN"
+    | "ISRC"
     | "ISSN"
+    | "ISWC"
     | "jurisdiction"
     | "keyword"
     | "language"
