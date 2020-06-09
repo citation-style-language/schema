@@ -1,3 +1,5 @@
+namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
+
 
 ## Item types
 div {

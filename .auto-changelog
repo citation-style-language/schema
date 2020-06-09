@@ -1,0 +1,8 @@
+{
+  "_comment": "config file for CSL schema repo",
+  "unreleased": true,
+  "commitLimit": 15,
+  "template": "keepachangelog",
+  "starting-version": "1.0.1",
+  "release-summary": true
+}
