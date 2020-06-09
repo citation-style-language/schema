@@ -92,11 +92,11 @@ def test_basic_data_schema_validates(csl_data_validator):
 
 
 def test_basic_citation_schema_validates(csl_citation_validator):
-    cite = [{
+    cite = {
         'id': 'example-id',
         'type': 'report',
         'title':  'test',
-    }]
+    }
     csl_citation_validator.validate(cite)
 
 
