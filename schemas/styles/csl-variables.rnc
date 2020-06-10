@@ -106,6 +106,8 @@ div {
     | "status"
     | "title"
     | "title-short"
+    | "translated-title"
+    | "translated-title-short"
     | "URL"
     | "version"
     | "volume-title"
