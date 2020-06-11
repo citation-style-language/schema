@@ -93,9 +93,18 @@ def test_basic_data_schema_validates(csl_data_validator):
 
 def test_basic_citation_schema_validates(csl_citation_validator):
     cite = {
-        'id': 'example-id',
-        'type': 'report',
-        'title':  'test',
+      "schema": "https://resource.citationstyles.org/schema/latest/input/json/csl-citation.json",
+      "citationID": "item1",
+      "citationItems": [
+          {
+            "id": "item1",
+            "itemData": {
+            "id": "item1",
+            "type": "book",
+            "title": "test title"
+          }
+        }
+      ]
     }
     csl_citation_validator.validate(cite)
 
