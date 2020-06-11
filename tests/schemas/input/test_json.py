@@ -44,6 +44,14 @@ def csl_data_validator():
     return Validator(schema)
 
 
+@pytest.fixture
+def csl_citation_validator():
+    text = root.joinpath('schemas/input/csl-citation.json').read_text()
+    schema = json.loads(text)
+    Validator = jsonschema.validators.validator_for(schema)
+    return Validator(schema)
+
+
 """
 The following section contains the tests.
 """
@@ -81,6 +89,24 @@ def test_basic_data_schema_validates(csl_data_validator):
         'type': 'report',
     }]
     csl_data_validator.validate(csl)
+
+
+def test_basic_citation_schema_validates(csl_citation_validator):
+    cite = {
+      "schema": "https://resource.citationstyles.org/schema/latest/input/json/csl-citation.json",
+      "citationID": "item1",
+      "citationItems": [
+          {
+            "id": "item1",
+            "itemData": {
+            "id": "item1",
+            "type": "book",
+            "title": "test title"
+          }
+        }
+      ]
+    }
+    csl_citation_validator.validate(cite)
 
 
 def test_basic_data_schema_with_author_validates(csl_data_validator):
