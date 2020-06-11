@@ -29,6 +29,7 @@ div {
     | "composer"
     | "container-author"
     | "contributor"
+    | "curator"
     | "director"
     | "editor"
     | "editorial-director"
