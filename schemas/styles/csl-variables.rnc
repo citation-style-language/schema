@@ -8,7 +8,8 @@ div {
   variables = variables.dates | variables.names | variables.standard
   
   ## Standard variables
-  variables.standard = variables.numbers | variables.strings
+  variables.standard =
+    variables.numbers | variables.strings | variables.titles
   
   ## Date variables
   variables.dates =
@@ -69,6 +70,33 @@ div {
     | "version"
     | "volume"
   
+  ## Title variables
+  variables.titles =
+    "collection-title"
+    | "collection-title-main"
+    | "collection-title-sub"
+    | "collection-title-short"
+    | "container-title"
+    | "container-title-main"
+    | "container-title-sub"
+    | "container-title-short"
+    | "original-title"
+    | "original-title-main"
+    | "original-title-sub"
+    | "original-title-short"
+    | "reviewed-title"
+    | "reviewed-title-main"
+    | "reviewed-title-sub"
+    | "reviewed-title-short"
+    | "volume-title"
+    | "volume-title-main"
+    | "volume-title-sub"
+    | "volume-title-short"
+    | "title"
+    | "title-main"
+    | "title-sub"
+    | "title-short"
+  
   ## String variables
   variables.strings =
     "abstract"
@@ -81,9 +109,6 @@ div {
     | "call-number"
     | "citation-key"
     | "citation-label"
-    | "collection-title"
-    | "container-title"
-    | "container-title-short"
     | "dimensions"
     | "division"
     | "DOI"
