@@ -327,6 +327,7 @@ div {
     | rendering-element.date
     | rendering-element.label
     | rendering-element.text
+    | rendering-element.title
     | rendering-element.number
     | rendering-element.choose
     | rendering-element.group
@@ -518,7 +519,7 @@ div {
       attribute term { "et-al" | "and others" }?,
       font-formatting
     }
-
+  
   ## Inherits variable from the parent cs:names element.
   names.label =
     element cs:label {
@@ -718,6 +719,7 @@ div {
     style.demote-non-dropping-particle,
     style.initialize-with-hyphen,
     style.page-range-format,
+    title-inheritable-options,
     names-inheritable-options,
     name-inheritable-options
   citation.options =
@@ -725,6 +727,7 @@ div {
     citation.collapse-options,
     citation.disambiguate-options,
     citation.near-note-distance,
+    title-inheritable-options,
     names-inheritable-options,
     name-inheritable-options
   bibliography.options =
@@ -732,6 +735,7 @@ div {
     bibliography.line-formatting-options,
     bibliography.second-field-align,
     bibliography.subsequent-author-substitute-options,
+    title-inheritable-options,
     names-inheritable-options,
     name-inheritable-options
   style.demote-non-dropping-particle =
@@ -891,6 +895,48 @@ div {
       | 
         ## Substitutes the first name if it matches.
         "partial-first"
+    }?
+  
+  ## Options affecting rendering of title variables, for cs:style, cs:citation and cs:bibliography
+  title-inheritable-options =
+    
+    ## Inheritable title option, specify the delimiter between "title-main" and "title-sub".
+    attribute title-delimiter { text }?,
+    
+    ## Inheritable title option, specify the delimiter between multiple subtitles.
+    ## The same as "title-delimiter" if not specified.
+    attribute title-sub-delimiter { text }?,
+    
+    ## Inheritable title option, specify how titles are split into "title-main" and "title-sub".
+    [ a:defaultValue = "simple" ]
+    attribute title-split {
+      
+      ## Matches "."", ":", "::", "!", "?" 
+      "simple"
+      | 
+        ## Matches the values for "simple" plus ";"
+        "extended"
+      | 
+        ## Matches the values for "simple" plus "—" and ";"
+        "full"
+      | 
+        ## Matches the values for "simple" plus ";"" 
+        ## and "[;,] or[,:]" (see CMoS 14.91), e.g.  "Moby-Dick; or, The Whale"
+        "chicago"
+    }?,
+    
+    ## Inheritable title option, specify which delimiters are normalized.
+    [ a:defaultValue = "simple" ]
+    attribute normalize-title-delimiters {
+      
+      ## Normalize "."", ":", "::"
+      "simple"
+      | 
+        ## Normalize the values for "simple" plus ";"
+        "extended"
+      | 
+        ## Normalize the values for "simple" plus "—" and ";"
+        "full"
     }?
   
   ## Options affecting cs:names, for cs:style, cs:citation and cs:bibliography.
@@ -1079,6 +1125,10 @@ div {
         ## Capitalizes the first character (other characters remain in
         ## their original case).
         "capitalize-first"
+      | 
+        ## Capitalizes the first character and the first character of a subtitle
+        ## (other characters remain in their original case).
+        "capitalize-subtitle"
       | 
         ## Capitalizes the first character of every word (other characters
         ## remain in their original case).

@@ -208,10 +208,22 @@
             "collection-title": {
                 "type": "string"
             },
+            "collection-title-main": {
+                "type": "string"
+            },
+            "collection-title-sub": {
+                "type": "string"
+            },
             "container-title": {
                 "type": "string"
             },
+            "container-title-main": {
+                "type": "string"
+            },
             "container-title-short": {
+                "type": "string"
+            },
+            "container-title-sub": {
                 "type": "string"
             },
             "dimensions": {
@@ -289,6 +301,12 @@
             "original-title": {
                 "type": "string"
             },
+            "original-title-main": {
+                "type": "string"
+            },
+            "original-title-sub": {
+                "type": "string"
+            },
             "page": {
                 "type": "string"
             },
@@ -313,6 +331,12 @@
             "reviewed-title": {
                 "type": "string"
             },
+            "reviewed-title-main": {
+                "type": "string"
+            },
+            "reviewed-title-sub": {
+                "type": "string"
+            },
             "scale": {
                 "type": "string"
             },
@@ -328,7 +352,13 @@
             "title": {
                 "type": "string"
             },
+            "title-main": {
+                "type": "string"
+            },
             "title-short": {
+                "type": "string"
+            },
+            "title-sub": {
                 "type": "string"
             },
             "URL": {
@@ -342,6 +372,15 @@
                     "string",
                     "number"
                 ]
+            },
+            "volume-title": {
+                "type": "string"
+            },
+            "volume-title-main": {
+                "type": "string"
+            },
+            "volume-title-sub": {
+                "type": "string"
             },
             "year-suffix": {
                 "type": "string"
