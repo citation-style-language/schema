@@ -58,6 +58,9 @@
       "id": {
         "type": ["string", "number"]
       },
+      "citekey": {
+        "type": "string"
+      },
       "categories": {
         "type": "array",
         "items": {

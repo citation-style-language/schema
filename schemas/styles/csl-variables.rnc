@@ -3,13 +3,13 @@ namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
 
 ## Variables
 div {
-  
+
   ## All variables
   variables = variables.dates | variables.names | variables.standard
-  
+
   ## Standard variables
   variables.standard = variables.numbers | variables.strings
-  
+
   ## Date variables
   variables.dates =
     "accessed"
@@ -19,7 +19,7 @@ div {
     | "issued"
     | "original-date"
     | "submitted"
-  
+
   ## Name variables
   variables.names =
     "author"
@@ -43,7 +43,7 @@ div {
     | "recipient"
     | "reviewed-author"
     | "translator"
-  
+
   ## Number variables
   variables.numbers =
     "chapter-number"
@@ -62,7 +62,7 @@ div {
     | "printing"
     | "supplement"
     | "volume"
-  
+
   ## String variables
   variables.strings =
     "abstract"
@@ -74,6 +74,7 @@ div {
     | "authority"
     | "call-number"
     | "citation-label"
+    | "citekey"
     | "collection-title"
     | "container-title"
     | "container-title-short"
