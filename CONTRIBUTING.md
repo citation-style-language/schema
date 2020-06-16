@@ -25,5 +25,18 @@ We encourage pull requests. Please use the following guidelines:
 
 - in general, follow [these recommendations](https://www.freecodecamp.org/news/writing-good-commit-messages-a-practical-guide/) on writing good commit messages
 - make sure your PRs are focused, and link where possible to existing issues
-- for linting and formatting the schema files, please use [trang](https://github.com/relaxng/jing-trang) for the rnc (see the [trang script](https://github.com/citation-style-language/schema/blob/master/tools/rnc-validate-format.sh)), and use [prettier](https://prettier.io) for the json
 - follow  the instructions on the PR template
+
+## Pre-Commit Hooks
+
+The repository includes a [pre-commit](https://pre-commit.com) configuration file, and a pre-commit hook, which will run linters for changes on any `rnc`, `json`, or `yaml` files. 
+To install them, do the following from your local repo:
+
+``` console
+# we need to make the script executable
+chmod +x hooks/rnc-format-validate.sh
+
+pip install pre-commit
+pre-commit install
+```
+
