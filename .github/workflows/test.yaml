@@ -11,8 +11,14 @@ jobs:
       uses: actions/checkout@v2
     - name: Set up Python
       uses: actions/setup-python@v2
-    - name: Install dependencies
+    - name: Set up npm
+      uses: actions/setup-node@v1
+    - name: Install Python dependencies
       run: pip install --requirement=tests/schemas/input/requirements.txt
+    - name: Install prettier
+      run: npx prettier@2.0.5 . --write
+    - name: Check json formatting
+      run: npx prettier --check schemas/input/*.json
     - name: Run Tests
       run: pytest --verbose --color=yes tests
   csl-xml:
@@ -23,6 +29,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Install dependencies
       run: sudo apt-get install --yes trang
-    - name: Run Tests
-      run: trang schemas/styles/csl.rnc csl.rng
-
+    - name: Check schema validity
+      run: trang schemas/styles/csl.rnc csl.rng && trang csl.rng csl.rnc
+    - name: Check schema formatting
+      run: for f in csl*.rnc; do diff -q $f schemas/styles/$f ; done
