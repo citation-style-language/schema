@@ -11,10 +11,10 @@ def main():
     # I don't understand why, but this currently isn't working
     for rncfile in changed_files:
         if rncfile.endswith(".rnc"):
-            rngfile = Path(rncfile).stem
-            subprocess.call(["trang", rncfile])
-            subprocess.call(["trang", rngfile, rncfile])
-            subprocess.call(["git", "add", rncfile])
+            rngfile = rncfile + ".rng"
+            subprocess.run(["trang", rncfile, rngfile])
+            subprocess.run(["trang", rngfile, rncfile])
+            subprocess.run(["git", "add", rncfile])
 
 
 main()
