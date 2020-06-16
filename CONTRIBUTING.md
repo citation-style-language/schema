@@ -33,8 +33,8 @@ The repository includes a [pre-commit](https://pre-commit.com) configuration fil
 To install them, do the following from your local repo:
 
 ``` console
-# we need to make the script executable
-chmod +x hooks/rnc-format-validate.sh
+# we need to make the script executable; YMMV on Windows
+chmod +x hooks/rnc-format-validate.py
 
 pip install pre-commit
 pre-commit install
