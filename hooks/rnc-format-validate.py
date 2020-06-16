@@ -5,12 +5,8 @@ from pathlib import Path
 
 def main():
 
-    proc = subprocess.Popen(
-        ["git", "diff", "--name-only", "--cached"], stdout=subprocess.PIPE
-    )
-    changed_files = proc.stdout.readlines()
-    changed_files = [f.decode("utf-8") for f in changed_files]
-    changed_files = [f.strip() for f in changed_files]
+    cmd = ["git", "diff", "--name-only", "--cached"]
+    changed_files = subprocess.check_output(cmd, text=True).splitlines()
 
     # I don't understand why, but this currently isn't working
     for rncfile in changed_files:
