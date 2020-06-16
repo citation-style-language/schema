@@ -1060,5 +1060,8 @@ div {
       | 
         ## Renders text in title case.
         "title"
+      | 
+        ## Renders text in sentence case. Deprecated.
+        "sentence"
     }?
 }
