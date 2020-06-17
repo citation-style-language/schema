@@ -7,9 +7,7 @@ div {
     terms.gender-assignable
     | terms.gender-variants
     | terms.locator
-    | 
-      ## Item types
-      item-types
+    | item-types
     | 
       ## Contributor roles
       variables.names
