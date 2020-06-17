@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 import platform
 import subprocess
 
@@ -20,6 +21,7 @@ def main():
             rngfile = rncfile + ".rng"
             subprocess.run(["trang", rncfile, rngfile])
             subprocess.run(["trang", rngfile, rncfile])
+            os.remove(rngfile)
             subprocess.run(["git", "add", rncfile])
 
 
