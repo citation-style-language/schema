@@ -21,6 +21,7 @@ dc:description [
 ]
 
 ## Subparts of the CSL schema
+include "csl-choose.rnc"
 include "csl-terms.rnc"
 include "csl-types.rnc"
 include "csl-variables.rnc"
@@ -1062,85 +1063,6 @@ div {
       [ a:defaultValue = "ascending" ]
       attribute sort { "ascending" | "descending" }?
     }
-}
-# ==============================================================================
-
-## cs:choose - Conditional Statements"
-div {
-  rendering-element.choose =
-    
-    ## Use to conditionally render rendering elements.
-    element cs:choose { choose.if, choose.else-if*, choose.else? }
-
-  choose.if = element cs:if { condition+, match, rendering-element* }
-
-  choose.else-if =
-    element cs:else-if { condition+, match, rendering-element* }
-
-  choose.else = element cs:else { rendering-element+ }
-
-  condition =
-    
-    ## If used, the element content is only rendered if it disambiguates two
-    ## otherwise identical citations. This attempt at disambiguation is only
-    ## made after all other disambiguation methods have failed.
-    [ a:defaultValue = "true" ] attribute disambiguate { "true" }
-    | 
-      ## Tests whether the given variables contain numeric text.
-      attribute is-numeric {
-        list { variables+ }
-      }
-    | 
-      ## Tests whether the given date variables contain approximate dates.
-      attribute is-uncertain-date {
-        list { variables.dates+ }
-      }
-    | 
-      ## Tests whether the locator matches the given locator types.
-      attribute locator {
-        list { (terms.locator.testable | "sub-verbo")+ }
-      }
-    | 
-      ## Tests whether the cite position matches the given positions.
-      attribute position {
-        list {
-          ("first"
-           | "subsequent"
-           | "ibid"
-           | "ibid-with-locator"
-           | "near-note")+
-        }
-      }
-    | 
-      ## Tests whether the item matches the given types.
-      attribute type {
-        list { item-types+ }
-      }
-    | 
-      ## Tests whether the default ("long") forms of the given variables
-      ## contain non-empty values.
-      attribute variable {
-        list { variables+ }
-      }
-
-  match =
-    
-    ## Set the testing logic.
-    [ a:defaultValue = "all" ]
-    attribute match {
-      
-      ## Element only tests "true" when all conditions test "true" for all
-      ## given test values.
-      "all"
-      | 
-        ## Element tests "true" when any condition tests "true" for any given
-        ## test value.
-        "any"
-      | 
-        ## Element only tests "true" when none of the conditions test "true"
-        ## for any given test value.
-        "none"
-    }?
 }
 # ==============================================================================
 
