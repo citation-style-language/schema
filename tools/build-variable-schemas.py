@@ -61,7 +61,6 @@ strings_without_short_full = create_original_reviewed_variants(strings_without_s
 strings = \
     strings_full + \
     create_variable_variant(variables=strings_full, modifier="suffix", affix="short") + \
-    create_variable_variant(variables=strings_full, modifier="suffix", affix="short") + \
     strings_without_short_full
 
 ## Titles
