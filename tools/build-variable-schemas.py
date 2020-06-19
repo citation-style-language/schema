@@ -5,8 +5,6 @@ import yaml
 import json
 from string import Template 
 
-# 
-
 # Read source file
 vars = open('schemas/variables/csl-variables.yaml', 'r').read()
 
