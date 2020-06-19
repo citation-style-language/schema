@@ -1,0 +1,97 @@
+---
+variables.dates:
+  - accessed
+  - available-date
+  - container
+  - event-date
+  - issued
+  - submitted
+variables.names:
+  - author
+  - chair
+  - collection-editor
+  - compiler
+  - composer
+  - container-author
+  - contributor
+  - curator
+  - director
+  - editor
+  - editorial-director
+  - executive-producer
+  - illustrator
+  - interviewer
+  - organizer
+  - performer
+  - producer
+  - recipient
+  - translator
+variables.numbers:
+  - chapter-number
+  - citation-number
+  - collection-number
+  - edition
+  - first-reference-note-number
+  - issue
+  - locator
+  - number
+  - number-of-pages
+  - number-of-volumes
+  - page
+  - page-first
+  - part
+  - printing
+  - supplement
+  - volume
+variables.strings:
+  - abstract
+  - annote
+  - archive
+  - archive_collection
+  - archive_location
+  - archive-place
+  - authority
+  - citation-label
+  - dimensions
+  - division
+  - event
+  - event-place
+  - genre
+  - jurisdiction
+  - keyword
+  - language
+  - license
+  - medium
+  - note
+  - publisher
+  - publisher-place
+  - references
+  - scale
+  - section
+  - source
+  - status
+  - URL
+  - version
+  - year-suffix
+variables.strings.without.short:
+  - call-number
+  - DOI
+  - ISAN
+  - ISBN
+  - ISCI
+  - ISMN
+  - ISRC
+  - ISSN
+  - ISWC
+  - PMCID
+  - PMID
+variables.titles:
+  - collection-title
+  - container-title
+  - part-title
+  - volume-title
+  - title
+  - translated-title
+variables.json:
+  - shortTitle
+  - journalAbbreviation
