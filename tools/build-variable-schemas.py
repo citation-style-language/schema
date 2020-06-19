@@ -8,7 +8,7 @@ from string import Template
 # 
 
 # Read source file
-vars = open('../schemas/variables/csl-variables.yaml', 'r').read()
+vars = open('schemas/variables/csl-variables.yaml', 'r').read()
 
 # Input variables
 dates_input = yaml.safe_load(vars)['variables.dates']
@@ -129,7 +129,7 @@ div {{
 
 # Write to csl-variables.rnc
 
-rnc_filename = '../schemas/styles/csl-variables.rnc'
+rnc_filename = 'schemas/styles/csl-variables.rnc'
 rnc_variables_file= open(rnc_filename,'w')
 rnc_variables_file.write(rnc_template)
 rnc_variables_file.close()
