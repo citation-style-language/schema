@@ -14,7 +14,7 @@ jobs:
     - name: Install prettier
       run: npx prettier@2.0.5 . --write
     - name: check json and yaml formatting
-      run: npx prettier --check schemas/**/*.{json,yaml}
+      run: npx prettier --check schemas/**/*.json
   csl-json:
     name: CSL JSON Tests
     runs-on: ubuntu-latest
