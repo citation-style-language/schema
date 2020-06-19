@@ -20,7 +20,7 @@ jobs:
     - name: Check json formatting
       run: npx prettier --check schemas/input/*.json
     - name: Check yaml formatting
-      run: npx prettier --check **/*.yaml
+      run: npx prettier --check **/**/*.yaml
     - name: Run Tests
       run: pytest --verbose --color=yes tests
   csl-xml:
