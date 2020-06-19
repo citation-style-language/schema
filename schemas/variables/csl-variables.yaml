@@ -44,25 +44,20 @@ variables.numbers:
   - supplement
   - volume
 variables.strings:
-  - abstract
   - annote
   - archive
   - archive_collection
   - archive_location
   - archive-place
   - authority
-  - citation-label
   - dimensions
   - division
   - event
   - event-place
   - genre
   - jurisdiction
-  - keyword
-  - language
   - license
   - medium
-  - note
   - publisher
   - publisher-place
   - references
@@ -74,8 +69,12 @@ variables.strings:
   - version
   - year-suffix
 variables.strings.without.short:
+  - abstract
   - call-number
+  - citation-label
   - DOI
+  - keyword
+  - language
   - ISAN
   - ISBN
   - ISCI
@@ -83,6 +82,7 @@ variables.strings.without.short:
   - ISRC
   - ISSN
   - ISWC
+  - note
   - PMCID
   - PMID
 variables.titles:
