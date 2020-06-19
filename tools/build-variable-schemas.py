@@ -68,9 +68,11 @@ titles_full = create_original_reviewed_variants(titles_input)
 
 titles = \
     titles_full + \
-    create_variable_variant(variables=titles_full, modifier="suffix", affix="short") + \
-    create_variable_variant(variables=titles_full, modifier="suffix", affix="main") + \
-    create_variable_variant(variables=titles_full, modifier="suffix", affix="sub")
+    # -main, and -sub variant creation disabled for 1.0.2, uncomment for 1.1
+    # create_variable_variant(variables=titles_full, modifier="suffix", affix="main") + \
+    # create_variable_variant(variables=titles_full, modifier="suffix", affix="sub") + \
+    create_variable_variant(variables=titles_full, modifier="suffix", affix="short") 
+    
 
 
 # Stringify the lists for RNC
