@@ -19,6 +19,8 @@ jobs:
       run: npx prettier@2.0.5 . --write
     - name: Check json formatting
       run: npx prettier --check schemas/input/*.json
+    - name: Check yaml formatting
+      run: npx prettier --check **/*.yaml
     - name: Run Tests
       run: pytest --verbose --color=yes tests
   csl-xml:
