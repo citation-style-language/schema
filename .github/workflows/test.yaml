@@ -1,8 +1,20 @@
-name: Python Test Suite
+name: CSL CI Test Suite
 on:
 - push
 - pull_request
 jobs:
+  prettier:
+    name: prettier
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout 
+      uses: actions/checkout@v2
+    - name: Set up npm
+      uses: actions/setup-node@v1
+    - name: Install prettier
+      run: npx prettier@2.0.5 . --write
+    - name: check json and yaml formatting
+      run: npx prettier --check schemas/**/*.{json,yaml}
   csl-json:
     name: CSL JSON Tests
     runs-on: ubuntu-latest
@@ -11,16 +23,8 @@ jobs:
       uses: actions/checkout@v2
     - name: Set up Python
       uses: actions/setup-python@v2
-    - name: Set up npm
-      uses: actions/setup-node@v1
-    - name: Install Python dependencies
+    - name: Install dependencies
       run: pip install --requirement=tests/schemas/input/requirements.txt
-    - name: Install prettier
-      run: npx prettier@2.0.5 . --write
-    - name: Check json formatting
-      run: npx prettier --check schemas/input/*.json
-    - name: Check yaml formatting
-      run: npx prettier --check **/**/*.yaml
     - name: Run Tests
       run: pytest --verbose --color=yes tests
   csl-xml:
