@@ -1,0 +1,146 @@
+{
+  "description": "JSON schema for CSL input data",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://resource.citationstyles.org/schema/latest/input/json/csl-data.json",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "article",
+          "article-journal",
+          "article-magazine",
+          "article-newspaper",
+          "bill",
+          "book",
+          "broadcast",
+          "chapter",
+          "classic",
+          "collection",
+          "dataset",
+          "document",
+          "entry",
+          "entry-dictionary",
+          "entry-encyclopedia",
+          "figure",
+          "graphic",
+          "hearing",
+          "interview",
+          "legal_case",
+          "legislation",
+          "manuscript",
+          "map",
+          "motion_picture",
+          "musical_score",
+          "pamphlet",
+          "paper-conference",
+          "patent",
+          "performance",
+          "periodical",
+          "personal_communication",
+          "post",
+          "post-weblog",
+          "regulation",
+          "report",
+          "review",
+          "review-book",
+          "software",
+          "song",
+          "speech",
+          "standard",
+          "thesis",
+          "treaty",
+          "webpage"
+        ]
+      },
+      "id": {
+        "type": ["string", "number"]
+      },
+      "categories": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "language": {
+        "type": "string"
+      }
+    },
+    "required": ["type", "id"],
+    "additionalProperties": false
+  },
+  "definitions": {
+    "name-variable": {
+      "anyOf": [
+        {
+          "properties": {
+            "family": {
+              "type": "string"
+            },
+            "given": {
+              "type": "string"
+            },
+            "dropping-particle": {
+              "type": "string"
+            },
+            "non-dropping-particle": {
+              "type": "string"
+            },
+            "suffix": {
+              "type": "string"
+            },
+            "comma-suffix": {
+              "type": ["string", "number", "boolean"]
+            },
+            "static-ordering": {
+              "type": ["string", "number", "boolean"]
+            },
+            "literal": {
+              "type": "string"
+            },
+            "parse-names": {
+              "type": ["string", "number", "boolean"]
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "date-variable": {
+      "anyOf": [
+        {
+          "properties": {
+            "date-parts": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": ["string", "number"]
+                },
+                "minItems": 1,
+                "maxItems": 3
+              },
+              "minItems": 1,
+              "maxItems": 2
+            },
+            "season": {
+              "type": ["string", "number"]
+            },
+            "circa": {
+              "type": ["string", "number", "boolean"]
+            },
+            "literal": {
+              "type": "string"
+            },
+            "raw": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

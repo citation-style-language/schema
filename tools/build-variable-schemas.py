@@ -131,3 +131,42 @@ rnc_filename = 'schemas/styles/csl-variables.rnc'
 rnc_variables_file= open(rnc_filename,'w')
 rnc_variables_file.write(rnc_template)
 rnc_variables_file.close()
+
+# Build the JSON schema
+
+## Load json
+with open('schemas/variables/csl-data-template.json') as json_file:
+    json_schema = json.load(json_file)
+
+where = json_schema['items']['properties']
+
+json_schema_update_dict = {}
+
+## json specific strings
+for var in json_input:
+    json_schema_update_dict[var] = {"type" : "string"}
+
+## dates
+for date in dates:
+    json_schema_update_dict[date] = {"type" : "array","items": {"$ref": "#/definitions/name-variable"}}
+## name
+for name in names:
+    json_schema_update_dict[name] = {"$ref": "#/definitions/date-variable"}
+
+## numbers
+for number in numbers:
+    json_schema_update_dict[number] = {"type" : ["string","number"]}
+
+## strings
+for string in strings:
+    json_schema_update_dict[string] = {"type" : "string"}
+
+## titles
+for title in titles:
+    json_schema_update_dict[title] = {"type" : "string"}
+
+where.update(json_schema_update_dict)
+
+with open('schemas/input/csl-data.json', 'w') as outfile:
+    json.dump(json_schema, outfile,indent=4)
+
