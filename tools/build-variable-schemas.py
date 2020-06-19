@@ -3,7 +3,7 @@
 
 import yaml
 import json
-from string import Template 
+from string import Template
 
 # Read source file
 vars = open('schemas/variables/csl-variables.yaml', 'r').read()
@@ -31,7 +31,7 @@ def create_variable_variant(variables, modifier, affix):
         for var in variables:
             new_vars.append(var + "-" + affix)
     return new_vars
-  
+
 def create_original_reviewed_variants(variables):
     # creates original and reviewed variants
     return \
@@ -51,7 +51,7 @@ names = create_original_reviewed_variants(names_input)
 ## Numbers
 numbers = create_original_reviewed_variants(numbers_input)
 
-## Stings
+## Strings
 strings_full = create_original_reviewed_variants(strings_input)
 
 strings_without_short_full = create_original_reviewed_variants(strings_without_short_input)
@@ -69,8 +69,8 @@ titles = \
     create_variable_variant(variables=titles_full, modifier="suffix", affix="short")
     # -main, and -sub variant creation disabled for 1.0.2, uncomment for 1.1
     # create_variable_variant(variables=titles_full, modifier="suffix", affix="main") + \
-    # create_variable_variant(variables=titles_full, modifier="suffix", affix="sub") 
-    
+    # create_variable_variant(variables=titles_full, modifier="suffix", affix="sub")
+
 
 
 # Stringify the lists for RNC
@@ -82,7 +82,7 @@ names_stringified = rnc_join_character.join('"{0}"'.format(w) for w in names)
 numbers_stringified = rnc_join_character.join('"{0}"'.format(w) for w in numbers)
 strings_stringified = rnc_join_character.join('"{0}"'.format(w) for w in strings)
 titles_stringified = rnc_join_character.join('"{0}"'.format(w) for w in titles)
-    
+
 # Define the RNC template, to assemble the complete RNC file, to pass to Trang.
 
 rnc_template = '''namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
@@ -90,29 +90,29 @@ rnc_template = '''namespace a = "http://relaxng.org/ns/compatibility/annotations
 
 ## Variables
 div {{
-  
+
   ## All variables
   variables = variables.dates | variables.names | variables.standard
-  
+
   ## Standard variables
   variables.standard = variables.numbers | variables.strings | variables.titles
-  
+
   ## Date variables
-  variables.dates = 
+  variables.dates =
     {dates}
-  
+
   ## Name variables
-  variables.names = 
+  variables.names =
     {names}
-  
+
   ## Number variables
   variables.numbers =
     {numbers}
 
   ## Ttile variables
-  variables.titles = 
+  variables.titles =
     {titles}
-  
+
   ## String variables
   variables.strings =
     {strings}
@@ -169,4 +169,3 @@ where.update(json_schema_update_dict)
 
 with open('schemas/input/csl-data.json', 'w') as outfile:
     json.dump(json_schema, outfile,indent=4)
-
