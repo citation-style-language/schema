@@ -13,6 +13,7 @@ repos:
     hooks:
       - id: rnc-format-validate
         name: Check rnc schema files
-        entry: hooks/rnc-format-validate.py
+        entry: tools/rnc-validate-format.py
+        args: ['--commit']
         language: python
         files: schemas/styles/csl*.rnc
