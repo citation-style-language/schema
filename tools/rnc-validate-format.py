@@ -16,7 +16,7 @@ args = parser.parse_args()
 rncdir = os.path.join("schemas", "styles")
 
 
-def rnc_format(rncfile, check=False):
+def rnc_format(rncfile):
     try:
         which("trang") is not None
     except Exception:
@@ -36,7 +36,7 @@ def rnc_format(rncfile, check=False):
 
 def rnc_pre_commit():
 
-    # this will only work as part of a pre-comimt process, where it will run
+    # this will only work as part of a pre-commit process, where it will run
     # rnc_format on any staged rnc files, and then restage
     cmd = ["git", "diff", "--name-only", "--cached"]
     changed_files = subprocess.check_output(cmd, text=True).splitlines()
@@ -44,7 +44,7 @@ def rnc_pre_commit():
 
     for changed_file in changed_files:
         if changed_file.endswith(".rnc"):
-            rnc_format(changed_file, True)
+            rnc_format(changed_file)
             subprocess.run(["git", "add", changed_file])
 
 
