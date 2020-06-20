@@ -40,7 +40,6 @@ def rnc_pre_commit():
     # rnc_format on any staged rnc files, and then restage
     cmd = ["git", "diff", "--name-only", "--cached"]
     changed_files = subprocess.check_output(cmd, text=True).splitlines()
-    print(changed_files)
 
     for changed_file in changed_files:
         if changed_file.endswith(".rnc"):
