@@ -53,6 +53,7 @@ def main():
         rnc_pre_commit()
     else:
         rnc_format(os.path.join("schemas", "styles", "csl.rnc"))
+        print("\n====> rnc schema files validated and formatted .....")
 
 
 if __name__ == "__main__":
