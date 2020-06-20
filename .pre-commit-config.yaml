@@ -16,4 +16,4 @@ repos:
         entry: tools/rnc-validate-format.py
         args: ['--commit']
         language: python
-        files: schemas/styles/csl*.rnc
+        files: ^schemas/styles/csl*.rnc$
