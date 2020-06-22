@@ -11,11 +11,11 @@ div {
   
   ## When specifying conditions, we allow either the attribute syntax or the element-based one.
   choose.condition =
-    condition.atts
+    (condition.atts, match?)
     | element cs:conditions { match, condition.elem+ }
   choose.if = element cs:if { choose.condition, rendering-element* }
   choose.else-if =
-    element cs:else-if { choose.condition+, rendering-element* }
+    element cs:else-if { choose.condition, rendering-element* }
   choose.else = element cs:else { rendering-element+ }
   
   ## This element allows for more complex conditional logic; for 
