@@ -105,6 +105,7 @@ div {
     | "publisher"
     | "publisher-place"
     | "references"
+    | "reviewed-genre"
     | "reviewed-title"
     | "scale"
     | "section"
