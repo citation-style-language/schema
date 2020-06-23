@@ -376,6 +376,9 @@
       "references": {
         "type": "string"
       },
+      "reviewed-genre": {
+        "type": "string"
+      },
       "reviewed-title": {
         "type": "string"
       },
