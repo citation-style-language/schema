@@ -60,7 +60,9 @@ div {
     | "page-first"
     | "part"
     | "printing"
+    | "section"
     | "supplement"
+    | "version"
     | "volume"
   
   ## String variables
@@ -109,7 +111,6 @@ div {
     | "reviewed-genre"
     | "reviewed-title"
     | "scale"
-    | "section"
     | "source"
     | "status"
     | "title"
@@ -117,7 +118,6 @@ div {
     | "translated-title"
     | "translated-title-short"
     | "URL"
-    | "version"
     | "volume-title"
     | "year-suffix"
 }
