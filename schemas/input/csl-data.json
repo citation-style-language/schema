@@ -58,6 +58,9 @@
       "id": {
         "type": ["string", "number"]
       },
+      "citation-key": {
+        "type": "string"
+      },
       "categories": {
         "type": "array",
         "items": {
