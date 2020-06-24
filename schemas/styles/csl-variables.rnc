@@ -60,6 +60,7 @@ div {
     | "page-first"
     | "part"
     | "printing"
+    | "section"
     | "supplement"
     | "volume"
   
@@ -109,7 +110,6 @@ div {
     | "reviewed-genre"
     | "reviewed-title"
     | "scale"
-    | "section"
     | "source"
     | "status"
     | "title"
