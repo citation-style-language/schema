@@ -58,7 +58,7 @@
       "id": {
         "type": ["string", "number"]
       },
-      "citekey": {
+      "citation-key": {
         "type": "string"
       },
       "categories": {
