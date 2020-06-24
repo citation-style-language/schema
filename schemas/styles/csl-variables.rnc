@@ -3,14 +3,14 @@ namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
 
 ## Variables
 div {
-  
+
   ## All variables
   variables = variables.dates | variables.names | variables.standard
-  
+
   ## Standard variables
   variables.standard =
     variables.numbers | variables.strings | variables.titles
-  
+
   ## Date variables
   variables.dates =
     "accessed"
@@ -19,7 +19,7 @@ div {
     | "issued"
     | "original-date"
     | "submitted"
-  
+
   ## Name variables
   variables.names =
     "author"
@@ -69,38 +69,18 @@ div {
     | "supplement"
     | "version"
     | "volume"
-  
+
   ## Title variables
   variables.titles =
     "collection-title"
-    | "collection-title-main"
-    | "collection-title-sub"
-    | "collection-title-short"
     | "container-title"
-    | "container-title-main"
-    | "container-title-sub"
-    | "container-title-short"
     | "original-title"
-    | "original-title-main"
-    | "original-title-sub"
-    | "original-title-short"
+    | "part-title"
     | "reviewed-title"
-    | "reviewed-title-main"
-    | "reviewed-title-sub"
-    | "reviewed-title-short"
     | "title"
-    | "title-main"
-    | "title-sub"
-    | "title-short"
     | "translated-title"
-    | "translated-title-main"
-    | "translated-title-sub"
-    | "translated-title-short"
     | "volume-title"
-    | "volume-title-main"
-    | "volume-title-sub"
-    | "volume-title-short"
-  
+
   ## String variables
   variables.strings =
     "abstract"
