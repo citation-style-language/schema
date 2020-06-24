@@ -62,6 +62,7 @@ div {
     | "printing"
     | "section"
     | "supplement"
+    | "version"
     | "volume"
   
   ## String variables
@@ -117,7 +118,6 @@ div {
     | "translated-title"
     | "translated-title-short"
     | "URL"
-    | "version"
     | "volume-title"
     | "year-suffix"
 }
