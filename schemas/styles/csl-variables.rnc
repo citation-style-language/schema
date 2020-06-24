@@ -74,7 +74,7 @@ div {
     | "authority"
     | "call-number"
     | "citation-label"
-    | "citekey"
+    | "citation-key"
     | "collection-title"
     | "container-title"
     | "container-title-short"
