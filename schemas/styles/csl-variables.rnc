@@ -3,14 +3,14 @@ namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
 
 ## Variables
 div {
-  
+
   ## All variables
   variables = variables.dates | variables.names | variables.standard
-  
+
   ## Standard variables
   variables.standard =
     variables.numbers | variables.strings | variables.titles
-  
+
   ## Date variables
   variables.dates =
     "accessed"
@@ -20,7 +20,7 @@ div {
     | "issued"
     | "original-date"
     | "submitted"
-  
+
   ## Name variables
   variables.names =
     "author"
@@ -44,7 +44,7 @@ div {
     | "recipient"
     | "reviewed-author"
     | "translator"
-  
+
   ## Number variables
   variables.numbers =
     "chapter-number"
@@ -63,34 +63,18 @@ div {
     | "printing"
     | "supplement"
     | "volume"
-  
+
   ## Title variables
   variables.titles =
     "collection-title"
-    | "collection-title-main"
-    | "collection-title-sub"
-    | "collection-title-short"
     | "container-title"
-    | "container-title-main"
-    | "container-title-sub"
-    | "container-title-short"
     | "original-title"
-    | "original-title-main"
-    | "original-title-sub"
-    | "original-title-short"
+    | "part-title"
     | "reviewed-title"
-    | "reviewed-title-main"
-    | "reviewed-title-sub"
-    | "reviewed-title-short"
-    | "volume-title"
-    | "volume-title-main"
-    | "volume-title-sub"
-    | "volume-title-short"
     | "title"
-    | "title-main"
-    | "title-sub"
-    | "title-short"
-  
+    | "translated-title"
+    | "volume-title"
+
   ## String variables
   variables.strings =
     "abstract"
@@ -123,8 +107,6 @@ div {
     | "note"
     | "original-publisher"
     | "original-publisher-place"
-    | "original-title"
-    | "part-title"
     | "PMCID"
     | "PMID"
     | "publisher"
@@ -134,10 +116,6 @@ div {
     | "section"
     | "source"
     | "status"
-    | "title"
-    | "title-short"
-    | "translated-title"
-    | "translated-title-short"
     | "URL"
     | "version"
     | "year-suffix"

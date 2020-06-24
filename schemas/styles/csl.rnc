@@ -125,7 +125,7 @@ div {
   info.id =
     
     ## Specify the unique and stable identifier for the style. A URI
-    ## is valid, but new styles should use a UUID to ensure stability 
+    ## is valid, but new styles should use a UUID to ensure stability
     ## and uniqueness.
     element cs:id { xsd:anyURI }
   info.issn =
@@ -321,6 +321,11 @@ div {
       attribute name { xsd:NMTOKEN },
       rendering-element+
     }
+}
+# ==============================================================================
+
+## Rendering Elements
+div {
   rendering-element =
     rendering-element.names
     | rendering-element.date
@@ -641,10 +646,11 @@ div {
     | 
       ## Specify verbatim text.
       attribute value { text }
-    | (
-       ## Select a variable.
-       attribute variable { variables.standard },
-       [ a:defaultValue = "long" ] attribute form { "short" | "long" }?)
+    | ((attribute variable { variables.numbers | variables.strings },
+        [ a:defaultValue = "long" ] attribute form { "short" | "long" })
+       | (attribute variable { variables.titles },
+          [ a:defaultValue = "long" ]
+          attribute form { "short" | "long" | "sub" | "main" })?)
 }
 # ==============================================================================
 
@@ -909,7 +915,7 @@ div {
     [ a:defaultValue = "simple" ]
     attribute title-split {
       
-      ## Matches "."", ":", "::", "!", "?" 
+      ## Matches "."", ":", "::", "!", "?"
       "simple"
       | 
         ## Matches the values for "simple" plus ";"
@@ -918,7 +924,7 @@ div {
         ## Matches the values for "simple" plus "—" and ";"
         "full"
       | 
-        ## Matches the values for "simple" plus ";"" 
+        ## Matches the values for "simple" plus ";""
         ## and "[;,] or[,:]" (see CMoS 14.91), e.g.  "Moby-Dick; or, The Whale"
         "chicago"
     }?,
