@@ -69,9 +69,11 @@ div {
     "collection-title"
     | "container-title"
     | "original-title"
+    | "part-title"
     | "reviewed-title"
-    | "volume-title"
     | "title"
+    | "translated-title"
+    | "volume-title"
 
   ## String variables
   variables.strings =
@@ -105,8 +107,6 @@ div {
     | "note"
     | "original-publisher"
     | "original-publisher-place"
-    | "original-title"
-    | "part-title"
     | "PMCID"
     | "PMID"
     | "publisher"
@@ -116,7 +116,6 @@ div {
     | "section"
     | "source"
     | "status"
-    | "translated-title"
     | "URL"
     | "version"
     | "year-suffix"
