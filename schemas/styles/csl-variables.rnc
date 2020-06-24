@@ -33,6 +33,7 @@ div {
     | "curator"
     | "director"
     | "editor"
+    | "editor-translator"
     | "editorial-director"
     | "executive-producer"
     | "illustrator"
