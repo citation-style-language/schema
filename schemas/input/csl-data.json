@@ -208,9 +208,6 @@
       "available-date": {
         "$ref": "#/definitions/date-variable"
       },
-      "container": {
-        "$ref": "#/definitions/date-variable"
-      },
       "event-date": {
         "$ref": "#/definitions/date-variable"
       },
