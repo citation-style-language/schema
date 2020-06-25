@@ -11,12 +11,12 @@ from glob import glob
 
 parser = argparse.ArgumentParser(description="process csl schema files")
 parser.add_argument("--commit", action="store_true", help="commit the file(s)")
-args = parser.parse_args()
+args, unknown = parser.parse_known_args()
 
 rncdir = os.path.join("schemas", "styles")
 
 
-def rnc_format(rncfile, check=False):
+def rnc_format(rncfile):
     try:
         which("trang") is not None
     except Exception:
@@ -36,15 +36,14 @@ def rnc_format(rncfile, check=False):
 
 def rnc_pre_commit():
 
-    # this will only work as part of a pre-comimt process, where it will run
+    # this will only work as part of a pre-commit process, where it will run
     # rnc_format on any staged rnc files, and then restage
     cmd = ["git", "diff", "--name-only", "--cached"]
     changed_files = subprocess.check_output(cmd, text=True).splitlines()
-    print(changed_files)
 
     for changed_file in changed_files:
         if changed_file.endswith(".rnc"):
-            rnc_format(changed_file, True)
+            rnc_format(changed_file)
             subprocess.run(["git", "add", changed_file])
 
 
@@ -53,6 +52,7 @@ def main():
         rnc_pre_commit()
     else:
         rnc_format(os.path.join("schemas", "styles", "csl.rnc"))
+        print("\n====> rnc schema files validated and formatted .....")
 
 
 if __name__ == "__main__":
