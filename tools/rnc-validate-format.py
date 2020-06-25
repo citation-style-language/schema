@@ -11,7 +11,7 @@ from glob import glob
 
 parser = argparse.ArgumentParser(description="process csl schema files")
 parser.add_argument("--commit", action="store_true", help="commit the file(s)")
-args = parser.parse_args()
+args, unknown = parser.parse_known_args()
 
 rncdir = os.path.join("schemas", "styles")
 
