@@ -481,7 +481,7 @@
     },
     "date-variable": {
       "title": "Date content model.",
-      "description": "The CSL input model supports two different date representations: a preferred EDTF string, and a more structured alternative.",
+      "description": "The CSL input model supports two different date representations: an EDTF string (preferred), and a more structured alternative.",
       "anyOf": [
         {
           "$ref": "#/definitions/edtf-datatype"
