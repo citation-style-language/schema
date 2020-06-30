@@ -477,7 +477,7 @@
       "title": "EDTF datatype pattern",
       "description": "CSL input supports EDTF, validated against this regular expression.",
       "type": "string",
-      "pattern": "[0-9,\-,%,~,X,?,..,\/]"
+      "pattern": "[0-9,-,%,~,X,?,..,\/]"
     },
     "date-variable": {
       "title": "Date content model.",
