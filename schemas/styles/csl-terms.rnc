@@ -109,7 +109,8 @@ div {
   ## Locator terms that can be tested with the "locator" conditional
   ## ("sub verbo" can be tested with "sub-verbo")
   terms.locator.testable =
-    "appendix"
+    "act"
+    | "appendix"
     | "article"
     | "book"
     | "canon"
@@ -126,6 +127,7 @@ div {
     | "paragraph"
     | "part"
     | "rule"
+    | "scene"
     | "section"
     | "supplement"
     | "table"
