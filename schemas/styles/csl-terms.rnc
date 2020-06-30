@@ -100,15 +100,6 @@ div {
   
   ## Locators
   terms.locator =
-    terms.locator.testable
-    | 
-      ## "sub verbo" is recognized as "sub" & "verbo" in attribute lists; term
-      ## should be renamed to "sub-verbo"
-      "sub verbo"
-  
-  ## Locator terms that can be tested with the "locator" conditional
-  ## ("sub verbo" can be tested with "sub-verbo")
-  terms.locator.testable =
     "act"
     | "appendix"
     | "article"
@@ -129,6 +120,7 @@ div {
     | "rule"
     | "scene"
     | "section"
+    | "sub-verbo"
     | "supplement"
     | "table"
     | "timestamp"
