@@ -40,7 +40,7 @@ div {
     | 
       ## Tests whether the locator matches the given locator types.
       attribute locator {
-        list { (terms.locator.testable | "sub-verbo")+ }
+        list { (terms.locator)+ }
       }
     | 
       ## Tests whether the cite position matches the given positions.
