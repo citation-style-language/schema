@@ -446,9 +446,14 @@
         "title": "Custom key-value pairs.",
         "type": "object",
         "description": "Used to store additional information that does not have a designated CSL JSON field. The note field can also store additional information, but custom is preferred for storing key-value pairs.",
-        "examples" : [
-          {"short_id": "xyz", "other-ids": ["alternative-id"]},
-          {"metadata-double-checked": true}
+        "examples": [
+          {
+            "short_id": "xyz",
+            "other-ids": ["alternative-id"]
+          },
+          {
+            "metadata-double-checked": true
+          }
         ]
       }
     },
@@ -492,8 +497,19 @@
         }
       ]
     },
+    "edtf-datatype": {
+      "title": "EDTF datatype pattern",
+      "description": "CSL input supports EDTF, validated against this regular expression.",
+      "type": "string",
+      "pattern": "^[0-9-%~X?.\/]{4,}$"
+    },
     "date-variable": {
+      "title": "Date content model.",
+      "description": "The CSL input model supports two different date representations: an EDTF string (preferred), and a more structured alternative.",
       "anyOf": [
+        {
+          "$ref": "#/definitions/edtf-datatype"
+        },
         {
           "properties": {
             "date-parts": {
@@ -520,6 +536,9 @@
             },
             "raw": {
               "type": "string"
+            },
+            "edtf": {
+              "$ref": "#/definitions/edtf-datatype"
             }
           },
           "additionalProperties": false
