@@ -27,6 +27,7 @@ div {
     | "et-al"
     | "forthcoming"
     | "from"
+    | "henceforth"
     | "ibid"
     | "in"
     | "in press"
