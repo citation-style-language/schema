@@ -64,6 +64,17 @@ div {
       attribute variable {
         list { variables+ }
       }
+      |
+      tests-dates
+  
+  # Tests for date variables that require two attributes:
+  tests-dates =
+    attribute tested { 
+      list { variables.dates+ }
+     },
+    attribute date-precision { text },
+    attribute date-range { text }
+
   match =
     
     ## Set the testing logic.
