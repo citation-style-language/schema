@@ -11,7 +11,7 @@ div {
   
   ## When specifying conditions, we allow either the attribute syntax or the element-based one.
   choose.condition =
-    (condition.atts, match?)
+    (condition.atts+, match?)
     | element cs:conditions { match, condition.elem+ }
   choose.if = element cs:if { choose.condition, rendering-element* }
   choose.else-if =
@@ -66,7 +66,7 @@ div {
       }
   
   # Tests that require two attributes
-  condition.atts.complex.dates = 
+  condition.atts.complex = 
     condition.atts.complex.dates
     |
     condition.atts.complex.general
