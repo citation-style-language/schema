@@ -64,13 +64,13 @@ div {
       attribute variable {
         list { variables+ }
       }
-      |
-      condition.atts.complex.dates
-      |
-      condition.atts.complex.general
-
   
-  # Tests that require two attributes 
+  # Tests that require two attributes
+  condition.atts.complex.dates = 
+    condition.atts.complex.dates
+    |
+    condition.atts.complex.general
+
   # Dates
   condition.atts.complex.dates =
     ## specifies the variable to be tested
