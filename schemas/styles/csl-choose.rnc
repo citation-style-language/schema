@@ -21,7 +21,7 @@ div {
   ## This element allows for more complex conditional logic; for 
   ## example, if you need to specify mixed "match" rules.
   condition.elem = element cs:condition { match?, condition.atts }
-  condition.atts = ((condition.atts.simple+, condition.atts.complex) | condition.atts.simple+ | condition.atts.complex)
+  condition.atts = ((condition.atts.simple+, condition.atts.complex?) | condition.atts.complex)
   condition.atts.simple =
     
     ## If used, the element content is only rendered if it disambiguates two
