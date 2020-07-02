@@ -11,7 +11,7 @@ div {
   
   ## When specifying conditions, we allow either the attribute syntax or the element-based one.
   choose.condition =
-    (condition.atts+, match?)
+    (condition.atts, match?)
     | element cs:conditions { match, condition.elem+ }
   choose.if = element cs:if { choose.condition, rendering-element* }
   choose.else-if =
@@ -21,7 +21,8 @@ div {
   ## This element allows for more complex conditional logic; for 
   ## example, if you need to specify mixed "match" rules.
   condition.elem = element cs:condition { match?, condition.atts }
-  condition.atts =
+  condition.atts = ((condition.atts.simple+, condition.atts.complex) | condition.atts.simple+ | condition.atts.complex)
+  condition.atts.simple =
     
     ## If used, the element content is only rendered if it disambiguates two
     ## otherwise identical citations. This attempt at disambiguation is only
