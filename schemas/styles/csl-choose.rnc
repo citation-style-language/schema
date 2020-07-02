@@ -70,23 +70,26 @@ div {
       condition.atts.complex.general
 
   
-  # Tests that require two attributes
+  # Tests that require two attributes 
   # Dates
   condition.atts.complex.dates =
     ## specifies the variable to be tested
     attribute tested { 
       list { variables.dates+ }
      },
-    ## Tests the precision of a date variable
-    attribute date-precision { text },
-    ## Tests whether a date variable is within a given range
-    attribute date-range { text }
+     (date-precision | date-range)+
+    
+  ## Tests the precision of a date variable
+  date-precision = attribute date-precision { text }
+  
+  ## Tests whether a date variable is within a given range
+  date-range = attribute date-range { text }
   
   # General
   condition.atts.complex.general =
     ## specifies the variable to be tested
     attribute tested { 
-      list {variables+ }
+      list { variables+ }
      },
     ## Tests whether the tested variable matches another variable
     attribute matches { 
