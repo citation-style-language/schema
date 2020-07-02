@@ -80,7 +80,9 @@ div {
      (date-precision | date-range)+
     
   ## Tests the precision of a date variable
-  date-precision = attribute date-precision { text }
+  date-precision = attribute date-precision { 
+    list { ("year" | "month" | "day") }
+   }
   
   ## Tests whether a date variable is within a given range
   date-range = attribute date-range { text }
