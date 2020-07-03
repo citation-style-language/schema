@@ -56,9 +56,6 @@ div {
     | "season-02"
     | "season-03"
     | "season-04"
-    | 
-      ## (legacy; remove in CSL 1.1)
-      category.field
   
   ## Terms to which a gender may be assigned
   terms.gender-assignable =
