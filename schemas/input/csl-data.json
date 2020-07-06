@@ -437,6 +437,78 @@
     "additionalProperties": false
   },
   "definitions": {
+    "edtf-string": {
+      "title": "EDTF date string",
+      "description": "CSL input supports EDTF, levels 0 and 1.",
+      "type": "string",
+      "pattern": "^[0-9-%~X?./]{4,}$"
+    },
+    "date-object": {
+      "title": "Date Object",
+      "description": "An EDTF date represented as an object.",
+      "type": "object",
+      "properties": {
+        "date-parts": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 1,
+          "maxItems": 3
+        },
+        "literal": {
+          "title": "Literal date",
+          "description": "A date that should be passed through to the processor as is; for dates that cannot be represented in EDTF.",
+          "examples": ["Han Dynasty"],
+          "type": "string"
+        },
+        "approximate": {
+          "title": "Approximate",
+          "description": "Indicates an approximate or circa date, which may be presented as `circa May 23, 1972`.",
+          "type": "boolean"
+        },
+        "uncertain": {
+          "title": "Uncertain",
+          "description": "Indicates uncertainty about a date representation, which may be presented as `May 23, 1972?`",
+          "type": "boolean"
+        }
+      },
+      "required": ["date-parts"]
+    },
+    "date-range": {
+      "title": "Date Range",
+      "description": "An EDTF range is a two-item array. An open end or begin of a range can be represented with a null.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/date-object"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "date-structured": {
+      "title": "Structured Date",
+      "description": "Can either be an object, or a two-item array.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/date-object"
+        },
+        {
+          "$ref": "#/definitions/date-range"
+        }
+      ]
+    },
+    "date-variable": {
+      "title": "Date content model.",
+      "description": "The CSL input model supports two different date representations: an EDTF string (preferred), and a more structured alternative.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/edtf-string"
+        },
+        {
+          "$ref": "#/definitions/date-structured"
+        }
+      ]
+    },
     "name-variable": {
       "anyOf": [
         {
@@ -467,54 +539,6 @@
             },
             "parse-names": {
               "type": ["string", "number", "boolean"]
-            }
-          },
-          "additionalProperties": false
-        }
-      ]
-    },
-    "edtf-datatype": {
-      "title": "EDTF datatype pattern",
-      "description": "CSL input supports EDTF, validated against this regular expression.",
-      "type": "string",
-      "pattern": "^[0-9-%~X?.\/]{4,}$"
-    },
-    "date-variable": {
-      "title": "Date content model.",
-      "description": "The CSL input model supports two different date representations: an EDTF string (preferred), and a more structured alternative.",
-      "anyOf": [
-        {
-          "$ref": "#/definitions/edtf-datatype"
-        },
-        {
-          "properties": {
-            "date-parts": {
-              "type": "array",
-              "items": {
-                "type": "array",
-                "items": {
-                  "type": ["string", "number"]
-                },
-                "minItems": 1,
-                "maxItems": 3
-              },
-              "minItems": 1,
-              "maxItems": 2
-            },
-            "season": {
-              "type": ["string", "number"]
-            },
-            "circa": {
-              "type": ["string", "number", "boolean"]
-            },
-            "literal": {
-              "type": "string"
-            },
-            "raw": {
-              "type": "string"
-            },
-            "edtf": {
-              "$ref": "#/definitions/edtf-datatype"
             }
           },
           "additionalProperties": false
