@@ -760,7 +760,7 @@ div {
     
     ## Reformat page ranges in the "page" variable.
     attribute page-range-format {
-      "chicago" | "expanded" | "minimal" | "minimal-two"
+      "expanded" | "minimal" | "minimal-two" | "minimal-oup" | "chicago" | "mhra" 
     }?
   citation.cite-group-delimiter =
     
