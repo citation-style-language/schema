@@ -289,25 +289,10 @@
       "genre": {
         "type": "string"
       },
-      "ISAN": {
-        "type": "string"
-      },
       "ISBN": {
         "type": "string"
       },
-      "ISCI": {
-        "type": "string"
-      },
-      "ISMN": {
-        "type": "string"
-      },
-      "ISRC": {
-        "type": "string"
-      },
       "ISSN": {
-        "type": "string"
-      },
-      "ISWC": {
         "type": "string"
       },
       "issue": {
