@@ -58,6 +58,9 @@
       "id": {
         "type": ["string", "number"]
       },
+      "citation-key": {
+        "type": "string"
+      },
       "categories": {
         "type": "array",
         "items": {
@@ -205,9 +208,6 @@
       "available-date": {
         "$ref": "#/definitions/date-variable"
       },
-      "container": {
-        "$ref": "#/definitions/date-variable"
-      },
       "event-date": {
         "$ref": "#/definitions/date-variable"
       },
@@ -289,25 +289,10 @@
       "genre": {
         "type": "string"
       },
-      "ISAN": {
-        "type": "string"
-      },
       "ISBN": {
         "type": "string"
       },
-      "ISCI": {
-        "type": "string"
-      },
-      "ISMN": {
-        "type": "string"
-      },
-      "ISRC": {
-        "type": "string"
-      },
       "ISSN": {
-        "type": "string"
-      },
-      "ISWC": {
         "type": "string"
       },
       "issue": {
@@ -376,6 +361,9 @@
       "references": {
         "type": "string"
       },
+      "reviewed-genre": {
+        "type": "string"
+      },
       "reviewed-title": {
         "type": "string"
       },
@@ -414,6 +402,12 @@
       },
       "volume": {
         "type": ["string", "number"]
+      },
+      "volume-title": {
+        "type": "string"
+      },
+      "volume-title-short": {
+        "type": "string"
       },
       "year-suffix": {
         "type": "string"
