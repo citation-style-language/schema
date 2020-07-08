@@ -418,6 +418,12 @@
       "volume": {
         "type": ["string", "number"]
       },
+      "volume-title": {
+        "type": "string"
+      },
+      "volume-title-short": {
+        "type": "string"
+      },
       "year-suffix": {
         "type": "string"
       }
