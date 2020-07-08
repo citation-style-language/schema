@@ -512,7 +512,6 @@ div {
       font-formatting,
       text-case
     }
-
   names.et-al =
     
     ## Specify the term used for et-al abbreviation and its formatting.
