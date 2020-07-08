@@ -34,6 +34,7 @@ div {
     | "film"
     | "forthcoming"
     | "from"
+    | "henceforth"
     | "ibid"
     | "in"
     | "in press"
@@ -74,15 +75,15 @@ div {
     | "open-inner-quote"
     | "close-inner-quote"
     | "page-range-delimiter"
+    | "colon"
+    | "comma"
+    | "semicolon"
     | 
       ## Seasons
       "season-01"
     | "season-02"
     | "season-03"
     | "season-04"
-    | 
-      ## (legacy; remove in CSL 1.1)
-      category.field
   
   ## Terms to which a gender may be assigned
   terms.gender-assignable =
@@ -125,16 +126,8 @@ div {
   
   ## Locators
   terms.locator =
-    terms.locator.testable
-    | 
-      ## "sub verbo" is recognized as "sub" & "verbo" in attribute lists; term
-      ## should be renamed to "sub-verbo"
-      "sub verbo"
-  
-  ## Locator terms that can be tested with the "locator" conditional
-  ## ("sub verbo" can be tested with "sub-verbo")
-  terms.locator.testable =
-    "appendix"
+    "act"
+    | "appendix"
     | "article-locator"
     | "book"
     | "canon"
@@ -149,6 +142,8 @@ div {
     | "opus"
     | "paragraph"
     | "rule"
+    | "scene"
+    | "sub-verbo"
     | "table"
     | "timestamp"
     | "title"

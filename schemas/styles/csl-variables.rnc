@@ -8,7 +8,8 @@ div {
   variables = variables.dates | variables.names | variables.standard
   
   ## Standard variables
-  variables.standard = variables.numbers | variables.strings
+  variables.standard =
+    variables.numbers | variables.strings | variables.titles
   
   ## Date variables
   variables.dates =
@@ -28,13 +29,18 @@ div {
     | "composer"
     | "container-author"
     | "contributor"
+    | "creator"
     | "curator"
     | "director"
     | "editor"
+    | "editor-translator"
     | "editorial-director"
     | "executive-producer"
+    | "guest"
+    | "host"
     | "illustrator"
     | "interviewer"
+    | "narrator"
     | "organizer"
     | "original-author"
     | "performer"
@@ -42,6 +48,7 @@ div {
     | "recipient"
     | "reviewed-author"
     | "translator"
+    | "writer"
   
   ## Number variables
   variables.numbers =
@@ -64,6 +71,17 @@ div {
     | "version"
     | "volume"
   
+  ## Title variables
+  variables.titles =
+    "collection-title"
+    | "container-title"
+    | "original-title"
+    | "part-title"
+    | "reviewed-title"
+    | "title"
+    | "translated-title"
+    | "volume-title"
+  
   ## String variables
   variables.strings =
     "abstract"
@@ -76,22 +94,14 @@ div {
     | "call-number"
     | "citation-key"
     | "citation-label"
-    | "collection-title"
-    | "container-title"
-    | "container-title-short"
     | "dimensions"
     | "division"
     | "DOI"
     | "event"
     | "event-place"
     | "genre"
-    | "ISAN"
     | "ISBN"
-    | "ISCI"
-    | "ISMN"
-    | "ISRC"
     | "ISSN"
-    | "ISWC"
     | "jurisdiction"
     | "keyword"
     | "language"
@@ -100,23 +110,15 @@ div {
     | "note"
     | "original-publisher"
     | "original-publisher-place"
-    | "original-title"
-    | "part-title"
     | "PMCID"
     | "PMID"
     | "publisher"
     | "publisher-place"
     | "references"
     | "reviewed-genre"
-    | "reviewed-title"
     | "scale"
     | "source"
     | "status"
-    | "title"
-    | "title-short"
-    | "translated-title"
-    | "translated-title-short"
     | "URL"
-    | "volume-title"
     | "year-suffix"
 }

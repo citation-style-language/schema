@@ -21,6 +21,7 @@ dc:description [
 ]
 
 ## Subparts of the CSL schema
+include "csl-choose.rnc"
 include "csl-terms.rnc"
 include "csl-types.rnc"
 include "csl-variables.rnc"
@@ -43,24 +44,21 @@ div {
       (style.locale*
        & style.macro*
        & style.citation
+       & style.intext?
        & style.bibliography?)
     }
   dependent-style.style =
     element cs:style {
-      style.default-locale,
-      version,
-      dependent-style.style.info,
-      dependent-style.style.legacy-attributes
+      style.default-locale, version, dependent-style.style.info
     }
+  style.default-locale =
+    
+    ## Set a default style locale.
+    attribute default-locale { xsd:language }?
   version =
     
-    ## Indicate CSL version compatibility ("1.0" for CSL 1.0).
-    [ a:defaultValue = "1.0" ] attribute version { "1.0" }
-  
-  ## Obsolete for dependent styles. Will be disallowed with CSL 1.1.
-  dependent-style.style.legacy-attributes =
-    attribute class { "in-text" | "note" }?,
-    style.options
+    ## Indicate CSL version compatibility.
+    [ a:defaultValue = "1.1" ] attribute version { "1.1" }
 }
 # ==============================================================================
 
@@ -127,7 +125,7 @@ div {
   info.id =
     
     ## Specify the unique and stable identifier for the style. A URI
-    ## is valid, but new styles should use a UUID to ensure stability 
+    ## is valid, but new styles should use a UUID to ensure stability
     ## and uniqueness.
     element cs:id { xsd:anyURI }
   info.issn =
@@ -160,10 +158,6 @@ div {
         | 
           ## URI of style documentation.
           "documentation"
-        | 
-          ## Obsolete for independent styles. Will be disallowed with
-          ## CSL 1.1.
-          "independent-parent"
       },
       info-text
     }
@@ -183,10 +177,6 @@ div {
         | 
           ## URI of style documentation.
           "documentation"
-        | 
-          ## Obsolete for dependent styles. Will be disallowed with CSL
-          ## 1.1.
-          "template"
       },
       info-text
     }
@@ -259,10 +249,6 @@ div {
       locale-file.locale.info?,
       (locale.style-options & locale.date+ & locale.terms)
     }
-  style.default-locale =
-    
-    ## Set a default style locale.
-    attribute default-locale { xsd:language }?
   locale.date =
     element cs:date {
       date.form,
@@ -335,6 +321,11 @@ div {
       attribute name { xsd:NMTOKEN },
       rendering-element+
     }
+}
+# ==============================================================================
+
+## Rendering Elements
+div {
   rendering-element =
     rendering-element.names
     | rendering-element.date
@@ -352,6 +343,13 @@ div {
     
     ## Use to describe the formatting of citations.
     element cs:citation { citation.options, sort?, citation.layout }
+  style.intext =
+    
+    ## Defines the author-only rendering for assembly of a textual citations
+    ## (for example, "Doe [3]" or "Doe (2018)"), where the output expectations
+    ## for in-text authors are different than the default citation rendering;
+    ## for example, in APA, or numeric styles.
+    element cs:intext { citation.options, sort?, citation.layout }
   style.bibliography =
     
     ## Use to describe the formatting of the bibliography.
@@ -407,14 +405,18 @@ div {
   name.attributes =
     
     ## Use to separate the second-to-last and last name of a name list by
-    ## the "and" term or ampersand.
+    ## the "and" term.
     attribute and {
       
-      ## Use the "and" term (e.g., "Doe, Johnson and Smith").
-      "text"
+      ## Use the "and" term "long" form (e.g., "Doe, Johnson and Smith").
+      "long"
       | 
-        ## Use the "ampersand" (e.g., "Doe, Johnson & Smith").
+        ## Use the "and" term "symbol" form (e.g., "Doe, Johnson & Smith").
         "symbol"
+      | 
+        ## Use the "and" term "short" form. Not common in English, but is seen in other languages.
+        ## In German, for example: "Doe, Johnson u. Smith, where "u." is short for "und."
+        "short"
     }?,
     
     ## Specify when the name delimiter is used between a truncated name list
@@ -518,12 +520,8 @@ div {
       ## Select the term to use for et-al abbreviation.
       [ a:defaultValue = "et-al" ]
       attribute term { "et-al" | "and others" }?,
-      font-formatting,
-      names.et-al.legacy-attributes
+      font-formatting
     }
-  
-  ## Ignored in CSL 1.0.1. Will be disallowed with CSL 1.1.
-  names.et-al.legacy-attributes = affixes
   
   ## Inherits variable from the parent cs:names element.
   names.label =
@@ -648,10 +646,11 @@ div {
     | 
       ## Specify verbatim text.
       attribute value { text }
-    | (
-       ## Select a variable.
-       attribute variable { variables.standard },
-       [ a:defaultValue = "long" ] attribute form { "short" | "long" }?)
+    | ((attribute variable { variables.numbers | variables.strings },
+        [ a:defaultValue = "long" ] attribute form { "short" | "long" })
+       | (attribute variable { variables.titles },
+          [ a:defaultValue = "long" ]
+          attribute form { "short" | "long" | "sub" | "main" })?)
 }
 # ==============================================================================
 
@@ -724,6 +723,7 @@ div {
     style.demote-non-dropping-particle,
     style.initialize-with-hyphen,
     style.page-range-format,
+    title-inheritable-options,
     names-inheritable-options,
     name-inheritable-options
   citation.options =
@@ -731,6 +731,7 @@ div {
     citation.collapse-options,
     citation.disambiguate-options,
     citation.near-note-distance,
+    title-inheritable-options,
     names-inheritable-options,
     name-inheritable-options
   bibliography.options =
@@ -738,6 +739,7 @@ div {
     bibliography.line-formatting-options,
     bibliography.second-field-align,
     bibliography.subsequent-author-substitute-options,
+    title-inheritable-options,
     names-inheritable-options,
     name-inheritable-options
   style.demote-non-dropping-particle =
@@ -758,7 +760,12 @@ div {
     
     ## Reformat page ranges in the "page" variable.
     attribute page-range-format {
-      "chicago" | "expanded" | "minimal" | "minimal-two"
+      "expanded"
+      | "minimal"
+      | "minimal-two"
+      | "minimal-oup"
+      | "chicago"
+      | "mhra"
     }?
   citation.cite-group-delimiter =
     
@@ -899,6 +906,48 @@ div {
         "partial-first"
     }?
   
+  ## Options affecting rendering of title variables, for cs:style, cs:citation and cs:bibliography
+  title-inheritable-options =
+    
+    ## Inheritable title option, specify the delimiter between "title-main" and "title-sub".
+    attribute title-delimiter { text }?,
+    
+    ## Inheritable title option, specify the delimiter between multiple subtitles.
+    ## The same as "title-delimiter" if not specified.
+    attribute title-sub-delimiter { text }?,
+    
+    ## Inheritable title option, specify how titles are split into "title-main" and "title-sub".
+    [ a:defaultValue = "simple" ]
+    attribute title-split {
+      
+      ## Matches "."", ":", "::", "!", "?"
+      "simple"
+      | 
+        ## Matches the values for "simple" plus ";"
+        "extended"
+      | 
+        ## Matches the values for "simple" plus "—" and ";"
+        "full"
+      | 
+        ## Matches the values for "simple" plus ";""
+        ## and "[;,] or[,:]" (see CMoS 14.91), e.g.  "Moby-Dick; or, The Whale"
+        "chicago"
+    }?,
+    
+    ## Inheritable title option, specify which delimiters are normalized.
+    [ a:defaultValue = "simple" ]
+    attribute normalize-title-delimiters {
+      
+      ## Normalize "."", ":", "::"
+      "simple"
+      | 
+        ## Normalize the values for "simple" plus ";"
+        "extended"
+      | 
+        ## Normalize the values for "simple" plus "—" and ";"
+        "full"
+    }?
+  
   ## Options affecting cs:names, for cs:style, cs:citation and cs:bibliography.
   names-inheritable-options =
     
@@ -947,80 +996,6 @@ div {
       [ a:defaultValue = "ascending" ]
       attribute sort { "ascending" | "descending" }?
     }
-}
-# ==============================================================================
-
-## cs:choose - Conditional Statements"
-div {
-  rendering-element.choose =
-    
-    ## Use to conditionally render rendering elements.
-    element cs:choose { choose.if, choose.else-if*, choose.else? }
-  choose.if = element cs:if { condition+, match, rendering-element* }
-  choose.else-if =
-    element cs:else-if { condition+, match, rendering-element* }
-  choose.else = element cs:else { rendering-element+ }
-  condition =
-    
-    ## If used, the element content is only rendered if it disambiguates two
-    ## otherwise identical citations. This attempt at disambiguation is only
-    ## made after all other disambiguation methods have failed.
-    [ a:defaultValue = "true" ] attribute disambiguate { "true" }
-    | 
-      ## Tests whether the given variables contain numeric text.
-      attribute is-numeric {
-        list { variables+ }
-      }
-    | 
-      ## Tests whether the given date variables contain approximate dates.
-      attribute is-uncertain-date {
-        list { variables.dates+ }
-      }
-    | 
-      ## Tests whether the locator matches the given locator types.
-      attribute locator {
-        list { (terms.locator.testable | "sub-verbo")+ }
-      }
-    | 
-      ## Tests whether the cite position matches the given positions.
-      attribute position {
-        list {
-          ("first"
-           | "subsequent"
-           | "ibid"
-           | "ibid-with-locator"
-           | "near-note")+
-        }
-      }
-    | 
-      ## Tests whether the item matches the given types.
-      attribute type {
-        list { item-types+ }
-      }
-    | 
-      ## Tests whether the default ("long") forms of the given variables
-      ## contain non-empty values.
-      attribute variable {
-        list { variables+ }
-      }
-  match =
-    
-    ## Set the testing logic.
-    [ a:defaultValue = "all" ]
-    attribute match {
-      
-      ## Element only tests "true" when all conditions test "true" for all
-      ## given test values.
-      "all"
-      | 
-        ## Element tests "true" when any condition tests "true" for any given
-        ## test value.
-        "any"
-      | 
-        ## Element only tests "true" when none of the conditions test "true"
-        ## for any given test value.
-        "none"
-    }?
 }
 # ==============================================================================
 
@@ -1086,14 +1061,15 @@ div {
         ## their original case).
         "capitalize-first"
       | 
+        ## Capitalizes the first character and the first character of a subtitle
+        ## (other characters remain in their original case).
+        "capitalize-subtitle"
+      | 
         ## Capitalizes the first character of every word (other characters
         ## remain in their original case).
         "capitalize-all"
       | 
         ## Renders text in title case.
         "title"
-      | 
-        ## Renders text in sentence case. Deprecated.
-        "sentence"
     }?
 }
