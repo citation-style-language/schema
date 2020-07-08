@@ -28,13 +28,17 @@ div {
     | "composer"
     | "container-author"
     | "contributor"
+    | "creator"
     | "curator"
     | "director"
     | "editor"
     | "editorial-director"
     | "executive-producer"
+    | "guest"
+    | "host"
     | "illustrator"
     | "interviewer"
+    | "narrator"
     | "organizer"
     | "original-author"
     | "performer"
@@ -42,6 +46,7 @@ div {
     | "recipient"
     | "reviewed-author"
     | "translator"
+    | "writer"
   
   ## Number variables
   variables.numbers =
