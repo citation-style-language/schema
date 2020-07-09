@@ -472,12 +472,11 @@
           "description": "Indicates uncertainty about a date representation, which may be presented as `May 23, 1972?`",
           "type": "boolean"
         }
-      },
-      "required": ["date-parts"]
+      }
     },
     "date-range": {
       "title": "Date Range",
-      "description": "An EDTF range is a two-item array. An open end or begin of a range can be represented with a null.",
+      "description": "An EDTF range is a two-item array. An open end or begin of a range can be represented with an empty (date) object.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/date-object"
