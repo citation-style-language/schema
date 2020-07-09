@@ -445,7 +445,18 @@
     },
     "date-object": {
       "title": "Date Object",
-      "description": "An EDTF date represented as an object.",
+      "description": "An EDTF date represented as an object. Seasons can be represented using the 21-24 month values of EDTF, decades and centuries using the X notation, and the qualifiers with the included boolean properties",
+      "examples": [
+        {
+          "id": "one",
+          "type": "book",
+          "title": "The Title",
+          "issued": {
+            "date-parts": [2000, 3, 10]
+          },
+          "approximate": "true"
+        }
+      ],
       "type": "object",
       "properties": {
         "date-parts": {
@@ -478,6 +489,20 @@
       "title": "Date Range",
       "description": "An EDTF range is a two-item array. An open end or begin of a range can be represented with an empty (date) object.",
       "type": "array",
+      "examples": [
+        {
+          "id": "range-1",
+          "type": "book",
+          "title": "The Title",
+          "issued": [{ "date-parts": [2000] }, { "date-parts": [2001] }]
+        },
+        {
+          "id": "range-2",
+          "type": "book",
+          "title": "The Title",
+          "issued": [{ "date-parts": [2000] }, {}]
+        }
+      ],
       "items": {
         "$ref": "#/definitions/date-object"
       },
