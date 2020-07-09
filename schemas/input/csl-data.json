@@ -459,13 +459,21 @@
       ],
       "type": "object",
       "properties": {
-        "date-parts": {
-          "type": "array",
-          "items": {
-            "type": "integer"
-          },
-          "minItems": 1,
-          "maxItems": 3
+        "year": {
+          "title": "year",
+          "description": "A year; can be negative.",
+          "examples": ["2012","-32"],
+          "type": "integer"
+        },
+        "month": {
+          "title": "month",
+          "description": "A month; can also represent seasons using the EDTF 21-24 values.",
+          "examples": ["2","22"],
+          "type": "integer"
+        },
+        "day": {
+          "title": "day",
+          "type": "integer"
         },
         "literal": {
           "title": "Literal date",
