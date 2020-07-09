@@ -293,7 +293,7 @@ div {
   ## When specifying conditions, we allow either the attribute syntax or the element-based one.
   terms.term.choose.condition =
     (terms.term.condition.atts, match?)
-    | element cs:conditions { match,  terms.term.choose.condition.elem }
+    | element cs:conditions { match?,  terms.term.choose.condition.elem }
   terms.term.choose.if = element cs:if { terms.term.choose.condition,  terms.term.elem }
   terms.term.choose.else-if =
     element cs:else-if { terms.term.choose.condition,  terms.term.elem }
