@@ -276,11 +276,37 @@ div {
   
   ## The "cs:term" element can either hold a basic string, or "cs:single" and
   ## "cs:multiple" child elements to give singular and plural forms of the term.
+  ## To conditionally define terms use "cs:choose" as child element of "cs:term".
+
   terms.term =
     element cs:term {
-      term.attributes,
-      (text | (term.single, term.multiple))
+      term.attributes, (terms.term.elem | terms.term.choose)
     }
+
+  terms.term.elem = text | (term.single, term.multiple)
+
+  terms.term.choose =
+
+    ## Used to conditionally define terms.
+    element cs:choose { terms.term.choose.if, terms.term.choose.else-if*, terms.term.choose.else? }
+  
+  ## When specifying conditions, we allow either the attribute syntax or the element-based one.
+  terms.term.choose.condition =
+    (terms.term.condition.atts, match?)
+    | element cs:conditions { match,  terms.term.choose.condition.elem }
+  terms.term.choose.if = element cs:if { terms.term.choose.condition,  terms.term.elem }
+  terms.term.choose.else-if =
+    element cs:else-if { terms.term.choose.condition,  terms.term.elem }
+  terms.term.choose.else = element cs:else { terms.term.elem }
+
+  terms.term.choose.condition.elem = element cs:condition { match?, terms.term.condition.atts }
+
+  terms.term.condition.atts = 
+    ## Tests whether the item matches the given types.
+    attribute type {
+      list { item-types+ }
+    }
+
   term.attributes =
     (attribute name { terms },
      [ a:defaultValue = "long" ] attribute form { term.form }?)
