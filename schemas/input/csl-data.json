@@ -487,7 +487,7 @@
     },
     "date-range": {
       "title": "Date Range",
-      "description": "An EDTF range is a two-item array. An open end or begin of a range can be represented with an empty (date) object.",
+      "description": "An EDTF range is a two-item array. An open end or beginning of a range can be represented with an empty (date) object.",
       "type": "array",
       "examples": [
         {
