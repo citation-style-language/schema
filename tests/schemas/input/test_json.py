@@ -116,7 +116,7 @@ def test_basic_data_schema_with_author_validates(csl_data_validator):
         "author": [
             {"given": "Jane", "family": "Roe"},
             {"literal": "John Doe"}
-        ],
+        ]
     }]
     csl_data_validator.validate(csl)
 
@@ -125,7 +125,7 @@ def test_data_schema_with_extra_property_fails(csl_data_validator):
     csl = [{
         "id": "example-id",
         "type": "report",
-        "not-a-csl-key": None,
+        "not-a-csl-key": None
     }]
     with pytest.raises(jsonschema.exceptions.ValidationError):
         csl_data_validator.validate(csl)
