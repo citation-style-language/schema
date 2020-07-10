@@ -111,8 +111,8 @@ def test_basic_citation_schema_validates(csl_citation_validator):
 
 def test_basic_data_schema_with_author_validates(csl_data_validator):
     csl = [{
-        'id': 'example-id',
-        'type': 'report',
+        "id": "example-id",
+        "type": "report",
         "author": [
             {"given": "Jane", "family": "Roe"},
             {"literal": "John Doe"}
@@ -123,24 +123,22 @@ def test_basic_data_schema_with_author_validates(csl_data_validator):
 
 def test_data_schema_with_extra_property_fails(csl_data_validator):
     csl = [{
-        'id': 'example-id',
-        'type': 'report',
-        'not-a-csl-key': None,
+        "id": "example-id",
+        "type": "report",
+        "not-a-csl-key": None,
     }]
     with pytest.raises(jsonschema.exceptions.ValidationError):
         csl_data_validator.validate(csl)
 
-def test_data_schema_with_empty_date_parts(csl_data_validator):
+def test_data_schema_with_missing_date(csl_data_validator):
     """
-    empty arrays in date-parts can cause downstream citeproc failures
+    empty dates can cause downstream citeproc failures
     https://github.com/citation-style-language/schema/pull/158
     """
     csl = [{
-        'id': 'example-id',
-        'type': 'report',
-        'issued': {
-            "date-parts": []
-        },
+        "id": "example-id",
+        "type": "report",
+        "issued": { 'approximate': true }
     }]
     with pytest.raises(jsonschema.exceptions.ValidationError):
         csl_data_validator.validate(csl)
