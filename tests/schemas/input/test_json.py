@@ -130,15 +130,3 @@ def test_data_schema_with_extra_property_fails(csl_data_validator):
     with pytest.raises(jsonschema.exceptions.ValidationError):
         csl_data_validator.validate(csl)
 
-def test_data_schema_with_missing_date(csl_data_validator):
-    """
-    empty dates can cause downstream citeproc failures
-    https://github.com/citation-style-language/schema/pull/158
-    """
-    csl = [{
-        "id": "example-id",
-        "type": "report",
-        "issued": { "approximate": true }
-    }]
-    with pytest.raises(jsonschema.exceptions.ValidationError):
-        csl_data_validator.validate(csl)
