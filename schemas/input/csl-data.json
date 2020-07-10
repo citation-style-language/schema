@@ -499,7 +499,7 @@
           "type": "boolean"
         }
       },
-      "oneof": [
+      "oneOf": [
         {
           "required": ["year"]
         },
