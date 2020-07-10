@@ -138,7 +138,7 @@ def test_data_schema_with_missing_date(csl_data_validator):
     csl = [{
         "id": "example-id",
         "type": "report",
-        "issued": { 'approximate': true }
+        "issued": { "approximate": true }
     }]
     with pytest.raises(jsonschema.exceptions.ValidationError):
         csl_data_validator.validate(csl)
