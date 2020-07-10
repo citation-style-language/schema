@@ -452,7 +452,9 @@
           "type": "book",
           "title": "The Title",
           "issued": {
-            "date-parts": [2000, 3, 10]
+            "year": 2000,
+            "month": 3,
+            "day": 10
           },
           "approximate": "true"
         }
@@ -462,13 +464,13 @@
         "year": {
           "title": "year",
           "description": "A year; can be negative.",
-          "examples": ["2012","-32"],
+          "examples": ["2012", "-32"],
           "type": "integer"
         },
         "month": {
           "title": "month",
           "description": "A month; can also represent seasons using the EDTF 21-24 values.",
-          "examples": ["2","22"],
+          "examples": ["2", "22"],
           "type": "integer"
         },
         "day": {
@@ -490,8 +492,21 @@
           "title": "Uncertain",
           "description": "Indicates uncertainty about a date representation, which may be presented as `May 23, 1972?`",
           "type": "boolean"
+        },
+        "undefined": {
+          "title": "Undefined",
+          "description": "Use to represent an open end of a range.",
+          "type": "boolean"
         }
-      }
+      },
+      "oneof": [
+        {
+          "required": ["year"]
+        },
+        {
+          "required": ["undefined"]
+        }
+      ]
     },
     "date-range": {
       "title": "Date Range",
@@ -502,13 +517,13 @@
           "id": "range-1",
           "type": "book",
           "title": "The Title",
-          "issued": [{ "date-parts": [2000] }, { "date-parts": [2001] }]
+          "issued": [{ "year": 2000 }, { "year": 2001 }]
         },
         {
           "id": "range-2",
           "type": "book",
           "title": "The Title",
-          "issued": [{ "date-parts": [2000] }, {}]
+          "issued": [{ "year": 2000 }, { "undefined": true }]
         }
       ],
       "items": {
