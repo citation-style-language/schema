@@ -339,6 +339,10 @@
       "number-of-volumes": {
         "type": ["string", "number"]
       },
+      "original": {
+        "title": "Original Related Item",
+        "$ref": "#/definitions/related-item"
+      },
       "original-publisher": {
         "description": "[Deprecated - Use `original` related `publisher` property instead]",
         "type": "string"
@@ -380,6 +384,10 @@
       },
       "references": {
         "type": "string"
+      },
+      "reviewed": {
+        "title": "Reviewed Related Item",
+        "$ref": "#/definitions/related-item"
       },
       "reviewed-title": {
         "description": "[Deprecated - Use `reviewed` related `title` property instead]",
@@ -423,10 +431,6 @@
       },
       "year-suffix": {
         "type": "string"
-      },
-      "related": {
-        "type": "array",
-        "items": [{ "$ref": "#/definitions/related-item" }]
       },
       "custom": {
         "title": "Custom key-value pairs.",
@@ -585,18 +589,11 @@
     },
     "related-item": {
       "type": "object",
-      "properties": {
-        "original": {
-          "$ref": "#/definitions/related-item-variable"
-        },
-        "reviewed": {
-          "$ref": "#/definitions/related-item-variable"
-        }
-      }
+      "$ref": "#/definitions/related-item-variable"
     },
     "related-item-variable": {
       "description": "The id for a related item, to be included in the output.",
-      "oneOf": [{ "$ref": "#/definitions/id-variable" }]
+      "$ref": "#/definitions/id-variable"
     },
     "name-variable": {
       "anyOf": [
