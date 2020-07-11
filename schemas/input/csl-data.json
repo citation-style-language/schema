@@ -56,7 +56,7 @@
         ]
       },
       "id": {
-        "type": ["string", "number"]
+        "$ref": "#/definitions/id-variable"
       },
       "categories": {
         "type": "array",
@@ -418,6 +418,10 @@
       "year-suffix": {
         "type": "string"
       },
+      "related": {
+        "type": "array",
+        "items": [{ "$ref": "#/definitions/related-item" }]
+      },
       "custom": {
         "title": "Custom key-value pairs.",
         "type": "object",
@@ -517,13 +521,27 @@
           "id": "range-1",
           "type": "book",
           "title": "The Title",
-          "issued": [{ "year": 2000 }, { "year": 2001 }]
+          "issued": [
+            {
+              "year": 2000
+            },
+            {
+              "year": 2001
+            }
+          ]
         },
         {
           "id": "range-2",
           "type": "book",
           "title": "The Title",
-          "issued": [{ "year": 2000 }, { "undefined": true }]
+          "issued": [
+            {
+              "year": 2000
+            },
+            {
+              "undefined": true
+            }
+          ]
         }
       ],
       "items": {
@@ -555,6 +573,24 @@
           "$ref": "#/definitions/date-structured"
         }
       ]
+    },
+    "id-variable": {
+      "type": ["string", "number"]
+    },
+    "related-item": {
+      "type": "object",
+      "properties": {
+        "original": {
+          "$ref": "#/definitions/related-item-variable"
+        },
+        "reviewed": {
+          "$ref": "#/definitions/related-item-variable"
+        }
+      }
+    },
+    "related-item-variable": {
+      "description": "The id for a related item, to be included in the output.",
+      "oneOf": [{ "$ref": "#/definitions/id-variable" }]
     },
     "name-variable": {
       "anyOf": [
