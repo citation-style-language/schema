@@ -164,6 +164,7 @@
         }
       },
       "original-author": {
+        "description": "[Deprecated - Use `original` related `author` property instead]",
         "type": "array",
         "items": {
           "$ref": "#/definitions/name-variable"
@@ -188,6 +189,7 @@
         }
       },
       "reviewed-author": {
+        "description": "[Deprecated - Use `reviewed` related `author` property instead]",
         "type": "array",
         "items": {
           "$ref": "#/definitions/name-variable"
@@ -338,12 +340,15 @@
         "type": ["string", "number"]
       },
       "original-publisher": {
+        "description": "[Deprecated - Use `original` related `publisher` property instead]",
         "type": "string"
       },
       "original-publisher-place": {
+        "description": "[Deprecated - Use `original` related `publisher-place` property instead]",
         "type": "string"
       },
       "original-title": {
+        "description": "[Deprecated - Use `original` related `title` property instead]",
         "type": "string"
       },
       "page": {
@@ -377,6 +382,7 @@
         "type": "string"
       },
       "reviewed-title": {
+        "description": "[Deprecated - Use `reviewed` related `title` property instead]",
         "type": "string"
       },
       "scale": {
