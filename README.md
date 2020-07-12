@@ -30,7 +30,7 @@ CSL style and locale files should be validated against `csl.rnc`,
 which incorporates the content of the other files.
 
 The CSL schema contains several [Schematron](http://www.schematron.com/) rules to make sure all macros called in a CSL style are actually defined.
-Since the popular [Jing](https://code.google.com/p/jing-trang/) XML validator currently ignores embedded Schematron rules, 
+Since the popular [Jing](https://github.com/relaxng/jing-trang) XML validator currently ignores embedded Schematron rules, 
 we also provide the `csl.sch` Schematron schema, which contains the Schematron rules extracted from the CSL schema.
 Jing users can use `csl.sch` to perform a secondary validation of CSL styles.
 
