@@ -1,0 +1,54 @@
+---
+description: JSON schema for CSL input rich text representation
+"$schema": http://json-schema.org/draft-07/schema#
+"$id": https://resource.citationstyles.org/schema/latest/input/json/csl-rich-text.json
+definitions:
+  rich-text-content:
+    title: Rich Text Content
+    description: Rich text content can be represented as an array of strings and formatted object strings.
+    examples:
+      - title:
+          - A title with a
+          - quote: quoted string.
+      - title:
+          - A title with tex math
+          - math-tex: x=y^2
+      - title:
+          - A title with mathml
+          - math-ml: x=y^2
+    oneOf:
+      - "$ref": "#/definitions/rich-text"
+      - type: string
+  rich-text:
+    type: array
+    items:
+      anyOf:
+        - title: Unformatted Sub-String
+          type: string
+        - bold:
+            title: Bold Text
+            "#ref": "#/definitions/rich-text-content"
+        - code:
+            title: Code/Verbatim Text
+            "#ref": "#/definitions/rich-text-content"
+        - italic:
+            title: Italicized Text
+            "#ref": "#/definitions/rich-text-content"
+        - math-ml:
+            title: MathML
+            "#ref": "#/definitions/rich-text-content"
+        - math-tex:
+            title: Math-TeX
+            "#ref": "#/definitions/rich-text-content"
+        - preserve:
+            title: Preserve Case Text
+            "#ref": "#/definitions/rich-text-content"
+        - quote:
+            title: Quote
+            "#ref": "#/definitions/rich-text-content"
+        - sc:
+            title: Small-Cap Text
+            "#ref": "#/definitions/rich-text-content"
+        - strike:
+            title: Strike-Through Text
+            "#ref": "#/definitions/rich-text-content"
