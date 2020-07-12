@@ -14,6 +14,7 @@ Current schemas include:
   (such as bibliographic metadata).
 
 For more information about CSL, visit <https://citationstyles.org>.
+For general quesions and discussions have a look at the [CSL-forum](https://discourse.citationstyles.org/).
 
 ## CSL Schema
 
@@ -45,7 +46,7 @@ and currently consists of the following files:
 To render citations and bibliographies, CSL processors not only require CSL style and locale files, but also bibliographic metadata.
 The citeproc-js CSL processor [introduced](http://gsl-nagoya-u.net/http/pub/citeproc-doc.html#data-input) a JSON format to store such metadata, 
 and this format has since been adopted by various other software products.
-The format, also known as "citeproc-JSON", has been codified in the CSL-JSON Schema. This same schema van be used to validate YAML.
+The format, also known as "citeproc-JSON", has been codified in the CSL-JSON Schema. This same schema can be used to validate YAML.
 
 **At this point the CSL-JSON schema is not yet fully normative, and care must be taken to ensure compatibility with other tools built around CSL-JSON.**
 
