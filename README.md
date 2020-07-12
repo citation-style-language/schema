@@ -14,6 +14,7 @@ Current schemas include:
   (such as bibliographic metadata).
 
 For more information about CSL, visit <https://citationstyles.org>.
+For general quesions and discussions have a look at the [CSL-forum](https://discourse.citationstyles.org/).
 
 ## CSL Schema
 
