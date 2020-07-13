@@ -1,0 +1,24 @@
+name: Publish
+on: [push]
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+
+      - name: Install and Build 🔧 # convert the yaml schema to json version and docs, and publish on gh-pages
+        run: |
+          npm install js-yaml
+          # pip install json-schema-for-humans
+          # js-yaml schemas/input/csl-data.yaml > schemas/input/latest/csl-data.json # currently leave off, as no yaml file
+          # TODO generate-schema-doc -–deprecated-from-description schemas/input/csl-data.yaml build/csl-data/index.html
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: schemas/input/latest # The folder the action should deploy.
