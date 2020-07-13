@@ -118,12 +118,6 @@
           "$ref": "#/definitions/name-variable"
         }
       },
-      "creator": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/name-variable"
-        }
-      },
       "curator": {
         "type": "array",
         "items": {
@@ -220,13 +214,19 @@
           "$ref": "#/definitions/name-variable"
         }
       },
-      "translator": {
+      "script-writer": {
         "type": "array",
         "items": {
           "$ref": "#/definitions/name-variable"
         }
       },
-      "writer": {
+      "series-creator": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "translator": {
         "type": "array",
         "items": {
           "$ref": "#/definitions/name-variable"

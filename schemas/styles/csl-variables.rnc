@@ -29,7 +29,6 @@ div {
     | "composer"
     | "container-author"
     | "contributor"
-    | "creator"
     | "curator"
     | "director"
     | "editor"
@@ -47,8 +46,9 @@ div {
     | "producer"
     | "recipient"
     | "reviewed-author"
+    | "script-writer"
+    | "series-creator"
     | "translator"
-    | "writer"
   
   ## Number variables
   variables.numbers =
