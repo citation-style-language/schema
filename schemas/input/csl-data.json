@@ -310,6 +310,9 @@
       "event": {
         "type": "string"
       },
+      "event-title": {
+        "type": "string"
+      },
       "event-place": {
         "type": "string"
       },
