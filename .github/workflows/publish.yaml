@@ -13,7 +13,7 @@ jobs:
         run: |
           npm install js-yaml
           # pip install json-schema-for-humans
-          # js-yaml schemas/input/csl-data.yaml > schemas/input/latest/csl-data.json # currently leave off, as no yaml file
+          js-yaml schemas/input/csl-data.yaml > schemas/input/latest/csl-data.json # currently leave off, as no yaml file
           # TODO generate-schema-doc -–deprecated-from-description schemas/input/csl-data.yaml build/csl-data/index.html
 
       - name: Deploy 🚀
