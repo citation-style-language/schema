@@ -64,10 +64,10 @@ div {
     | "number-of-volumes"
     | "page"
     | "page-first"
-    | "part"
-    | "printing"
+    | "part-number"
+    | "printing-number"
     | "section"
-    | "supplement"
+    | "supplement-number"
     | "version"
     | "volume"
   
