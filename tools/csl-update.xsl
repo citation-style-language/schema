@@ -15,6 +15,11 @@
     <xsl:attribute name="version">1.1</xsl:attribute>
   </xsl:template>
 
+  <!-- update attribute values -->
+  <xsl:template match="//*/@variable[.='event']">
+    <xsl:attribute name="variable">event-title</xsl:attribute>
+  </xsl:template>
+
   <!-- strip elements with these deprecated attribute values -->
   <xsl:template match="//cs:link[@rel='independent-parent']"/>
   <xsl:template match="//cs:link[@rel='template']"/>
