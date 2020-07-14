@@ -24,6 +24,7 @@
           "entry",
           "entry-dictionary",
           "entry-encyclopedia",
+          "event",
           "figure",
           "graphic",
           "hearing",
@@ -308,6 +309,7 @@
         "type": ["string", "number"]
       },
       "event": {
+        "description": "Alias for 'event-title'. Deprecated. Will be removed in CSL 1.1.",
         "type": "string"
       },
       "event-title": {
@@ -448,7 +450,7 @@
       "custom": {
         "title": "Custom key-value pairs.",
         "type": "object",
-        "description": "Used to store additional information that does not have a designated CSL JSON field. The note field can also store additional information, but custom is preferred for storing key-value pairs.",
+        "description": "Used to store additional information that does not have a designated CSL JSON field. The custom field is preferred over the note field for storing custom data, particularly for storing key-value pairs, as the note field is used for user annotations in annotated bibliography styles.",
         "examples": [
           {
             "short_id": "xyz",
