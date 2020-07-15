@@ -309,7 +309,7 @@
         "type": ["string", "number"]
       },
       "event": {
-        "description": "Alias for 'event-title'. Deprecated. Will be removed in CSL 1.1.",
+        "description": "[Deprecated - use 'event-title' instead. Will be removed in 1.1]",
         "type": "string"
       },
       "event-title": {
