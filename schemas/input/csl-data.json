@@ -221,10 +221,10 @@
         "$ref": "#/definitions/date-variable"
       },
       "abstract": {
-        "type": "string"
+        "$ref": "#/definitions/rich-text-string"
       },
       "annote": {
-        "type": "string"
+        "$ref": "#/definitions/rich-text-string"
       },
       "archive": {
         "type": "string"
@@ -257,13 +257,13 @@
         "type": ["string", "number"]
       },
       "collection-title": {
-        "type": "string"
+        "$ref": "#/definitions/title-string"
       },
       "container-title": {
-        "type": "string"
+        "$ref": "#/definitions/title-string"
       },
       "container-title-short": {
-        "type": "string"
+        "$ref": "#/definitions/title-string"
       },
       "dimensions": {
         "type": "string"
@@ -344,7 +344,7 @@
         "type": "string"
       },
       "original-title": {
-        "type": "string"
+        "$ref": "#/definitions/title-string"
       },
       "page": {
         "type": ["string", "number"]
@@ -356,7 +356,7 @@
         "type": ["string", "number"]
       },
       "part-title": {
-        "type": "string"
+        "$ref": "#/definitions/title-string"
       },
       "PMCID": {
         "type": "string"
@@ -377,7 +377,7 @@
         "type": "string"
       },
       "reviewed-title": {
-        "type": "string"
+        "$ref": "#/definitions/title-string"
       },
       "scale": {
         "type": "string"
@@ -395,16 +395,16 @@
         "type": ["string", "number"]
       },
       "title": {
-        "type": "string"
+        "$ref": "#/definitions/title-string"
       },
       "title-short": {
-        "type": "string"
+        "$ref": "#/definitions/title-string"
       },
       "translated-title": {
-        "type": "string"
+        "$ref": "#/definitions/title-string"
       },
       "translated-title-short": {
-        "type": "string"
+        "$ref": "#/definitions/title-string"
       },
       "URL": {
         "type": "string"
@@ -437,6 +437,16 @@
     "additionalProperties": false
   },
   "definitions": {
+    "rich-text-string": {
+      "title": "Rich Text String",
+      "description": "A string that may include sub-string formatting for bold, italic, subscript, superscript, math, etc. The accompanying `csl-rich-text.yaml` schema defines experimental support for this in CSL JSON input.",
+      "type": "string"
+    },
+    "title-string": {
+      "title": "Title String",
+      "description": "Titles are a primary example of rich text strings in CSL.",
+      "$ref": "#definitions/rich-text-string"
+    },
     "edtf-string": {
       "title": "EDTF date string",
       "description": "CSL input supports EDTF, levels 0 and 1.",
