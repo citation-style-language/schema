@@ -29,7 +29,6 @@ div {
     | "composer"
     | "container-author"
     | "contributor"
-    | "creator"
     | "curator"
     | "director"
     | "editor"
@@ -47,8 +46,9 @@ div {
     | "producer"
     | "recipient"
     | "reviewed-author"
+    | "script-writer"
+    | "series-creator"
     | "translator"
-    | "writer"
   
   ## Number variables
   variables.numbers =
@@ -64,10 +64,10 @@ div {
     | "number-of-volumes"
     | "page"
     | "page-first"
-    | "part"
-    | "printing"
+    | "part-number"
+    | "printing-number"
     | "section"
-    | "supplement"
+    | "supplement-number"
     | "version"
     | "volume"
   
@@ -97,7 +97,9 @@ div {
     | "dimensions"
     | "division"
     | "DOI"
-    | "event"
+    | # Alias for 'event-title'. Deprecated. Will be removed in CSL 1.1.
+      "event"
+    | "event-title"
     | "event-place"
     | "genre"
     | "ISBN"
