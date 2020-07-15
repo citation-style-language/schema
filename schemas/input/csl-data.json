@@ -393,6 +393,7 @@
           "$ref": "#/definitions/date-variable"
         },
         "original-date": {
+          "description": "[Deprecated - Use `original` related date property instead]",
           "$ref": "#/definitions/date-variable"
         },
         "submitted": {
