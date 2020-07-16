@@ -304,10 +304,11 @@ div {
   ## "symbol" reverts to "short" if the "symbol" form is not available.
   ## "verb" and "short" revert to "long" if the specified form is not available.
   term.form = "long" | "verb" | "short" | "verb-short" | "symbol"
-  term.types = 
+  # Used to specify terms per item type
+  term.types =
     attribute for-types {
-        list { item-types+ }
-      }
+      list { item-types+ }
+    }
   term.single =
     
     ## Singular version of the term.
@@ -767,7 +768,12 @@ div {
     
     ## Reformat page ranges in the "page" variable.
     attribute page-range-format {
-      "expanded" | "minimal" | "minimal-two" | "minimal-oup" | "chicago" | "mhra" 
+      "expanded"
+      | "minimal"
+      | "minimal-two"
+      | "minimal-oup"
+      | "chicago"
+      | "mhra"
     }?
   citation.cite-group-delimiter =
     
