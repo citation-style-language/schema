@@ -283,24 +283,32 @@ div {
     }
   term.attributes =
     (attribute name { terms },
-     [ a:defaultValue = "long" ] attribute form { term.form }?)
+     [ a:defaultValue = "long" ] attribute form { term.form }?,
+     term.types)
     | (attribute name { terms.ordinals },
        attribute form { "long" }?,
        attribute gender-form { "masculine" | "feminine" }?,
        attribute match {
          "last-digit" | "last-two-digits" | "whole-number"
-       }?)
+       }?,
+       term.types)
     | (attribute name { terms.long-ordinals },
        attribute form { "long" }?,
        attribute gender-form { "masculine" | "feminine" })
     | (attribute name { terms.gender-assignable },
        attribute form { "long" }?,
-       attribute gender { "masculine" | "feminine" })
+       attribute gender { "masculine" | "feminine" },
+       term.types)
   
   ## "verb-short" reverts to "verb" if the "verb-short" form is not available.
   ## "symbol" reverts to "short" if the "symbol" form is not available.
   ## "verb" and "short" revert to "long" if the specified form is not available.
   term.form = "long" | "verb" | "short" | "verb-short" | "symbol"
+  # Used to specify terms per item type
+  term.types =
+    attribute for-types {
+      list { item-types+ }
+    }
   term.single =
     
     ## Singular version of the term.
@@ -760,7 +768,12 @@ div {
     
     ## Reformat page ranges in the "page" variable.
     attribute page-range-format {
-      "expanded" | "minimal" | "minimal-two" | "minimal-oup" | "chicago" | "mhra" 
+      "expanded"
+      | "minimal"
+      | "minimal-two"
+      | "minimal-oup"
+      | "chicago"
+      | "mhra"
     }?
   citation.cite-group-delimiter =
     
