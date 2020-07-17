@@ -11,7 +11,7 @@ jobs:
 
       - name: Install and Build 🔧 # convert the yaml schema to json version and docs, and publish on gh-pages
         run: |
-          npm install js-yaml
+          npm install --global js-yaml
           # pip install json-schema-for-humans
           mkdir schemas/input/latest
           js-yaml schemas/input/csl-data.yaml > schemas/input/latest/csl-data.json # currently leave off, as no yaml file
