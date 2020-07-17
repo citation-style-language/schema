@@ -8,6 +8,8 @@ jobs:
         uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
       - name: setup node.js
         uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
       - name: Install and Build 🔧 # convert the yaml schema to json version and docs, and publish on gh-pages
         run: |
           npm install js-yaml
