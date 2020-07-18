@@ -578,8 +578,6 @@ div {
           "short"
       }?,
 
-      Labels for collapsed identical names are combined using, and, and delimiter-precedes-last attributes applied to label.
-      label.attributes-shared
     }
   names.substitute =
     
