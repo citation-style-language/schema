@@ -400,7 +400,7 @@ div {
   name.forms =
     
     ## Select the name form:
-    ## "long" (personal: first name + last name + particles + suffixes, for Western names; non-personal: literal),
+    ## "long" (personal: first name + last name + particles + suffixes + alternate, for Western names; non-personal: literal + alternate),
     ## "short" (personal: last name only, for Western names; non-personal: literal-short), 
     ## "long-short" (personal: same as 'long'; non-personal: long, then short in square brackets, 'literal [literal-short]'),
     ## "count" (returning the number of names in the name variable, which can be useful for some sorting algorithms).
@@ -531,7 +531,7 @@ div {
     
     ## Use to format individual name parts (e.g., "Jane DOE").
     element cs:name-part {
-      attribute name { "family" | "given" },
+      attribute name { "family" | "given" | "alternate" | "literal"},
       affixes,
       font-formatting,
       text-case
