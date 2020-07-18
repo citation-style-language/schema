@@ -442,6 +442,8 @@
         {
           "properties": {
             "family": {
+              "title": "Family name of creator",
+              "description": "Use family, not literal, for personal mononyms, e.g. 'Socrates', 'Lady Gaga'",
               "type": "string"
             },
             "given": {
@@ -463,6 +465,13 @@
               "type": ["string", "number", "boolean"]
             },
             "literal": {
+              "title": "Literal name text; should not be parsed",
+              "description": "Use for institutional creator names; e.g. 'National Institutes of Health'",
+              "type": "string"
+            },
+            "literal-short": {
+              "title": "Short form of literal",
+              "description": "Use for short institutional creator names; e.g. 'NIH'",
               "type": "string"
             },
             "alternate": {
