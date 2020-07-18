@@ -801,7 +801,8 @@ div {
     style.page-range-format,
     title-inheritable-options,
     names-inheritable-options,
-    name-inheritable-options
+    name-inheritable-options,
+    label-inheritable-options
   citation.options =
     citation.cite-group-delimiter,
     citation.collapse-options,
@@ -809,7 +810,8 @@ div {
     citation.near-note-distance,
     title-inheritable-options,
     names-inheritable-options,
-    name-inheritable-options
+    name-inheritable-options,
+    label-inheritable-options
   bibliography.options =
     bibliography.hanging-indent,
     bibliography.line-formatting-options,
@@ -817,7 +819,8 @@ div {
     bibliography.subsequent-author-substitute-options,
     title-inheritable-options,
     names-inheritable-options,
-    name-inheritable-options
+    name-inheritable-options,
+    label-inheritable-options
   style.demote-non-dropping-particle =
     
     ## Specify whether the non-dropping particle is demoted in inverted
@@ -1040,6 +1043,12 @@ div {
     ## Inheritable name option, companion for "form" on cs:name.
     [ a:defaultValue = "long" ]
     attribute name-form { "long" | "short" | "count" }?
+  
+  ## Options affecting cs:label, for cs:style, cs:citation and cs:bibliography.
+  label-inheritable-options =
+        
+    ## Inheritable name option, companion for "delimiter" on cs:label.
+    attribute label-delimiter { text }?
 }
 # ==============================================================================
 
