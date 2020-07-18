@@ -231,6 +231,11 @@ div {
   locale.style-options =
     element cs:style-options {
       
+      ## Specify the space character to be used between initialized first names and family names, 
+      ## e.g. a non-breaking space.
+      [ a:defaultValue = " " ]
+      attribute initial-family-name-delimiter { text }?,
+      
       ## Limit the "ordinal" form to the first day of the month.
       [ a:defaultValue = "false" ]
       attribute limit-day-ordinals-to-day-1 { xsd:boolean }?,
