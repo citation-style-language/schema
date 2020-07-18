@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import ruamel.yaml
+from pathlib import Path
 import json
 import glob
 import sys
-import os
 
 # grab the yaml files
 files = glob.glob('schemas/input/csl-*.yaml')
 
 for file in files:
-    ofn = os.path.join('build', os.path.splitext(file)[0] + '.json')
-    print(ofn)
+    ofns = Path(file).stem
+    ofn = ofns + '.json'
     yaml = ruamel.yaml.YAML(typ='safe')
 
     with open(file) as jsonf:
