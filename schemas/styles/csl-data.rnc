@@ -1,14 +1,20 @@
+namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
 namespace dc = "http://purl.org/dc/elements/1.1/"
 
 dc:title [ "Citation Style Language Data" ]
 dc:creator [ "Bruce D'Arcus" ]
-dc:rights [ "Copyright 2009-2018 Citation Style Language and contributors" ]
+dc:rights [
+  "Copyright 2009-2018 Citation Style Language and contributors"
+]
 dc:license [ "MIT license" ]
 dc:description [ "A schema for the CSL data model." ]
 include "csl-types.rnc"
 include "csl-variables.rnc"
 start = element references { reference+ }
-reference = element reference { type, id, uri?, container-uri?, (contributor* & date* & variable+) }
+reference =
+  element reference {
+    type, id, uri?, container-uri?, (contributor* & date* & variable+)
+  }
 
 ## Types 
 div {
@@ -17,88 +23,93 @@ div {
 
 ## Identifiers
 div {
-
-   ## The id is an identifier unique to the scope of the file
-   id = attribute id { token }
-   
-   ## The URI is the global identity for the refererence; used to associate a citation reference to its data
-   uri = attribute uri { xsd:anyURI }
   
-   ## the URI for containing items (such as edited books or journals)
-   container-uri = attribute container-uri { xsd:anyURI }
+  ## The id is an identifier unique to the scope of the file
+  id = attribute id { token }
+  
+  ## The URI is the global identity for the refererence; used to associate a citation reference to its data
+  uri = attribute uri { xsd:anyURI }
+  
+  ## the URI for containing items (such as edited books or journals)
+  container-uri = attribute container-uri { xsd:anyURI }
 }
 
 ## Contributors
 div {
-   contributor =
-      element contributor {
-         attribute type { variables.names },
-         name-elements
-      }
-   name-elements =
-      element name { text }
-    | ((element given { text }? &
-       element family { text }?) &
-       element dropping-particle { text }? &
-       element non-dropping-particle { text }? &
-       element suffix { text }?)
+  contributor =
+    element contributor {
+      attribute type { variables.names },
+      name-elements
+    }
+  name-elements =
+    element name { text }
+    | ((element given { text }?
+        & element family { text }?)
+       & element dropping-particle { text }?
+       & element non-dropping-particle { text }?
+       & element suffix { text }?)
 }
 
 ## Dates
 div {
-   date =
-      element date { 
-         attribute type { variables.dates }, 
-         attribute circa { xsd:boolean }?,
-         (date-pattern | date-range)
-      }
-   date-pattern =
-      year-pattern,
-      ( ( month-pattern, day-pattern? ) | season-pattern )?
-   date-range =
-      element begin-date { date-pattern },
-      element end-date { date-pattern }?
-   year-pattern =
-      attribute year {
-         xsd:integer { maxInclusive="-1" }
-       | xsd:integer { minInclusive="1" }
-      }
-   month-pattern =
-      attribute month { xsd:integer { minInclusive="1" maxInclusive="12" } }
-   day-pattern =
-      attribute day { xsd:integer { minInclusive="1" maxInclusive="31" } }
-
-   # 1 = Spring, 2 = Summer, 3 = Fall, 4 = Winter
-   season-pattern =
-      attribute season { xsd:integer { minInclusive="1" maxInclusive="4" } }
+  date =
+    element date {
+      attribute type { variables.dates },
+      attribute circa { xsd:boolean }?,
+      (date-pattern | date-range)
+    }
+  date-pattern =
+    year-pattern,
+    ((month-pattern, day-pattern?) | season-pattern)?
+  date-range =
+    element begin-date { date-pattern },
+    element end-date { date-pattern }?
+  year-pattern =
+    attribute year {
+      xsd:integer { maxInclusive = "-1" }
+      | xsd:integer { minInclusive = "1" }
+    }
+  month-pattern =
+    attribute month {
+      xsd:integer { minInclusive = "1" maxInclusive = "12" }
+    }
+  day-pattern =
+    attribute day {
+      xsd:integer { minInclusive = "1" maxInclusive = "31" }
+    }
+  # 1 = Spring, 2 = Summer, 3 = Fall, 4 = Winter
+  season-pattern =
+    attribute season {
+      xsd:integer { minInclusive = "1" maxInclusive = "4" }
+    }
 }
 
 ## Simple Variables
 div {
-   variable =
-      element variable {
-         attribute type { variables.standard },
-         (simple-variable-pattern | rich-variable-pattern)
-      }
-   simple-variable-pattern = text
-   rich-variable-pattern =
-      (text
-       | element abbr { text }
-       | element b { text }
-       | element cite {
-          
-          ## cited title which is a part (like an article), and so typically rendered in quotes, rather than italicized
-          attribute class { "part" }?,
-          text
+  variable =
+    element variable {
+      attribute type { variables.standard },
+      (simple-variable-pattern | rich-variable-pattern)
+    }
+  simple-variable-pattern = text
+  rich-variable-pattern =
+    (text
+     | element abbr { text }
+     | element b { text }
+     | element cite {
+         
+         ## cited title which is a part (like an article), and so typically rendered in quotes, rather than italicized
+         attribute class { "part" }?,
+         text
        }
-       | element i { text }
-       | element sc { text }
-       | element span {
-          
-          ## text whose case should not be transformed (as with proper nouns)
-          attribute class { "protect" }?,
-          text
+     | element i { text }
+     | element sc { text }
+     | element span {
+         
+         ## text whose case should not be transformed (as with proper nouns)
+         attribute class { "protect" }?,
+         text
        }
-       | element sup { text }
-       | element sub { text })+
+     | element sup { text }
+     | element sub { text })+
 }

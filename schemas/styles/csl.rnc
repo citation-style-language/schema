@@ -394,21 +394,14 @@ div {
         
         ## Formatting applies to all names.
         "all"
-        |
-
+        | 
           ## Formatting applies if the variable contains only personal names or mixed personal and non-personal names.
           "personal"
-        |
-
+        | 
           ## Formatting applies if the variable contains only non-personal names.
           "non-personal"
-
       }?,
       
-      ## The name delimiter is only used when the truncated name list
-      ## consists of two or more names.
-      "contextual"
-
       ## Select the name form:
       ## "long" (personal: first name + last name + particles + suffixes, for Western names; non-personal: literal),
       ## "short" (personal: last name only, for Western names; non-personal: literal-short), 
@@ -416,10 +409,12 @@ div {
       ## "count" (returning the number of names in the name variable, which can be useful for some sorting algorithms).
       [ a:defaultValue = "long" ]
       attribute form { "long" | "short" | "long-short" | "count" }?,
-
+      
       ## Select the name form to use on subsequent appearances of the name:
       ## Same options as for "form"
-      attribute form-subsequent { "long" | "short" | "long-short" | "count" }?,
+      attribute form-subsequent {
+        "long" | "short" | "long-short" | "count"
+      }?,
       affixes,
       
       ## Set the delimiter for names in a name variable (e.g., ", " in
@@ -514,7 +509,7 @@ div {
     ## Activate initializing of given names. The attribute value is appended
     ## to each initial (e.g., with ". ", "Orson Welles" becomes "O. Welles").
     attribute initialize-with { text }?,
-
+    
     ## Specify how multiple name variables are rendered. Only has an effect
     ## when multiple name variables are given in variable.
     [ a:defaultValue = "sequential" ]
@@ -567,11 +562,11 @@ div {
   names.label =
     element cs:label {
       [ a:defaultValue = "long" ] attribute form { term.form }?,
-
+      
       ## When multiple='combined', set the delimiter for collapsed name labels
       ## (e.g., ", " in "Creator, Writer, & Director")
-      [ a:defaultValue = ", " ] attribute delimiter,
-
+      [ a:defaultValue = ", " ] delimiter,
+      
       ## Specify when the label delimiter is used between the second-to-last
       ## and last label of a label list. Only has an effect when the "and" term 
       ## is used (e.g., "Writer & Director" or "Writer, & Director".
@@ -588,7 +583,7 @@ div {
           ## The label delimiter is never used.
           "never"
       }?,
-
+      
       ## Use to separate the second-to-last and last label of a label list by
       ## the "and" term.
       attribute and {
@@ -602,8 +597,7 @@ div {
           ## Use the "and" term "short" form. Not common in English, but is seen in other languages.
           ## In German, for example: "Drehbuchautor u. Regisseur, where "u." is short for "und."
           "short"
-      }?,
-
+      }?
     }
   names.substitute =
     
@@ -836,7 +830,12 @@ div {
     
     ## Reformat page ranges in the "page" variable.
     attribute page-range-format {
-      "expanded" | "minimal" | "minimal-two" | "minimal-oup" | "chicago" | "mhra" 
+      "expanded"
+      | "minimal"
+      | "minimal-two"
+      | "minimal-oup"
+      | "chicago"
+      | "mhra"
     }?
   citation.cite-group-delimiter =
     
