@@ -7,14 +7,14 @@ import glob
 import sys
 
 # grab the yaml files
-files = glob.glob('schemas/input/csl-*.yaml')
+yfiles = glob.glob('schemas/input/csl-*.yaml')
 
-for file in files:
-    ofns = Path(file).stem
-    ofn = ofns + '.json'
+for yfile in yfiles:
+    inf = Path(yfile)
+    ofns = inf.stem
+    ofn = Path('build/' + ofns + '.json')
     yaml = ruamel.yaml.YAML(typ='safe')
-
-    with open(file) as jsonf:
-        data = yaml.load(jsonf)
-    with open(ofn, 'w') as fpo:
-        json.dump(data, fpo, indent=2)
+    data = yaml.load(inf)
+    with open(ofn, "w") as write_file:
+        json.dump(data, write_file)
+    #json.dump(data, ofn, indent=2)
