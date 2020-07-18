@@ -465,7 +465,17 @@
             "literal": {
               "type": "string"
             },
+            "alternate": {
+              "title": "Alternative name, such as screen name for online item or real name of pseudonymous author.",
+              "description": "E.g. rendered as 'Smith, J. [@JSmith]'"
+              "type": "string"
+            },
             "parse-names": {
+              "type": ["string", "number", "boolean"]
+            },
+            "is-uncertain": {
+              "title": "Indicates uncertain authorship",
+              "description": "E.g. rendered as '[Smith, J.?]'",
               "type": ["string", "number", "boolean"]
             }
           },
