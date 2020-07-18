@@ -370,7 +370,7 @@ div {
   rendering-element.names =
     element cs:names {
       names.attributes,
-      ((names.name?, names.et-al?) & names.label?),
+      ((names.name*, names.et-al?) & names.label?),
       names.substitute?
     }
   names.attributes =
@@ -388,12 +388,38 @@ div {
     element cs:name {
       name.attributes,
       
-      ## Select the "long" (first name + last name, for Western names),
-      ## "short" (last name only, for Western names), or "count" name form
-      ## (returning the number of names in the name variable, which can be
-      ## useful for some sorting algorithms).
+      ## Specify whether formatting in "name" applies to all names (default), personal names, or non-personal names.
+      [ a:defaultValue = "all" ]
+      attribute name-type {
+        
+        ## Formatting applies to all names.
+        "all"
+        |
+
+          ## Formatting applies if the variable contains only personal names or mixed personal and non-personal names.
+          "personal"
+        |
+
+          ## Formatting applies if the variable contains only non-personal names.
+          "non-personal"
+
+      }?,
+      
+      ## The name delimiter is only used when the truncated name list
+      ## consists of two or more names.
+      "contextual"
+
+      ## Select the name form:
+      ## "long" (personal: first name + last name + particles + suffixes, for Western names; non-personal: literal),
+      ## "short" (personal: last name only, for Western names; non-personal: literal-short), 
+      ## "long-short" (personal: same as 'long'; non-personal: long, then short in square brackets, 'literal [literal-short]'),
+      ## "count" (returning the number of names in the name variable, which can be useful for some sorting algorithms).
       [ a:defaultValue = "long" ]
-      attribute form { "long" | "short" | "count" }?,
+      attribute form { "long" | "short" | "long-short" | "count" }?,
+
+      ## Select the name form to use on subsequent appearances of the name:
+      ## Same options as for "form"
+      attribute form-subsequent { "long" | "short" | "long-short" | "count" }?,
       affixes,
       
       ## Set the delimiter for names in a name variable (e.g., ", " in
