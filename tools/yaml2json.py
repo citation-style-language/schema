@@ -16,5 +16,4 @@ for yfile in yfiles:
     yaml = ruamel.yaml.YAML(typ='safe')
     data = yaml.load(inf)
     with open(ofn, "w") as write_file:
-        json.dump(data, write_file)
-    #json.dump(data, ofn, indent=2)
+        json.dump(data, write_file, indent=2)
