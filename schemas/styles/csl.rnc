@@ -400,10 +400,11 @@ div {
   name.forms =
     
     ## Select the name form:
-    ## "long" (personal: first name + last name + particles + suffixes, for Western names; instiutional: institution),
-    ## "short" (personal: last name only, for Western names; instiutional: institution-short), 
+    ## "long" (personal: given + family + particles + suffixes; instiutional: institution),
+    ## "short" (personal: family only; instiutional: institution-short), 
     ## "long-short" (personal: same as 'long'; instiutional: institution + institution-short),
-    ## "count" (returning the number of names in the name variable, which can be useful for some sorting algorithms).
+    ## "count" (returning the number of names in the name variable, which can be useful for some sorting algorithms);
+    ## order of included name-parts determined by 'name-as-sort-order', 'demote-non-dropping-particle', and the alphabet of the individual name
     [ a:defaultValue = "long" ]
     attribute form { "long" | "short" | "long-short" | "count" }?,
     
