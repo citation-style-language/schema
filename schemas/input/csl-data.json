@@ -480,7 +480,7 @@
               "type": "string"
             },
             "parse-names": {
-              "type": ["string", "number", "boolean"]
+              "type": "boolean"
             },
             "is-uncertain": {
               "title": "Indicates uncertain authorship",
