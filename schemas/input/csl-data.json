@@ -482,7 +482,7 @@
             "parse-names": {
               "type": "boolean"
             },
-            "is-uncertain": {
+            "uncertain": {
               "title": "Indicates uncertain authorship",
               "description": "E.g. rendered as '[Smith, J.?]'",
               "type": "boolean"
