@@ -411,7 +411,25 @@ div {
     ## Same options as for "form".
     attribute form-subsequent {
       "long" | "short" | "long-short" | "count"
-    }?
+    }?,
+    
+    ## Should the 'alternate' name-part be included (e.g., Smith, J. [@JSmith]);
+    ## if included, the 'alternate' name-part is rendered after the other name parts
+    [ a:defaultValue = "if-long" ]
+    attribute include-alternate {
+      
+      ## Include the 'alternate' name-part if 'form' is 'long' or 'long-short'.
+      "if-long"
+      | 
+        ## Always include the 'alternate' name-part.
+        "always"
+      | 
+        ## Never include the 'alternate' name-part.
+        "never"
+    }?,
+    
+    ## Sets the delimiter between the 'alternate' name-part and preceding name-parts.
+    [ a:defaultValue = ", " ] attribute alternate-separator { text }?
   name.attributes =
     
     ## Use to separate the second-to-last and last name of a name list by
@@ -435,8 +453,7 @@ div {
     [ a:defaultValue = "contextual" ]
     attribute delimiter-precedes-et-al {
       
-      ## The name delimiter is only used when the truncated name list
-      ## consists of two or more names.
+      ## The name delimiter is only used when the truncated name list consists of two or more names.
       "contextual"
       | 
         ## The name delimiter is always used.
@@ -445,9 +462,15 @@ div {
         ## The name delimiter is never used.
         "never"
       | 
-        ## The name delimiter is only used if the preceding name is inverted as
-        ## a result of the "name-as-sort-order" attribute.
+        ## The name delimiter is only used if the preceding name is inverted as a result of the "name-as-sort-order" attribute;
+        ## note: institutational names are never treated as inverted.
         "after-inverted-name"
+      | 
+        ## The name delimiter is used if
+        ## (1) the preceding name is inverted as a result of the "name-as-sort-order" attribute, or
+        ## (2) if the preceding name is not inverted, when the truncated name list consists of two or more names;
+        ## note: institutational names are never treated as inverted.
+        "after-inverted-name-or-contextual"
     }?,
     
     ## Specify when the name delimiter is used between the second-to-last
@@ -457,8 +480,7 @@ div {
     [ a:defaultValue = "contextual" ]
     attribute delimiter-precedes-last {
       
-      ## The name delimiter is only used when the name list consists of
-      ## three or more names.
+      ## The name delimiter is only used when the name list consists of three or more names.
       "contextual"
       | 
         ## The name delimiter is always used.
@@ -470,6 +492,12 @@ div {
         ## The name delimiter is only used if the preceding name is inverted as
         ## a result of the "name-as-sort-order" attribute.
         "after-inverted-name"
+      | 
+        ## The name delimiter is used if
+        ## (1) the preceding name is inverted as a result of the "name-as-sort-order" attribute, or
+        ## (2) if preceding the name is not inverted, when the truncated name list consists of three or more names;
+        ## note: institutational names are never treated as inverted.
+        "after-inverted-name-or-contextual"
     }?,
     
     ## Set the minimum number of names needed in a name variable to activate
@@ -490,20 +518,6 @@ div {
     ## an ellipsis followed by the last name of the name variable.
     [ a:defaultValue = "false" ]
     attribute et-al-use-last { xsd:boolean }?,
-    
-    ## Include the 'alternate' name-part (e.g., Smith, J. [@JSmith])?
-    [ a:defaultValue = "if-long" ]
-    attribute include-alternate {
-      
-      ## Include the 'alternate' name-part if 'form' is 'long' or 'long-short'.
-      "if-long"
-      | 
-        ## Always include the 'alternate' name-part.
-        "always"
-      | 
-        ## Never include the 'alternate' name-part.
-        "never"
-    }?,
     
     ## If set to "false", names are not initialized and "initialize-with"
     ## only affects initials already present in the input data.
@@ -558,19 +572,13 @@ div {
     }
   name.name-type =
     
-    ## Use to apply separate formatting when a variable contains only personal
-    ## names or a combination of personal and institutional names ("names") versus
-    ## contains only institutional names.
+    ## Use to apply separate formatting to personal versus institutional names.
     element cs:name-type {
       attribute name { "personal" | "institutional" },
-      name.attributes,
       name.forms,
       affixes,
-      
-      ## Set the delimiter for names in a name variable (e.g., ", " in
-      ## "Doe, Smith")
-      [ a:defaultValue = ", " ] delimiter,
       font-formatting,
+      text-case,
       name.name-part*
     }
   names.et-al =
