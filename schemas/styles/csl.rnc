@@ -400,9 +400,9 @@ div {
   name.forms =
     
     ## Select the name form:
-    ## "long" (personal: first name + last name + particles + suffixes + alternate, for Western names; non-personal: literal + alternate),
-    ## "short" (personal: last name only, for Western names; non-personal: literal-short), 
-    ## "long-short" (personal: same as 'long'; non-personal: long, then short in square brackets, 'literal [literal-short]'),
+    ## "long" (personal: first name + last name + particles + suffixes, for Western names; instiutional: institution),
+    ## "short" (personal: last name only, for Western names; instiutional: institution-short), 
+    ## "long-short" (personal: same as 'long'; instiutional: institution + institution-short),
     ## "count" (returning the number of names in the name variable, which can be useful for some sorting algorithms).
     [ a:defaultValue = "long" ]
     attribute form { "long" | "short" | "long-short" | "count" }?,
@@ -531,7 +531,13 @@ div {
     
     ## Use to format individual name parts (e.g., "Jane DOE").
     element cs:name-part {
-      attribute name { "family" | "given" | "alternate" | "literal"},
+      attribute name {
+        "family"
+        | "given"
+        | "alternate"
+        | "institution"
+        | "institution-short"
+      },
       affixes,
       font-formatting,
       text-case
@@ -539,10 +545,10 @@ div {
   name.name-type =
     
     ## Use to apply separate formatting when a variable contains only personal
-    ## names or a combination of personal and non-personal names ("names") versus
-    ## contains only non-personal names.
+    ## names or a combination of personal and institutional names ("names") versus
+    ## contains only institutional names.
     element cs:name-type {
-      attribute name { "personal" | "non-personal" },
+      attribute name { "personal" | "institutional" },
       name.attributes,
       name.forms,
       affixes,
@@ -1046,7 +1052,7 @@ div {
   
   ## Options affecting cs:label, for cs:style, cs:citation and cs:bibliography.
   label-inheritable-options =
-        
+    
     ## Inheritable name option, companion for "delimiter" on cs:label.
     attribute label-delimiter { text }?
 }

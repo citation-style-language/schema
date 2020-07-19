@@ -464,13 +464,13 @@
             "static-ordering": {
               "type": ["string", "number", "boolean"]
             },
-            "literal": {
+            "institution": {
               "title": "Literal name text; should not be parsed",
               "description": "Use for institutional creator names; e.g. 'National Institutes of Health'",
               "type": "string"
             },
-            "literal-short": {
-              "title": "Short form of literal",
+            "institution-short": {
+              "title": "Short form of institution",
               "description": "Use for short institutional creator names; e.g. 'NIH'",
               "type": "string"
             },
