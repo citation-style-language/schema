@@ -485,7 +485,7 @@
             "is-uncertain": {
               "title": "Indicates uncertain authorship",
               "description": "E.g. rendered as '[Smith, J.?]'",
-              "type": ["string", "number", "boolean"]
+              "type": "boolean"
             }
           },
           "additionalProperties": false
