@@ -491,6 +491,20 @@ div {
     [ a:defaultValue = "false" ]
     attribute et-al-use-last { xsd:boolean }?,
     
+    ## Include the 'alternate' name-part (e.g., Smith, J. [@JSmith])?
+    [ a:defaultValue = "if-long" ]
+    attribute include-alternate {
+      
+      ## Include the 'alternate' name-part if 'form' is 'long' or 'long-short'.
+      "if-long"
+      | 
+        ## Always include the 'alternate' name-part.
+        "always"
+      | 
+        ## Never include the 'alternate' name-part.
+        "never"
+    }?,
+    
     ## If set to "false", names are not initialized and "initialize-with"
     ## only affects initials already present in the input data.
     [ a:defaultValue = "true" ] attribute initialize { xsd:boolean }?,
