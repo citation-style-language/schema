@@ -442,7 +442,7 @@
         {
           "properties": {
             "family": {
-              "title": "Family name of creator",
+              "title": "Family name of contributor",
               "description": "Use family, not literal, for personal mononyms, e.g. 'Socrates', 'Lady Gaga'",
               "type": "string"
             },
