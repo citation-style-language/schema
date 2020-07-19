@@ -370,7 +370,10 @@ div {
   rendering-element.names =
     element cs:names {
       names.attributes,
-      ((names.name?, names.et-al?) & names.label?),
+      ((names.name?, names.et-al?)
+       & names.label?
+       & names.abbreviation?
+       & names.alternate?),
       names.substitute?
     }
   names.attributes =
@@ -402,35 +405,14 @@ div {
     ## Select the name form:
     ## "long" (personal: given + family + particles + suffixes; instiutional: institution),
     ## "short" (personal: family only; instiutional: institution-short), 
-    ## "long-short" (personal: same as 'long'; instiutional: institution + institution-short),
     ## "count" (returning the number of names in the name variable, which can be useful for some sorting algorithms);
     ## order of included name-parts determined by 'name-as-sort-order', 'demote-non-dropping-particle', and the alphabet of the individual name
     [ a:defaultValue = "long" ]
-    attribute form { "long" | "short" | "long-short" | "count" }?,
+    attribute form { "long" | "short" | "count" }?,
     
     ## Select the name form to use on subsequent appearances of the name.
     ## Same options as for "form".
-    attribute form-subsequent {
-      "long" | "short" | "long-short" | "count"
-    }?,
-    
-    ## Should the 'alternate' name-part be included (e.g., Smith, J. [@JSmith]);
-    ## if included, the 'alternate' name-part is rendered after the other name parts
-    [ a:defaultValue = "if-long" ]
-    attribute include-alternate {
-      
-      ## Include the 'alternate' name-part if 'form' is 'long' or 'long-short'.
-      "if-long"
-      | 
-        ## Always include the 'alternate' name-part.
-        "always"
-      | 
-        ## Never include the 'alternate' name-part.
-        "never"
-    }?,
-    
-    ## Sets the delimiter between the 'alternate' name-part and preceding name-parts.
-    [ a:defaultValue = ", " ] attribute alternate-separator { text }?
+    attribute form-subsequent { "long" | "short" | "count" }?
   name.attributes =
     
     ## Use to separate the second-to-last and last name of a name list by
@@ -561,12 +543,11 @@ div {
     ## Use to format individual name parts (e.g., "Jane DOE").
     element cs:name-part {
       attribute name {
-        "family"
-        | "given"
-        | "alternate"
-        | "institution"
-        | "institution-short"
+        "family" | "given" | "institution" | "institution-short"
       },
+      
+      ## Apply formatting for name="institution" only if 'institution-short' name-part exists
+      attribute if-institution-short { xsd:boolean }?,
       affixes,
       font-formatting,
       text-case
@@ -592,6 +573,13 @@ div {
       attribute term { "et-al" | "and others" }?,
       font-formatting
     }
+  
+  ## If name.form="long", render the "institution-short" name-part.
+  names.abbreviation =
+    element cs:abbreviation { affixes, font-formatting, text-case }
+  
+  ## Render the "alternate" name and specify formatting.
+  names.alternate = element cs:alternate { names.name }
   
   ## Inherits variable from the parent cs:names element.
   names.label =
