@@ -10,6 +10,10 @@
         "https://resource.citationstyles.org/schema/latest/input/json/csl-citation.json"
       ]
     },
+    "version": {
+      "type": "string",
+      "pattern": "1.1"
+    },
     "citationID": {
       "type": ["string", "number"]
     },
