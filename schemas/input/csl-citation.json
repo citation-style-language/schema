@@ -1,110 +1,152 @@
 {
-    "description": "JSON schema for CSL citation objects",
-    "$schema" : "http://json-schema.org/draft-07/schema#",
-    "$id": "https://resource.citationstyles.org/schema/latest/input/json/csl-citation.json",
-    "type": "object",
-    "properties": {
-        "schema": {
-            "type": "string",
-            "enum" : [
-                "https://resource.citationstyles.org/schema/latest/input/json/csl-citation.json" 
-            ] 
-        },
-        "citationID": {
-            "type": [
-                "string",
-                "number" 
-            ]
-        },
-        "citationItems": {
+  "description": "JSON schema for CSL citation objects",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://resource.citationstyles.org/schema/latest/input/json/csl-citation.json",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "enum": [
+        "https://resource.citationstyles.org/schema/latest/input/json/csl-citation.json"
+      ]
+    },
+    "citationID": {
+      "type": ["string", "number"]
+    },
+    "citationItems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": ["string", "number"]
+          },
+          "itemData": {
+            "$ref": "csl-data.json#/items"
+          },
+          "prefix": {
+            "type": "string"
+          },
+          "suffix": {
+            "type": "string"
+          },
+          "locators": {
             "type": "array",
             "items": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": [
-                            "string",
-                            "number" 
-                        ]
-                    },
-                    "itemData": {
-                        "$ref": "csl-data.json#/items" 
-                    },
-                    "prefix": {
-                        "type": "string" 
-                    },
-                    "suffix": {
-                        "type": "string" 
-                    },
-                    "locator": {
-                        "type": "string" 
-                    },
-                    "label": {
-                        "type": "string",
-                        "enum": [
-                            "appendix",
-                            "article",
-                            "book",
-                            "canon",
-                            "chapter",
-                            "column",
-                            "elocation",
-                            "equation",
-                            "figure",
-                            "folio",
-                            "issue",
-                            "line",
-                            "note",
-                            "opus",
-                            "page",
-                            "paragraph",
-                            "part",
-                            "rule",
-                            "section",
-                            "sub verbo",
-                            "supplement",
-                            "table",
-                            "timestamp",
-                            "title",
-                            "verse",
-                            "volume" 
-                        ] 
-                    },
-                    "suppress-author": {
-                        "type": [
-                            "string",
-                            "number",
-                            "boolean" 
-                        ] 
-                    },
-                    "author-only": {
-                        "type": [
-                            "string",
-                            "number",
-                            "boolean" 
-                        ] 
-                    },
-                    "uris": {
-                        "type": "array",
-                        "items": {
-                            "type": "string" 
-                        } 
-                    } 
-                },
-                "required": ["id"],
-                "additionalProperties" : false 
-            } 
+              "$ref": "#/definitions/locators"
+            }
+          },
+          "suppress-author": {
+            "type": ["string", "number", "boolean"]
+          },
+          "author-only": {
+            "type": ["string", "number", "boolean"]
+          },
+          "uris": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
         },
-        "properties": {
-            "type": "object",
-            "properties": {
-                "noteIndex": {
-                    "type": "number" 
-                } 
-            },
-            "additionalProperties" : false 
-        } 
+        "required": ["id"],
+        "additionalProperties": false
+      }
     },
-    "required": ["schema", "citationID"],
-    "additionalProperties" : false 
+    "properties": {
+      "type": "object",
+      "properties": {
+        "noteIndex": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": ["schema", "citationID"],
+  "additionalProperties": false,
+  "definitions": {
+    "locators": {
+      "properties": {
+        "appendix": {
+          "type": "string"
+        },
+        "article": {
+          "type": "string"
+        },
+        "book": {
+          "type": "string"
+        },
+        "canon": {
+          "type": "string"
+        },
+        "chapter": {
+          "type": "string"
+        },
+        "column": {
+          "type": "string"
+        },
+        "elocation": {
+          "type": "string"
+        },
+        "equation": {
+          "type": "string"
+        },
+        "figure": {
+          "type": "string"
+        },
+        "folio": {
+          "type": "string"
+        },
+        "issue": {
+          "type": "string"
+        },
+        "line": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        },
+        "opus": {
+          "type": "string"
+        },
+        "page": {
+          "type": "string"
+        },
+        "paragraph": {
+          "type": "string"
+        },
+        "part": {
+          "type": "string"
+        },
+        "rule": {
+          "type": "string"
+        },
+        "section": {
+          "type": "string"
+        },
+        "sub-verbo": {
+          "type": "string"
+        },
+        "supplement": {
+          "type": "string"
+        },
+        "table": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "verse": {
+          "type": "string"
+        },
+        "volume": {
+          "type": "string"
+        }
+      }
+    }
+  }
 }
