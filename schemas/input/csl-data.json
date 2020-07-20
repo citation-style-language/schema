@@ -51,16 +51,6 @@
           "description": "The primary title component for the item.",
           "$ref": "#definitions/rich-text-string"
         },
-        "sub": {
-          "title": "Sub-Title",
-          "description": "The sub-title component for the item.",
-          "$ref": "#definitions/rich-text-string"
-        },
-        "sub-sub": {
-          "title": "Sub-Sub Title",
-          "description": "The secondary subtitle component for the item. This is rarely used in practice, but see https://style.mla.org/punctuation-with-titles/.",
-          "$ref": "#definitions/rich-text-string"
-        },
         "alternate": {
           "title": "Alternate Title",
           "description": "An alternative variant title. This is rarely used in practice, but see https://style.mla.org/punctuation-with-titles/.",
@@ -70,6 +60,14 @@
           "title": "Short Title",
           "description": "A short variant title component for the item.",
           "$ref": "#definitions/rich-text-string"
+        },
+        "sub": {
+          "title": "Sub-Titles",
+          "description": "The sub-title components for the item, as an array. Typically, when there is a subtitle, there will only be one, but there are cases when there are more.",
+          "type": "array",
+          "items": {
+            "$ref": "#definitions/rich-text-string"
+          }
         }
       }
     },
