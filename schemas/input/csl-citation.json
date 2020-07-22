@@ -71,6 +71,41 @@
   "additionalProperties": false,
   "definitions": {
     "locators": {
+      "title": "Locators List",
+      "description": "A list of locators. Typically, there will only be one, but there are cases where there may be more than one.",
+      "examples": [
+        {
+          "locators": [
+            [
+              {
+                "page": "23",
+                "line": "2"
+              }
+            ],
+            [
+              {
+                "page": "34",
+                "line": "12"
+              }
+            ]
+          ]
+        }
+      ],
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/locator"
+      }
+    },
+    "locator": {
+      "title": "Locator",
+      "description": "This identitifies a specific location within a cited item.",
+      "examples": [
+        {
+          "page": "23",
+          "line": "12"
+        }
+      ],
+      "type": "object",
       "properties": {
         "appendix": {
           "type": "string"
