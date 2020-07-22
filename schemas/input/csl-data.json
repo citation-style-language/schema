@@ -51,11 +51,6 @@
           "description": "The primary title component for the item.",
           "$ref": "#definitions/rich-text-string"
         },
-        "alternate": {
-          "title": "Alternate Title",
-          "description": "An alternative variant title. This is rarely used in practice, but see https://style.mla.org/punctuation-with-titles/.",
-          "$ref": "#definitions/rich-text-string"
-        },
         "short": {
           "title": "Short Title",
           "description": "A short variant title component for the item.",
