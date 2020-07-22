@@ -20,20 +20,22 @@
         {
           "full": "Finis Coronat Opus: A Curious Reciprocity; Shelley’s “When the Lamp Is Shattered”",
           "main": "Finis Coronat Opus",
-          "sub": "A Curious Reciprocity",
-          "sub-sub": "Shelley’s “When the Lamp Is Shattered”"
+          "sub": [
+            "A Curious Reciprocity",
+            "Shelley’s “When the Lamp Is Shattered”"
+          ]
         },
         {
           "main": "Whose Music?",
-          "sub": "A Sociology of Musical Language"
+          "sub": ["A Sociology of Musical Language"]
         },
         {
           "main": "Pardon the Interruption",
-          "sub": "Goal Proximity, Perceived Spare Time, and Impatience"
+          "sub": ["Goal Proximity, Perceived Spare Time, and Impatience"]
         },
         {
           "main": "England’s Monitor",
-          "alternate": "The History of the Separation"
+          "sub": [", or The History of the Separation"]
         },
         {
           "main": "Kriegstagebuch des Oberkommandos der Wehrmacht, 1940–1945",
