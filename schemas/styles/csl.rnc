@@ -276,25 +276,25 @@ div {
         "numeric"
     }
   date.era-notation =
-
+    
     ## Select the localized era notation format ("ce" or "ad")
     attribute era-notation {
-
+      
       ## Use CE/BCE
       "ce"
-      |
-      ## Use BC/AD
-      "ad"
+      | 
+        ## Use BC/AD
+        "ad"
     }
-  
-  date.era = 
+  date.era =
     element cs:era {
-      affixes, font-formatting, text-case, 
+      affixes,
+      font-formatting,
+      text-case,
       attribute term {
-        list {"ad" | "bc" | "bce" | "ce"}
-        }
+        list { "ad" | "bc" | "bce" | "ce" }
+      }
     }
-
   locale.date.date-part =
     element cs:date-part {
       affixes, font-formatting, text-case, (day | month | year)
