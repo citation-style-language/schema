@@ -257,6 +257,7 @@ div {
   locale.date =
     element cs:date {
       date.form,
+      date.era-notation,
       delimiter,
       font-formatting,
       text-case,
@@ -273,6 +274,18 @@ div {
         ## Numeric date form (e.g., "2005-12-15").
         "numeric"
     }
+  date.era-notation =
+
+    ## Select the localized era notation format ("ce" or "ad")
+    attribute era-notation {
+
+      ## Use CE/BCE
+      "ce"
+      |
+      ## Use BC/AD
+      "ad"
+    }
+
   locale.date.date-part =
     element cs:date-part {
       affixes, font-formatting, text-case, (day | month | year)
