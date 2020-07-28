@@ -260,11 +260,10 @@ div {
   locale.date =
     element cs:date {
       date.form,
-      date.era+,
       delimiter,
       font-formatting,
       text-case,
-      locale.date.date-part+
+      (locale.date.date-part | date.era)+
     }
   date.form =
     
