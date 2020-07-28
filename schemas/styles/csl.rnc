@@ -231,6 +231,9 @@ div {
   locale.style-options =
     element cs:style-options {
       
+      ## Select the localized era notation format ("ce" or "ad")
+      attribute era-notation {"ce" | "ad"}
+      
       ## Specify the space character to be used between initialized first names and family names, 
       ## e.g. a non-breaking space.
       [ a:defaultValue = " " ]
@@ -274,17 +277,6 @@ div {
       | 
         ## Numeric date form (e.g., "2005-12-15").
         "numeric"
-    }
-  date.era-notation =
-    
-    ## Select the localized era notation format ("ce" or "ad")
-    attribute era-notation {
-      
-      ## Use CE/BCE
-      "ce"
-      | 
-        ## Use BC/AD
-        "ad"
     }
   date.era =
     element cs:era {
