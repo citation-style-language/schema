@@ -1012,6 +1012,13 @@ div {
 }
 # ==============================================================================
 
+## Allow repeated rendering of a rendering-element
+div {
+  ## By default, variables are rendered only once.
+  ## The "repeatable" attribute allows re-rendering of otherwise suppressed variables.
+  repeatable = attribute repeatable { xsd:boolean }?
+}
+
 ## Formatting attributes.
 div {
   affixes =
