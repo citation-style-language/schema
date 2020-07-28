@@ -232,7 +232,7 @@ div {
     element cs:style-options {
       
       ## Select the localized era notation format ("ce" or "ad")
-      attribute era-notation {"ce" | "ad"}
+      attribute era-notation {"ce" | "ad"},
       
       ## Specify the space character to be used between initialized first names and family names, 
       ## e.g. a non-breaking space.
@@ -260,7 +260,6 @@ div {
   locale.date =
     element cs:date {
       date.form,
-      date.era-notation,
       date.era,
       delimiter,
       font-formatting,
@@ -278,15 +277,14 @@ div {
         ## Numeric date form (e.g., "2005-12-15").
         "numeric"
     }
+  date.era-terms = "ad" | "bc" | "bce" | "ce"
   date.era =
     element cs:era {
       affixes,
       font-formatting,
       text-case,
-      attribute term {
-        list { "ad" | "bc" | "bce" | "ce" }
-      }
-    }
+      attribute term { list { date.era-terms+ }} 
+    } 
   locale.date.date-part =
     element cs:date-part {
       affixes, font-formatting, text-case, (day | month | year)
