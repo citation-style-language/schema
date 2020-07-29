@@ -70,120 +70,114 @@
   "required": ["schema", "citationID"],
   "additionalProperties": false,
   "definitions": {
-    "locators": {
-      "title": "Locators List",
-      "description": "A list of locators. Typically, there will only be one, but there are cases where there may be more than one.",
-      "examples": [
+    "locator-variable": {
+      "description": "A locator is a list, that can be a string, or a (preferred) array.",
+      "anyOf": [
         {
-          "locators": [
-            [
-              {
-                "page": "23",
-                "line": "2"
+          "description": "When using the string ...",
+          "type": "string"
+        },
+        {
+          "description": "Strings represent a literal number, while numbers (integer or floating point) should otherwise be used. Ranges are represented by a two-item inner array.",
+          "examples": [
+            { "page": [2, 3, [5, 12]] },
+            { "page": ["I-13"] },
+            { "page": [["I-13", "I-18"]] }
+          ],
+          "anyOf": [
+            { "type": "string" },
+            { "type": "number" },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/locators"
               }
-            ],
-            [
-              {
-                "page": "34",
-                "line": "12"
-              }
-            ]
+            }
           ]
         }
-      ],
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/locator"
-      }
+      ]
     },
-    "locator": {
-      "title": "Locator",
-      "description": "This identitifies a specific location within a cited item.",
-      "examples": [
-        {
-          "page": "23",
-          "line": "12"
-        }
-      ],
+    "locators": {
       "type": "object",
       "properties": {
         "appendix": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "article": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "book": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "canon": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "chapter": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "column": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "elocation": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "equation": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "figure": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "folio": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "issue": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "line": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "note": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "opus": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "page": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "paragraph": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "part": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "rule": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "section": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "sub-verbo": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "supplement": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "table": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "timestamp": {
+          "description": "TODO",
           "type": "string"
         },
         "title": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "verse": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         },
         "volume": {
-          "type": "string"
+          "$ref": "#/definitions/locator-variable"
         }
       }
     }
