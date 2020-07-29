@@ -1019,7 +1019,8 @@ div {
 div {
   ## By default, variables are rendered only once.
   ## The "repeatable" attribute allows re-rendering of otherwise suppressed variables.
-  repeatable = attribute repeatable { xsd:boolean }?
+  ## The "always-render" attribute allows re-rendering of otherwise suppressed variables.
+  always-render = attribute always-render { xsd:boolean }?
 }
 
 ## Formatting attributes.
