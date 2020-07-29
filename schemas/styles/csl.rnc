@@ -676,7 +676,7 @@ div {
     
     ## Use to render a number variable.
     element cs:number {
-      number.attributes, affixes, display, font-formatting, repeatable, text-case
+      number.attributes, affixes, display, font-formatting, always-render, text-case
     }
   number.attributes =
     attribute variable { variables.numbers },
