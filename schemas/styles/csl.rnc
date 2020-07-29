@@ -231,6 +231,14 @@ div {
   locale.style-options =
     element cs:style-options {
       
+      ## Select the localized era notation format ("ce" or "ad")
+      attribute era-notation {"ce" | "ad"}?,
+      
+      ## Specify the space character to be used between initialized first names and family names, 
+      ## e.g. a non-breaking space.
+      [ a:defaultValue = " " ]
+      attribute initial-family-name-delimiter { text }?,
+      
       ## Limit the "ordinal" form to the first day of the month.
       [ a:defaultValue = "false" ]
       attribute limit-day-ordinals-to-day-1 { xsd:boolean }?,
@@ -255,7 +263,7 @@ div {
       delimiter,
       font-formatting,
       text-case,
-      locale.date.date-part+
+      (locale.date.date-part | date.era)+
     }
   date.form =
     
@@ -268,6 +276,14 @@ div {
         ## Numeric date form (e.g., "2005-12-15").
         "numeric"
     }
+  date.era-terms = "ad" | "bc" | "bce" | "ce"
+  date.era =
+    element cs:era {
+      affixes,
+      font-formatting,
+      text-case,
+      attribute term { list { date.era-terms+ }} 
+    } 
   locale.date.date-part =
     element cs:date-part {
       affixes, font-formatting, text-case, (day | month | year)
@@ -283,24 +299,32 @@ div {
     }
   term.attributes =
     (attribute name { terms },
-     [ a:defaultValue = "long" ] attribute form { term.form }?)
+     [ a:defaultValue = "long" ] attribute form { term.form }?,
+     term.types)
     | (attribute name { terms.ordinals },
        attribute form { "long" }?,
        attribute gender-form { "masculine" | "feminine" }?,
        attribute match {
          "last-digit" | "last-two-digits" | "whole-number"
-       }?)
+       }?,
+       term.types)
     | (attribute name { terms.long-ordinals },
        attribute form { "long" }?,
        attribute gender-form { "masculine" | "feminine" })
     | (attribute name { terms.gender-assignable },
        attribute form { "long" }?,
-       attribute gender { "masculine" | "feminine" })
+       attribute gender { "masculine" | "feminine" },
+       term.types)
   
   ## "verb-short" reverts to "verb" if the "verb-short" form is not available.
   ## "symbol" reverts to "short" if the "symbol" form is not available.
   ## "verb" and "short" revert to "long" if the specified form is not available.
   term.form = "long" | "verb" | "short" | "verb-short" | "symbol"
+  # Used to specify terms per item type
+  term.types =
+    attribute for-types {
+      list { item-types+ }
+    }
   term.single =
     
     ## Singular version of the term.
@@ -386,7 +410,8 @@ div {
     ## the same cs:names element.
     delimiter,
     display,
-    font-formatting
+    font-formatting,
+    always-render
   names.name =
     element cs:name {
       name.attributes,
@@ -658,6 +683,7 @@ div {
       affixes,
       display,
       font-formatting,
+      always-render,
       text-case
     }
   rendering-element.date.date-part.localized =
@@ -722,6 +748,7 @@ div {
       display,
       font-formatting,
       quotes,
+      always-render,
       strip-periods,
       text-case
     }
@@ -753,7 +780,7 @@ div {
     
     ## Use to render a number variable.
     element cs:number {
-      number.attributes, affixes, display, font-formatting, text-case
+      number.attributes, affixes, display, font-formatting, always-render, text-case
     }
   number.attributes =
     attribute variable { variables.numbers },
@@ -1100,6 +1127,14 @@ div {
     }
 }
 # ==============================================================================
+
+## Allow repeated rendering of a rendering-element
+div {
+  ## By default, variables are rendered only once.
+  ## The "repeatable" attribute allows re-rendering of otherwise suppressed variables.
+  ## The "always-render" attribute allows re-rendering of otherwise suppressed variables.
+  always-render = attribute always-render { xsd:boolean }?
+}
 
 ## Formatting attributes.
 div {
