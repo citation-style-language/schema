@@ -579,7 +579,7 @@ div {
       affixes,
       display,
       font-formatting,
-      repeatable,
+      always-render,
       text-case
     }
   rendering-element.date.date-part.localized =
