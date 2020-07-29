@@ -644,7 +644,7 @@ div {
       display,
       font-formatting,
       quotes,
-      repeatable,
+      always-render,
       strip-periods,
       text-case
     }
