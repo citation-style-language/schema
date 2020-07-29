@@ -219,6 +219,8 @@
         {
           "properties": {
             "family": {
+              "title": "Family name of contributor",
+              "description": "Use family, not literal, for personal mononyms, e.g. 'Socrates', 'Lady Gaga'",
               "type": "string"
             },
             "given": {
@@ -239,11 +241,28 @@
             "static-ordering": {
               "type": ["string", "number", "boolean"]
             },
-            "literal": {
+            "institution": {
+              "title": "Literal name text; should not be parsed",
+              "description": "Use for institutional creator names; e.g. 'National Institutes of Health'",
+              "type": "string"
+            },
+            "institution-short": {
+              "title": "Short form of institution",
+              "description": "Use for short institutional creator names; e.g. 'NIH'",
+              "type": "string"
+            },
+            "alternate": {
+              "title": "Alternative name, such as screen name for online item or real name of pseudonymous author.",
+              "description": "E.g. rendered as 'Smith, J. [@JSmith]'",
               "type": "string"
             },
             "parse-names": {
-              "type": ["string", "number", "boolean"]
+              "type": "boolean"
+            },
+            "uncertain": {
+              "title": "Indicates uncertain authorship",
+              "description": "E.g. rendered as '[Smith, J.?]'",
+              "type": "boolean"
             }
           },
           "additionalProperties": false

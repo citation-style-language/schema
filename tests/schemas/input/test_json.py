@@ -115,7 +115,7 @@ def test_basic_data_schema_with_author_validates(csl_data_validator):
         "type": "report",
         "author": [
             {"given": "Jane", "family": "Roe"},
-            {"literal": "John Doe"}
+            {"institution": "ACME Corporation"}
         ]
     }]
     csl_data_validator.validate(csl)

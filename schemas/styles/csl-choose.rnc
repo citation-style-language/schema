@@ -38,9 +38,14 @@ div {
         list { variables.dates+ }
       }
     | 
+      ## Tests whether the given name variables contain uncertain names.
+      attribute is-uncertain-name {
+        list { variables.names+ }
+      }
+    | 
       ## Tests whether the locator matches the given locator types.
       attribute locator {
-        list { (terms.locator)+ }
+        list { terms.locator+ }
       }
     | 
       ## Tests whether the cite position matches the given positions.
