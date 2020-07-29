@@ -289,6 +289,7 @@
             "personal_communication",
             "post",
             "post-weblog",
+            "project",
             "regulation",
             "report",
             "review",
@@ -327,6 +328,12 @@
           }
         },
         "chair": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name-variable"
+          }
+        },
+        "co-investigator": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/name-variable"
@@ -418,6 +425,12 @@
           }
         },
         "performer": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name-variable"
+          }
+        },
+        "principal-investigator": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/name-variable"
