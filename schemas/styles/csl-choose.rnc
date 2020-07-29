@@ -81,8 +81,11 @@ div {
      (date-precision | date-range)+
     
   ## Tests the precision of a date variable
-  date-precision = attribute date-precision { 
-    list { ("year" | "month" | "day") }
+  date-precision = attribute date-precision {
+    ## specifies the highlest level of precision of a date variable
+    ## e.g., date-precision="month" means date-parts "year" and "month"
+    ## are present, but "day" is missing.
+    "year" | "month" | "day"
    }
   
   ## Tests whether a date variable is within a given range
