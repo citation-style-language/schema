@@ -396,7 +396,8 @@ div {
     ## the same cs:names element.
     delimiter,
     display,
-    font-formatting
+    font-formatting,
+    always-render
   names.name =
     element cs:name {
       name.attributes,
@@ -578,6 +579,7 @@ div {
       affixes,
       display,
       font-formatting,
+      always-render,
       text-case
     }
   rendering-element.date.date-part.localized =
@@ -642,6 +644,7 @@ div {
       display,
       font-formatting,
       quotes,
+      always-render,
       strip-periods,
       text-case
     }
@@ -673,7 +676,7 @@ div {
     
     ## Use to render a number variable.
     element cs:number {
-      number.attributes, affixes, display, font-formatting, text-case
+      number.attributes, affixes, display, font-formatting, always-render, text-case
     }
   number.attributes =
     attribute variable { variables.numbers },
@@ -1011,6 +1014,14 @@ div {
     }
 }
 # ==============================================================================
+
+## Allow repeated rendering of a rendering-element
+div {
+  ## By default, variables are rendered only once.
+  ## The "repeatable" attribute allows re-rendering of otherwise suppressed variables.
+  ## The "always-render" attribute allows re-rendering of otherwise suppressed variables.
+  always-render = attribute always-render { xsd:boolean }?
+}
 
 ## Formatting attributes.
 div {
