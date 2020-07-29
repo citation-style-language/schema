@@ -22,6 +22,7 @@ dc:description [
 
 ## Subparts of the CSL schema
 include "csl-choose.rnc"
+include "csl-citation-label-format.rnc"
 include "csl-terms.rnc"
 include "csl-types.rnc"
 include "csl-variables.rnc"
@@ -45,7 +46,8 @@ div {
        & style.macro*
        & style.citation
        & style.intext?
-       & style.bibliography?)
+       & style.bibliography?
+       & style.citation-label-format?)
     }
   dependent-style.style =
     element cs:style {
@@ -232,7 +234,7 @@ div {
     element cs:style-options {
       
       ## Select the localized era notation format ("ce" or "ad")
-      attribute era-notation {"ce" | "ad"}?,
+      attribute era-notation { "ce" | "ad" }?,
       
       ## Specify the space character to be used between initialized first names and family names, 
       ## e.g. a non-breaking space.
@@ -282,8 +284,10 @@ div {
       affixes,
       font-formatting,
       text-case,
-      attribute term { list { date.era-terms+ }} 
-    } 
+      attribute term {
+        list { date.era-terms+ }
+      }
+    }
   locale.date.date-part =
     element cs:date-part {
       affixes, font-formatting, text-case, (day | month | year)
@@ -687,7 +691,12 @@ div {
     
     ## Use to render a number variable.
     element cs:number {
-      number.attributes, affixes, display, font-formatting, always-render, text-case
+      number.attributes,
+      affixes,
+      display,
+      font-formatting,
+      always-render,
+      text-case
     }
   number.attributes =
     attribute variable { variables.numbers },
@@ -975,13 +984,15 @@ div {
         "full"
     }?
   
-  ## Options affecting cs:names, for cs:style, cs:citation and cs:bibliography.
+  ## Options affecting cs:names, for cs:style, cs:citation, cs:bibliography,
+  ## and cs:citation-label.
   names-inheritable-options =
     
     ## Inheritable name option, companion for "delimiter" on cs:names.
     attribute names-delimiter { text }?
   
-  ## Options affecting cs:name, for cs:style, cs:citation and cs:bibliography.
+  ## Options affecting cs:name, for cs:style, cs:citation, cs:bibliography,
+  ## and cs:citation-label.
   name-inheritable-options =
     name.attributes,
     
@@ -1028,6 +1039,7 @@ div {
 
 ## Allow repeated rendering of a rendering-element
 div {
+  
   ## By default, variables are rendered only once.
   ## The "repeatable" attribute allows re-rendering of otherwise suppressed variables.
   ## The "always-render" attribute allows re-rendering of otherwise suppressed variables.
