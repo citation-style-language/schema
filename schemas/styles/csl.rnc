@@ -397,7 +397,7 @@ div {
     delimiter,
     display,
     font-formatting,
-    repeatable
+    always-render
   names.name =
     element cs:name {
       name.attributes,
