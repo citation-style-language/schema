@@ -25,6 +25,7 @@ div {
   variables.names =
     "author"
     | "chair"
+    | "co-investigator"
     | "collection-editor"
     | "compiler"
     | "composer"
@@ -41,6 +42,7 @@ div {
     | "organizer"
     | "original-author"
     | "performer"
+    | "principal-investigator"
     | "producer"
     | "recipient"
     | "reviewed-author"
