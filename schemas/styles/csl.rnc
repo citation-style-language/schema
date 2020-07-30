@@ -236,10 +236,11 @@ div {
       ## Select the localized era notation format ("ce" or "ad")
       attribute era-notation { "ce" | "ad" }?,
       
-      ## Specify the space character to be used between initialized first names and family names, 
+      ## Specify the space character to be used between "small" name parts
+      ## i.e., between initialized given names or particles and other name parts
       ## e.g. a non-breaking space.
       [ a:defaultValue = " " ]
-      attribute initial-family-name-delimiter { text }?,
+      attribute small-name-part-delimiter { text }?,
       
       ## Limit the "ordinal" form to the first day of the month.
       [ a:defaultValue = "false" ]
