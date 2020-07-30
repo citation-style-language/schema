@@ -71,7 +71,7 @@
   "additionalProperties": false,
   "definitions": {
     "locator-variable": {
-      "description": "A locator is a list, that can be a string, or a (preferred) array.",
+      "description": "A locator is a list, that can be a string, or a (preferred) array. The array can consist of numbers, strings, or locator objects; a range can be represented by a two-item sub-array.",
       "anyOf": [
         {
           "description": "When using the string ...",
