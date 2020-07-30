@@ -108,6 +108,8 @@
       ]
     },
     "locators": {
+      "title": "Locators",
+      "description": "Locators refer to a specific location within the cited document. The options should be self-explanatory mostly, as they should match the item in question.",
       "appendix": {
         "$ref": "#/definitions/locator-variable"
       },
@@ -127,6 +129,8 @@
         "$ref": "#/definitions/locator-variable"
       },
       "elocation": {
+        "title": "E-Location",
+        "description": "A location within an electronic document; for example an eBook.",
         "$ref": "#/definitions/locator-variable"
       },
       "equation": {
@@ -180,7 +184,10 @@
         "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
         "examples": ["01:12:32"]
       },
-      "title": {
+      "title-locator": {
+        "title": "Title",
+        "description": "A section within an often legal document.",
+        "examples": ["Civil Rights Act of 1964, Title VII"],
         "$ref": "#/definitions/locator-variable"
       },
       "verse": {
