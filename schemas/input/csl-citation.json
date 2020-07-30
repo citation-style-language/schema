@@ -11,8 +11,8 @@
       ]
     },
     "version": {
-      "type": "string",
-      "pattern": "1.1"
+      "type": "number",
+      "pattern": "^1.1$"
     },
     "citationID": {
       "type": ["string", "number"]
