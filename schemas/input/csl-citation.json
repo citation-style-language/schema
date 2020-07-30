@@ -96,10 +96,17 @@
               "type": "number"
             },
             {
+              "$ref": "#/definitions/locators"
+            },
+            {
+              "title": "Locator Range",
+              "description": "An array within the locator array indicates a range.",
               "type": "array",
               "items": {
-                "$ref": "#/definitions/locators"
-              }
+                "type": ["number", "string"]
+              },
+              "minItems": 2,
+              "maxItems": 2
             }
           ]
         }
