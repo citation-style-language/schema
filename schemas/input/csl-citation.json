@@ -168,7 +168,12 @@
         },
         "timestamp": {
           "description": "TODO",
-          "type": "string"
+          "description: "An hour, minute, second timestamp for video or audio sources.",
+          "type": "string",
+          "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+          "examples": [
+            "01:12:32"
+          ]
         },
         "title": {
           "$ref": "#/definitions/locator-variable"
