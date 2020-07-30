@@ -14,9 +14,11 @@ div {
        attribute label-style {
          
          ## Style used in citeproc-js for CLS 1.0.* styles
+         ## Wier16, WiPe16, WiPP16, WPPU16
          "citeproc"
          | 
            ## Default style used in biblatex
+           ## Wie16, WP16, WPP16, WPPU16
            "biblatex-default"
        }
        | 
@@ -39,6 +41,7 @@ div {
     
     ## Abbreviate non-date variables by extracting the first N characters.
     ## For list variables (e.g. names), extract chacters from each element.
+    ## If empty, variables are rendered without abbreviation.
     attribute width { xsd:integer }?,
     
     ## As "width", but for variables that are length 1 (e.g. single authors).
