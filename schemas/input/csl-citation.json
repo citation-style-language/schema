@@ -34,11 +34,9 @@
           "suffix": {
             "type": "string"
           },
-          "locators": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/locators"
-            }
+          "locator": {
+            "type": "object",
+            "$ref": "#/definitions/locators"
           },
           "suppress-author": {
             "type": ["string", "number", "boolean"]
