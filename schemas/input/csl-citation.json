@@ -80,13 +80,23 @@
         {
           "description": "Strings represent a literal number, while numbers (integer or floating point) should otherwise be used. Ranges are represented by a two-item inner array.",
           "examples": [
-            { "page": [2, 3, [5, 12]] },
-            { "page": ["I-13"] },
-            { "page": [["I-13", "I-18"]] }
+            {
+              "page": [2, 3, [5, 12]]
+            },
+            {
+              "page": ["I-13"]
+            },
+            {
+              "page": [["I-13", "I-18"]]
+            }
           ],
           "anyOf": [
-            { "type": "string" },
-            { "type": "number" },
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
             {
               "type": "array",
               "items": {
