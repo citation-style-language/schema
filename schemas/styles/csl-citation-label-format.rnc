@@ -1,0 +1,104 @@
+namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
+namespace cs = "http://purl.org/net/xbiblio/csl"
+
+
+## cs:citation-label-format - Format for automatically generated citation-label
+div {
+  style.citation-label-format =
+    
+    ## Specify the format for automatically-generated citation-labels.
+    ## If unspecified, citation-labels are not automatically generated.
+    element cs:citation-label-format {
+      (
+       ## Specify a predefined label style
+       attribute label-style {
+         
+         ## Style used in citeproc-js for CLS 1.0.* styles
+         ## Wier16, WiPe16, WiPP16, WPPU16
+         "citeproc"
+         | 
+           ## Default style used in biblatex
+           ## Wie16, WP16, WPP16, WPPU16
+           "biblatex-default"
+       }
+       | 
+         ## Specify a custom label style
+         (rendering-element+, citation-label.options)),
+      affixes,
+      [ a:defaultValue = "" ] delimiter,
+      font-formatting
+    }
+  
+  ## Citation Label Options
+  citation-label.options =
+    
+    ## Default values for inheritable attributes in citation-label-format
+    ## [ a:defaultValue = "" ] names-delimiter
+    ## [ a:defaultValue = "" ] name-delimiter
+    ## [ a:defaultValue = "short" ] name-form
+    names-inheritable-options,
+    name-inheritable-options,
+    
+    ## Abbreviate non-date variables by extracting the first N characters.
+    ## For list variables (e.g. names), extract chacters from each element.
+    ## If empty, variables are rendered without abbreviation.
+    attribute width { xsd:integer }?,
+    
+    ## As "width", but for variables that are length 1 (e.g. single authors).
+    attribute width-single { xsd:integer }?,
+    
+    ## Set to "true" to treat parts of names or strings separated by whitepace 
+    ## or hyphens as separate elements when abbreviating.
+    [ a:defaultValue = "false" ]
+    attribute split-compound { xsd:boolean }?,
+    
+    ## Set to an integer to force the non-date part of citation-label to be the 
+    ## specified length (e.g. to make all labels 4 characters long).
+    ## Set to "true" to force all non-date parts of a citation label to be the
+    ## same length as the longest disambiguated non-date citation label part.
+    [ a:defaultValue = "false" ]
+    attribute fixed-width { xsd:integer | xsd:boolean }?,
+    
+    ## Set to "true" to activate disambiguation by adding additional characters 
+    ## to abbreviated variables in label.
+    attribute disambiguate-add-characters { xsd:boolean }?,
+    
+    ## Specify how variables are expanded for disambiguation.
+    attribute characters-disambiguation-rule {
+      
+      ## Ambiguous abbreviations in the same position are expanded until 
+      ## disambiguated (when disambiguation is not possible, the name/text
+      ## remains in its original form).
+      "by-position"
+      | 
+        ## As "by-position", but only ambiguous names in ambiguous cites are
+        ## expanded.
+        "by-cite"
+    }?,
+    
+    ## Set the maximum number of characters to add when disambiguating.
+    attribute disambiguate-max-characters { xsd:integer }?,
+    
+    ## Set to "true" to activate disambiguation by adding year-suffixes
+    ## (e.g., "ABC18a, ABC18b") for ambiguous citation labels.
+    [ a:defaultValue = "false" ]
+    attribute disambiguate-add-year-suffix { xsd:boolean }?,
+    
+    ## The form of the cs:et-al term to use when et-al abbreviation is activated. 
+    ## Set to "none" to omit the term. Set to "long", "short", or "symbol" to
+    ## render the respective form of the term.
+    [ a:defaultValue = "none" ]
+    attribute et-al-form { "none" | "long" | "short" | "symbol" }?,
+    
+    ## If specified and fixed-width="true", if a non-date part of a
+    ## citation-label lacks sufficient characters, add the specified character 
+    ## to the end of the non-date part of the citation label until it is the
+    ## correct length
+    attribute pad-character { padchar }?,
+    
+    ## If specified and fixed-width="true", if a date part of a citation-label 
+    ## lacks sufficient characters, add the specified character to the end of 
+    ## the date part of the citation label until it is the correct length
+    attribute pad-character-date { padchar }?
+  padchar = xsd:string { pattern = "." }
+}
