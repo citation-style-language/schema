@@ -113,7 +113,10 @@
       "appendix": {
         "$ref": "#/definitions/locator-variable"
       },
-      "article": {
+      "article-locator": {
+        "title": "Article",
+        "description": "A section within an often legal document.",
+        "examples": ["U.S. Constitution, Article IV"],
         "$ref": "#/definitions/locator-variable"
       },
       "book": {
