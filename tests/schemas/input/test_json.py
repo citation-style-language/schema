@@ -108,6 +108,47 @@ def test_basic_citation_schema_validates(csl_citation_validator):
     }
     csl_citation_validator.validate(cite)
 
+def test_citation_schema_compound_locator_validates(csl_citation_validator):
+    cite = {
+      "schema": "https://resource.citationstyles.org/schema/latest/input/json/csl-citation.json",
+      "citationID": "item1",
+      "citationItems": [
+          {
+            "id": "item1",
+            "itemData": {
+            "id": "item1",
+            "type": "book",
+            "title": "test title"
+          },
+          "locator": {
+            "page": [1, 3, {"line": 12}, [15, 18]]
+          }
+        }
+      ]
+    }
+    csl_citation_validator.validate(cite)
+
+def test_citation_schema_locator_recursive_array_fails(csl_citation_validator):
+    cite = {
+      "schema": "https://resource.citationstyles.org/schema/latest/input/json/csl-citation.json",
+      "citationID": "item1",
+      "citationItems": [
+          {
+            "id": "item1",
+            "itemData": {
+            "id": "item1",
+            "type": "book",
+            "title": "test title"
+          },
+          "locator": {
+            "page": [1, [3, [4]]]
+          }
+        }
+      ]
+    }
+    with pytest.raises(jsonschema.exceptions.ValidationError):
+        csl_citation_validator.validate(cite)
+
 
 def test_basic_data_schema_with_author_validates(csl_data_validator):
     csl = [{
