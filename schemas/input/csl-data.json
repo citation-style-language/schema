@@ -382,6 +382,12 @@
             "$ref": "#/definitions/name-variable"
           }
         },
+        "container-translator": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name-variable"
+          }
+        },
         "contributor": {
           "type": "array",
           "items": {
@@ -475,6 +481,18 @@
           }
         },
         "translator": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name-variable"
+          }
+        },
+        "volume-editor": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name-variable"
+          }
+        },
+        "volume-translator": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/name-variable"
