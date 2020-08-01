@@ -36,7 +36,7 @@
           },
           "locators": {
             "title": "Locators",
-            "description": "One-or-more specific locations within the cited document. The options should be self-explanatory mostly, as they should match the item in question. The array consists of locator objects.",
+            "description": "One-or-more specific locations within the cited document.  The array consists of locator objects, which should be mostly self-explanatory, as they should match the item in question.",
             "example": [{
                 "locators": [{
                   "page": 21
