@@ -120,9 +120,10 @@ def test_citation_schema_compound_locator_validates(csl_citation_validator):
             "type": "book",
             "title": "test title"
           },
-          "locator": {
-            "page": [1, 3, {"line": 12}, [15, 18]]
-          }
+          "locators": [
+            {"page": [1, 3]},
+            {"line": 12}
+          ]
         }
       ]
     }

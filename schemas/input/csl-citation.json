@@ -34,21 +34,172 @@
           "suffix": {
             "type": "string"
           },
-          "locator": {
-            "type": "object",
-            "$ref": "#/definitions/locators"
-          },
-          "suppress-author": {
-            "type": ["string", "number", "boolean"]
-          },
-          "author-only": {
-            "type": ["string", "number", "boolean"]
-          },
-          "uris": {
+          "locators": {
+            "description": "Locators refer to a specific location within the cited document. The options should be self-explanatory mostly, as they should match the item in question.",
+            "example": [
+              { "locators": [{ "page": [1, 3, { "begin": 23, "end": 32 }] }] },
+              { "locators": [{ "page": 1 }, { "line": 12 }] }
+            ],
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "anyOf": [
+                {
+                  "appendix": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "article-locator": {
+                    "title": "Article",
+                    "description": "A section within an often legal document.",
+                    "examples": ["U.S. Constitution, Article IV"],
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "book": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "canon": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "chapter": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "column": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "elocation": {
+                    "title": "E-Location",
+                    "description": "A location within an electronic document; for example an eBook.",
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "equation": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "figure": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "folio": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "issue": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "line": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "note": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "opus": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "page": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "paragraph": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "part": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "rule": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "section": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "sub-verbo": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "supplement": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "table": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "timestamp": {
+                    "description": "An hour, minute, second timestamp for video or audio sources.",
+                    "type": "string",
+                    "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+                    "examples": ["01:12:32"]
+                  }
+                },
+                {
+                  "title-locator": {
+                    "title": "Title",
+                    "description": "A section within an often legal document.",
+                    "examples": ["Civil Rights Act of 1964, Title VII"],
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "verse": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                },
+                {
+                  "volume": {
+                    "$ref": "#/definitions/locator-variable"
+                  }
+                }
+              ]
+            },
+            "minItems": 1,
+            "additionalProperties": false
+          }
+        },
+        "suppress-author": {
+          "type": ["string", "number", "boolean"]
+        },
+        "author-only": {
+          "type": ["string", "number", "boolean"]
+        },
+        "uris": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         },
         "required": ["id"],
@@ -69,141 +220,26 @@
   "additionalProperties": false,
   "definitions": {
     "locator-variable": {
-      "description": "A locator is a list, that can be a string, or a (preferred) array. The array can consist of numbers, strings, or locator objects; a range can be represented by a two-item sub-array.",
-      "anyOf": [
-        {
-          "description": "When using the string ...",
-          "type": "string"
-        },
-        {
-          "description": "Strings represent a literal number, while numbers (integer or floating point) should otherwise be used. Ranges are represented by a two-item inner array.",
-          "examples": [
-            {
-              "page": [2, 3, [5, 12]]
-            },
-            {
-              "page": ["I-13"]
-            },
-            {
-              "page": [["I-13", "I-18"]]
-            }
-          ],
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "$ref": "#/definitions/locators"
-            },
-            {
-              "title": "Locator Range",
-              "description": "An array within the locator array indicates a range.",
-              "type": "array",
-              "items": {
+      "description": "The value of a locator can be an array of numbers and/or strings OR a range object.",
+      "type": "array",
+      "items": {
+        "anyOf": [
+          { "type": ["number", "string"] },
+          {
+            "title": "Locator Range",
+            "type": "object",
+            "properties": {
+              "begin": {
                 "type": ["number", "string"]
               },
-              "minItems": 2,
-              "maxItems": 2
+              "end": {
+                "type": ["number", "string"]
+              }
             }
-          ]
-        }
-      ]
-    },
-    "locators": {
-      "title": "Locators",
-      "description": "Locators refer to a specific location within the cited document. The options should be self-explanatory mostly, as they should match the item in question.",
-      "appendix": {
-        "$ref": "#/definitions/locator-variable"
-      },
-      "article-locator": {
-        "title": "Article",
-        "description": "A section within an often legal document.",
-        "examples": ["U.S. Constitution, Article IV"],
-        "$ref": "#/definitions/locator-variable"
-      },
-      "book": {
-        "$ref": "#/definitions/locator-variable"
-      },
-      "canon": {
-        "$ref": "#/definitions/locator-variable"
-      },
-      "chapter": {
-        "$ref": "#/definitions/locator-variable"
-      },
-      "column": {
-        "$ref": "#/definitions/locator-variable"
-      },
-      "elocation": {
-        "title": "E-Location",
-        "description": "A location within an electronic document; for example an eBook.",
-        "$ref": "#/definitions/locator-variable"
-      },
-      "equation": {
-        "$ref": "#/definitions/locator-variable"
-      },
-      "figure": {
-        "$ref": "#/definitions/locator-variable"
-      },
-      "folio": {
-        "$ref": "#/definitions/locator-variable"
-      },
-      "issue": {
-        "$ref": "#/definitions/locator-variable"
-      },
-      "line": {
-        "$ref": "#/definitions/locator-variable"
-      },
-      "note": {
-        "$ref": "#/definitions/locator-variable"
-      },
-      "opus": {
-        "$ref": "#/definitions/locator-variable"
-      },
-      "page": {
-        "$ref": "#/definitions/locator-variable"
-      },
-      "paragraph": {
-        "$ref": "#/definitions/locator-variable"
-      },
-      "part": {
-        "$ref": "#/definitions/locator-variable"
-      },
-      "rule": {
-        "$ref": "#/definitions/locator-variable"
-      },
-      "section": {
-        "$ref": "#/definitions/locator-variable"
-      },
-      "sub-verbo": {
-        "$ref": "#/definitions/locator-variable"
-      },
-      "supplement": {
-        "$ref": "#/definitions/locator-variable"
-      },
-      "table": {
-        "$ref": "#/definitions/locator-variable"
-      },
-      "timestamp": {
-        "description": "An hour, minute, second timestamp for video or audio sources.",
-        "type": "string",
-        "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
-        "examples": ["01:12:32"]
-      },
-      "title-locator": {
-        "title": "Title",
-        "description": "A section within an often legal document.",
-        "examples": ["Civil Rights Act of 1964, Title VII"],
-        "$ref": "#/definitions/locator-variable"
-      },
-      "verse": {
-        "$ref": "#/definitions/locator-variable"
-      },
-      "volume": {
-        "$ref": "#/definitions/locator-variable"
+          }
+        ]
       }
     }
-  }
+  },
+  "additionalProperties": false
 }
