@@ -256,6 +256,10 @@
               "description": "E.g. rendered as 'Smith, J. [@JSmith]'",
               "type": "string"
             },
+            "label": {
+              "title": "Non-default label to use when rendering name",
+              "description": "Overrides the default label for the role. e.g. to indicate a subtype of a role or specific MARC or CRediT roles."
+            },
             "parse-names": {
               "type": "boolean"
             },
