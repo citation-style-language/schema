@@ -423,12 +423,6 @@
       "title-short": {
         "type": "string"
       },
-      "translated-title": {
-        "type": "string"
-      },
-      "translated-title-short": {
-        "type": "string"
-      },
       "URL": {
         "type": "string"
       },
