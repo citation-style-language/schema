@@ -382,12 +382,6 @@
             "$ref": "#/definitions/name-variable"
           }
         },
-        "container-translator": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
         "contributor": {
           "type": "array",
           "items": {
