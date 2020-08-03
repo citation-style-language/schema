@@ -235,12 +235,6 @@
             "suffix": {
               "type": "string"
             },
-            "comma-suffix": {
-              "type": ["string", "number", "boolean"]
-            },
-            "static-ordering": {
-              "type": ["string", "number", "boolean"]
-            },
             "institution": {
               "title": "Literal name text; should not be parsed",
               "description": "Use for institutional creator names; e.g. 'National Institutes of Health'",
