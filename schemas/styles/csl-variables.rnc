@@ -30,6 +30,7 @@ div {
     | "compiler"
     | "composer"
     | "container-author"
+    | "container-translator"
     | "contributor"
     | "curator"
     | "director"
