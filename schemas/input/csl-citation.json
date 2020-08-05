@@ -234,9 +234,13 @@
       ]
     },
     "locator-variable": {
-      "type": ["string", "number"]
+      "title": "Locator Variable",
+      "description": "Generally should be an integer or float, but can be a string.",
+      "type": ["string", "number"],
+      "examples": [{ "page": 23 }, { "page": "a-34" }, { "page": "VII" }]
     },
     "locator-range": {
+      "title": "Locator Range",
       "type": "object",
       "properties": {
         "begin": {
