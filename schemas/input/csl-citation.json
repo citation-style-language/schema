@@ -36,13 +36,13 @@
           },
           "locators": {
             "title": "Locator List",
-            "description": "One-or-more specific locations within the cited document.  The array consists of locator objects, which should be mostly self-explanatory, as they should match the item in question.",
+            "description": "One-or-more specific locations within the cited document.  The array consists of locator objects, which should be mostly self-explanatory, as they should match the item in question. There is also a range object to represent locator ranges.",
             "type": "array",
             "items": {
               "$ref": "#/definitions/locator"
             },
             "examples": [
-              { "locators": [{ "page": 23 }] },
+              { "locators": [{ "page": 23 }, { "page": 25 }] },
               {
                 "locators": [{ "begin": { "page": 23 }, "end": { "page": 25 } }]
               },
