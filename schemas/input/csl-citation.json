@@ -88,6 +88,9 @@
     "locator": {
       "anyOf": [
         {
+          "$ref": "#/definitions/locator-range"
+        },
+        {
           "appendix": {
             "$ref": "#/definitions/locator-variable"
           }
@@ -231,16 +234,6 @@
       ]
     },
     "locator-variable": {
-      "anyOf": [
-        {
-          "$ref": "#/definitions/number-variable"
-        },
-        {
-          "$ref": "#/definitions/locator-range"
-        }
-      ]
-    },
-    "number-variable": {
       "type": ["string", "number"]
     },
     "locator-range": {
