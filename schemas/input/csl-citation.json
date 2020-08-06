@@ -41,10 +41,10 @@
             }
           },
           "suppress-author": {
-            "type": ["string", "number", "boolean"]
+            "type": "boolean"
           },
           "author-only": {
-            "type": ["string", "number", "boolean"]
+            "type": "boolean"
           },
           "uris": {
             "type": "array",
