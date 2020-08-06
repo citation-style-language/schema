@@ -40,11 +40,10 @@
               "$ref": "#/definitions/locators"
             }
           },
-          "suppress-author": {
-            "type": "boolean"
-          },
-          "author-only": {
-            "type": "boolean"
+          "command": {
+            "type": "string"
+            "enum": ["author-in-text", "suppress-author", "author-only"]
+            ]
           },
           "uris": {
             "type": "array",
