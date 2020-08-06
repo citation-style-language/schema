@@ -39,18 +39,30 @@
             "description": "One-or-more specific locations within the cited document.  The array consists of locator objects, which should be mostly self-explanatory, as they should match the item in question. There is also a range object to represent locator ranges.",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/locator"
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/locator"
+                },
+                {
+                  "$ref": "#/definitions/locators-subgroup"
+                }
+              ]
             },
             "examples": [
-              { "locators": [{ "page": 23 }, { "page": 25 }] },
               {
-                "locators": [{ "begin": { "page": 23 }, "end": { "page": 25 } }]
+                "locators": [{ "page": 23 }, { "page": 25 }]
               },
-              { "locators": [{ "page": 23, "line": 2 }] },
+              {
+                "locators": [{"begin": { "page": 23 },"end": { "page": 25 }}]
+              },
+              {
+                "locators": [{ "page": 23, "line": 2 }]
+              },
               {
                 "locators": [
                   { "page": 23 },
-                  { "begin": { "page": 25 }, "end": { "page": 28 } }
+                  {"begin": { "page": 25 }, "end": { "page": 28 }
+                  }
                 ]
               }
             ],
@@ -238,6 +250,22 @@
       "description": "Generally should be an integer or float, but can be a string.",
       "type": ["string", "number"],
       "examples": [{ "page": 23 }, { "page": "a-34" }, { "page": "VII" }]
+    },
+    "locators-subgroup": {
+      "title": "Locators Subgroup",
+      "description": "Not common, but for a locator sub-group.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/locator"
+      },
+      "examples": [
+        {
+          "locators": [
+            { "page": 259, "line": 12 },
+            ["see also", { "page": 273, "line": 3 }]
+          ]
+        }
+      ]
     },
     "locator-range": {
       "title": "Locator Range",
