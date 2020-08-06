@@ -42,7 +42,9 @@
           },
           "command": {
             "type": "string",
-            "enum": ["author-in-text", "suppress-author", "author-only"]
+            "title": "Special citation command",
+            "descriptions": "Calls for a non-default citation format",
+            "enum": ["narrative", "suppress-author", "author-only"]
           },
           "uris": {
             "type": "array",
