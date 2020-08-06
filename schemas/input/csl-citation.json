@@ -43,7 +43,7 @@
           "command": {
             "type": "string",
             "title": "Special citation command",
-            "descriptions": "Calls for a non-default citation format",
+            "descriptions": "Specifies a non-default citation format; respectively 'Doe (2019)', '(2019)' and 'Doe'",
             "enum": ["narrative", "suppress-author", "author-only"]
           },
           "uris": {
