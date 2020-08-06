@@ -41,7 +41,7 @@
             }
           },
           "command": {
-            "type": "string"
+            "type": "string",
             "enum": ["author-in-text", "suppress-author", "author-only"]
           },
           "uris": {
