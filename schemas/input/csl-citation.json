@@ -26,6 +26,8 @@
       },
       "additionalProperties": false
     },
+    "required": ["version", "citationID"],
+    "additionalProperties": false,
     "citationItems": {
       "type": "array",
       "items": {
@@ -93,9 +95,7 @@
       },
       "required": ["id"],
       "additionalProperties": false
-    },
-    "required": ["version", "citationID"],
-    "additionalProperties": false
+    }
   },
   "definitions": {
     "locator": {
