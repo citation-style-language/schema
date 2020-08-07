@@ -93,7 +93,9 @@
       },
       "required": ["id"],
       "additionalProperties": false
-    }
+    },
+    "required": ["version", "citationID"],
+    "additionalProperties": false
   },
   "definitions": {
     "locator": {
