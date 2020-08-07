@@ -40,11 +40,11 @@
               "$ref": "#/definitions/locators"
             }
           },
-          "suppress-author": {
-            "type": ["string", "number", "boolean"]
-          },
-          "author-only": {
-            "type": ["string", "number", "boolean"]
+          "command": {
+            "type": "string",
+            "title": "Special citation command",
+            "descriptions": "Specifies a non-default citation format; respectively 'Doe (2019)', '(2019)' and 'Doe'",
+            "enum": ["narrative", "suppress-author", "author-only"]
           },
           "uris": {
             "type": "array",
