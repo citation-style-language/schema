@@ -17,7 +17,7 @@
     "citationID": {
       "title": "Citation ID",
       "description": "A stable and unique ID (for example, a UUID) assigned to the citation, for internal use by the processor.",
-      "type": "number"
+      "type": ["string", "number"]
     },
     "noteIndex": {
       "type": "number"
