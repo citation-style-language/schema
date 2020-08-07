@@ -15,7 +15,9 @@
       "pattern": "1.1"
     },
     "citationID": {
-      "type": ["string", "number"]
+      "title": "Citation ID",
+      "description": "A stable and unique ID (for example, a UUID) assigned to the citation, for internal use by the processor.",
+      "type": "number"
     },
     "noteIndex": {
       "type": "number"
