@@ -2,24 +2,25 @@ namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
 namespace cs = "http://purl.org/net/xbiblio/csl"
 namespace dc = "http://purl.org/dc/elements/1.1/"
 
-dc:title [ "Extension schema for the Citation Style Language styles repository" ]
+dc:title [
+  "Extension schema for the Citation Style Language styles repository"
+]
 dc:creator [ "Rintze M. Zelle" ]
-dc:rights [ "Copyright 2013-2018 Citation Style Language and contributors" ]
+dc:rights [
+  "Copyright 2013-2018 Citation Style Language and contributors"
+]
 dc:license [ "MIT license" ]
 dc:description [
   "Enforces stricter requirements for the styles in the official CSL styles repository."
 ]
-
 include "csl.rnc" {
-
+  
   ## Remove legacy attributes from cs:style of dependents
   dependent-style.style =
     element cs:style {
-      style.default-locale,
-      version,
-      dependent-style.style.info
+      style.default-locale, version, dependent-style.style.info
     }
-
+  
   ## - Only allow cs:issn once
   ## - Require a cs:rights element
   ## - Forgo "interleave" (so the elements need to be in the order specified),
@@ -50,7 +51,7 @@ include "csl.rnc" {
       info.updated,
       info.rights
     }
-    
+  
   ## - Only allow cs:issn once
   ## - Require a cs:rights element
   ## - Forgo "interleave" (so the elements need to be in the order specified),
@@ -81,16 +82,18 @@ include "csl.rnc" {
       info.updated,
       info.rights
     }
-
+  
   ## Require "license" attribute; require specific value for "license" attribute and
   ## text content for cs:rights
   info.rights =
     element cs:rights {
-      attribute license { "http://creativecommons.org/licenses/by-sa/3.0/" },
+      attribute license {
+        "http://creativecommons.org/licenses/by-sa/3.0/"
+      },
       attribute xml:lang { xsd:language }?,
       "This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License"
     }
-
+  
   ## Remove legacy attributes from cs:et-al
   names.et-al =
     
@@ -103,41 +106,35 @@ include "csl.rnc" {
       font-formatting
     }
 }
-
 independent-style.info.link.self =
-element cs:link {
-  attribute href { xsd:anyURI },
-  attribute rel { "self" },
-  info-text
-}
-
+  element cs:link {
+    attribute href { xsd:anyURI },
+    attribute rel { "self" },
+    info-text
+  }
 independent-style.info.link.template =
-element cs:link {
-  attribute href { xsd:anyURI },
-  attribute rel { "template" },
-  info-text
-}
-
+  element cs:link {
+    attribute href { xsd:anyURI },
+    attribute rel { "template" },
+    info-text
+  }
 independent-style.info.link.independent-parent =
-element cs:link {
-  attribute href { xsd:anyURI },
-  attribute rel { "independent-parent" },
-  info-text
-}
-
+  element cs:link {
+    attribute href { xsd:anyURI },
+    attribute rel { "independent-parent" },
+    info-text
+  }
 independent-style.info.link.documentation =
-element cs:link {
-  attribute href { xsd:anyURI },
-  attribute rel { "documentation" },
-  info-text
-}
-
+  element cs:link {
+    attribute href { xsd:anyURI },
+    attribute rel { "documentation" },
+    info-text
+  }
 info.category.citation-format =
-element cs:category {
-  attribute citation-format { category.citation-format }
-}
-
+  element cs:category {
+    attribute citation-format { category.citation-format }
+  }
 info.category.field =
-element cs:category {
-  attribute field { category.field }
-}
+  element cs:category {
+    attribute field { category.field }
+  }

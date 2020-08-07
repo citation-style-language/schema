@@ -12,7 +12,7 @@ div {
   ## When specifying conditions, we allow either the attribute syntax or the element-based one.
   choose.condition =
     (condition.atts, match?)
-    | element cs:conditions { match, condition.elem+ }
+    | element cs:conditions { match?, condition.elem+ }
   choose.if = element cs:if { choose.condition, rendering-element* }
   choose.else-if =
     element cs:else-if { choose.condition, rendering-element* }
@@ -21,7 +21,8 @@ div {
   ## This element allows for more complex conditional logic; for 
   ## example, if you need to specify mixed "match" rules.
   condition.elem = element cs:condition { match?, condition.atts }
-  condition.atts =
+  condition.atts = ((condition.atts.simple+, condition.atts.complex?) | condition.atts.complex)
+  condition.atts.simple =
     
     ## If used, the element content is only rendered if it disambiguates two
     ## otherwise identical citations. This attempt at disambiguation is only
@@ -38,9 +39,14 @@ div {
         list { variables.dates+ }
       }
     | 
+      ## Tests whether the given name variables contain uncertain names.
+      attribute is-uncertain-name {
+        list { variables.names+ }
+      }
+    | 
       ## Tests whether the locator matches the given locator types.
       attribute locator {
-        list { (terms.locator)+ }
+        list { terms.locator+ }
       }
     | 
       ## Tests whether the cite position matches the given positions.
@@ -64,6 +70,43 @@ div {
       attribute variable {
         list { variables+ }
       }
+  
+  # Tests that require two attributes
+  condition.atts.complex = 
+    condition.atts.complex.dates
+    |
+    condition.atts.complex.general
+
+  # Dates
+  condition.atts.complex.dates =
+    ## specifies the variable to be tested
+    attribute tested { 
+      list { variables.dates+ }
+     },
+     (date-precision | date-range)+
+    
+  ## Tests the precision of a date variable
+  date-precision = attribute date-precision {
+    ## specifies the highlest level of precision of a date variable
+    ## e.g., date-precision="month" means date-parts "year" and "month"
+    ## are present, but "day" is missing.
+    "year" | "month" | "day"
+   }
+  
+  ## Tests whether a date variable is within a given range
+  date-range = attribute date-range { text }
+  
+  # General
+  condition.atts.complex.general =
+    ## specifies the variable to be tested
+    attribute tested { 
+      list { variables+ }
+     },
+    ## Tests whether the tested variable matches another variable
+    attribute matches { 
+      list {variables+ }
+     }
+
   match =
     
     ## Set the testing logic.

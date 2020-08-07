@@ -1,4 +1,5 @@
 {
+  "title": "CSL JSON/YAML",
   "description": "JSON schema for CSL input data",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://resource.citationstyles.org/schema/latest/input/json/csl-data.json",
@@ -7,6 +8,66 @@
     "$ref": "#/definitions/refitem"
   },
   "definitions": {
+    "title-variable": {
+      "title": "Title variable",
+      "description": "Titles are represented as an object.",
+      "$ref": "#definitions/title-object"
+    },
+    "title-object": {
+      "title": "Title Object",
+      "type": "object",
+      "examples": [
+        {
+          "full": "Finis Coronat Opus: A Curious Reciprocity; Shelley’s “When the Lamp Is Shattered”",
+          "main": "Finis Coronat Opus",
+          "sub": [
+            "A Curious Reciprocity",
+            "Shelley’s “When the Lamp Is Shattered”"
+          ]
+        },
+        {
+          "main": "Whose Music?",
+          "sub": ["A Sociology of Musical Language"]
+        },
+        {
+          "main": "Pardon the Interruption",
+          "sub": ["Goal Proximity, Perceived Spare Time, and Impatience"]
+        },
+        {
+          "main": "England’s Monitor",
+          "sub": [", or The History of the Separation"]
+        },
+        {
+          "main": "Kriegstagebuch des Oberkommandos der Wehrmacht, 1940–1945",
+          "short": "Kriegstagebuch"
+        }
+      ],
+      "properties": {
+        "full": {
+          "title": "Full Title",
+          "description": "The full title string for the item; should generally be redundant, as it's simply the main + the sub titles and/or alternate title.",
+          "$ref": "#definitions/rich-text-string"
+        },
+        "main": {
+          "title": "Main Title",
+          "description": "The primary title component for the item.",
+          "$ref": "#definitions/rich-text-string"
+        },
+        "short": {
+          "title": "Short Title",
+          "description": "A short variant title component for the item.",
+          "$ref": "#definitions/rich-text-string"
+        },
+        "sub": {
+          "title": "Sub-Titles",
+          "description": "The sub-title components for the item, as an array. Typically, when there is a subtitle, there will only be one, but there are cases when there are more.",
+          "type": "array",
+          "items": {
+            "$ref": "#definitions/rich-text-string"
+          }
+        }
+      }
+    },
     "rich-text-string": {
       "title": "Rich Text String",
       "description": "A string that may include sub-string formatting for bold, italic, subscript, superscript, math, etc. The accompanying `csl-rich-text.yaml` schema defines experimental support for this in CSL JSON input.",
@@ -158,6 +219,8 @@
         {
           "properties": {
             "family": {
+              "title": "Family name of contributor",
+              "description": "Use family, not literal, for personal mononyms, e.g. 'Socrates', 'Lady Gaga'",
               "type": "string"
             },
             "given": {
@@ -172,17 +235,28 @@
             "suffix": {
               "type": "string"
             },
-            "comma-suffix": {
-              "type": ["string", "number", "boolean"]
+            "institution": {
+              "title": "Literal name text; should not be parsed",
+              "description": "Use for institutional creator names; e.g. 'National Institutes of Health'",
+              "type": "string"
             },
-            "static-ordering": {
-              "type": ["string", "number", "boolean"]
+            "institution-short": {
+              "title": "Short form of institution",
+              "description": "Use for short institutional creator names; e.g. 'NIH'",
+              "type": "string"
             },
-            "literal": {
+            "alternate": {
+              "title": "Alternative name, such as screen name for online item or real name of pseudonymous author.",
+              "description": "E.g. rendered as 'Smith, J. [@JSmith]'",
               "type": "string"
             },
             "parse-names": {
-              "type": ["string", "number", "boolean"]
+              "type": "boolean"
+            },
+            "uncertain": {
+              "title": "Indicates uncertain authorship",
+              "description": "E.g. rendered as '[Smith, J.?]'",
+              "type": "boolean"
             }
           },
           "additionalProperties": false
@@ -228,6 +302,7 @@
             "personal_communication",
             "post",
             "post-weblog",
+            "project",
             "regulation",
             "report",
             "review",
@@ -266,6 +341,12 @@
           }
         },
         "chair": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name-variable"
+          }
+        },
+        "co-investigator": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/name-variable"
@@ -362,6 +443,12 @@
             "$ref": "#/definitions/name-variable"
           }
         },
+        "principal-investigator": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name-variable"
+          }
+        },
         "producer": {
           "type": "array",
           "items": {
@@ -446,13 +533,10 @@
           "type": ["string", "number"]
         },
         "collection-title": {
-          "type": "string"
+          "$ref": "#definitions/title-variable"
         },
         "container-title": {
-          "type": "string"
-        },
-        "container-title-short": {
-          "type": "string"
+          "$ref": "#definitions/title-variable"
         },
         "dimensions": {
           "type": "string"
@@ -540,7 +624,7 @@
         },
         "original-title": {
           "description": "[Deprecated - Use `original` related `title` property instead]",
-          "type": "string"
+          "$ref": "#definitions/title-variable"
         },
         "page": {
           "type": ["string", "number"]
@@ -596,16 +680,10 @@
           "type": ["string", "number"]
         },
         "title": {
-          "type": "string"
-        },
-        "title-short": {
-          "type": "string"
+          "$ref": "#definitions/title-variable"
         },
         "translated-title": {
-          "type": "string"
-        },
-        "translated-title-short": {
-          "type": "string"
+          "$ref": "#definitions/title-variable"
         },
         "URL": {
           "type": "string"
