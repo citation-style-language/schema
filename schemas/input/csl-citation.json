@@ -26,7 +26,6 @@
       },
       "additionalProperties": false
     },
-    "required": ["version", "citationID"],
     "additionalProperties": false,
     "citationItems": {
       "type": "array",
