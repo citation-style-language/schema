@@ -17,6 +17,9 @@
     "citationID": {
       "type": ["string", "number"]
     },
+    "noteIndex": {
+      "type": "number"
+    },
     "citationItems": {
       "type": "array",
       "items": {
@@ -56,15 +59,6 @@
         "required": ["id"],
         "additionalProperties": false
       }
-    },
-    "properties": {
-      "type": "object",
-      "properties": {
-        "noteIndex": {
-          "type": "number"
-        }
-      },
-      "additionalProperties": false
     }
   },
   "required": ["schema", "citationID"],
