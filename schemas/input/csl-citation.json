@@ -28,6 +28,7 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "The id for the cited item a processor will use to access the corresponding item data.",
             "type": ["string", "number"]
           },
           "itemData": {
