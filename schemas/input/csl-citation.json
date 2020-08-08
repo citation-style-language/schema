@@ -20,24 +20,34 @@
       "type": ["string", "number"]
     },
     "noteIndex": {
-      "type": "number"
+      "title": "Note Index",
+      "description": "The foot/endnote number or symbol in which the citation is located within the document. Citations within the main text of the document have a noteIndex of zero.",
+      "type": ["number", "string"]
     },
     "citationItems": {
+      "title": "Citation Items",
+      "description": "The citation data, from which the rendered citations are generated.",
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
           "id": {
-            "description": "The id for the cited item a processor will use to access the corresponding item data.",
+            "description": "The id for the cited item a processor will use to access the corresponding item data. By definition, it must match the id value for the itemData item.",
             "type": ["string", "number"]
           },
           "itemData": {
+            "title": "Item Data",
+            "description": "The metadata (title, author, etc.) for the cited items.",
             "$ref": "csl-data.json#/items"
           },
           "prefix": {
+            "title": "Citation Prefix",
+            "description": "The text to render before this cite item.",
             "type": "string"
           },
           "suffix": {
+            "title": "Citation Suffix",
+            "description": "The text to render after this cite item.",
             "type": "string"
           },
           "locators": {
