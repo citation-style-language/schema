@@ -24,42 +24,6 @@
       "description": "The end/footnote number (or symbol) in which the citation is located within the document. Citations within the main text of the document have a noteIndex of zero.",
       "type": ["number", "string"]
     },
-    "locator": {
-      "type": "string",
-      "description": "[Deprecated - use the locators object array instead.]"
-    },
-    "label": {
-      "type": "string",
-      "description": "[Deprecated - use the locators object array instead.]",
-      "enum": [
-        "appendix",
-        "article",
-        "book",
-        "canon",
-        "chapter",
-        "column",
-        "elocation",
-        "equation",
-        "figure",
-        "folio",
-        "issue",
-        "line",
-        "note",
-        "opus",
-        "page",
-        "paragraph",
-        "part",
-        "rule",
-        "section",
-        "sub verbo",
-        "supplement",
-        "table",
-        "timestamp",
-        "title",
-        "verse",
-        "volume"
-      ]
-    },
     "properties": {
       "description": "[Deprecated - Use top-level noteIndex property instead.]",
       "type": "object",
@@ -123,6 +87,42 @@
             "minItems": 1,
             "additionalProperties": false
           }
+        },
+        "locator": {
+          "type": "string",
+          "description": "[Deprecated - use the locators object array instead.]"
+        },
+        "label": {
+          "type": "string",
+          "description": "[Deprecated - use the locators object array instead.]",
+          "enum": [
+            "appendix",
+            "article",
+            "book",
+            "canon",
+            "chapter",
+            "column",
+            "elocation",
+            "equation",
+            "figure",
+            "folio",
+            "issue",
+            "line",
+            "note",
+            "opus",
+            "page",
+            "paragraph",
+            "part",
+            "rule",
+            "section",
+            "sub verbo",
+            "supplement",
+            "table",
+            "timestamp",
+            "title",
+            "verse",
+            "volume"
+          ]
         },
         "uris": {
           "type": "array",
