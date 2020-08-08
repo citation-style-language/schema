@@ -21,33 +21,72 @@
     },
     "noteIndex": {
       "title": "Note Index",
-      "description": "The foot/endnote number or symbol in which the citation is located within the document. Citations within the main text of the document have a noteIndex of zero.",
+      "description": "The end/footnote number (or symbol) in which the citation is located within the document. Citations within the main text of the document have a noteIndex of zero.",
       "type": ["number", "string"]
     },
+    "locator": {
+      "type": "string",
+      "description": "[Deprecated - use the locators object array instead.]"
+    },
+    "label": {
+      "type": "string",
+      "description": "[Deprecated - use the locators object array instead.]",
+      "enum": [
+        "appendix",
+        "article",
+        "book",
+        "canon",
+        "chapter",
+        "column",
+        "elocation",
+        "equation",
+        "figure",
+        "folio",
+        "issue",
+        "line",
+        "note",
+        "opus",
+        "page",
+        "paragraph",
+        "part",
+        "rule",
+        "section",
+        "sub verbo",
+        "supplement",
+        "table",
+        "timestamp",
+        "title",
+        "verse",
+        "volume"
+      ]
+    },
+    "properties": {
+      "description": "[Deprecated - Use top-level noteIndex property instead.]",
+      "type": "object",
+      "properties": {
+        "noteIndex": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "additionalProperties": false,
     "citationItems": {
-      "title": "Citation Items",
-      "description": "The citation data, from which the rendered citations are generated.",
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
           "id": {
-            "description": "The id for the cited item a processor will use to access the corresponding item data. By definition, it must match the id value for the itemData item.",
+            "description": "The id for the cited item a processor will use to access the corresponding item data.",
             "type": ["string", "number"]
           },
           "itemData": {
-            "title": "Item Data",
-            "description": "The metadata (title, author, etc.) for the cited items.",
             "$ref": "csl-data.json#/items"
           },
           "prefix": {
-            "title": "Citation Prefix",
-            "description": "The text to render before this cite item.",
             "type": "string"
           },
           "suffix": {
-            "title": "Citation Suffix",
-            "description": "The text to render after this cite item.",
             "type": "string"
           },
           "locators": {
@@ -85,21 +124,21 @@
             "additionalProperties": false
           }
         },
-        "required": ["id"],
-        "additionalProperties": false
-      },
-      "uris": {
-        "type": "array",
-        "items": {
-          "type": "string"
+        "uris": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "command": {
+          "type": "string",
+          "title": "Special citation command",
+          "descriptions": "Specifies a non-default citation format; respectively 'Doe (2019)', '(2019)' and 'Doe'",
+          "enum": ["narrative", "suppress-author", "author-only"]
         }
       },
-      "command": {
-        "type": "string",
-        "title": "Special citation command",
-        "descriptions": "Specifies a non-default citation format; respectively 'Doe (2019)', '(2019)' and 'Doe'",
-        "enum": ["narrative", "suppress-author", "author-only"]
-      }
+      "required": ["id"],
+      "additionalProperties": false
     }
   },
   "definitions": {
