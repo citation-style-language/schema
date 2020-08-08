@@ -15,9 +15,53 @@
       "pattern": "^1.1$"
     },
     "citationID": {
+      "title": "Citation ID",
+      "description": "A stable and unique ID (for example, a UUID) assigned to the citation, for internal use by the processor.",
       "type": ["string", "number"]
     },
+    "noteIndex": {
+      "title": "Note Index",
+      "description": "The end/footnote number (or symbol) in which the citation is located within the document. Citations within the main text of the document have a noteIndex of zero.",
+      "type": ["number", "string"]
+    },
+    "locator": {
+      "type": "string",
+      "description": "[Deprecated - use the locators object array instead.]"
+    },
+    "label": {
+      "type": "string",
+      "description": "[Deprecated - use the locators object array instead.]",
+      "enum": [
+        "appendix",
+        "article",
+        "book",
+        "canon",
+        "chapter",
+        "column",
+        "elocation",
+        "equation",
+        "figure",
+        "folio",
+        "issue",
+        "line",
+        "note",
+        "opus",
+        "page",
+        "paragraph",
+        "part",
+        "rule",
+        "section",
+        "sub verbo",
+        "supplement",
+        "table",
+        "timestamp",
+        "title",
+        "verse",
+        "volume"
+      ]
+    },
     "properties": {
+      "description": "[Deprecated - Use top-level noteIndex property instead.]",
       "type": "object",
       "properties": {
         "noteIndex": {
@@ -33,6 +77,7 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "The id for the cited item a processor will use to access the corresponding item data.",
             "type": ["string", "number"]
           },
           "itemData": {
