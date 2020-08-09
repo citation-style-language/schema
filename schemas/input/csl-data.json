@@ -181,12 +181,7 @@
           "$ref": "#/definitions/date-object"
         }
       }
-    },
-    "items": {
-      "$ref": "#/definitions/date-object"
-    },
-    "minItems": 2,
-    "maxItems": 2
+    }
   },
   "date-structured": {
     "title": "Structured Date",
