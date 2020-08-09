@@ -82,7 +82,7 @@
       "title": "EDTF date string",
       "description": "CSL input supports EDTF, levels 0 and 1.",
       "type": "string",
-      "pattern": "^[0-9-%~X?.\/]{4,}$"
+      "pattern": "^[0-9-%~X?./]{4,}$"
     },
     "date-object": {
       "title": "Date Object",
@@ -151,593 +151,593 @@
     },
     "date-range": {
       "title": "Date Range",
-      "description": "An EDTF range is a two-item array. An open end or beginning of a range can be represented with an empty (date) object.",
+      "description": "An EDTF range is an object with begin and end properties. An open end or beginning of a range can be represented with an undefined property on the data object.",
       "type": "array",
       "examples": [
         {
           "id": "range-1",
           "type": "book",
           "title": "The Title",
-          "issued": [
-            {
-              "year": 2000
-            },
-            {
-              "year": 2001
-            }
-          ]
+          "issued": {
+            "begin": { "year": 2000 },
+            "end": { "year": 2001 }
+          }
         },
         {
           "id": "range-2",
           "type": "book",
           "title": "The Title",
           "issued": [
-            {
-              "year": 2000
-            },
-            {
-              "undefined": true
-            }
+            { "begin": { "year": 2000 } },
+            { "end": { "undefined": true } }
           ]
         }
       ],
-      "items": {
-        "$ref": "#/definitions/date-object"
-      },
-      "minItems": 2,
-      "maxItems": 2
-    },
-    "date-structured": {
-      "title": "Structured Date",
-      "description": "Can either be an object, or a two-item array.",
-      "oneOf": [
-        {
+      "properties": {
+        "begin": {
           "$ref": "#/definitions/date-object"
         },
-        {
-          "$ref": "#/definitions/date-range"
+        "end": {
+          "$ref": "#/definitions/date-object"
         }
-      ]
+      }
     },
-    "date-variable": {
-      "title": "Date content model.",
-      "description": "The CSL input model supports two different date representations: an EDTF string (preferred), and a more structured alternative.",
-      "oneOf": [
-        {
-          "$ref": "#/definitions/edtf-string"
-        },
-        {
-          "$ref": "#/definitions/date-structured"
-        }
-      ]
+    "items": {
+      "$ref": "#/definitions/date-object"
     },
-    "id-variable": {
-      "type": ["string", "number"]
-    },
-    "name-variable": {
-      "anyOf": [
-        {
-          "properties": {
-            "family": {
-              "title": "Family name of contributor",
-              "description": "Use family, not literal, for personal mononyms, e.g. 'Socrates', 'Lady Gaga'",
-              "type": "string"
-            },
-            "given": {
-              "type": "string"
-            },
-            "dropping-particle": {
-              "type": "string"
-            },
-            "non-dropping-particle": {
-              "type": "string"
-            },
-            "suffix": {
-              "type": "string"
-            },
-            "institution": {
-              "title": "Literal name text; should not be parsed",
-              "description": "Use for institutional creator names; e.g. 'National Institutes of Health'",
-              "type": "string"
-            },
-            "institution-short": {
-              "title": "Short form of institution",
-              "description": "Use for short institutional creator names; e.g. 'NIH'",
-              "type": "string"
-            },
-            "alternate": {
-              "title": "Alternative name, such as screen name for online item or real name of pseudonymous author.",
-              "description": "E.g. rendered as 'Smith, J. [@JSmith]'",
-              "type": "string"
-            },
-            "parse-names": {
-              "type": "boolean"
-            },
-            "uncertain": {
-              "title": "Indicates uncertain authorship",
-              "description": "E.g. rendered as '[Smith, J.?]'",
-              "type": "boolean"
-            }
-          },
-          "additionalProperties": false
-        }
-      ]
-    },
-    "refitem": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "article",
-            "article-journal",
-            "article-magazine",
-            "article-newspaper",
-            "bill",
-            "book",
-            "broadcast",
-            "chapter",
-            "classic",
-            "collection",
-            "dataset",
-            "document",
-            "entry",
-            "entry-dictionary",
-            "entry-encyclopedia",
-            "event",
-            "figure",
-            "graphic",
-            "hearing",
-            "interview",
-            "legal_case",
-            "legislation",
-            "manuscript",
-            "map",
-            "motion_picture",
-            "musical_score",
-            "pamphlet",
-            "paper-conference",
-            "patent",
-            "performance",
-            "periodical",
-            "personal_communication",
-            "post",
-            "post-weblog",
-            "project",
-            "regulation",
-            "report",
-            "review",
-            "review-book",
-            "software",
-            "song",
-            "speech",
-            "standard",
-            "thesis",
-            "treaty",
-            "webpage"
-          ]
-        },
-        "id": {
-          "$ref": "#/definitions/id-variable"
-        },
-        "citation-key": {
-          "type": "string"
-        },
-        "categories": {
-          "type": "array",
-          "items": {
+    "minItems": 2,
+    "maxItems": 2
+  },
+  "date-structured": {
+    "title": "Structured Date",
+    "description": "Can either be an object, or a two-item array.",
+    "oneOf": [
+      {
+        "$ref": "#/definitions/date-object"
+      },
+      {
+        "$ref": "#/definitions/date-range"
+      }
+    ]
+  },
+  "date-variable": {
+    "title": "Date content model.",
+    "description": "The CSL input model supports two different date representations: an EDTF string (preferred), and a more structured alternative.",
+    "oneOf": [
+      {
+        "$ref": "#/definitions/edtf-string"
+      },
+      {
+        "$ref": "#/definitions/date-structured"
+      }
+    ]
+  },
+  "id-variable": {
+    "type": ["string", "number"]
+  },
+  "name-variable": {
+    "anyOf": [
+      {
+        "properties": {
+          "family": {
+            "title": "Family name of contributor",
+            "description": "Use family, not literal, for personal mononyms, e.g. 'Socrates', 'Lady Gaga'",
             "type": "string"
+          },
+          "given": {
+            "type": "string"
+          },
+          "dropping-particle": {
+            "type": "string"
+          },
+          "non-dropping-particle": {
+            "type": "string"
+          },
+          "suffix": {
+            "type": "string"
+          },
+          "institution": {
+            "title": "Literal name text; should not be parsed",
+            "description": "Use for institutional creator names; e.g. 'National Institutes of Health'",
+            "type": "string"
+          },
+          "institution-short": {
+            "title": "Short form of institution",
+            "description": "Use for short institutional creator names; e.g. 'NIH'",
+            "type": "string"
+          },
+          "alternate": {
+            "title": "Alternative name, such as screen name for online item or real name of pseudonymous author.",
+            "description": "E.g. rendered as 'Smith, J. [@JSmith]'",
+            "type": "string"
+          },
+          "parse-names": {
+            "type": "boolean"
+          },
+          "uncertain": {
+            "title": "Indicates uncertain authorship",
+            "description": "E.g. rendered as '[Smith, J.?]'",
+            "type": "boolean"
           }
         },
-        "language": {
+        "additionalProperties": false
+      }
+    ]
+  },
+  "refitem": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "article",
+          "article-journal",
+          "article-magazine",
+          "article-newspaper",
+          "bill",
+          "book",
+          "broadcast",
+          "chapter",
+          "classic",
+          "collection",
+          "dataset",
+          "document",
+          "entry",
+          "entry-dictionary",
+          "entry-encyclopedia",
+          "event",
+          "figure",
+          "graphic",
+          "hearing",
+          "interview",
+          "legal_case",
+          "legislation",
+          "manuscript",
+          "map",
+          "motion_picture",
+          "musical_score",
+          "pamphlet",
+          "paper-conference",
+          "patent",
+          "performance",
+          "periodical",
+          "personal_communication",
+          "post",
+          "post-weblog",
+          "project",
+          "regulation",
+          "report",
+          "review",
+          "review-book",
+          "software",
+          "song",
+          "speech",
+          "standard",
+          "thesis",
+          "treaty",
+          "webpage"
+        ]
+      },
+      "id": {
+        "$ref": "#/definitions/id-variable"
+      },
+      "citation-key": {
+        "type": "string"
+      },
+      "categories": {
+        "type": "array",
+        "items": {
           "type": "string"
-        },
-        "journalAbbreviation": {
-          "type": "string"
-        },
-        "shortTitle": {
-          "type": "string"
-        },
-        "author": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "chair": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "co-investigator": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "collection-editor": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "compiler": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "composer": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "container-author": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "contributor": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "curator": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "director": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "editor": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "editorial-director": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "executive-producer": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "guest": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "host": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "interviewer": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "illustrator": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "narrator": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "organizer": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "original-author": {
-          "description": "[Deprecated - Use `original` related `author` property instead]",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "performer": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "principal-investigator": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "producer": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "recipient": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "reviewed-author": {
-          "description": "[Deprecated - Use `reviewed` related `author` property instead]",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "script-writer": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "series-creator": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "translator": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/name-variable"
-          }
-        },
-        "accessed": {
-          "$ref": "#/definitions/date-variable"
-        },
-        "available-date": {
-          "$ref": "#/definitions/date-variable"
-        },
-        "event-date": {
-          "$ref": "#/definitions/date-variable"
-        },
-        "issued": {
-          "$ref": "#/definitions/date-variable"
-        },
-        "original-date": {
-          "description": "[Deprecated - Use `original` related date property instead]",
-          "$ref": "#/definitions/date-variable"
-        },
-        "submitted": {
-          "$ref": "#/definitions/date-variable"
-        },
-        "abstract": {
-          "type": "string"
-        },
-        "annote": {
-          "type": "string"
-        },
-        "archive": {
-          "type": "string"
-        },
-        "archive_collection": {
-          "type": "string"
-        },
-        "archive_location": {
-          "type": "string"
-        },
-        "archive-place": {
-          "type": "string"
-        },
-        "authority": {
-          "type": "string"
-        },
-        "call-number": {
-          "type": "string"
-        },
-        "chapter-number": {
-          "type": ["string", "number"]
-        },
-        "citation-number": {
-          "type": ["string", "number"]
-        },
-        "citation-label": {
-          "type": "string"
-        },
-        "collection-number": {
-          "type": ["string", "number"]
-        },
-        "collection-title": {
-          "$ref": "#definitions/title-variable"
-        },
-        "container-title": {
-          "$ref": "#definitions/title-variable"
-        },
-        "dimensions": {
-          "type": "string"
-        },
-        "division": {
-          "type": "string"
-        },
-        "DOI": {
-          "type": "string"
-        },
-        "edition": {
-          "type": ["string", "number"]
-        },
-        "event": {
-          "description": "[Deprecated - use 'event-title' instead. Will be removed in 1.1]",
-          "type": "string"
-        },
-        "event-title": {
-          "type": "string"
-        },
-        "event-place": {
-          "type": "string"
-        },
-        "first-reference-note-number": {
-          "type": ["string", "number"]
-        },
-        "genre": {
-          "type": "string"
-        },
-        "ISBN": {
-          "type": "string"
-        },
-        "ISSN": {
-          "type": "string"
-        },
-        "issue": {
-          "type": ["string", "number"]
-        },
-        "jurisdiction": {
-          "type": "string"
-        },
-        "keyword": {
-          "type": "string"
-        },
-        "locator": {
-          "type": ["string", "number"]
-        },
-        "medium": {
-          "type": "string"
-        },
-        "note": {
-          "type": "string"
-        },
-        "number": {
-          "type": ["string", "number"]
-        },
-        "number-of-pages": {
-          "type": ["string", "number"]
-        },
-        "number-of-volumes": {
-          "type": ["string", "number"]
-        },
-        "original": {
-          "title": "Original Related Item",
-          "$ref": "#/definitions/refitem"
-        },
-        "original-publisher": {
-          "description": "[Deprecated - Use `original` related `publisher` property instead]",
-          "type": "string"
-        },
-        "original-publisher-place": {
-          "description": "[Deprecated - Use `original` related `publisher-place` property instead]",
-          "type": "string"
-        },
-        "original-title": {
-          "description": "[Deprecated - Use `original` related `title` property instead]",
-          "$ref": "#definitions/title-variable"
-        },
-        "page": {
-          "type": ["string", "number"]
-        },
-        "page-first": {
-          "type": ["string", "number"]
-        },
-        "part": {
-          "type": ["string", "number"]
-        },
-        "part-title": {
-          "type": "string"
-        },
-        "PMCID": {
-          "type": "string"
-        },
-        "PMID": {
-          "type": "string"
-        },
-        "printing": {
-          "type": ["string", "number"]
-        },
-        "publisher": {
-          "type": "string"
-        },
-        "publisher-place": {
-          "type": "string"
-        },
-        "references": {
-          "type": "string"
-        },
-        "reviewed": {
-          "title": "Reviewed Related Item",
-          "$ref": "#/definitions/refitem"
-        },
-        "reviewed-genre": {
-          "description": "[Deprecated - Use `reviewed` related `genre` property instead]",
-          "type": "string"
-        },
-        "reviewed-title": {
-          "description": "[Deprecated - Use `reviewed` related `title` property instead]",
-          "type": "string"
-        },
-        "scale": {
-          "type": "string"
-        },
-        "section": {
-          "type": "string"
-        },
-        "source": {
-          "type": "string"
-        },
-        "status": {
-          "type": "string"
-        },
-        "supplement": {
-          "type": ["string", "number"]
-        },
-        "title": {
-          "$ref": "#definitions/title-variable"
-        },
-        "URL": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string"
-        },
-        "volume": {
-          "type": ["string", "number"]
-        },
-        "volume-title": {
-          "type": "string"
-        },
-        "year-suffix": {
-          "type": "string"
-        },
-        "custom": {
-          "title": "Custom key-value pairs.",
-          "type": "object",
-          "description": "Used to store additional information that does not have a designated CSL JSON field. The custom field is preferred over the note field for storing custom data, particularly for storing key-value pairs, as the note field is used for user annotations in annotated bibliography styles.",
-          "examples": [
-            {
-              "short_id": "xyz",
-              "other-ids": ["alternative-id"]
-            },
-            {
-              "metadata-double-checked": true
-            }
-          ]
         }
       },
-      "required": ["type"],
-      "additionalProperties": false
-    }
+      "language": {
+        "type": "string"
+      },
+      "journalAbbreviation": {
+        "type": "string"
+      },
+      "shortTitle": {
+        "type": "string"
+      },
+      "author": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "chair": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "co-investigator": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "collection-editor": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "compiler": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "composer": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "container-author": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "contributor": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "curator": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "director": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "editor": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "editorial-director": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "executive-producer": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "guest": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "host": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "interviewer": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "illustrator": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "narrator": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "organizer": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "original-author": {
+        "description": "[Deprecated - Use `original` related `author` property instead]",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "performer": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "principal-investigator": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "producer": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "recipient": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "reviewed-author": {
+        "description": "[Deprecated - Use `reviewed` related `author` property instead]",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "script-writer": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "series-creator": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "translator": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "accessed": {
+        "$ref": "#/definitions/date-variable"
+      },
+      "available-date": {
+        "$ref": "#/definitions/date-variable"
+      },
+      "event-date": {
+        "$ref": "#/definitions/date-variable"
+      },
+      "issued": {
+        "$ref": "#/definitions/date-variable"
+      },
+      "original-date": {
+        "description": "[Deprecated - Use `original` related date property instead]",
+        "$ref": "#/definitions/date-variable"
+      },
+      "submitted": {
+        "$ref": "#/definitions/date-variable"
+      },
+      "abstract": {
+        "type": "string"
+      },
+      "annote": {
+        "type": "string"
+      },
+      "archive": {
+        "type": "string"
+      },
+      "archive_collection": {
+        "type": "string"
+      },
+      "archive_location": {
+        "type": "string"
+      },
+      "archive-place": {
+        "type": "string"
+      },
+      "authority": {
+        "type": "string"
+      },
+      "call-number": {
+        "type": "string"
+      },
+      "chapter-number": {
+        "type": ["string", "number"]
+      },
+      "citation-number": {
+        "type": ["string", "number"]
+      },
+      "citation-label": {
+        "type": "string"
+      },
+      "collection-number": {
+        "type": ["string", "number"]
+      },
+      "collection-title": {
+        "$ref": "#definitions/title-variable"
+      },
+      "container-title": {
+        "$ref": "#definitions/title-variable"
+      },
+      "dimensions": {
+        "type": "string"
+      },
+      "division": {
+        "type": "string"
+      },
+      "DOI": {
+        "type": "string"
+      },
+      "edition": {
+        "type": ["string", "number"]
+      },
+      "event": {
+        "description": "[Deprecated - use 'event-title' instead. Will be removed in 1.1]",
+        "type": "string"
+      },
+      "event-title": {
+        "type": "string"
+      },
+      "event-place": {
+        "type": "string"
+      },
+      "first-reference-note-number": {
+        "type": ["string", "number"]
+      },
+      "genre": {
+        "type": "string"
+      },
+      "ISBN": {
+        "type": "string"
+      },
+      "ISSN": {
+        "type": "string"
+      },
+      "issue": {
+        "type": ["string", "number"]
+      },
+      "jurisdiction": {
+        "type": "string"
+      },
+      "keyword": {
+        "type": "string"
+      },
+      "locator": {
+        "type": ["string", "number"]
+      },
+      "medium": {
+        "type": "string"
+      },
+      "note": {
+        "type": "string"
+      },
+      "number": {
+        "type": ["string", "number"]
+      },
+      "number-of-pages": {
+        "type": ["string", "number"]
+      },
+      "number-of-volumes": {
+        "type": ["string", "number"]
+      },
+      "original": {
+        "title": "Original Related Item",
+        "$ref": "#/definitions/refitem"
+      },
+      "original-publisher": {
+        "description": "[Deprecated - Use `original` related `publisher` property instead]",
+        "type": "string"
+      },
+      "original-publisher-place": {
+        "description": "[Deprecated - Use `original` related `publisher-place` property instead]",
+        "type": "string"
+      },
+      "original-title": {
+        "description": "[Deprecated - Use `original` related `title` property instead]",
+        "$ref": "#definitions/title-variable"
+      },
+      "page": {
+        "type": ["string", "number"]
+      },
+      "page-first": {
+        "type": ["string", "number"]
+      },
+      "part": {
+        "type": ["string", "number"]
+      },
+      "part-title": {
+        "type": "string"
+      },
+      "PMCID": {
+        "type": "string"
+      },
+      "PMID": {
+        "type": "string"
+      },
+      "printing": {
+        "type": ["string", "number"]
+      },
+      "publisher": {
+        "type": "string"
+      },
+      "publisher-place": {
+        "type": "string"
+      },
+      "references": {
+        "type": "string"
+      },
+      "reviewed": {
+        "title": "Reviewed Related Item",
+        "$ref": "#/definitions/refitem"
+      },
+      "reviewed-genre": {
+        "description": "[Deprecated - Use `reviewed` related `genre` property instead]",
+        "type": "string"
+      },
+      "reviewed-title": {
+        "description": "[Deprecated - Use `reviewed` related `title` property instead]",
+        "type": "string"
+      },
+      "scale": {
+        "type": "string"
+      },
+      "section": {
+        "type": "string"
+      },
+      "source": {
+        "type": "string"
+      },
+      "status": {
+        "type": "string"
+      },
+      "supplement": {
+        "type": ["string", "number"]
+      },
+      "title": {
+        "$ref": "#definitions/title-variable"
+      },
+      "URL": {
+        "type": "string"
+      },
+      "version": {
+        "type": "string"
+      },
+      "volume": {
+        "type": ["string", "number"]
+      },
+      "volume-title": {
+        "type": "string"
+      },
+      "year-suffix": {
+        "type": "string"
+      },
+      "custom": {
+        "title": "Custom key-value pairs.",
+        "type": "object",
+        "description": "Used to store additional information that does not have a designated CSL JSON field. The custom field is preferred over the note field for storing custom data, particularly for storing key-value pairs, as the note field is used for user annotations in annotated bibliography styles.",
+        "examples": [
+          {
+            "short_id": "xyz",
+            "other-ids": ["alternative-id"]
+          },
+          {
+            "metadata-double-checked": true
+          }
+        ]
+      }
+    },
+    "required": ["type"],
+    "additionalProperties": false
   }
 }
