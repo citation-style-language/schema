@@ -11,7 +11,7 @@
     "title-variable": {
       "title": "Title variable",
       "description": "Titles are represented as an object.",
-      "$ref": "#definitions/title-object"
+      "$ref": "#/definitions/title-object"
     },
     "title-object": {
       "title": "Title Object",
@@ -46,24 +46,24 @@
         "full": {
           "title": "Full Title",
           "description": "The full title string for the item; should generally be redundant, as it's simply the main + the sub titles and/or alternate title.",
-          "$ref": "#definitions/rich-text-string"
+          "$ref": "#/definitions/rich-text-string"
         },
         "main": {
           "title": "Main Title",
           "description": "The primary title component for the item.",
-          "$ref": "#definitions/rich-text-string"
+          "$ref": "#/definitions/rich-text-string"
         },
         "short": {
           "title": "Short Title",
           "description": "A short variant title component for the item.",
-          "$ref": "#definitions/rich-text-string"
+          "$ref": "#/definitions/rich-text-string"
         },
         "sub": {
           "title": "Sub-Titles",
           "description": "The sub-title components for the item, as an array. Typically, when there is a subtitle, there will only be one, but there are cases when there are more.",
           "type": "array",
           "items": {
-            "$ref": "#definitions/rich-text-string"
+            "$ref": "#/definitions/rich-text-string"
           }
         }
       }
@@ -76,7 +76,7 @@
     "title-string": {
       "title": "Title String",
       "description": "Titles are a primary example of rich text strings in CSL.",
-      "$ref": "#definitions/rich-text-string"
+      "$ref": "#/definitions/rich-text-string"
     },
     "edtf-string": {
       "title": "EDTF date string",
@@ -560,10 +560,10 @@
         "type": ["string", "number"]
       },
       "collection-title": {
-        "$ref": "#definitions/title-variable"
+        "$ref": "#/definitions/title-variable"
       },
       "container-title": {
-        "$ref": "#definitions/title-variable"
+        "$ref": "#/definitions/title-variable"
       },
       "dimensions": {
         "type": "string"
@@ -640,7 +640,7 @@
       },
       "original-title": {
         "description": "[Deprecated - Use `original` related `title` property instead]",
-        "$ref": "#definitions/title-variable"
+        "$ref": "#/definitions/title-variable"
       },
       "page": {
         "type": ["string", "number"]
@@ -700,7 +700,7 @@
         "type": ["string", "number"]
       },
       "title": {
-        "$ref": "#definitions/title-variable"
+        "$ref": "#/definitions/title-variable"
       },
       "URL": {
         "type": "string"
