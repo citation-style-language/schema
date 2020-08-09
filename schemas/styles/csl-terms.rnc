@@ -7,6 +7,7 @@ div {
     terms.gender-assignable
     | terms.gender-variants
     | terms.locator
+    | item-types
     | 
       ## Contributor roles
       variables.names
@@ -15,10 +16,13 @@ div {
       ## Miscellaneous terms
       "accessed"
     | "ad"
+    | "advance-online-publication"
+    | "album"
     | "and"
     | "and others"
     | "anonymous"
     | "at"
+    | "audio-recording"
     | "available at"
     | "bc"
     | "bce"
@@ -27,6 +31,7 @@ div {
     | "circa"
     | "cited"
     | "et-al"
+    | "film"
     | "forthcoming"
     | "from"
     | "henceforth"
@@ -36,15 +41,33 @@ div {
     | "internet"
     | "interview"
     | "letter"
+    | "loc-cit"
     | "no date"
-    | "no-name"
     | "no-place"
+    | "no-publisher"
+    | "on"
     | "online"
+    | "op-cit"
+    | "original-work-published"
+    | "personal-communication"
+    | "podcast"
+    | "podcast-episode"
+    | "preprint"
     | "presented at"
+    | "radio-broadcast"
+    | "radio-series"
+    | "radio-series-episode"
     | "reference"
     | "retrieved"
+    | "review-of"
     | "scale"
-    | "version"
+    | "special-issue"
+    | "special-section"
+    | "television-broadcast"
+    | "television-series"
+    | "television-series-episode"
+    | "video"
+    | "working-paper"
     | 
       ## Punctuation
       "open-quote"
@@ -105,7 +128,7 @@ div {
   terms.locator =
     "act"
     | "appendix"
-    | "article"
+    | "article-locator"
     | "book"
     | "canon"
     | "chapter"
@@ -117,14 +140,10 @@ div {
     | "line"
     | "note"
     | "opus"
-    | "page"
     | "paragraph"
-    | "part"
     | "rule"
     | "scene"
-    | "section"
     | "sub-verbo"
-    | "supplement"
     | "table"
     | "timestamp"
     | "title"
@@ -132,14 +151,25 @@ div {
     | terms.locator-number-variables
   
   ## Locator terms with matching number variables
-  terms.locator-number-variables = "issue" | "volume"
+  terms.locator-number-variables =
+    "issue"
+    | "page"
+    | "part"
+    | "section"
+    | "supplement"
+    | "version"
+    | "volume"
   
   ## Non-locator terms accompanying number variables
   terms.non-locator-number-variables =
     "chapter-number"
+    | "citation-number"
     | "collection-number"
     | "edition"
+    | "first-reference-note-number"
     | "number"
     | "number-of-pages"
     | "number-of-volumes"
+    | "page-first"
+    | "printing"
 }

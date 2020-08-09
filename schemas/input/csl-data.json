@@ -82,7 +82,7 @@
       "title": "EDTF date string",
       "description": "CSL input supports EDTF, levels 0 and 1.",
       "type": "string",
-      "pattern": "^[0-9-%~X?./]{4,}$"
+      "pattern": "^[0-9-%~X?.\/]{4,}$"
     },
     "date-object": {
       "title": "Date Object",
@@ -284,6 +284,7 @@
             "entry",
             "entry-dictionary",
             "entry-encyclopedia",
+            "event",
             "figure",
             "graphic",
             "hearing",
@@ -318,6 +319,9 @@
         },
         "id": {
           "$ref": "#/definitions/id-variable"
+        },
+        "citation-key": {
+          "type": "string"
         },
         "categories": {
           "type": "array",
@@ -412,6 +416,18 @@
             "$ref": "#/definitions/name-variable"
           }
         },
+        "guest": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name-variable"
+          }
+        },
+        "host": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name-variable"
+          }
+        },
         "interviewer": {
           "type": "array",
           "items": {
@@ -419,6 +435,12 @@
           }
         },
         "illustrator": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name-variable"
+          }
+        },
+        "narrator": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/name-variable"
@@ -468,6 +490,18 @@
             "$ref": "#/definitions/name-variable"
           }
         },
+        "script-writer": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name-variable"
+          }
+        },
+        "series-creator": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name-variable"
+          }
+        },
         "translator": {
           "type": "array",
           "items": {
@@ -478,9 +512,6 @@
           "$ref": "#/definitions/date-variable"
         },
         "available-date": {
-          "$ref": "#/definitions/date-variable"
-        },
-        "container": {
           "$ref": "#/definitions/date-variable"
         },
         "event-date": {
@@ -551,6 +582,10 @@
           "type": ["string", "number"]
         },
         "event": {
+          "description": "[Deprecated - use 'event-title' instead. Will be removed in 1.1]",
+          "type": "string"
+        },
+        "event-title": {
           "type": "string"
         },
         "event-place": {
@@ -562,25 +597,10 @@
         "genre": {
           "type": "string"
         },
-        "ISAN": {
-          "type": "string"
-        },
         "ISBN": {
           "type": "string"
         },
-        "ISCI": {
-          "type": "string"
-        },
-        "ISMN": {
-          "type": "string"
-        },
-        "ISRC": {
-          "type": "string"
-        },
         "ISSN": {
-          "type": "string"
-        },
-        "ISWC": {
           "type": "string"
         },
         "issue": {
@@ -660,6 +680,10 @@
           "title": "Reviewed Related Item",
           "$ref": "#/definitions/refitem"
         },
+        "reviewed-genre": {
+          "description": "[Deprecated - Use `reviewed` related `genre` property instead]",
+          "type": "string"
+        },
         "reviewed-title": {
           "description": "[Deprecated - Use `reviewed` related `title` property instead]",
           "type": "string"
@@ -682,9 +706,6 @@
         "title": {
           "$ref": "#definitions/title-variable"
         },
-        "translated-title": {
-          "$ref": "#definitions/title-variable"
-        },
         "URL": {
           "type": "string"
         },
@@ -694,13 +715,16 @@
         "volume": {
           "type": ["string", "number"]
         },
+        "volume-title": {
+          "type": "string"
+        },
         "year-suffix": {
           "type": "string"
         },
         "custom": {
           "title": "Custom key-value pairs.",
           "type": "object",
-          "description": "Used to store additional information that does not have a designated CSL JSON field. The note field can also store additional information, but custom is preferred for storing key-value pairs.",
+          "description": "Used to store additional information that does not have a designated CSL JSON field. The custom field is preferred over the note field for storing custom data, particularly for storing key-value pairs, as the note field is used for user annotations in annotated bibliography styles.",
           "examples": [
             {
               "short_id": "xyz",
