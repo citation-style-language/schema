@@ -79,7 +79,6 @@ div {
     | "part-title"
     | "reviewed-title"
     | "title"
-    | "translated-title"
     | "volume-title"
   
   ## String variables
