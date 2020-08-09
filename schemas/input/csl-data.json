@@ -11,7 +11,7 @@
     "title-variable": {
       "title": "Title variable",
       "description": "Titles are represented as an object.",
-      "$ref": "#definitions/title-object"
+      "$ref": "#/definitions/title-object"
     },
     "title-object": {
       "title": "Title Object",
@@ -46,24 +46,24 @@
         "full": {
           "title": "Full Title",
           "description": "The full title string for the item; should generally be redundant, as it's simply the main + the sub titles and/or alternate title.",
-          "$ref": "#definitions/rich-text-string"
+          "$ref": "#/definitions/rich-text-string"
         },
         "main": {
           "title": "Main Title",
           "description": "The primary title component for the item.",
-          "$ref": "#definitions/rich-text-string"
+          "$ref": "#/definitions/rich-text-string"
         },
         "short": {
           "title": "Short Title",
           "description": "A short variant title component for the item.",
-          "$ref": "#definitions/rich-text-string"
+          "$ref": "#/definitions/rich-text-string"
         },
         "sub": {
           "title": "Sub-Titles",
           "description": "The sub-title components for the item, as an array. Typically, when there is a subtitle, there will only be one, but there are cases when there are more.",
           "type": "array",
           "items": {
-            "$ref": "#definitions/rich-text-string"
+            "$ref": "#/definitions/rich-text-string"
           }
         }
       }
@@ -76,13 +76,13 @@
     "title-string": {
       "title": "Title String",
       "description": "Titles are a primary example of rich text strings in CSL.",
-      "$ref": "#definitions/rich-text-string"
+      "$ref": "#/definitions/rich-text-string"
     },
     "edtf-string": {
       "title": "EDTF date string",
       "description": "CSL input supports EDTF, levels 0 and 1.",
       "type": "string",
-      "pattern": "^[0-9-%~X?.\/]{4,}$"
+      "pattern": "^[0-9-%~X?./]{4,}$"
     },
     "date-object": {
       "title": "Date Object",
@@ -151,41 +151,36 @@
     },
     "date-range": {
       "title": "Date Range",
-      "description": "An EDTF range is a two-item array. An open end or beginning of a range can be represented with an empty (date) object.",
+      "description": "An EDTF range is an object with begin and end properties. An open end or beginning of a range can be represented with an undefined property on the data object.",
       "type": "array",
       "examples": [
         {
           "id": "range-1",
           "type": "book",
           "title": "The Title",
-          "issued": [
-            {
-              "year": 2000
-            },
-            {
-              "year": 2001
-            }
-          ]
+          "issued": {
+            "begin": { "year": 2000 },
+            "end": { "year": 2001 }
+          }
         },
         {
           "id": "range-2",
           "type": "book",
           "title": "The Title",
           "issued": [
-            {
-              "year": 2000
-            },
-            {
-              "undefined": true
-            }
+            { "begin": { "year": 2000 } },
+            { "end": { "undefined": true } }
           ]
         }
       ],
-      "items": {
-        "$ref": "#/definitions/date-object"
-      },
-      "minItems": 2,
-      "maxItems": 2
+      "properties": {
+        "begin": {
+          "$ref": "#/definitions/date-object"
+        },
+        "end": {
+          "$ref": "#/definitions/date-object"
+        }
+      }
     },
     "date-structured": {
       "title": "Structured Date",
@@ -564,10 +559,10 @@
           "type": ["string", "number"]
         },
         "collection-title": {
-          "$ref": "#definitions/title-variable"
+          "$ref": "#/definitions/title-variable"
         },
         "container-title": {
-          "$ref": "#definitions/title-variable"
+          "$ref": "#/definitions/title-variable"
         },
         "dimensions": {
           "type": "string"
@@ -644,7 +639,7 @@
         },
         "original-title": {
           "description": "[Deprecated - Use `original` related `title` property instead]",
-          "$ref": "#definitions/title-variable"
+          "$ref": "#/definitions/title-variable"
         },
         "page": {
           "type": ["string", "number"]
@@ -704,7 +699,7 @@
           "type": ["string", "number"]
         },
         "title": {
-          "$ref": "#definitions/title-variable"
+          "$ref": "#/definitions/title-variable"
         },
         "URL": {
           "type": "string"
