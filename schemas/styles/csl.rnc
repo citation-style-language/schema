@@ -253,7 +253,7 @@ div {
       ## Alphabet to use for generating year suffixes.
       [ a:defaultValue = "latin" ]
       attribute year-suffix-alphabet {
-        "latin" | "abjad" | "cyrillic" | "greek" | "hebrew" | "persian"
+        "latin" | "arabic" | "cyrillic" | "greek" | "hebrew" | "persian"
       }?
     }
   locale-file.locale =
