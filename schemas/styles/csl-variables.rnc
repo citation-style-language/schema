@@ -98,8 +98,6 @@ div {
     | "dimensions"
     | "division"
     | "DOI"
-    | # Alias for 'event-title'. Deprecated. Will be removed in CSL 1.1.
-      "event"
     | "event-title"
     | "event-place"
     | "genre"
