@@ -248,7 +248,13 @@ div {
       ## Specify whether punctuation (a period or comma) is placed within
       ## or outside (default) the closing quotation mark.
       [ a:defaultValue = "false" ]
-      attribute punctuation-in-quote { xsd:boolean }?
+      attribute punctuation-in-quote { xsd:boolean }?,
+      
+      ## Alphabet to use for generating year suffixes.
+      [ a:defaultValue = "latin" ]
+      attribute year-suffix-alphabet {
+        "latin" | "abjad" | "cyrillic" | "greek" | "hebrew" | "persian"
+      }?
     }
   locale-file.locale =
     element cs:locale {
