@@ -248,6 +248,11 @@
           }
         },
         {
+          "string": {
+            "$ref": "#/definitions/locator-variable"
+          }
+        },
+        {
           "sub-verbo": {
             "$ref": "#/definitions/locator-variable"
           }
