@@ -1048,24 +1048,6 @@ div {
     ## The same as "title-delimiter" if not specified.
     attribute title-sub-delimiter { text }?,
     
-    ## Inheritable title option, specify how titles are split into "title-main" and "title-sub".
-    [ a:defaultValue = "simple" ]
-    attribute title-split {
-      
-      ## Matches "."", ":", "::", "!", "?"
-      "simple"
-      | 
-        ## Matches the values for "simple" plus ";"
-        "extended"
-      | 
-        ## Matches the values for "simple" plus "—" and ";"
-        "full"
-      | 
-        ## Matches the values for "simple" plus ";""
-        ## and "[;,] or[,:]" (see CMoS 14.91), e.g.  "Moby-Dick; or, The Whale"
-        "chicago"
-    }?,
-    
     ## Inheritable title option, specify which delimiters are normalized.
     [ a:defaultValue = "simple" ]
     attribute normalize-title-delimiters {
