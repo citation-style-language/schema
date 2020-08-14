@@ -1052,7 +1052,7 @@ div {
     [ a:defaultValue = "simple" ]
     attribute normalize-title-delimiters {
       
-      ## Normalize "."", ":", "::"
+      ## Normalize ".", ":", "::"
       "simple"
       | 
         ## Normalize the values for "simple" plus ";"
