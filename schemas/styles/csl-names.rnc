@@ -45,15 +45,15 @@ div {
     ## "long" (personal: given + family + particles + suffixes; instiutional: institution),
     ## "short" (personal: family only; instiutional: institution-short), 
     ## "count" (returning the number of names in the name variable, which can be useful for some sorting algorithms),
-    ## "no-name" (no not render name-parts, et-al, or label; only alternate and/or place; used, for example, to render only the publisher place);
+    ## "none" (no not render name-parts or et-al; used, for example, to render only the publisher place);
     ## order of included name-parts determined by 'name-as-sort-order', 'demote-non-dropping-particle', and the alphabet of the individual name
     [ a:defaultValue = "long" ]
-    attribute form { "long" | "short" | "count" | "no-name" }?,
+    attribute form { "long" | "short" | "count" | "none" }?,
     
     ## Select the name form to use on subsequent appearances of the name.
     ## Same options as for "form".
     attribute form-subsequent {
-      "long" | "short" | "count" | "no-name"
+      "long" | "short" | "count" | "none"
     }?
   name.attributes =
     
