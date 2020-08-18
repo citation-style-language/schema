@@ -245,6 +245,13 @@
               "description": "E.g. rendered as 'Smith, J. [@JSmith]'",
               "type": "string"
             },
+            "place": {
+              "title": "Place associated with the name",
+              "type": ["string", "array"],
+              "items": {
+                "type": "string"
+              }
+            },
             "parse-names": {
               "type": "boolean"
             },
@@ -472,6 +479,13 @@
             "$ref": "#/definitions/name-variable"
           }
         },
+        "publisher": {
+          "description": "Publisher of the item",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name-variable"
+          }
+        },
         "recipient": {
           "type": "array",
           "items": {
@@ -516,7 +530,7 @@
           "$ref": "#/definitions/date-variable"
         },
         "original-date": {
-          "description": "[Deprecated - Use `original` related date property instead]",
+          "description": "[Deprecated - Use `original` related `issued` property instead]",
           "$ref": "#/definitions/date-variable"
         },
         "submitted": {
@@ -634,7 +648,7 @@
           "type": "string"
         },
         "original-publisher-place": {
-          "description": "[Deprecated - Use `original` related `publisher-place` property instead]",
+          "description": "[Deprecated - Use `original` related `publisher` property `place` element instead]",
           "type": "string"
         },
         "original-title": {
@@ -661,12 +675,6 @@
         },
         "printing": {
           "type": ["string", "number"]
-        },
-        "publisher": {
-          "type": "string"
-        },
-        "publisher-place": {
-          "type": "string"
         },
         "references": {
           "type": "string"
