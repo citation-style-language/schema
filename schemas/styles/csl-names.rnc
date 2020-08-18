@@ -1,6 +1,7 @@
 namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
 namespace cs = "http://purl.org/net/xbiblio/csl"
 
+
 ## cs:names Rendering Element
 div {
   rendering-element.names =
@@ -9,7 +10,8 @@ div {
       ((names.name?, names.et-al?)
        & names.label?
        & names.abbreviation?
-       & names.alternate?),
+       & names.alternate?
+       & names.place?),
       names.substitute?
     }
   names.attributes =
@@ -42,14 +44,17 @@ div {
     ## Select the name form:
     ## "long" (personal: given + family + particles + suffixes; instiutional: institution),
     ## "short" (personal: family only; instiutional: institution-short), 
-    ## "count" (returning the number of names in the name variable, which can be useful for some sorting algorithms);
+    ## "count" (returning the number of names in the name variable, which can be useful for some sorting algorithms),
+    ## "no-name" (no not render name-parts, et-al, or label; only alternate and/or place; used, for example, to render only the publisher place);
     ## order of included name-parts determined by 'name-as-sort-order', 'demote-non-dropping-particle', and the alphabet of the individual name
     [ a:defaultValue = "long" ]
-    attribute form { "long" | "short" | "count" }?,
+    attribute form { "long" | "short" | "count" | "no-name" }?,
     
     ## Select the name form to use on subsequent appearances of the name.
     ## Same options as for "form".
-    attribute form-subsequent { "long" | "short" | "count" }?
+    attribute form-subsequent {
+      "long" | "short" | "count" | "no-name"
+    }?
   name.attributes =
     
     ## Use to separate the second-to-last and last name of a name list by
@@ -63,13 +68,14 @@ div {
         "symbol"
       | 
         ## Use the "and" term "short" form. Not common in English, but is seen in other languages.
-        ## In German, for example: "Doe, Johnson u. Smith, where "u." is short for "und."
+        ## In German, for example: "Doe, Johnson u. Smith, where "u." is short for "und".
         "short"
     }?,
     
     ## Specify when the name delimiter is used between a truncated name list
     ## and the "et-al" (or "and others") term in case of et-al abbreviation
-    ## (e.g., "Smith, Doe et al." or "Smith, Doe, et al.").
+    ## (e.g., "Smith, Doe et al." or "Smith, Doe, et al.");
+    ## If the et-al form is set to "none", do not render a delimiter after the last rendered name.
     [ a:defaultValue = "contextual" ]
     attribute delimiter-precedes-et-al {
       
@@ -208,6 +214,12 @@ div {
       ## Select the term to use for et-al abbreviation.
       [ a:defaultValue = "et-al" ]
       attribute term { "et-al" | "and others" }?,
+      
+      ## The form of the cs:et-al term to use when et-al abbreviation is activated. 
+      ## Set to "none" to omit the term. Set to "long", "short", or "symbol" to
+      ## render the respective form of the term.
+      [ a:defaultValue = "long" ]
+      attribute form { "none" | "long" | "short" | "symbol" }?,
       font-formatting
     }
   
@@ -227,9 +239,8 @@ div {
       ## (e.g., ", " in "Creator, Writer, & Director")
       [ a:defaultValue = ", " ] delimiter,
       
-      ## Specify when the label delimiter is used between the second-to-last
-      ## and last label of a label list. Only has an effect when the "and" term 
-      ## is used (e.g., "Writer & Director" or "Writer, & Director".
+      ## Specify when the label delimiter is used between the second-to-last and last label of a label list;
+      ## only has an effect when the "and" term is used (e.g., "Writer & Director" or "Writer, & Director").
       [ a:defaultValue = "contextual" ]
       attribute delimiter-precedes-last {
         
@@ -244,8 +255,7 @@ div {
           "never"
       }?,
       
-      ## Use to separate the second-to-last and last label of a label list by
-      ## the "and" term.
+      ## Use to separate the second-to-last and last label of a label list by the "and" term.
       attribute and {
         
         ## Use the "and" term "long" form (e.g., "Writer and Director").
@@ -255,14 +265,56 @@ div {
           "symbol"
         | 
           ## Use the "and" term "short" form. Not common in English, but is seen in other languages.
-          ## In German, for example: "Drehbuchautor u. Regisseur, where "u." is short for "und."
+          ## In German, for example: "Drehbuchautor u. Regisseur, where "u." is short for "und".
           "short"
       }?
     }
+  
+  ## Render the "place" associated with a name and specify formatting;
+  ## used to render a publisher's place.
+  names.place =
+    element cs:place {
+      
+      ## If a name has multiple places associated with it, specify how many places to show.
+      attribute use-first { xsd:integer }?,
+      
+      ## If a name has multiple places associated with it, set the delimiter between places;
+      ## if use-first is set to 1, do not show the delimiter.
+      [ a:defaultValue = ", " ] delimiter,
+      
+      ## Specify when the place delimiter is used between the second-to-last and last place of a place list;
+      ## only has an effect when the "and" term is used (e.g., "Beijing and Berlin" or "London, and New York").
+      [ a:defaultValue = "contextual" ]
+      attribute delimiter-precedes-last {
+        
+        ## The label delimiter is only used when the label list consists of
+        ## three or more labels.
+        "contextual"
+        | 
+          ## The label delimiter is always used.
+          "always"
+        | 
+          ## The label delimiter is never used.
+          "never"
+      }?,
+      
+      ## Use to separate the second-to-last and last place of a place list by the "and" term.
+      attribute and {
+        
+        ## Use the "and" term "long" form (e.g., "Writer and Director").
+        "long"
+        | 
+          ## Use the "and" term "symbol" form (e.g., "Writer & Director").
+          "symbol"
+        | 
+          ## Use the "and" term "short" form. Not common in English, but is seen in other languages.
+          ## In German, for example: "Berlin u. Bremen, where "u." is short for "und".
+          "short"
+      }?
+    }
+  
+  ## Specify substitution options when the name variables selected on the parent cs:names element are empty.
   names.substitute =
-    
-    ## Specify substitution options when the name variables selected on the
-    ## parent cs:names element are empty.
     element cs:substitute { (substitute.names | rendering-element)+ }
   
   ## Short version of cs:names, without children, allowed in cs:substitute.
@@ -270,28 +322,31 @@ div {
 }
 # ==============================================================================
 
-## Options affecting cs:names, for cs:style, cs:citation, cs:bibliography,
-## and cs:citation-label.
-names-inheritable-options =
+## Style Options Related to Names
+div {
   
-  ## Inheritable name option, companion for "delimiter" on cs:names.
-  attribute names-delimiter { text }?
-
-## Options affecting cs:name, for cs:style, cs:citation, cs:bibliography,
-## and cs:citation-label.
-name-inheritable-options =
-  name.attributes,
+  ## Options affecting cs:names, for cs:style, cs:citation, cs:bibliography,
+  ## and cs:citation-label.
+  names-inheritable-options =
+    
+    ## Inheritable name option, companion for "delimiter" on cs:names.
+    attribute names-delimiter { text }?
   
-  ## Inheritable name option, companion for "delimiter" on cs:name.
-  attribute name-delimiter { text }?,
+  ## Options affecting cs:name, for cs:style, cs:citation, cs:bibliography,
+  ## and cs:citation-label.
+  name-inheritable-options =
+    name.attributes,
+    
+    ## Inheritable name option, companion for "delimiter" on cs:name.
+    attribute name-delimiter { text }?,
+    
+    ## Inheritable name option, companion for "form" on cs:name.
+    [ a:defaultValue = "long" ]
+    attribute name-form { "long" | "short" | "count" }?
   
-  ## Inheritable name option, companion for "form" on cs:name.
-  [ a:defaultValue = "long" ]
-  attribute name-form { "long" | "short" | "count" }?
-
-## Options affecting cs:label, for cs:style, cs:citation and cs:bibliography.
-label-inheritable-options =
-  
-  ## Inheritable name option, companion for "delimiter" on cs:label.
-  attribute label-delimiter { text }?
+  ## Options affecting cs:label, for cs:style, cs:citation and cs:bibliography.
+  label-inheritable-options =
+    
+    ## Inheritable name option, companion for "delimiter" on cs:label.
+    attribute label-delimiter { text }?
 }

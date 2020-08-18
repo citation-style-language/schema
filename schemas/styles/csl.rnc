@@ -792,6 +792,7 @@ div {
         ## Normalize the values for "simple" plus "—" and ";"
         "full"
     }?
+}
 # ==============================================================================
 
 ## cs:sort - Sorting
