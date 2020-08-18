@@ -250,6 +250,7 @@
             },
             "place": {
               "title": "Place associated with the name",
+              "description": "Can be a simple string if one location or an array of strings if multiple locations are listed (e.g. Berlin; New York)",
               "type": ["string", "array"],
               "items": {
                 "type": "string"
