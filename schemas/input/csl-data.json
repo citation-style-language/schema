@@ -243,7 +243,10 @@
             "alternate": {
               "title": "Alternative name, such as screen name for online item or real name of pseudonymous author.",
               "description": "E.g. rendered as 'Smith, J. [@JSmith]'",
-              "type": "string"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/name-variable"
+              }
             },
             "place": {
               "title": "Place associated with the name",
