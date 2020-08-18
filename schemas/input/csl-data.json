@@ -651,7 +651,7 @@
           "type": "string"
         },
         "original-publisher-place": {
-          "description": "[Deprecated - Use `original` related `publisher` property `place` element instead]",
+          "description": "[Deprecated - Use `original` related `publisher` property `place` attribute instead]",
           "type": "string"
         },
         "original-title": {
