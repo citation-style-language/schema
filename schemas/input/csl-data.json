@@ -484,7 +484,8 @@
           }
         },
         "publisher": {
-          "description": "Publisher of the item",
+          "title": "Publisher of the item",
+          "description": "e.g., [{'institution': 'Publisher', 'place': 'London, UK'}], [{'institution': 'Publisher A', 'place': 'New York, NY, US'}, {'institution': 'Publisher B', 'place': 'Berlin, Germany'}]",
           "type": "array",
           "items": {
             "$ref": "#/definitions/name-variable"
