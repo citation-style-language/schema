@@ -653,7 +653,7 @@
           "type": "string"
         },
         "original-publisher-place": {
-          "description": "[Deprecated - Use `original` related `publisher` property `place` attribute instead]",
+          "description": "[Deprecated - Use `original` related `publisher` property `place` property instead]",
           "type": "string"
         },
         "original-title": {
