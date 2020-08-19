@@ -234,6 +234,7 @@ div {
   names.label =
     element cs:label {
       [ a:defaultValue = "long" ] attribute form { term.form }?,
+      label.attributes-shared,
       
       ## When multiple='combined', set the delimiter for collapsed name labels
       ## (e.g., ", " in "Creator, Writer, & Director")
