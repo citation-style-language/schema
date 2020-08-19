@@ -275,6 +275,10 @@ div {
   ## used to render a publisher's place.
   names.place =
     element cs:place {
+      affixes,
+      font-formatting,
+      strip-periods,
+      text-case,
       
       ## If a name has multiple places associated with it, specify how many places to show.
       attribute use-first { xsd:integer }?,
