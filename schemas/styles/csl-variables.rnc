@@ -29,6 +29,7 @@ div {
     | "compiler"
     | "composer"
     | "container-author"
+    | "container-translator"
     | "contributor"
     | "curator"
     | "director"
@@ -51,6 +52,8 @@ div {
     | "script-writer"
     | "series-creator"
     | "translator"
+    | "volume-editor"
+    | "volume-translator"
   
   ## Number variables
   variables.numbers =
