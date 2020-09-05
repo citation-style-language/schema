@@ -414,6 +414,7 @@ div {
     attribute variable {
       list { variables.names+ }
     },
+    related?,
     affixes,
     
     ## Specify the delimiter for name lists of name variables rendered by
@@ -690,6 +691,7 @@ div {
         date.form,
         rendering-element.date.date-part.localized*)
        | (rendering-element.date.date-part.non-localized+, delimiter)),
+      related?,
       affixes,
       display,
       font-formatting,
@@ -805,7 +807,8 @@ div {
     ## Number forms: "numeric" ("4"), "ordinal" ("4th"), "long-ordinal"
     ## ("fourth"), "roman" ("iv").
     [ a:defaultValue = "numeric" ]
-    attribute form { "numeric" | "ordinal" | "long-ordinal" | "roman" }?
+    attribute form { "numeric" | "ordinal" | "long-ordinal" | "roman" }?,
+    related?
 }
 # ==============================================================================
 
@@ -848,7 +851,8 @@ div {
       delimiter,
       display,
       font-formatting,
-      rendering-element+
+      rendering-element+,
+      related?
     }
   group.attributes = notAllowed?
 }
