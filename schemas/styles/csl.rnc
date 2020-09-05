@@ -777,10 +777,12 @@ div {
       ## Specify verbatim text.
       attribute value { text }
     | ((attribute variable { variables.numbers | variables.strings },
-        [ a:defaultValue = "long" ] attribute form { "short" | "long" })
+        [ a:defaultValue = "long" ] attribute form { "short" | "long" },
+        related?)
        | (attribute variable { variables.titles },
           [ a:defaultValue = "long" ]
-          attribute form { "short" | "long" | "sub" | "main" })?)
+          attribute form { "short" | "long" | "sub" | "main" },
+          related?)?)
 }
 # ==============================================================================
 
