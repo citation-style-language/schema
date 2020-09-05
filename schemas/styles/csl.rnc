@@ -414,7 +414,7 @@ div {
     attribute variable {
       list { variables.names+ }
     },
-    related?,
+    related,
     affixes,
     
     ## Specify the delimiter for name lists of name variables rendered by
@@ -691,7 +691,7 @@ div {
         date.form,
         rendering-element.date.date-part.localized*)
        | (rendering-element.date.date-part.non-localized+, delimiter)),
-      related?,
+      related,
       affixes,
       display,
       font-formatting,
@@ -780,11 +780,11 @@ div {
       attribute value { text }
     | ((attribute variable { variables.numbers | variables.strings },
         [ a:defaultValue = "long" ] attribute form { "short" | "long" },
-        related?)
+        related)
        | (attribute variable { variables.titles },
           [ a:defaultValue = "long" ]
           attribute form { "short" | "long" | "sub" | "main" },
-          related?)?)
+          related)?)
 }
 # ==============================================================================
 
@@ -808,7 +808,7 @@ div {
     ## ("fourth"), "roman" ("iv").
     [ a:defaultValue = "numeric" ]
     attribute form { "numeric" | "ordinal" | "long-ordinal" | "roman" }?,
-    related?
+    related
 }
 # ==============================================================================
 
@@ -852,7 +852,7 @@ div {
       display,
       font-formatting,
       rendering-element+,
-      related?
+      related
     }
   group.attributes = notAllowed?
 }
@@ -1144,7 +1144,7 @@ div {
 
 ## Select a related-variable
 div {
-  related = attribute related {"original" | "reviewed" }
+  related = attribute related {"original" | "reviewed" }?
 }
 
 ## Formatting attributes.
