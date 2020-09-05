@@ -1136,6 +1136,11 @@ div {
   always-render = attribute always-render { xsd:boolean }?
 }
 
+## Select a related-variable
+div {
+  related = attribute related {"original" | "reviewed" }
+}
+
 ## Formatting attributes.
 div {
   affixes =
