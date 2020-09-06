@@ -42,8 +42,9 @@
                     "label": {
                         "type": "string",
                         "enum": [
+                            "act",
                             "appendix",
-                            "article",
+                            "article-locator",
                             "book",
                             "canon",
                             "chapter",
@@ -60,13 +61,15 @@
                             "paragraph",
                             "part",
                             "rule",
+                            "scene",
                             "section",
-                            "sub verbo",
+                            "sub-verbo",
                             "supplement",
                             "table",
                             "timestamp",
-                            "title",
+                            "title-locator",
                             "verse",
+                            "version",
                             "volume" 
                         ] 
                     },

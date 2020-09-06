@@ -146,7 +146,7 @@ div {
     | "sub-verbo"
     | "table"
     | "timestamp"
-    | "title"
+    | "title-locator"
     | "verse"
     | terms.locator-number-variables
   
