@@ -8,20 +8,11 @@ div {
     
     ## Use to conditionally render rendering elements.
     element cs:choose { choose.if, choose.else-if*, choose.else? }
-  
-  ## When specifying conditions, we allow either the attribute syntax or the element-based one.
-  choose.condition =
-    (condition.atts, match?)
-    | element cs:conditions { match, condition.elem+ }
-  choose.if = element cs:if { choose.condition, rendering-element* }
+  choose.if = element cs:if { condition+, match, rendering-element* }
   choose.else-if =
-    element cs:else-if { choose.condition, rendering-element* }
+    element cs:else-if { condition+, match, rendering-element* }
   choose.else = element cs:else { rendering-element+ }
-  
-  ## This element allows for more complex conditional logic; for 
-  ## example, if you need to specify mixed "match" rules.
-  condition.elem = element cs:condition { match?, condition.atts }
-  condition.atts =
+  condition =
     
     ## If used, the element content is only rendered if it disambiguates two
     ## otherwise identical citations. This attempt at disambiguation is only
