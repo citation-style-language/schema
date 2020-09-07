@@ -1146,7 +1146,7 @@ div {
 
 ## Select a related-variable
 div {
-  related = attribute relation { "original" | "reviewed" }?
+  relation = attribute relation { "original" | "reviewed" }?
 }
 
 ## Formatting attributes.
