@@ -414,6 +414,7 @@ div {
     attribute variable {
       list { variables.names+ }
     },
+    relation,
     affixes,
     
     ## Specify the delimiter for name lists of name variables rendered by
@@ -690,6 +691,7 @@ div {
         date.form,
         rendering-element.date.date-part.localized*)
        | (rendering-element.date.date-part.non-localized+, delimiter)),
+      relation,
       affixes,
       display,
       font-formatting,
@@ -777,10 +779,12 @@ div {
       ## Specify verbatim text.
       attribute value { text }
     | ((attribute variable { variables.numbers | variables.strings },
-        [ a:defaultValue = "long" ] attribute form { "short" | "long" })
+        [ a:defaultValue = "long" ] attribute form { "short" | "long" },
+        relation)
        | (attribute variable { variables.titles },
           [ a:defaultValue = "long" ]
-          attribute form { "short" | "long" | "sub" | "main" })?)
+          attribute form { "short" | "long" | "sub" | "main" },
+          relation)?)
 }
 # ==============================================================================
 
@@ -803,7 +807,10 @@ div {
     ## Number forms: "numeric" ("4"), "ordinal" ("4th"), "long-ordinal"
     ## ("fourth"), "roman" ("iv").
     [ a:defaultValue = "numeric" ]
-    attribute form { "numeric" | "ordinal" | "long-ordinal" | "roman" }?
+    attribute form {
+      "numeric" | "ordinal" | "long-ordinal" | "roman"
+    }?,
+    relation
 }
 # ==============================================================================
 
@@ -846,7 +853,8 @@ div {
       delimiter,
       display,
       font-formatting,
-      rendering-element+
+      rendering-element+,
+      relation
     }
   group.attributes = notAllowed?
 }
@@ -1134,6 +1142,12 @@ div {
   ## The "repeatable" attribute allows re-rendering of otherwise suppressed variables.
   ## The "always-render" attribute allows re-rendering of otherwise suppressed variables.
   always-render = attribute always-render { xsd:boolean }?
+}
+
+## Select a related-variable
+div {
+  relation = attribute relation { relations }?
+  relations = "original" | "reviewed"
 }
 
 ## Formatting attributes.

@@ -11,8 +11,8 @@ div {
   
   ## When specifying conditions, we allow either the attribute syntax or the element-based one.
   choose.condition =
-    (condition.atts, match?)
-    | element cs:conditions { match?, condition.elem+ }
+    (condition.atts, relation, match?)
+    | element cs:conditions { match?, relation, condition.elem+ }
   choose.if = element cs:if { choose.condition, rendering-element* }
   choose.else-if =
     element cs:else-if { choose.condition, rendering-element* }
@@ -20,7 +20,8 @@ div {
   
   ## This element allows for more complex conditional logic; for 
   ## example, if you need to specify mixed "match" rules.
-  condition.elem = element cs:condition { match?, condition.atts }
+  condition.elem =
+    element cs:condition { match?, relation, condition.atts }
   condition.atts =
     (condition.atts.simple+, condition.atts.complex?)
     | condition.atts.complex
@@ -30,6 +31,11 @@ div {
     ## otherwise identical citations. This attempt at disambiguation is only
     ## made after all other disambiguation methods have failed.
     [ a:defaultValue = "true" ] attribute disambiguate { "true" }
+    | 
+      ## Tests whether the item has the given relation.
+      attribute has-relation {
+        list { relations+ }
+      }
     | 
       ## Tests whether the given variables contain numeric text.
       attribute is-numeric {
