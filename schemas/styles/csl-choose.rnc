@@ -51,7 +51,7 @@ div {
         list { terms.locator+ }
       }
     | 
-      ## Tests whether the cite position matches the given positions.
+      ## Tests whether the cite position matches the given position.
       attribute position {
         "first"
         | "subsequent"
