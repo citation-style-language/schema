@@ -32,6 +32,11 @@ div {
     ## made after all other disambiguation methods have failed.
     [ a:defaultValue = "true" ] attribute disambiguate { "true" }
     | 
+      ## Tests whether the item has the given relation.
+      attribute has-relation {
+        list { relations+ }
+      }
+    | 
       ## Tests whether the given variables contain numeric text.
       attribute is-numeric {
         list { variables+ }
