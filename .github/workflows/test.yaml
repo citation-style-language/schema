@@ -34,7 +34,7 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
     - name: Install dependencies
-      run: sudo apt-get install --yes trang
+      run: sudo apt-get update && sudo apt-get install --yes trang
     - name: Check schema validity
       run: trang schemas/styles/csl.rnc csl.rng && trang csl.rng csl.rnc
     - name: Check schema formatting
