@@ -197,9 +197,8 @@ div {
     element cs:title-short { info-text }
   info.updated =
     
-    ## Specify when the style was last updated (e.g.,
-    ## "2007-10-26T21:32:52+02:00")
-    element cs:updated { xsd:dateTime }
+    ## Specify when the style was last updated (e.g., "2007-10-26" or "2007-10-26T21:32:52+02:00")
+    element cs:updated { xsd:dateTime | xsd:date }
   info-text =
     attribute xml:lang { xsd:language }?,
     text
