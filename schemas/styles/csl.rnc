@@ -904,6 +904,8 @@ div {
       | "minimal-two"
       | "minimal-oup"
       | "chicago"
+      | "chicago-15"
+      | "chicago-16"
       | "mhra"
     }?
   citation.cite-group-delimiter =
