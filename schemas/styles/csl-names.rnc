@@ -276,7 +276,7 @@ div {
     element cs:component { 
 
       ## Which component to render?
-      attribute component {
+      attribute name {
         
         ## If name.form="long" (or name.form-subsequent="long" if a subsequent appearance of the name), render the "institution-short" name-part;
         ## render nothing for other name forms.
@@ -294,15 +294,15 @@ div {
       strip-periods, 
       text-case,
 
-      ## If component="alternate", specify the name form to render;
+      ## If name="alternate", specify the name form to render;
       ## default to the values specified on the sibling cs:name
       name.forms,
 
-      ## If component="alternate", specify formatting attributes for names;
+      ## If name="alternate", specify formatting attributes for names;
       ## default to the values specified on the sibling cs:name
       name.attributes,
 
-      ## If component="alternate", use to apply separate formatting to individual name parts or to personal vs. institutional names 
+      ## If name="alternate", use to apply separate formatting to individual name parts or to personal vs. institutional names 
       name.name-part,
       name.name-type
           
@@ -320,24 +320,23 @@ div {
       [ a:defaultValue = "contextual" ]
       attribute delimiter-precedes-last {
         
-        ## The label delimiter is only used when the label list consists of
-        ## three or more labels.
+        ## The component delimiter is only used when the component list consists of three or more elements.
         "contextual"
         | 
-          ## The label delimiter is always used.
+          ## The component delimiter is always used.
           "always"
         | 
-          ## The label delimiter is never used.
+          ## The component delimiter is never used.
           "never"
       }?,
       
-      ## Use to separate the second-to-last and last element of a place by the "and" term.
+      ## Use to separate the second-to-last and last element of a component list by the "and" term.
       attribute and {
         
-        ## Use the "and" term "long" form (e.g., "Writer and Director").
+        ## Use the "and" term "long" form (e.g., "Beijing and Berlin").
         "long"
         | 
-          ## Use the "and" term "symbol" form (e.g., "Writer & Director").
+          ## Use the "and" term "symbol" form (e.g., "Beijing & Berlin").
           "symbol"
         | 
           ## Use the "and" term "short" form. Not common in English, but is seen in other languages.
