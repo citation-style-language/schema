@@ -599,7 +599,7 @@ div {
       
       ## Select the term to use for et-al abbreviation.
       [ a:defaultValue = "et-al" ]
-      attribute term { "et-al" | "and others" }?,
+      attribute term { "et-al" | "and-others" }?,
       font-formatting
     }
   
