@@ -342,7 +342,7 @@ div {
           ## Use the "and" term "short" form. Not common in English, but is seen in other languages.
           ## In German, for example: "Berlin u. Bremen, where "u." is short for "und".
           "short"
-      }?
+      }*
     }
   
   ## Specify substitution options when the name variables selected on the parent cs:names element are empty.
