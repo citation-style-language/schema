@@ -51,15 +51,13 @@ div {
         list { terms.locator+ }
       }
     | 
-      ## Tests whether the cite position matches the given positions.
+      ## Tests whether the cite position matches the given position.
       attribute position {
-        list {
-          ("first"
-           | "subsequent"
-           | "ibid"
-           | "ibid-with-locator"
-           | "near-note")+
-        }
+        "first"
+        | "subsequent"
+        | "ibid"
+        | "ibid-with-locator"
+        | "near-note"
       }
     | 
       ## Tests whether the item matches the given types.
