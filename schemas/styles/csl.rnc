@@ -708,7 +708,6 @@ div {
     style.demote-non-dropping-particle,
     style.initialize-with-hyphen,
     style.page-range-format,
-    title-inheritable-options,
     names-inheritable-options,
     name-inheritable-options
   citation.options =
@@ -716,7 +715,6 @@ div {
     citation.collapse-options,
     citation.disambiguate-options,
     citation.near-note-distance,
-    title-inheritable-options,
     names-inheritable-options,
     name-inheritable-options
   bibliography.options =
@@ -724,7 +722,6 @@ div {
     bibliography.line-formatting-options,
     bibliography.second-field-align,
     bibliography.subsequent-author-substitute-options,
-    title-inheritable-options,
     names-inheritable-options,
     name-inheritable-options
   style.demote-non-dropping-particle =
