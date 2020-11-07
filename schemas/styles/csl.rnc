@@ -403,7 +403,7 @@ div {
       ## Use the "and" term (e.g., "Doe, Johnson and Smith").
       "text"
       | 
-         ## Use the "ampersand" (e.g., "Doe, Johnson & Smith").
+        ## Use the "ampersand" (e.g., "Doe, Johnson & Smith").
         "symbol"
     }?,
     
@@ -634,8 +634,8 @@ div {
     | 
       ## Specify verbatim text.
       attribute value { text }
-    | ((attribute variable { variables.standard },
-        [ a:defaultValue = "long" ] attribute form { "short" | "long" })?)
+    | (attribute variable { variables.standard },
+       [ a:defaultValue = "long" ] attribute form { "short" | "long" })?
 }
 # ==============================================================================
 
@@ -1007,7 +1007,7 @@ div {
       | 
         ## Renders text in title case.
         "title"
-      |
+      | 
         ## Renders text in sentence case.
         ## Deprecated. Will be removed in CSL 1.1
         "sentence"
