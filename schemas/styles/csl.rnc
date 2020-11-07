@@ -57,7 +57,7 @@ div {
   version =
     
     ## Indicate CSL version compatibility.
-    [ a:defaultValue = "1.1" ] attribute version { "1.1" }
+    [ a:defaultValue = "1.0" ] attribute version { "1.0" }
 }
 # ==============================================================================
 
@@ -397,18 +397,14 @@ div {
   name.attributes =
     
     ## Use to separate the second-to-last and last name of a name list by
-    ## the "and" term.
+    ## the "and" term or ampersand.
     attribute and {
       
-      ## Use the "and" term "long" form (e.g., "Doe, Johnson and Smith").
-      "long"
+      ## Use the "and" term (e.g., "Doe, Johnson and Smith").
+      "text"
       | 
-        ## Use the "and" term "symbol" form (e.g., "Doe, Johnson & Smith").
+         ## Use the "ampersand" (e.g., "Doe, Johnson & Smith").
         "symbol"
-      | 
-        ## Use the "and" term "short" form. Not common in English, but is seen in other languages.
-        ## In German, for example: "Doe, Johnson u. Smith, where "u." is short for "und."
-        "short"
     }?,
     
     ## Specify when the name delimiter is used between a truncated name list
