@@ -327,12 +327,6 @@
         "language": {
           "type": "string"
         },
-        "journalAbbreviation": {
-          "type": "string"
-        },
-        "shortTitle": {
-          "type": "string"
-        },
         "author": {
           "type": "array",
           "items": {
