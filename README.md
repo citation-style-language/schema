@@ -9,8 +9,9 @@ More info at https://rhodesmill.org/brandon/2012/one-sentence-per-line/
 This is the official repository for schemas describing the Citation Style Language (CSL).
 Current schemas include:
 
-* CSL schema - describes CSL style and locale XML files
-* CSL-JSON schema - describes a commonly used JSON data model for storing CSL processor input
+* [CSL schema](#csl-schema) - describes CSL style and locale XML files
+* [CSL-JSON schema](#csl-json-schema) -
+  describes a commonly used JSON data model for storing CSL processor input
   (such as bibliographic metadata).
 
 For more information about CSL, visit <https://citationstyles.org>.
