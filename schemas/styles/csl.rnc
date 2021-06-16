@@ -634,8 +634,10 @@ div {
     | 
       ## Specify verbatim text.
       attribute value { text }
-    | (attribute variable { variables.standard },
-       [ a:defaultValue = "long" ] attribute form { "short" | "long" })?
+    | (
+       ## Select a variable.
+       attribute variable { variables.standard },
+       [ a:defaultValue = "long" ] attribute form { "short" | "long" }?)
 }
 # ==============================================================================
 
