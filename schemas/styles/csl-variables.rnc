@@ -83,8 +83,6 @@ div {
     | # Short title forms. Will be removed in CSL 1.1
       "title-short"
     | "container-title-short"
-
-
   
   ## String variables
   variables.strings =
