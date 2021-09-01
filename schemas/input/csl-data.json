@@ -10,8 +10,11 @@
   "definitions": {
     "title-variable": {
       "title": "Title variable",
-      "description": "Titles are represented as an object.",
-      "$ref": "#/definitions/title-object"
+      "description": "Titles are represented as a string or as an object.",
+      "anyOf": [
+        { "$ref": "#/definitions/rich-text-string" },
+        { "$ref": "#/definitions/title-object" }
+      ]
     },
     "title-object": {
       "title": "Title Object",
@@ -72,11 +75,6 @@
       "title": "Rich Text String",
       "description": "A string that may include sub-string formatting for bold, italic, subscript, superscript, math, etc. The accompanying `csl-rich-text.yaml` schema defines experimental support for this in CSL JSON input.",
       "type": "string"
-    },
-    "title-string": {
-      "title": "Title String",
-      "description": "Titles are a primary example of rich text strings in CSL.",
-      "$ref": "#/definitions/rich-text-string"
     },
     "edtf-string": {
       "title": "EDTF date string",
