@@ -1,19 +1,24 @@
 ---
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.5.0
+    rev: v4.0.1
     hooks:
       - id: check-merge-conflict
-  - repo: https://github.com/prettier/prettier
-    rev: 2.0.5
+      - id: check-json
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v2.3.2
     hooks:
       - id: prettier
-        types: [json,yaml]
+        name: Prettier JSON
+        types: [json]
+      - id: prettier
+        name: Prettier YAML
+        types: [yaml]
   - repo: local
     hooks:
       - id: rnc-format-validate
         name: Check rnc schema files
         entry: tools/rnc-validate-format.py
-        args: ['--commit']
+        args: ["--commit"]
         language: python
         files: ^schemas/styles/csl*.rnc$
