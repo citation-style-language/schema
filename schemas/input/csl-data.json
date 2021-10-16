@@ -84,125 +84,89 @@
       "type": "string",
       "pattern": "^[0-9-%~X?./]{4,}$"
     },
-    "date-object": {
-      "title": "Date Object",
-      "description": "An EDTF date represented as an object. Seasons can be represented using the 21-24 month values of EDTF, decades and centuries using the X notation, and the qualifiers with the included boolean properties",
+    "date-object-v2": {
+      "title": "Date Object (v2)",
+      "description": "Supports literal only, for now",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Literal Date",
+          "description": "A date that should be passed through to the processor as is; for dates that cannot be represented in EDTF.",
+          "examples": [{ "literal": "Han Dynasty" }],
+          "properties": {
+            "literal": {
+              "type": "string"
+            }
+          },
+          "required": ["literal"]
+        }
+      ]
+    },
+    "date-object-v1": {
+      "title": "Date Object (v1)",
+      "description": "Legacy date format from CSL JSON 1.0.",
+      "deprecated": true,
       "examples": [
         {
           "id": "one",
           "type": "book",
           "title": "The Title",
           "issued": {
-            "year": 2000,
-            "month": 3,
-            "day": 10
-          },
-          "approximate": "true"
+            "date-parts": [[2000, 3, 10]],
+            "circa": "true"
+          }
         }
       ],
       "type": "object",
       "properties": {
-        "year": {
-          "title": "year",
-          "description": "A year; can be negative.",
-          "examples": ["2012", "-32"],
-          "type": "integer"
+        "date-parts": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": ["string", "number"]
+            },
+            "minItems": 1,
+            "maxItems": 3
+          },
+          "minItems": 1,
+          "maxItems": 2
         },
-        "month": {
-          "title": "month",
-          "description": "A month; can also represent seasons using the EDTF 21-24 values.",
-          "examples": ["2", "22"],
-          "type": "integer"
+        "season": {
+          "type": ["string", "number"]
         },
-        "day": {
-          "title": "day",
-          "type": "integer"
+        "circa": {
+          "type": ["string", "number", "boolean"]
         },
         "literal": {
-          "title": "Literal date",
-          "description": "A date that should be passed through to the processor as is; for dates that cannot be represented in EDTF.",
-          "examples": ["Han Dynasty"],
           "type": "string"
         },
-        "approximate": {
-          "title": "Approximate",
-          "description": "Indicates an approximate or circa date, which may be presented as `circa May 23, 1972`.",
-          "type": "boolean"
-        },
-        "uncertain": {
-          "title": "Uncertain",
-          "description": "Indicates uncertainty about a date representation, which may be presented as `May 23, 1972?`",
-          "type": "boolean"
-        },
-        "undefined": {
-          "title": "Undefined",
-          "description": "Use to represent an open end of a range.",
-          "type": "boolean"
+        "raw": {
+          "type": "string"
         }
       },
-      "oneOf": [
-        {
-          "required": ["year"]
-        },
-        {
-          "required": ["undefined"]
-        }
-      ]
-    },
-    "date-range": {
-      "title": "Date Range",
-      "description": "An EDTF range is an object with begin and end properties. An open end or beginning of a range can be represented with an undefined property on the data object.",
-      "type": "array",
-      "examples": [
-        {
-          "id": "range-1",
-          "type": "book",
-          "title": "The Title",
-          "issued": {
-            "begin": { "year": 2000 },
-            "end": { "year": 2001 }
-          }
-        },
-        {
-          "id": "range-2",
-          "type": "book",
-          "title": "The Title",
-          "issued": [
-            { "begin": { "year": 2000 } },
-            { "end": { "undefined": true } }
-          ]
-        }
-      ],
-      "properties": {
-        "begin": {
-          "$ref": "#/definitions/date-object"
-        },
-        "end": {
-          "$ref": "#/definitions/date-object"
-        }
-      }
-    },
-    "date-structured": {
-      "title": "Structured Date",
-      "description": "Can either be an object, or a two-item array.",
-      "oneOf": [
-        {
-          "$ref": "#/definitions/date-object"
-        },
-        {
-          "$ref": "#/definitions/date-range"
-        }
-      ]
+      "additionalProperties": false
     },
     "date-variable": {
-      "title": "Date content model.",
-      "description": "The CSL input model supports two different date representations: an EDTF string (preferred), and a more structured alternative.",
-      "oneOf": [
+      "title": "Date content model",
+      "description": "The CSL input model supports three date representations: an EDTF string (preferred), a literal format using `{ \"literal\": \"string\" }`, and a legacy format (deprecated).",
+      "examples": [
+        {
+          "id": "one",
+          "type": "book",
+          "title": "The Title",
+          "issued": "2019-07-16?"
+        }
+      ],
+      "anyOf": [
         {
           "$ref": "#/definitions/edtf-string"
         },
         {
-          "$ref": "#/definitions/date-structured"
+          "$ref": "#/definitions/date-object-v2"
+        },
+        {
+          "$ref": "#/definitions/date-object-v1"
         }
       ]
     },
