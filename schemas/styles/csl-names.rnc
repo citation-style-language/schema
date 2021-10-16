@@ -1,0 +1,388 @@
+namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
+namespace cs = "http://purl.org/net/xbiblio/csl"
+
+
+## cs:names Rendering Element
+div {
+  rendering-element.names =
+    element cs:names {
+      names.attributes,
+      ((names.name?, names.et-al?)
+       & names.label?
+       & names.abbreviation?
+       & names.alternate?
+       & names.place?),
+      names.substitute?
+    }
+  names.attributes =
+    attribute variable {
+      list { variables.names+ }
+    },
+    affixes,
+    
+    ## Specify the delimiter for name lists of name variables rendered by
+    ## the same cs:names element.
+    delimiter,
+    display,
+    font-formatting,
+    always-render,
+
+    ## Specify how multiple name variables are rendered. Only has an effect
+    ## when multiple name variables are given in variable.
+    [ a:defaultValue = "sequential" ]
+    attribute multiple {
+      
+      ## Each name variable independently rendered in the order specified;
+      ## exception: identical editor and translator combined into editortranslator
+      "sequential"
+      | 
+        ## All name variables are combined in the order specified, then rendered as one list;
+        ## labels for identical creators are collapsed
+        "combined"
+    }?
+  names.name =
+    element cs:name {
+      name.forms,
+      name.attributes,
+      name.list-attributes,
+      affixes,
+      
+      ## Set the delimiter for names in a name variable (e.g., ", " in
+      ## "Doe, Smith")
+      [ a:defaultValue = ", " ] delimiter,
+      font-formatting,
+      name.name-part*,
+      name.name-type*
+    }
+  name.forms =
+    
+    ## Select the name form:
+    ## "long" (personal: given + family + particles + suffixes; instiutional: institution),
+    ## "short" (personal: family only; instiutional: institution-short), 
+    ## "count" (returning the number of names in the name variable, which can be useful for some sorting algorithms),
+    ## "none" (no not render name-parts or et-al; e.g., to render only the publisher place);
+    ## order of included name-parts determined by 'name-as-sort-order', 'demote-non-dropping-particle', and the alphabet of the individual name
+    [ a:defaultValue = "long" ]
+    attribute form { "long" | "short" | "count" | "none" }?,
+    
+    ## Select the name form to use on subsequent appearances of the name.
+    ## Same options as for "form".
+    attribute form-subsequent {
+      "long" | "short" | "count" | "none"
+    }?
+
+  ## Attributes controlling the formatting of indivdiual names in lists of names
+  name.attributes = 
+
+    ## If set to "false", names are not initialized and "initialize-with"
+    ## only affects initials already present in the input data.
+    [ a:defaultValue = "true" ] attribute initialize { xsd:boolean }?,
+    
+    ## Activate initializing of given names. The attribute value is appended
+    ## to each initial (e.g., with ". ", "Orson Welles" becomes "O. Welles").
+    attribute initialize-with { text }?,
+
+    ## Specify whether (and which) names should be rendered in their sort
+    ## order (e.g., "Doe, John" instead of "John Doe").
+    attribute name-as-sort-order {
+      
+      ## Render the first name of each name variable in sort order.
+      "first"
+      | 
+        ## Render all names in sort order.
+        "all"
+    }?,
+    
+    ## Sets the delimiter for name-parts that have switched positions as a
+    ## result of "name-as-sort-order" (e.g., ", " in "Doe, John").
+    [ a:defaultValue = ", " ] attribute sort-separator { text }?
+
+  ## Attributes controlling the formatting of lists of names
+  name.list-attributes =
+    
+    ## Use to separate the second-to-last and last name of a name list by the "and" term.
+    attribute and {
+      
+      ## Use the "and" term "long" form (e.g., "Doe, Johnson and Smith").
+      "long"
+      | 
+        ## Use the "and" term "symbol" form (e.g., "Doe, Johnson & Smith").
+        "symbol"
+      | 
+        ## Use the "and" term "short" form. Not common in English, but is seen in other languages.
+        ## In German, for example: "Doe, Johnson u. Smith, where "u." is short for "und".
+        "short"
+    }?,
+    
+    ## Specify when the name delimiter is used between a truncated name list
+    ## and the "et-al" (or "and others") term in case of et-al abbreviation
+    ## (e.g., "Smith, Doe et al." or "Smith, Doe, et al.");
+    ## If the et-al form is set to "none", do not render a delimiter after the last rendered name.
+    [ a:defaultValue = "contextual" ]
+    attribute delimiter-precedes-et-al {
+      
+      ## The name delimiter is only used when the truncated name list consists of two or more names.
+      "contextual"
+      | 
+        ## The name delimiter is always used.
+        "always"
+      | 
+        ## The name delimiter is never used.
+        "never"
+      | 
+        ## The name delimiter is only used if the preceding name is inverted as a result of the "name-as-sort-order" attribute;
+        ## note: institutational names are never treated as inverted.
+        "after-inverted-name"
+      | 
+        ## The name delimiter is used if
+        ## (1) the preceding name is inverted as a result of the "name-as-sort-order" attribute, or
+        ## (2) if the preceding name is not inverted, when the truncated name list consists of two or more names;
+        ## note: institutational names are never treated as inverted.
+        "after-inverted-name-or-contextual"
+    }?,
+    
+    ## Specify when the name delimiter is used between the second-to-last
+    ## and last name of a non-truncated name list. Only has an effect when
+    ## the "and" term or ampersand is used (e.g., "Doe and Smith" or "Doe,
+    ## and Smith").
+    [ a:defaultValue = "contextual" ]
+    attribute delimiter-precedes-last {
+      
+      ## The name delimiter is only used when the name list consists of three or more names.
+      "contextual"
+      | 
+        ## The name delimiter is always used.
+        "always"
+      | 
+        ## The name delimiter is never used.
+        "never"
+      | 
+        ## The name delimiter is only used if the preceding name is inverted as
+        ## a result of the "name-as-sort-order" attribute.
+        "after-inverted-name"
+      | 
+        ## The name delimiter is used if
+        ## (1) the preceding name is inverted as a result of the "name-as-sort-order" attribute, or
+        ## (2) if preceding the name is not inverted, when the truncated name list consists of three or more names;
+        ## note: institutational names are never treated as inverted.
+        "after-inverted-name-or-contextual"
+    }?,
+    
+    ## Set the minimum number of names needed in a name variable to activate
+    ## et-al abbreviation.
+    attribute et-al-min { xsd:integer }?,
+    
+    ## Set the number of names to render when et-al abbreviation is active.
+    attribute et-al-use-first { xsd:integer }?,
+    
+    ## As "et-al-min", but only affecting subsequent citations to an item.
+    attribute et-al-subsequent-min { xsd:integer }?,
+    
+    ## As "et-al-use-first", but only affecting subsequent citations to an
+    ## item.
+    attribute et-al-subsequent-use-first { xsd:integer }?,
+    
+    ## If set to "true", the "et-al" (or "and others") term is replaced by
+    ## an ellipsis followed by the last name of the name variable.
+    [ a:defaultValue = "false" ]
+    attribute et-al-use-last { xsd:boolean }?
+          
+  name.name-part =
+    
+    ## Use to format individual name parts (e.g., "Jane DOE").
+    element cs:name-part {
+      attribute name {
+        "family" | "given" | "institution" | "institution-short"
+      },
+      
+      ## Apply formatting for name="institution" only if 'institution-short' name-part exists
+      attribute if-institution-short { xsd:boolean }?,
+      affixes,
+      font-formatting,
+      text-case
+    }
+  name.name-type =
+    
+    ## Use to apply separate formatting to personal versus institutional names.
+    element cs:name-type {
+      attribute name { "personal" | "institutional" },
+      name.forms,
+      affixes,
+      font-formatting,
+      text-case,
+      name.name-part*
+    }
+  names.et-al =
+    
+    ## Specify the term used for et-al abbreviation and its formatting.
+    element cs:et-al {
+      
+      ## Select the term to use for et-al abbreviation.
+      [ a:defaultValue = "et-al" ]
+      attribute term { "et-al" | "and others" }?,
+      
+      ## The form of the cs:et-al term to use when et-al abbreviation is activated. 
+      ## Set to "none" to omit the term. Set to "long", "short", or "symbol" to
+      ## render the respective form of the term.
+      [ a:defaultValue = "long" ]
+      attribute form { "none" | "long" | "short" | "symbol" }?,
+      font-formatting
+    }
+  
+  ## Inherits variable from the parent cs:names element.
+  names.label =
+    element cs:label {
+      [ a:defaultValue = "long" ] attribute form { term.form }?,
+      label.attributes-shared,
+      
+      ## When multiple='combined', set the delimiter for collapsed name labels
+      ## (e.g., ", " in "Creator, Writer, & Director")
+      [ a:defaultValue = ", " ] delimiter,
+      
+      ## Specify when the label delimiter is used between the second-to-last and last label of a label list;
+      ## only has an effect when the "and" term is used (e.g., "Writer & Director" or "Writer, & Director").
+      [ a:defaultValue = "contextual" ]
+      attribute delimiter-precedes-last {
+        
+        ## The label delimiter is only used when the label list consists of
+        ## three or more labels.
+        "contextual"
+        | 
+          ## The label delimiter is always used.
+          "always"
+        | 
+          ## The label delimiter is never used.
+          "never"
+      }?,
+      
+      ## Use to separate the second-to-last and last label of a label list by the "and" term.
+      attribute and {
+        
+        ## Use the "and" term "long" form (e.g., "Writer and Director").
+        "long"
+        | 
+          ## Use the "and" term "symbol" form (e.g., "Writer & Director").
+          "symbol"
+        | 
+          ## Use the "and" term "short" form. Not common in English, but is seen in other languages.
+          ## In German, for example: "Drehbuchautor u. Regisseur, where "u." is short for "und".
+          "short"
+      }?
+    }
+  
+  ## Render and format additional name components that are not otherwise shown;
+  ## components are rendered adjacent to their respective name in the name list (as with label).
+  names.component =
+    element cs:component { 
+
+      ## Which component to render?
+      attribute name {
+        
+        ## If name.form="long" (or name.form-subsequent="long" if a subsequent appearance of the name), render the "institution-short" name-part;
+        ## render nothing for other name forms.
+        "abbreviation"
+        |
+          ## Render the "alternate" form of a name;
+          ## name attributes are inherited from the cs:
+          "alternate"
+        |  
+          ## Render the "place" associated with the name (e.g. a publisher place).
+          "place"
+      },
+      affixes, 
+      font-formatting, 
+      strip-periods, 
+      text-case,
+
+      ## If name="alternate", specify the name form to render;
+      ## default to the values specified on the sibling cs:name
+      name.forms,
+
+      ## If name="alternate", specify formatting attributes for names;
+      ## default to the values specified on the sibling cs:name
+      name.attributes,
+
+      ## If name="alternate", use to apply separate formatting to individual name parts or to personal vs. institutional names 
+      name.name-part,
+      name.name-type
+          
+      ## If the component is an array, specify the maximum number of elements to render;
+      ## if absent, render all elements;
+      ## used, e.g. to specify that only one publisher place should be rendered.
+      attribute use-first { xsd:integer }?,
+      
+      ## If the component is an array and multiple elements are rendered, set the delimiter between elements;
+      ## if use-first is set to 1, do not show the delimiter.
+      [ a:defaultValue = ", " ] delimiter,
+      
+      ## Specify when the component delimiter is used between the second-to-last and last element of a list;
+      ## only has an effect when the "and" term is used (e.g., "Beijing and Berlin" or "London, and New York").
+      [ a:defaultValue = "contextual" ]
+      attribute delimiter-precedes-last {
+        
+        ## The component delimiter is only used when the component list consists of three or more elements.
+        "contextual"
+        | 
+          ## The component delimiter is always used.
+          "always"
+        | 
+          ## The component delimiter is never used.
+          "never"
+      }?,
+      
+      ## Use to separate the second-to-last and last element of a component list by the "and" term.
+      attribute and {
+        
+        ## Use the "and" term "long" form (e.g., "Beijing and Berlin").
+        "long"
+        | 
+          ## Use the "and" term "symbol" form (e.g., "Beijing & Berlin").
+          "symbol"
+        | 
+          ## Use the "and" term "short" form. Not common in English, but is seen in other languages.
+          ## In German, for example: "Berlin u. Bremen, where "u." is short for "und".
+          "short"
+      }*
+    }
+  
+  ## Specify substitution options when the name variables selected on the parent cs:names element are empty.
+  names.substitute =
+    element cs:substitute { (substitute.names | rendering-element)+ }
+  
+  ## Short version of cs:names, without children, allowed in cs:substitute.
+  substitute.names = element cs:names { names.attributes }
+}
+# ==============================================================================
+
+## Style Options Related to Names
+div {
+  
+  ## Options affecting cs:names, for cs:style, cs:citation, cs:bibliography,
+  ## and cs:citation-label.
+  names-inheritable-options =
+    
+    ## Inheritable name option, companion for "delimiter" on cs:names.
+    attribute names-delimiter { text }?
+  
+  ## Options affecting cs:name, for cs:style, cs:citation, cs:bibliography,
+  ## and cs:citation-label.
+  name-inheritable-options =
+    name.attributes,
+    name.list-attributes,
+    
+    ## Inheritable name option, companion for "delimiter" on cs:name.
+    attribute name-delimiter { text }?,
+    
+    ## Inheritable name option, companion for "form" on cs:name.
+    [ a:defaultValue = "long" ]
+    attribute name-form { "long" | "short" | "count" }?,
+
+    ## Inheritable name option, companion for "delimiter" on cs:component.
+    attribute component-delimiter { text }?,
+  
+  ## Options affecting cs:label, for cs:style, cs:citation and cs:bibliography.
+  label-inheritable-options =
+    
+    ## Inheritable name option, companion for "delimiter" on cs:label.
+    attribute label-delimiter { text }?
+}

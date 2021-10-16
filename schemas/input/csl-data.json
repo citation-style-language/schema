@@ -207,7 +207,18 @@
             "alternate": {
               "title": "Alternative name, such as screen name for online item or real name of pseudonymous author.",
               "description": "E.g. rendered as 'Smith, J. [@JSmith]'",
-              "type": "string"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/name-variable"
+              }
+            },
+            "place": {
+              "title": "Place associated with the name",
+              "description": "Can be a simple string if one location or an array of strings if multiple locations are listed (e.g. Berlin; New York)",
+              "type": ["string", "array"],
+              "items": {
+                "type": "string"
+              }
             },
             "parse-names": {
               "type": "boolean"
@@ -436,6 +447,14 @@
             "$ref": "#/definitions/name-variable"
           }
         },
+        "publisher": {
+          "title": "Publisher of the item",
+          "description": "e.g., [{'institution': 'Publisher', 'place': 'London, UK'}], [{'institution': 'Publisher A', 'place': 'New York, NY, US'}, {'institution': 'Publisher B', 'place': 'Berlin, Germany'}]",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name-variable"
+          }
+        },
         "recipient": {
           "type": "array",
           "items": {
@@ -492,7 +511,7 @@
           "$ref": "#/definitions/date-variable"
         },
         "original-date": {
-          "description": "[Deprecated - Use `original` related date property instead]",
+          "description": "[Deprecated - Use `original` related `issued` property instead]",
           "$ref": "#/definitions/date-variable"
         },
         "submitted": {
@@ -610,7 +629,7 @@
           "type": "string"
         },
         "original-publisher-place": {
-          "description": "[Deprecated - Use `original` related `publisher-place` property instead]",
+          "description": "[Deprecated - Use `original` related `publisher` property `place` property instead]",
           "type": "string"
         },
         "original-title": {
@@ -637,12 +656,6 @@
         },
         "printing": {
           "type": ["string", "number"]
-        },
-        "publisher": {
-          "type": "string"
-        },
-        "publisher-place": {
-          "type": "string"
         },
         "references": {
           "type": "string"
