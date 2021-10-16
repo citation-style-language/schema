@@ -144,7 +144,7 @@
     "date-variable": {
       "title": "Date content model",
       "description": "The CSL input model supports three date representations: an EDTF string (preferred), a literal format using `{ \"literal\": \"string\" }`, and a legacy format (deprecated).",
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/definitions/edtf-string"
         },
