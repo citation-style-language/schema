@@ -87,14 +87,20 @@
     "date-object-v2": {
       "title": "Date Object (v2)",
       "description": "Supprts literal only, for now",
-      "properties": {
-        "literal": {
-          "title": "Literal date",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Literal Date",
           "description": "A date that should be passed through to the processor as is; for dates that cannot be represented in EDTF.",
-          "examples": ["Han Dynasty"],
-          "type": "string"
+          "examples": [{ "literal": "Han Dynasty" }],
+          "properties": {
+            "literal": {
+              "type": "string"
+            }
+          },
+          "required": ["literal"]
         }
-      }
+      ]
     },
     "date-object-v1": {
       "title": "Date Object (v1)",
