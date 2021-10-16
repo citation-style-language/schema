@@ -86,7 +86,7 @@
     },
     "date-object-v2": {
       "title": "Date Object (v2)",
-      "description": "Supprts literal only, for now",
+      "description": "Supports literal only, for now",
       "oneOf": [
         {
           "type": "object",
