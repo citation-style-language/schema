@@ -537,8 +537,16 @@
         "collection-title": {
           "$ref": "#/definitions/title-variable"
         },
+        "collection-title-short": {
+          "description": "[Deprecated - use `collection-title` with a `short` key",
+          "type": "string"
+        },
         "container-title": {
           "$ref": "#/definitions/title-variable"
+        },
+        "container-title-short": {
+          "description": "[Deprecated - use `container-title` with a `short` key",
+          "type": "string"
         },
         "dimensions": {
           "type": "string"
@@ -676,6 +684,10 @@
         },
         "title": {
           "$ref": "#/definitions/title-variable"
+        },
+        "title-short": {
+          "description": "[Deprecated - use `title` with a `short` key",
+          "type": "string"
         },
         "URL": {
           "type": "string"
