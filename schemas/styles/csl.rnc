@@ -44,7 +44,6 @@ div {
       (style.locale*
        & style.macro*
        & style.citation
-       & style.intext?
        & style.bibliography?)
     }
   dependent-style.style =
@@ -58,7 +57,7 @@ div {
   version =
     
     ## Indicate CSL version compatibility.
-    [ a:defaultValue = "1.1" ] attribute version { "1.1" }
+    [ a:defaultValue = "1.0" ] attribute version { "1.0" }
 }
 # ==============================================================================
 
@@ -343,13 +342,6 @@ div {
     
     ## Use to describe the formatting of citations.
     element cs:citation { citation.options, sort?, citation.layout }
-  style.intext =
-    
-    ## Defines the author-only rendering for assembly of a textual citations
-    ## (for example, "Doe [3]" or "Doe (2018)"), where the output expectations
-    ## for in-text authors are different than the default citation rendering;
-    ## for example, in APA, or numeric styles.
-    element cs:intext { citation.options, sort?, citation.layout }
   style.bibliography =
     
     ## Use to describe the formatting of the bibliography.
@@ -405,18 +397,14 @@ div {
   name.attributes =
     
     ## Use to separate the second-to-last and last name of a name list by
-    ## the "and" term.
+    ## the "and" term or ampersand.
     attribute and {
       
-      ## Use the "and" term "long" form (e.g., "Doe, Johnson and Smith").
-      "long"
+      ## Use the "and" term (e.g., "Doe, Johnson and Smith").
+      "text"
       | 
-        ## Use the "and" term "symbol" form (e.g., "Doe, Johnson & Smith").
+        ## Use the "ampersand" (e.g., "Doe, Johnson & Smith").
         "symbol"
-      | 
-        ## Use the "and" term "short" form. Not common in English, but is seen in other languages.
-        ## In German, for example: "Doe, Johnson u. Smith, where "u." is short for "und."
-        "short"
     }?,
     
     ## Specify when the name delimiter is used between a truncated name list
@@ -646,11 +634,10 @@ div {
     | 
       ## Specify verbatim text.
       attribute value { text }
-    | ((attribute variable { variables.numbers | variables.strings },
-        [ a:defaultValue = "long" ] attribute form { "short" | "long" })
-       | (attribute variable { variables.titles },
-          [ a:defaultValue = "long" ]
-          attribute form { "short" | "long" | "sub" | "main" })?)
+    | (
+       ## Select a variable.
+       attribute variable { variables.standard },
+       [ a:defaultValue = "long" ] attribute form { "short" | "long" }?)
 }
 # ==============================================================================
 
@@ -723,7 +710,6 @@ div {
     style.demote-non-dropping-particle,
     style.initialize-with-hyphen,
     style.page-range-format,
-    title-inheritable-options,
     names-inheritable-options,
     name-inheritable-options
   citation.options =
@@ -731,7 +717,6 @@ div {
     citation.collapse-options,
     citation.disambiguate-options,
     citation.near-note-distance,
-    title-inheritable-options,
     names-inheritable-options,
     name-inheritable-options
   bibliography.options =
@@ -739,7 +724,6 @@ div {
     bibliography.line-formatting-options,
     bibliography.second-field-align,
     bibliography.subsequent-author-substitute-options,
-    title-inheritable-options,
     names-inheritable-options,
     name-inheritable-options
   style.demote-non-dropping-particle =
@@ -763,9 +747,9 @@ div {
       "expanded"
       | "minimal"
       | "minimal-two"
-      | "minimal-oup"
       | "chicago"
-      | "mhra"
+      | "chicago-15"
+      | "chicago-16"
     }?
   citation.cite-group-delimiter =
     
@@ -906,48 +890,6 @@ div {
         "partial-first"
     }?
   
-  ## Options affecting rendering of title variables, for cs:style, cs:citation and cs:bibliography
-  title-inheritable-options =
-    
-    ## Inheritable title option, specify the delimiter between "title-main" and "title-sub".
-    attribute title-delimiter { text }?,
-    
-    ## Inheritable title option, specify the delimiter between multiple subtitles.
-    ## The same as "title-delimiter" if not specified.
-    attribute title-sub-delimiter { text }?,
-    
-    ## Inheritable title option, specify how titles are split into "title-main" and "title-sub".
-    [ a:defaultValue = "simple" ]
-    attribute title-split {
-      
-      ## Matches "."", ":", "::", "!", "?"
-      "simple"
-      | 
-        ## Matches the values for "simple" plus ";"
-        "extended"
-      | 
-        ## Matches the values for "simple" plus "—" and ";"
-        "full"
-      | 
-        ## Matches the values for "simple" plus ";""
-        ## and "[;,] or[,:]" (see CMoS 14.91), e.g.  "Moby-Dick; or, The Whale"
-        "chicago"
-    }?,
-    
-    ## Inheritable title option, specify which delimiters are normalized.
-    [ a:defaultValue = "simple" ]
-    attribute normalize-title-delimiters {
-      
-      ## Normalize "."", ":", "::"
-      "simple"
-      | 
-        ## Normalize the values for "simple" plus ";"
-        "extended"
-      | 
-        ## Normalize the values for "simple" plus "—" and ";"
-        "full"
-    }?
-  
   ## Options affecting cs:names, for cs:style, cs:citation and cs:bibliography.
   names-inheritable-options =
     
@@ -1061,15 +1003,15 @@ div {
         ## their original case).
         "capitalize-first"
       | 
-        ## Capitalizes the first character and the first character of a subtitle
-        ## (other characters remain in their original case).
-        "capitalize-subtitle"
-      | 
         ## Capitalizes the first character of every word (other characters
         ## remain in their original case).
         "capitalize-all"
       | 
         ## Renders text in title case.
         "title"
+      | 
+        ## Renders text in sentence case.
+        ## Deprecated. Will be removed in CSL 1.1
+        "sentence"
     }?
 }

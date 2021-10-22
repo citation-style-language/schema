@@ -1,7 +1,7 @@
 {
   "description": "JSON schema for CSL input data",
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://resource.citationstyles.org/schema/latest/input/json/csl-data.json",
+  "$id": "https://resource.citationstyles.org/schema/v1.0/input/json/csl-data.json",
   "type": "array",
   "items": {
     "type": "object",
@@ -496,19 +496,10 @@
         }
       ]
     },
-    "edtf-datatype": {
-      "title": "EDTF datatype pattern",
-      "description": "CSL input supports EDTF, validated against this regular expression.",
-      "type": "string",
-      "pattern": "^[0-9-%~X?.\/]{4,}$"
-    },
     "date-variable": {
       "title": "Date content model.",
       "description": "The CSL input model supports two different date representations: an EDTF string (preferred), and a more structured alternative.",
       "anyOf": [
-        {
-          "$ref": "#/definitions/edtf-datatype"
-        },
         {
           "properties": {
             "date-parts": {
@@ -535,9 +526,6 @@
             },
             "raw": {
               "type": "string"
-            },
-            "edtf": {
-              "$ref": "#/definitions/edtf-datatype"
             }
           },
           "additionalProperties": false
