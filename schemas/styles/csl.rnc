@@ -411,6 +411,24 @@ div {
        & names.alternate?),
       names.substitute?
     }
+  
+  ## Specifies what to add between the second-to-last and last item in a name or label list.
+  and.attribute =
+    attribute and {
+      
+      ## Use the "and" term "long" form (e.g., "Doe, Johnson and Smith").
+      "long"
+      | 
+        ## Use the "and" term "symbol" form (e.g., "Doe, Johnson & Smith").
+        "symbol"
+      | 
+        ## Use the "and" term "short" form. Not common in English, but is seen in other languages.
+        ## In German, for example: "Doe, Johnson u. Smith, where "u." is short for "und."
+        "short"
+      | 
+        ## Do not include (e.g., "Doe, Johnson, Smith").
+        "none"
+    }
   names.attributes =
     attribute variable {
       list { variables.names+ }
@@ -453,18 +471,7 @@ div {
     
     ## Use to separate the second-to-last and last name of a name list by
     ## the "and" term.
-    attribute and {
-      
-      ## Use the "and" term "long" form (e.g., "Doe, Johnson and Smith").
-      "long"
-      | 
-        ## Use the "and" term "symbol" form (e.g., "Doe, Johnson & Smith").
-        "symbol"
-      | 
-        ## Use the "and" term "short" form. Not common in English, but is seen in other languages.
-        ## In German, for example: "Doe, Johnson u. Smith, where "u." is short for "und."
-        "short"
-    }?,
+    and.attribute?,
     
     ## Specify when the name delimiter is used between a truncated name list
     ## and the "et-al" (or "and others") term in case of et-al abbreviation
@@ -645,18 +652,7 @@ div {
       
       ## Use to separate the second-to-last and last label of a label list by
       ## the "and" term.
-      attribute and {
-        
-        ## Use the "and" term "long" form (e.g., "Writer and Director").
-        "long"
-        | 
-          ## Use the "and" term "symbol" form (e.g., "Writer & Director").
-          "symbol"
-        | 
-          ## Use the "and" term "short" form. Not common in English, but is seen in other languages.
-          ## In German, for example: "Drehbuchautor u. Regisseur, where "u." is short for "und."
-          "short"
-      }?
+      and.attribute?
     }
   names.substitute =
     
