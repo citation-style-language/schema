@@ -425,9 +425,6 @@ div {
         ## Use the "and" term "short" form. Not common in English, but is seen in other languages.
         ## In German, for example: "Doe, Johnson u. Smith, where "u." is short for "und."
         "short"
-      | 
-        ## Do not include (e.g., "Doe, Johnson, Smith").
-        "none"
     }
   names.attributes =
     attribute variable {
