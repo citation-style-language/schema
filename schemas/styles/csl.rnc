@@ -853,6 +853,7 @@ div {
     style.demote-non-dropping-particle,
     style.initialize-with-hyphen,
     style.page-range-format,
+    style.strip-url-protocol,
     title-inheritable-options,
     names-inheritable-options,
     name-inheritable-options,
