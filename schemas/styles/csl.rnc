@@ -853,6 +853,7 @@ div {
     style.demote-non-dropping-particle,
     style.initialize-with-hyphen,
     style.page-range-format,
+    style.strip-url-protocol,
     title-inheritable-options,
     names-inheritable-options,
     name-inheritable-options,
@@ -902,6 +903,11 @@ div {
       | "chicago-16"
       | "mhra"
     }?
+  style.strip-url-protocol =
+    
+    ## Specify whether http/https should be stripped from urls
+    [ a:defaultValue = "false" ]
+    attribute strip-url-protocol { xsd:boolean }?
   citation.cite-group-delimiter =
     
     ## Activate cite grouping and specify the delimiter for cites within a
