@@ -903,6 +903,11 @@ div {
       | "chicago-16"
       | "mhra"
     }?
+  style.strip-url-protocol =
+    
+    ## Specify whether http/https should be stripped from urls
+    [ a:defaultValue = "false" ]
+    attribute strip-url-protocol { xsd:boolean }?
   citation.cite-group-delimiter =
     
     ## Activate cite grouping and specify the delimiter for cites within a
