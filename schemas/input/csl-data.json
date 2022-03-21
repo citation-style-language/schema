@@ -463,6 +463,7 @@
     "name-variable": {
       "anyOf": [
         {
+          "type": "object",
           "properties": {
             "family": {
               "type": "string"
@@ -501,6 +502,7 @@
       "description": "The CSL input model supports two different date representations: an EDTF string (preferred), and a more structured alternative.",
       "anyOf": [
         {
+          "type": "object",
           "properties": {
             "date-parts": {
               "type": "array",
