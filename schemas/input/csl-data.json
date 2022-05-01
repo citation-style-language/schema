@@ -464,7 +464,12 @@
       "status": {
         "title": "Publication status of the item",
         "type": "string",
-        "examples": ["forthcoming", "in press", "advance online publication", "retracted"]
+        "examples": [
+          "forthcoming",
+          "in press",
+          "advance online publication",
+          "retracted"
+        ]
       },
       "supplement": {
         "type": ["string", "number"]
