@@ -374,17 +374,31 @@ div {
 
 ## cs:citation and cs:bibliography
 div {
+  style.citation.element = citation.options, sort?, citation.layout
   style.citation =
     
     ## Use to describe the formatting of citations.
-    element cs:citation { citation.options, sort?, citation.layout }
+    ## A "default" mode template is required.
+    element cs:citation {
+      attribute mode { "default" },
+      style.citation.element
+    },
+    element cs:citation {
+      attribute mode { style.citation.modes },
+      style.citation.element
+    }*
+  
+  ## TODO what else? Arbitrary extension?
+  style.citation.modes = "in-text" | "suppress-author"
+  
+  ## TODO revert this
   style.intext =
     
     ## Defines the author-only rendering for assembly of a textual citations
     ## (for example, "Doe [3]" or "Doe (2018)"), where the output expectations
     ## for in-text authors are different than the default citation rendering;
     ## for example, in APA, or numeric styles.
-    element cs:intext { citation.options, sort?, citation.layout }
+    element cs:intext { style.citation.element }
   style.bibliography =
     
     ## Use to describe the formatting of the bibliography.
