@@ -2,18 +2,38 @@
   "title": "CSL JSON/YAML",
   "description": "JSON schema for CSL input data",
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://resource.citationstyles.org/schema/latest/input/json/csl-data.json",
-  "type": "array",
-  "items": {
-    "$ref": "#/definitions/refitem"
+  "$id": "https://resource.citationstyles.org/schema/v1.1/input/json/csl-data.json",
+  "type": "object",
+  "required": ["references", "version"],
+  "properties": {
+    "version": {
+      "type": "number",
+      "enum": [1.1]
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/refitem"
+      }
+    }
   },
   "definitions": {
     "title-variable": {
       "title": "Title variable",
       "description": "Titles are represented as a string or as an object.",
       "anyOf": [
-        { "$ref": "#/definitions/rich-text-string" },
-        { "$ref": "#/definitions/title-object" }
+        {
+          "$ref": "#/definitions/rich-text-string"
+        },
+        {
+          "$ref": "#/definitions/title-object"
+        }
       ]
     },
     "title-object": {
@@ -90,7 +110,11 @@
           "type": "object",
           "title": "Literal Date",
           "description": "A date that should be passed through to the processor as is; for dates that cannot be represented in EDTF.",
-          "examples": [{ "literal": "Han Dynasty" }],
+          "examples": [
+            {
+              "literal": "Han Dynasty"
+            }
+          ],
           "properties": {
             "literal": {
               "type": "string"
