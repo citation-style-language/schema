@@ -84,10 +84,15 @@ def test_schema_is_valid(json_schema):
 
 
 def test_basic_data_schema_validates(csl_data_validator):
-    csl = [{
-        'id': 'example-id',
-        'type': 'report',
-    }]
+    csl = {
+        'version': 1.1,
+        'references': [
+            {
+               'id': 'example-id',
+               'type': 'report',
+            }
+        ]
+    }
     csl_data_validator.validate(csl)
 
 
@@ -129,14 +134,19 @@ def test_citation_schema_compound_locator_validates(csl_citation_validator):
     csl_citation_validator.validate(cite)
 
 def test_basic_data_schema_with_author_validates(csl_data_validator):
-    csl = [{
-        "id": "example-id",
-        "type": "report",
-        "author": [
-            {"given": "Jane", "family": "Roe"},
-            {"institution": "ACME Corporation"}
+    csl =  {
+        'version': 1.1,
+        'references': [
+           {
+                "id": "example-id",
+                "type": "report",
+                "author": [
+                    {"given": "Jane", "family": "Roe"},
+                    {"institution": "ACME Corporation"}
+               ]
+           }
         ]
-    }]
+    }
     csl_data_validator.validate(csl)
 
 
