@@ -99,8 +99,7 @@
     "edtf-string": {
       "title": "EDTF date string",
       "description": "CSL input supports EDTF, levels 0 and 1.",
-      "type": "string",
-      "pattern": "^[0-9-%~X?./]{4,}$"
+      "type":"string"
     },
     "date-object-v2": {
       "title": "Date Object (v2)",
