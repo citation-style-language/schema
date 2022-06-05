@@ -8,7 +8,7 @@ for (const level of [0, 1, 2]) {
   levels.push(level);
 
   (function(levels) {
-    formats[`edtf/level_${levels.map(l => '' + l).join('+')}`] = function (date) {
+    formats[`edtf/${levels.map(l => '' + l).join('+')}`] = formats[`edtf/${levels[levels.length - 1]}`] = function (date) {
       if (typeof date !== 'string') return false
 
       try {

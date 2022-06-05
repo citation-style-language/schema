@@ -1,7 +1,7 @@
 const schema = {
   type: "object",
   properties: {
-    baz: { type: 'string', format: 'edtf/level_0+1' }
+    baz: { type: 'string', format: 'edtf/0+1' }
   },
   required: ['baz'],
   additionalProperties: false
@@ -14,6 +14,7 @@ const ajv = require('../validator/ajv')(new Ajv)
 
 const ZSchema = require('../validator/z-schema')(require('z-schema'))
 const zschema = new ZSchema
+console.log(ZSchema.getRegisteredFormats())
 
 const IMJV = require('is-my-json-valid')
 const imjv = IMJV(schema, { formats })
