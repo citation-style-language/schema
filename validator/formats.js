@@ -5,9 +5,10 @@ const { parse } = require('edtf')
 const levels = []
 const formats = {}
 for (const level of [0, 1, 2]) {
-  levels.push(level)
-  formats[`edtf/level_${levels.map(l => '' + l).join('+')}`] = (function(levels) {
-    return function (date) {
+  levels.push(level);
+
+  (function(levels) {
+    formats[`edtf/level_${levels.map(l => '' + l).join('+')}`] = function (date) {
       if (typeof date !== 'string') return false
 
       try {
