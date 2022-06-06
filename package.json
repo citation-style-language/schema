@@ -1,0 +1,39 @@
+{
+  "name": "csl-schema",
+  "version": "1.0.0",
+  "description": "Citation Style Language schema",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "node tests/json-schema.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/citation-style-language/schema.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/citation-style-language/schema/issues"
+  },
+  "homepage": "https://github.com/citation-style-language/schema#readme",
+  "files": [
+    "schemas/input/csl-citation.json",
+    "schemas/input/csl-data.json",
+    "schemas/styles/stop-words.json",
+    "validator/ajv.js",
+    "validator/formats.js",
+    "validator/z-schema.js"
+  ],
+  "dependencies": {
+    "edtf": "^4.1.0"
+  },
+  "devDependencies": {
+    "ajv": "^8.11.0",
+    "is-my-json-valid": "^2.20.6",
+    "jsen": "^0.6.6",
+    "z-schema": "^5.0.3"
+  }
+}
