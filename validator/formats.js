@@ -2,18 +2,25 @@
 
 const { parse } = require('edtf')
 
+function testLevel(date, expected, also3) {
+  if (date.level) {
+    return (date.level <= expected ) || (date.level === 3 && also3)
+  }
+  else if (Array.isArray(date)) {
+    return !date.find(d => !testLevel(d, expected, also3))
+  }
+  return false
+}
+
 function isLevel(date, expected, also3) {
   if (typeof date !== 'string') return false
 
   try {
-    const found = parse(date, { level: also3 ? 3 : level }).level
-    return (found <= expected ) || (found === 3 && also3)
+    return testLevel(parse(date, { level: also3 ? 3 : expected }), expected, also3)
   }
   catch (err) {
     return false
   }
-
-  return true
 }
 
 const formats = {}
