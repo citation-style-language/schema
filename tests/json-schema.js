@@ -22,7 +22,7 @@ const imjv = IMJV(schema, { formats })
 const JSEN = require('jsen')
 const jsen = JSEN(schema, { formats })
 
-for (const data of [{date: '2016-XX'}, {date: 'invalid'}]) {
+for (const data of [{date: '2016-XX'}, {date: '2017-24/2018-21'}, {date: 'invalid'}]) {
   if (!ajv.validate(schema, data)) console.log('ajv', data, ajv.errors[0].message)
   if (!zschema.validate(data, schema)) console.log('zschema', data, zschema.getLastError().details[0].message)
   if (!imjv(data)) console.log('imjv', data, imjv.errors[0].message)

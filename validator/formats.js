@@ -6,7 +6,7 @@ function isLevel(date, expected, also3) {
   if (typeof date !== 'string') return false
 
   try {
-    const found = parse(date).level
+    const found = parse(date, { level: also3 ? 3 : level }).level
     return (found <= expected ) || (found === 3 && also3)
   }
   catch (err) {
