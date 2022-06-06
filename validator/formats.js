@@ -2,24 +2,25 @@
 
 const { parse } = require('edtf')
 
-const levels = []
+function isLevel(date, expected, also3) {
+  if (typeof date !== 'string') return false
+
+  try {
+    const found = parse(date).level
+    return (found <= expected ) || (found === 3 && also3)
+  }
+  catch (err) {
+    return false
+  }
+
+  return true
+}
+
 const formats = {}
-for (const level of [0, 1, 2]) {
-  levels.push(level);
-
-  (function(levels) {
-    formats[`edtf/${levels.map(l => '' + l).join('+')}`] = formats[`edtf/${levels[levels.length - 1]}`] = function (date) {
-      if (typeof date !== 'string') return false
-
-      try {
-        return levels.includes(parse(date).level)
-      }
-      catch (err) {
-        return false
-      }
-
-      return true
-    }
-  })(levels)
+for (const level of [0, 1, 2, 3]) {
+  (level => {
+    formats[`edtf/${level}`] = date => isLevel(date, level, false)
+    if (level < 2) formats[`edtf/${level}+3`] = date => isLevel(date, level, true)
+  })(level)
 }
 module.exports = formats
