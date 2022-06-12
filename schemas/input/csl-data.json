@@ -99,7 +99,8 @@
     "edtf-string": {
       "title": "EDTF date string",
       "description": "CSL input supports EDTF, levels 0 and 1.",
-      "type":"string"
+      "type":"string",
+      "format": "edtf/level-1+season-intervals"
     },
     "date-object-v2": {
       "title": "Date Object (v2)",
