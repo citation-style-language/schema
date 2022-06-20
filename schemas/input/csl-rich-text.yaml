@@ -52,3 +52,9 @@ definitions:
         - strike:
             title: Strike-Through Text
             "#ref": "#/definitions/rich-text-content"
+        - sub:
+            title: Subscript Text
+            "#ref": "#/definitions/rich-text-content"
+        - sup:
+            title: Superscript Text
+            "#ref": "#/definitions/rich-text-content"
