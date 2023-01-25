@@ -28,7 +28,7 @@
                         ]
                     },
                     "itemData": {
-                        "$ref": "csl-data.json#/items" 
+                        "$ref": "https://resource.citationstyles.org/schema/v1.0/input/json/csl-data.json#/items" 
                     },
                     "prefix": {
                         "type": "string" 
