@@ -60,6 +60,7 @@
         "type": ["string", "number"]
       },
       "citation-key": {
+        "description": "Identifier of the item in the input data file (analogous to BibTeX entrykey);\nUse this variable to facilitate conversion between word-processor and plain-text writing systems;\nFor an identifer intended as formatted output label for a citation (e.g. “Ferr78”), use citation-label instead",
         "type": "string"
       },
       "categories": {
@@ -69,6 +70,7 @@
         }
       },
       "language": {
+        "description": "The language of the item;\nShould be entered as an ISO 639-1 two-letter language code (e.g. “en”, “zh”), optionally with a two-letter locale code (e.g. “de-DE”, “de-AT”",
         "type": "string"
       },
       "journalAbbreviation": {
@@ -234,21 +236,28 @@
         }
       },
       "accessed": {
+        "title": "Date the item has been accessed",
         "$ref": "#/definitions/date-variable"
       },
       "available-date": {
+        "title": "Date the item was initially available",
+        "description": "e.g. the online publication date of a journal article before its formal publication date; the date a treaty was made available for signing",
         "$ref": "#/definitions/date-variable"
       },
       "event-date": {
+        "title": "Date the event related to an item took place",
         "$ref": "#/definitions/date-variable"
       },
       "issued": {
+        "title": "Date the item was issued/published",
         "$ref": "#/definitions/date-variable"
       },
       "original-date": {
+        "title": "Issue date of the original version",
         "$ref": "#/definitions/date-variable"
       },
       "submitted": {
+        "title": "Date the item (e.g. a manuscript) was submitted for publication",
         "$ref": "#/definitions/date-variable"
       },
       "abstract": {
@@ -258,21 +267,27 @@
         "type": "string"
       },
       "archive": {
+        "title": "Archive storing the item",
         "type": "string"
       },
       "archive_collection": {
+        "title": "Collection the item is part of within an archive",
         "type": "string"
       },
       "archive_location": {
+        "title": "Storage location within an archive (e.g. a box and folder number)",
         "type": "string"
       },
       "archive-place": {
+        "title": "Geographic location of the archive",
         "type": "string"
       },
       "authority": {
+        "description": "Issuing or judicial authority (e.g. “USPTO” for a patent, “Fairfax Circuit Court” for a legal case)",
         "type": "string"
       },
       "call-number": {
+        "title": "Call number (to locate the item in a library)",
         "type": "string"
       },
       "chapter-number": {
@@ -282,28 +297,36 @@
         "type": ["string", "number"]
       },
       "citation-label": {
+        "description": "Label identifying the item in in-text citations of label styles (e.g. “Ferr78”);\n May be assigned by the CSL processor based on item metadata;\n For the identifier of the item in the input data file, use `citation-key` instead",
         "type": "string"
       },
       "collection-number": {
         "type": ["string", "number"]
       },
       "collection-title": {
+        "description": "Title of the collection holding the item (e.g. the series title for a book; the lecture series title for a presentation)",
         "type": "string"
       },
       "container-title": {
+        "description": "Title of the container holding the item (e.g. the book title for a book chapter, the journal title for a journal article; the album title for a recording; the session title for multi-part presentation at a conference)",
         "type": "string"
       },
       "container-title-short": {
+        "description": "Short/abbreviated form of container-title; Deprecated; use variable=\"container-title\" form=\"short\" instead",
         "type": "string"
       },
       "dimensions": {
+        "description": "Physical (e.g. size) or temporal (e.g. running time) dimensions of the item",
         "type": "string"
       },
       "division": {
+        "title": "Minor subdivision of a court with a `jurisdiction` for a legal item",
         "type": "string"
       },
       "DOI": {
-        "type": "string"
+        "title": "Digital Object Identifier",
+        "type": "string",
+        "examples": ["10.1128/AEM.02591-07"]
       },
       "edition": {
         "type": ["string", "number"]
@@ -313,42 +336,56 @@
         "type": "string"
       },
       "event-title": {
+        "description": "Name of the event related to the item (e.g. the conference name when citing a conference paper; the meeting where presentation was made)",
         "type": "string"
       },
       "event-place": {
+        "description": "Geographic location of the event related to the item (e.g. “Amsterdam, The Netherlands”)",
         "type": "string"
       },
       "first-reference-note-number": {
         "type": ["string", "number"]
       },
       "genre": {
+        "description": "Type, class, or subtype of the item (e.g. “Doctoral dissertation” for a PhD thesis; “NIH Publication” for an NIH technical report);\nDo not use for topical descriptions or categories (e.g. “adventure” for an adventure movie)",
         "type": "string"
       },
       "ISBN": {
-        "type": "string"
+        "title": "International Standard Book Number",
+        "type": "string",
+        "examples": ["978-3-8474-1017-1"]
       },
       "ISSN": {
+        "title": "International Standard Serial Number",
         "type": "string"
       },
       "issue": {
+        "description": "Issue number of the item or container holding the item (e.g. “5” when citing a journal article from journal volume 2, issue 5);",
         "type": ["string", "number"]
       },
       "jurisdiction": {
+        "description": "Geographic scope of relevance (e.g. “US” for a US patent; the court hearing a legal case)",
         "type": "string"
       },
       "keyword": {
+        "title": "Keyword(s) or tag(s) attached to the item",
         "type": "string"
       },
       "locator": {
         "type": ["string", "number"]
       },
       "medium": {
-        "type": "string"
+        "title": "Description of the item's format or medium",
+        "type": "string",
+        "examples": ["CD", "DVD", "Album"]
       },
       "note": {
+        "title": "Descriptive text or notes about an item",
+        "description": "e.g. in an annotated bibliography",
         "type": "string"
       },
       "number": {
+        "description": "Number identifying the item (e.g. a report number)",
         "type": ["string", "number"]
       },
       "number-of-pages": {
@@ -367,9 +404,11 @@
         "type": "string"
       },
       "page": {
+        "description": "Range of pages the item (e.g. a journal article) covers in a container (e.g. a journal issue)",
         "type": ["string", "number"]
       },
       "page-first": {
+        "description": "First page of the range of pages the item (e.g. a journal article) covers in a container (e.g. a journal issue)",
         "type": ["string", "number"]
       },
       "part": {
@@ -379,9 +418,11 @@
         "type": "string"
       },
       "PMCID": {
+        "title": "PubMed Central reference number",
         "type": "string"
       },
       "PMID": {
+        "title": "PubMed reference number",
         "type": "string"
       },
       "printing": {
@@ -391,54 +432,81 @@
         "type": "string"
       },
       "publisher-place": {
+        "title": "Geographic location of the publisher",
         "type": "string"
       },
       "references": {
+        "description": "Resources related to the procedural history of a legal case or legislation;\nCan also be used to refer to the procedural history of other items (e.g. “Conference canceled” for a presentation accepted as a conference that was subsequently canceled; details of a retraction or correction notice)",
         "type": "string"
       },
       "reviewed-genre": {
-        "type": "string"
+        "title": "Type of the item being reviewed by the current item",
+        "type": "string",
+        "examples": ["book", "film"]
       },
       "reviewed-title": {
+        "title": "Title of the item reviewed by the current item",
         "type": "string"
       },
       "scale": {
+        "title": "Scale of e.g. a map or model",
         "type": "string"
       },
       "section": {
+        "title": "Section of the item or container holding the item",
+        "description": "e.g. “§2.0.1” for a law; “politics” for a newspaper article",
         "type": "string"
       },
       "source": {
+        "title": "Source from whence the item originates (e.g. a library catalog or database)",
         "type": "string"
       },
       "status": {
-        "type": "string"
+        "title": "Publication status of the item",
+        "type": "string",
+        "examples": [
+          "forthcoming",
+          "in press",
+          "advance online publication",
+          "retracted"
+        ]
       },
       "supplement": {
         "type": ["string", "number"]
       },
       "title": {
+        "title": "Primary title of the item",
         "type": "string"
       },
       "title-short": {
+        "description": "Short/abbreviated form of title;\nDeprecated; use variable=\"title\" form=\"short\" instead",
         "type": "string"
       },
       "URL": {
-        "type": "string"
+        "title": "Uniform Resource Locator",
+        "type": "string",
+        "examples": ["https://www.example.com"]
       },
       "version": {
-        "type": "string"
+        "title": "Version of the item",
+        "type": "string",
+        "examples": ["2.0.9"]
       },
       "volume": {
+        "description": "Volume number of the item (e.g. “2” when citing volume 2 of a book) or the container holding the item (e.g. “2” when citing a chapter from volume 2 of a book);\nUse volume-title for the title of the volume, if any",
         "type": ["string", "number"]
       },
       "volume-title": {
+        "title": "Title of the volume of the item or container holding the item",
+        "description": "Also use for titles of periodical special issues, special sections, and the like",
         "type": "string"
       },
       "volume-title-short": {
         "type": "string"
       },
       "year-suffix": {
+        "title": "Disambiguating year suffix in author-date styles",
+        "description": "e.g. “a” in “Doe, 1999a”",
         "type": "string"
       },
       "custom": {
@@ -505,6 +573,8 @@
           "type": "object",
           "properties": {
             "date-parts": {
+              "description": "Array of variable length: first element is year, second month, last is day",
+              "examples": [[2022, 12, 24], [2020], [1996, 12]],
               "type": "array",
               "items": {
                 "type": "array",
