@@ -378,6 +378,9 @@
       "part-title": {
         "type": "string"
       },
+      "ARXIV": {
+        "type": "string"
+      },
       "PMCID": {
         "type": "string"
       },

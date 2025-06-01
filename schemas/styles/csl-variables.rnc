@@ -114,6 +114,7 @@ div {
     | "note"
     | "original-publisher"
     | "original-publisher-place"
+    | "ARXIV"
     | "PMCID"
     | "PMID"
     | "publisher"
