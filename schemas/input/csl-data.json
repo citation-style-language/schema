@@ -269,6 +269,9 @@
       "archive-place": {
         "type": "string"
       },
+      "bibcode": {
+        "type": "string"
+      },
       "authority": {
         "type": "string"
       },

@@ -93,6 +93,7 @@ div {
     | "archive_location"
     | "archive-place"
     | "authority"
+    | "bibcode"
     | "call-number"
     | "citation-key"
     | "citation-label"
