@@ -1,11 +1,11 @@
 ---
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.5.0
+    rev: v6.0.0
     hooks:
       - id: check-merge-conflict
-  - repo: https://github.com/prettier/prettier
-    rev: 2.0.5
+  - repo: https://github.com/mirrors-prettier/mirrors-prettier
+    rev: v3.9.6
     hooks:
       - id: prettier
         types: [json,yaml]
