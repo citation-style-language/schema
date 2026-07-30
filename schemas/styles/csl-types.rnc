@@ -25,6 +25,7 @@ div {
     | "hearing"
     | "interview"
     | "legal_case"
+    | "legal_commentary"
     | "legislation"
     | "manuscript"
     | "map"

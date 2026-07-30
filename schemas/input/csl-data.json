@@ -30,6 +30,7 @@
           "hearing",
           "interview",
           "legal_case",
+          "legal_commentary",
           "legislation",
           "manuscript",
           "map",
@@ -90,6 +91,12 @@
         }
       },
       "collection-editor": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/name-variable"
+        }
+      },
+      "commenter": {
         "type": "array",
         "items": {
           "$ref": "#/definitions/name-variable"
@@ -248,6 +255,9 @@
       "original-date": {
         "$ref": "#/definitions/date-variable"
       },
+      "publication-date": {
+        "$ref": "#/definitions/date-variable"
+      },
       "submitted": {
         "$ref": "#/definitions/date-variable"
       },
@@ -290,6 +300,9 @@
       "collection-title": {
         "type": "string"
       },
+      "committee": {
+        "type": "string"
+      },
       "container-title": {
         "type": "string"
       },
@@ -300,6 +313,9 @@
         "type": "string"
       },
       "division": {
+        "type": "string"
+      },
+      "document-name": {
         "type": "string"
       },
       "DOI": {
@@ -385,6 +401,9 @@
         "type": "string"
       },
       "printing": {
+        "type": ["string", "number"]
+      },
+      "publication-number": {
         "type": ["string", "number"]
       },
       "publisher": {
