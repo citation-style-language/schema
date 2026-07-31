@@ -11,5 +11,8 @@
     <sch:rule context="/cs:style/cs:macro">
       <sch:assert test="count(/cs:style/cs:macro/@name[. = current()/@name]) = 1">This macro does not have a unique name.</sch:assert>
     </sch:rule>
+    <sch:rule context="*[@et-al-min]">
+      <sch:assert test="number(current()/@et-al-min) gt number(current()/@et-al-use-first)">et-al-min must be greater than et-al-use-first.</sch:assert>
+    </sch:rule>
   </sch:pattern>
 </sch:schema>
