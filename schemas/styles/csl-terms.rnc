@@ -141,6 +141,7 @@ div {
     | "note"
     | "opus"
     | "paragraph"
+    | "recital"
     | "rule"
     | "scene"
     | "sub-verbo"
@@ -153,6 +154,7 @@ div {
   ## Locator terms with matching number variables
   terms.locator-number-variables =
     "issue"
+    | "margin-number"
     | "page"
     | "part"
     | "section"
